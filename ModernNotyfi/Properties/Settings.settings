@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ModernNotyfi.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="last_check_update" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Никогда</Value>
+    </Setting>
+    <Setting Name="opacity_panel" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.7</Value>
+    </Setting>
+    <Setting Name="color_panel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#fff</Value>
+    </Setting>
+    <Setting Name="theme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">light</Value>
+    </Setting>
+    <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="NowPlay" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Очередь пуста</Value>
+    </Setting>
+    <Setting Name="Show_Exit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Disign_Shutdown" Type="System.String" Scope="User">
+      <Value Profile="(Default)">old</Value>
+    </Setting>
+    <Setting Name="User_Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

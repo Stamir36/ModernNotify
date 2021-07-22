@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj": {}
+  },
+  "projects": {
+    "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj",
+        "projectName": "ModernNotyfi",
+        "projectPath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj",
+        "packagesPath": "C:\\Users\\stas1\\.nuget\\packages\\",
+        "outputPath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\stas1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "FluentWPF": {
+              "target": "Package",
+              "version": "[0.9.0, )"
+            },
+            "Microsoft.Windows.SDK.Contracts": {
+              "target": "Package",
+              "version": "[10.0.19041.1, )"
+            },
+            "ModernWpfUI": {
+              "target": "Package",
+              "version": "[0.9.4, )"
+            },
+            "NAudio": {
+              "target": "Package",
+              "version": "[2.0.1, )"
+            },
+            "XamlAnimatedGif": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            }
+          },
+          "imports": [
+            "uap10.0.19041"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
