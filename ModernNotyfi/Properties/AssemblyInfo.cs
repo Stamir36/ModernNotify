@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyDescription("Новая панель быстрых действий")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Unesell Studio")]
-[assembly: AssemblyProduct("ModernNotify")]
+[assembly: AssemblyProduct("ModernNotify Dev")]
 [assembly: AssemblyCopyright("Unesell Copyright ©  2021")]
 [assembly: AssemblyTrademark("Unesell")]
 [assembly: AssemblyCulture("")]
@@ -51,5 +51,5 @@ using System.Windows;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.0.11")]
-[assembly: AssemblyFileVersion("0.0.0.11")]
+[assembly: AssemblyVersion("0.0.0.16")]
+[assembly: AssemblyFileVersion("0.0.0.16")]

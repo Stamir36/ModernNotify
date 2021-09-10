@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ModernNotyfi"
         mc:Ignorable="d"
-        Title="Настройки" Height="457" Width="839"
+        Title="Настройки" Height="107.15" Width="839"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True" MinWidth="960" MinHeight="530" Icon="icons/maim_settings.png" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Visibility="Visible" AllowsTransparency="True" Loaded="Settings_Loaded">
@@ -21,17 +21,24 @@
 
         <ui:NavigationView
             x:Name="NavView"
-            PaneTitle="Параметры ModernNotyfi"
+            IsTitleBarAutoPaddingEnabled="False"
             IsBackButtonVisible="Collapsed"
             IsBackEnabled="True"
             IsPaneOpen="False"
             IsSettingsVisible="False"
             IsTabStop="True" Grid.ColumnSpan="2" ItemInvoked="NavView_ItemInvoked">
 
+            <ui:NavigationView.PaneHeader>
+                <Grid HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="177" Margin="0,5,0,0">
+                    <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="icon.ico" Width="27" Height="27" Margin="0,1,0,0"/>
+                    <Label Content="ModernNotify" HorizontalAlignment="Left" Margin="32,5,0,0" VerticalAlignment="Top" Width="119" FontWeight="Bold"/>
+                </Grid>
+            </ui:NavigationView.PaneHeader>
+
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem Icon="Home" Tag="Home"  Content="Основное"/>
-                <ui:NavigationViewItem Icon="Keyboard" Tag="Keyboard" Content="Настройки клавиш" />
-                <ui:NavigationViewItem Icon="Library" Tag="Library" Content="Персонализация" />
+                <ui:NavigationViewItem Icon="Setting" Tag="Keyboard" Content="Мини-приложения" />
+                <ui:NavigationViewItem Icon="Edit" Tag="Library" Content="Персонализация" />
                 <ui:NavigationViewItem Icon="Help" Tag="Help" Content="О программе" />
             </ui:NavigationView.MenuItems>
 
@@ -44,7 +51,8 @@
                     <TabControl x:Name="Settings_Tab" Margin="-71,70,19,63" Background="{x:Null}" Foreground="{x:Null}" TabStripPlacement="Left">
                         <TabItem Header="Menu" Width="14" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid>
-
+                                
+                                
                                 <Button x:Name="Open_Main" HorizontalAlignment="Left" Margin="72,23,0,0" VerticalAlignment="Top" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Main_Click">
                                     <Grid Height="41" Width="377">
                                         <Image HorizontalAlignment="Left" Source="icons/maim_settings.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
@@ -54,14 +62,14 @@
                                 <Label x:Name="text_7" Content="Категории:" HorizontalAlignment="Left" Margin="72,0,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="Open_Keyboard" HorizontalAlignment="Left" Margin="72,79,0,0" VerticalAlignment="Top" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Keyboard_Click">
                                     <Grid Height="41" Width="377">
-                                        <Image HorizontalAlignment="Left" Source="icons/keyboard.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                        <Label Content="Клавиатура" Margin="37,7,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
+                                        <Image HorizontalAlignment="Left" Source="icons/App_Color.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
+                                        <Label Content="Мини-приложения" Margin="37,7,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
                                     </Grid>
                                 </Button>
                                 <Button x:Name="Open_Personalization" HorizontalAlignment="Left" Margin="72,135,0,0" VerticalAlignment="Top" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Personalization_Click">
                                     <Grid Height="41" Width="377">
                                         <Image HorizontalAlignment="Left" Source="icons/Personalization.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                        <Label Content="Персонализация" Margin="37,7,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
+                                        <Label Content="Персонализация" Margin="30,6,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
                                     </Grid>
                                 </Button>
                                 <Button x:Name="Open_Info" HorizontalAlignment="Left" Margin="72,191,0,0" VerticalAlignment="Top" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Info_Click">
@@ -78,13 +86,12 @@
                                 </Button>
                                 <Label x:Name="text_8" Content="Прочее:" HorizontalAlignment="Left" Margin="72,262,0,0" VerticalAlignment="Top"/>
 
-
                             </Grid>
                         </TabItem>
                         <TabItem Width="14">
                             <ScrollViewer>
                                 <StackPanel>
-                                    <Grid Height="367">
+                                    <Grid Height="383">
                                         <Label x:Name="text_1" Content="Основные параметры" Margin="70,10,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
                                         <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="75,39,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                             <Border.RenderTransform>
@@ -111,8 +118,8 @@
                                                 </ComboBox>
                                             </Grid>
                                         </Border>
-                                        <Label Content="Функции и взаимодействие" Margin="74,134,0,0" HorizontalAlignment="Left" Width="276" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="75,163,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                        <Label Content="Функции и взаимодействие" Margin="67,184,0,0" HorizontalAlignment="Left" Width="276" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="72,213,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                             <Border.RenderTransform>
                                                 <TransformGroup>
                                                     <ScaleTransform ScaleY="-1"/>
@@ -122,7 +129,7 @@
                                                 </TransformGroup>
                                             </Border.RenderTransform>
                                         </Border>
-                                        <Border BorderThickness="1" Height="57" Margin="70,261,31,0" VerticalAlignment="Top" CornerRadius="15">
+                                        <Border BorderThickness="1" Height="57" Margin="70,303,31,0" VerticalAlignment="Top" CornerRadius="15">
                                             <Border.BorderBrush>
                                                 <SolidColorBrush Color="Black" Opacity="0.2"/>
                                             </Border.BorderBrush>
@@ -136,7 +143,7 @@
                                             </Grid>
                                         </Border>
 
-                                        <Border BorderThickness="1" Height="57" Margin="70,199,31,0" VerticalAlignment="Top" CornerRadius="15">
+                                        <Border BorderThickness="1" Height="57" Margin="70,241,31,0" VerticalAlignment="Top" CornerRadius="15">
                                             <Border.BorderBrush>
                                                 <SolidColorBrush Color="Black" Opacity="0.2"/>
                                             </Border.BorderBrush>
@@ -151,7 +158,20 @@
                                                 </ComboBox>
                                             </Grid>
                                         </Border>
-                                        <Label Content="Панель выключения." Margin="73,172,0,0" HorizontalAlignment="Left" Width="142" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
+                                        <Label Content="Панель выключения." Margin="73,216,0,0" HorizontalAlignment="Left" Width="142" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
+                                        <Border BorderThickness="1" Height="57" Margin="70,113,31,0" VerticalAlignment="Top" CornerRadius="15">
+                                            <Border.BorderBrush>
+                                                <SolidColorBrush Color="Black" Opacity="0.2"/>
+                                            </Border.BorderBrush>
+                                            <Border.Background>
+                                                <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
+                                            </Border.Background>
+                                            <Grid x:Name="Click_Shitdown_Check1">
+                                                <Label Content="Показывать стартовое уведомление" HorizontalAlignment="Left" Margin="55,14,0,0" VerticalAlignment="Top" Height="24" Width="359" FontSize="18"/>
+                                                <Image HorizontalAlignment="Left" Height="30" Margin="14,12,0,0" VerticalAlignment="Top" Width="30" Source="icons/info.png"/>
+                                                <CheckBox x:Name="Chek_Start_Notify" HorizontalAlignment="Right" Margin="0,10,20,0" VerticalAlignment="Top" Width="20" Height="32" MinWidth="20" Cursor="Hand"/>
+                                            </Grid>
+                                        </Border>
                                     </Grid>
                                 </StackPanel>
                             </ScrollViewer>
@@ -260,10 +280,12 @@
                                 <Button x:Name="Open_Tab_Update" Content="Проверить обновления" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Left" Margin="76,66,0,0" VerticalAlignment="Top" Width="174" Click="Open_Tab_Update_Click" Cursor="Hand"/>
                                 <Button x:Name="Open_Site" Content="Сайт проекта" HorizontalAlignment="Left" Margin="255,66,0,0" VerticalAlignment="Top" Width="110" Cursor="Hand"/>
                                 <Label x:Name="version" Content="version" HorizontalAlignment="Left" Margin="128,31,0,0" VerticalAlignment="Top" Width="154"/>
-                                <Label Content="Разработчик:" HorizontalAlignment="Left" Margin="76,203,0,0" VerticalAlignment="Top" Foreground="#FF0023FF" FontWeight="Bold"/>
-                                <Label x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="76,222,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Разработчик:" HorizontalAlignment="Left" Margin="76,181,0,0" VerticalAlignment="Top" Foreground="#FF0023FF" FontWeight="Bold"/>
+                                <Label x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="76,200,0,0" VerticalAlignment="Top"/>
                                 <Label Content="О продукте:" HorizontalAlignment="Left" Margin="76,113,0,0" VerticalAlignment="Top" Foreground="#FF0023FF" FontWeight="Bold"/>
-                                <Label x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xD;&#xA;компьютере под управлением любой&#xD;&#xA;Windows 7,8, 10, 11." HorizontalAlignment="Left" Margin="76,132,0,0" VerticalAlignment="Top" Height="68" Width="371" UseLayoutRounding="False"/>
+                                <Label x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11." HorizontalAlignment="Left" Margin="76,132,0,0" VerticalAlignment="Top" Height="48" Width="371" UseLayoutRounding="False"/>
+                                <Button Content="Используемый исходный код" HorizontalAlignment="Right" Margin="0,55,10,0" VerticalAlignment="Top" Width="215" Click="Open_Sourse" Padding="1,1,7,1" Background="{x:Null}" Foreground="#FF003AFF" BorderBrush="Transparent" HorizontalContentAlignment="Right"/>
+                                <Label x:Name="text_5_Copy" Content="Прочая информация:" HorizontalAlignment="Right" Margin="0,34,14,0" VerticalAlignment="Top" Height="19" Width="155" UseLayoutRounding="False" HorizontalContentAlignment="Right"/>
                             </Grid>
                         </TabItem>
                         <TabItem Width="14">
@@ -273,7 +295,7 @@
                                         <SolidColorBrush Color="#7FDADADA" Opacity="0.7"/>
                                     </Border.Background>
                                     <Grid>
-                                        <Label Content="Обновления не требуются" Margin="78,12,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
+                                        <Label x:Name="InfoUpdate" Content="Обновления не требуются" Margin="78,12,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
                                         <Image x:Name="Update_img" HorizontalAlignment="Left" Height="51" Margin="15,10,0,0" VerticalAlignment="Top" Width="51" Source="icons/update.png" RenderTransformOrigin="0.5,0.5"></Image>
                                         <Button x:Name="Check_Update" Content="Проверить наличие обновлений" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="0,18,20,0" VerticalAlignment="Top" Width="240" Cursor="Hand" Click="Check_Update_Click"/>
                                         <Label x:Name="LastChekUpdate" Content="Последняя проверка" HorizontalAlignment="Left" Margin="78,39,0,0" VerticalAlignment="Top"/>

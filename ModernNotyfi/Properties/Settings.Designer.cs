@@ -130,5 +130,41 @@ namespace ModernNotyfi.Properties {
                 this["User_Name"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool show_start_notify {
+            get {
+                return ((bool)(this["show_start_notify"]));
+            }
+            set {
+                this["show_start_notify"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("32")]
+        public uint hotkey_1 {
+            get {
+                return ((uint)(this["hotkey_1"]));
+            }
+            set {
+                this["hotkey_1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public uint hotkey_2 {
+            get {
+                return ((uint)(this["hotkey_2"]));
+            }
+            set {
+                this["hotkey_2"] = value;
+            }
+        }
     }
 }

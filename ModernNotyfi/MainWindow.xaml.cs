@@ -18,19 +18,31 @@ using NAudio.CoreAudioApi;
 using System.Reflection;
 using System.Diagnostics;
 using ModernWpf;
+using LiveCharts;
+using LiveCharts.Wpf;
 using Windows.Media;
 using Windows.Media.Control;
 using System.Media;
 using System.Runtime.InteropServices;
+using System.Management;
+using LiveCharts.Dtos;
+using Microsoft.Toolkit.Uwp.Notifications;
+using System.Windows.Interop;
+using Windows.UI.Notifications.Management;
 
 namespace ModernNotyfi
 {
     public partial class MainWindow : Window
     {
+        // БАЗОВЫЕ НАСТРОЙКИ И ПАРАМЕТРЫ ---------------------------------------------------------
         public int soundDevice = 1; //Активное устройство воспроизведенеия
         public int SoundDeviceOpen = 0;
         public int AudioOnOff = 0; //Вкл \ Выкл звук.
         public int TempAudioOnOff = 0;
+
+        public int batt_status = 0; // 0 разряд / 1 заряд.
+        public int batt_start = 0;
+        public int batt_min = 0;
 
         MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
         ProcessStartInfo commands = new ProcessStartInfo();
@@ -43,6 +55,84 @@ namespace ModernNotyfi
         public const int VK_MEDIA_NEXT_TRACK = 0xB0;
         public const int VK_MEDIA_PLAY_PAUSE = 0xB3;
         public const int VK_MEDIA_PREV_TRACK = 0xB1;
+
+        // РЕГИСТРАЦИЯ ХОТКЕЯ ----------------------------------------------------------------------
+        [DllImport("User32.dll")]
+        private static extern bool RegisterHotKey(
+        [In] IntPtr hWnd,
+        [In] int id,
+        [In] uint fsModifiers,
+        [In] uint vk);
+
+        [DllImport("User32.dll")]
+        private static extern bool UnregisterHotKey(
+            [In] IntPtr hWnd,
+            [In] int id);
+
+        private HwndSource _source;
+        private const int HOTKEY_ID = 9000;
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            var helper = new WindowInteropHelper(this);
+            _source = HwndSource.FromHwnd(helper.Handle);
+            _source.AddHook(HwndHook);
+            RegisterHotKey();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            _source.RemoveHook(HwndHook);
+            _source = null;
+            UnregisterHotKey();
+            base.OnClosed(e);
+        }
+
+        private void RegisterHotKey()
+        {
+            var helper = new WindowInteropHelper(this);
+            const uint SPASE = 0x20;
+            const uint MOD_CTRL = 0x0002;
+            if (!RegisterHotKey(helper.Handle, HOTKEY_ID, MOD_CTRL, SPASE))
+            {
+                // handle error
+            }
+        }
+
+        private void UnregisterHotKey()
+        {
+            var helper = new WindowInteropHelper(this);
+            UnregisterHotKey(helper.Handle, HOTKEY_ID);
+        }
+
+        private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            const int WM_HOTKEY = 0x0312;
+            switch (msg)
+            {
+                case WM_HOTKEY:
+                    switch (wParam.ToInt32())
+                    {
+                        case HOTKEY_ID:
+                            OnHotKeyPressed();
+                            handled = true;
+                            break;
+                    }
+                    break;
+            }
+            return IntPtr.Zero;
+        }
+
+        private void OnHotKeyPressed()
+        {
+            ModernNotyfi.WindowState = WindowState.Normal;
+            ThicknessAnimation Border_MainPanelGrid = new ThicknessAnimation();
+            Border_MainPanelGrid.From = new Thickness(355, 0, -666, 0);
+            Border_MainPanelGrid.To = new Thickness(0, 0, -312, 0);
+            Border_MainPanelGrid.Duration = TimeSpan.FromSeconds(0.1);
+            MainPanelGrid.BeginAnimation(Border.MarginProperty, Border_MainPanelGrid);
+        }
 
         // Инициализация
         public MainWindow()
@@ -77,11 +167,15 @@ namespace ModernNotyfi
                 SoundBorder.Background = (Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
                 Border_Shutdown.Background = (Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
                 Border_Music.Background = (Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
+                MainPanel.Background = (Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
+                Border_Notify.Background = (Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
 
                 Border_Time.Background.Opacity = Properties.Settings.Default.opacity_panel;
                 Border_Panel.Background.Opacity = Properties.Settings.Default.opacity_panel;
                 SoundBorder.Background.Opacity = Properties.Settings.Default.opacity_panel;
                 Border_Music.Background.Opacity = Properties.Settings.Default.opacity_panel;
+                MainPanel.Background.Opacity = Properties.Settings.Default.opacity_panel;
+                Border_Notify.Opacity = Properties.Settings.Default.opacity_panel;
                 NowPlayning.Foreground = SoundText.Foreground;
 
                 if (Properties.Settings.Default.Show_Exit == "False")
@@ -122,6 +216,15 @@ namespace ModernNotyfi
                 MessageBox.Show("Информация об ошибке:\n" + e + "\n\nПриложение будет закрыто, для избежания перегрузки памяти.", "Ошибка загрузки", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
             }
+
+            ManagementClass wmi = new ManagementClass("Win32_Battery");
+            ManagementObjectCollection allBatteries = wmi.GetInstances();
+            foreach (var battery in allBatteries)
+            {
+                Values1 = new ChartValues<int> { };
+                Values1.Add(Convert.ToInt16(battery["EstimatedChargeRemaining"]));
+            }
+            DataContext = this;
         }
 
         // Потеря фокуса
@@ -129,9 +232,25 @@ namespace ModernNotyfi
         {
             ModernNotyfi.WindowState = WindowState.Minimized;
         }
-        
+
+        public ChartValues<int> Values1 { get; set; }
+
         private void ModernNotyfi_Loaded(object sender, RoutedEventArgs e)
         {
+
+            // Отправка уведомления.
+            if (Properties.Settings.Default.show_start_notify)
+            {
+                new ToastContentBuilder()
+                .AddArgument("action", "viewConversation")
+                .AddArgument("conversationId", 9813)
+                .AddText("Откройте панель с Ctrl + Пробел")
+                .AddText("Это уведомление можно отключить в настройках.")
+                .Show();
+            }
+            // ------------------------------------------------------------------------------
+
+            // СЕКУНДНЫЙ ТАЙМЕР
             var timer = new System.Windows.Threading.DispatcherTimer();
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             timer.Interval = new TimeSpan(0, 0, 1);
@@ -141,10 +260,15 @@ namespace ModernNotyfi
                 // Время
                 SoundText.Content = "Настройки звука";
                 DateTimeText.Content = DateTime.Now.ToString("HH:mm");
+                DateTimeText1.Content = DateTime.Now.ToString("HH:mm");
+                DateTimeText_Panel.Content = DateTime.Now.ToString("HH:mm");
                 DateTimeText_sec.Content = ":" + DateTime.Now.ToString("ss");
+                DateTimeText_sec_main.Content = ":" + DateTime.Now.ToString("ss");
+
                 // Положение: правый-нижний угол.
                 this.Left = desktopWorkingArea.Right - this.Width;
                 this.Top = desktopWorkingArea.Bottom - this.Height;
+                
                 // ---------------------------------------------------------------------
                 if (speakDevices.Count() > 0)
                 {
@@ -166,8 +290,185 @@ namespace ModernNotyfi
                 MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
                 MediaManager.OnSongChanged += MediaManager_OnSongChanged;
                 MediaManager.Start();
+
+                //Батарея
+                GetBatteryPercent();
             };
             timer.Start();
+
+
+            Battery_time.Content = "Вычисление";
+            ManagementClass wmi = new ManagementClass("Win32_Battery");
+            ManagementObjectCollection allBatteries = wmi.GetInstances();
+            foreach (var battery in allBatteries)
+            {
+                if (Convert.ToUInt16(battery["BatteryStatus"]) == 1)
+                {
+                    batt_status = 1;
+                }
+                else
+                {
+                    batt_status = 0;
+                }
+            }
+
+            // МИНУТНЫЙ ТАЙМЕР
+            var timer_minute = new System.Windows.Threading.DispatcherTimer();
+            timer_minute.Interval = new TimeSpan(0, 1, 0);
+            timer_minute.IsEnabled = true;
+            timer_minute.Tick += (o, t) =>
+            {
+                foreach (var battery in allBatteries)
+                {
+                    Values1.Add(Convert.ToInt32(battery["EstimatedChargeRemaining"]));
+
+                    if (Convert.ToUInt16(battery["BatteryStatus"]) == 1 || batt_status == 0) //Разряжается
+                    {
+                        batt_min++;
+                        Batt_label_time.Content = "Время работы:";
+                        if (batt_min >= 1)
+                        {
+                            int bvar1 = batt_start - Convert.ToInt16(battery["EstimatedChargeRemaining"]);
+                            int min = 0;
+                            if (bvar1 != 0) { min = Convert.ToInt16(battery["EstimatedChargeRemaining"]) * batt_min / bvar1; } else { min = Convert.ToInt16(battery["EstimatedChargeRemaining"]) * batt_min; }
+                            int chas = 0;
+                            if (min > 60)
+                            {
+                                chas = min / 60;
+                                min = min % 60;
+                            }
+                            Battery_time.Content = chas + "ч. " + min + "мин. ";
+                        }
+                        else
+                        {
+                            Battery_time.Content = "Вычисление...";
+                        }
+
+                        if (Convert.ToInt32(battery["EstimatedChargeRemaining"]) == 25)
+                        {
+                            new ToastContentBuilder()
+                            .AddArgument("action", "viewConversation")
+                            .AddArgument("conversationId", 9813)
+                            .AddText("Батарея почти разряжена.")
+                            .AddText("Осталось "+ Convert.ToInt32(battery["EstimatedChargeRemaining"]) + "%. Подключите зарядное устройство.")
+                            .Show();
+                        }
+                    }
+                    else
+                    {
+                        batt_min++;
+                        Batt_label_time.Content = "До полного заряда:";
+                        if (batt_min >= 1)
+                        {
+                            int bvar1 = Convert.ToInt16(battery["EstimatedChargeRemaining"]) - batt_start;
+                            int min = 0;
+                            if (bvar1 != 0) { min = 100 * batt_min / bvar1; } else { min = Convert.ToInt16(battery["EstimatedChargeRemaining"]) * batt_min; }
+                            int chas = 0;
+                            if (min > 60)
+                            {
+                                chas = min / 60;
+                                min = min % 60;
+                            }
+                            Battery_time.Content = chas + "ч. " + min + "мин. ";
+                        }
+                        else
+                        {
+                            Battery_time.Content = "Вычисление...";
+                        }
+                        if (Convert.ToInt32(battery["EstimatedChargeRemaining"]) == 80)
+                        {
+                            new ToastContentBuilder()
+                            .AddArgument("action", "viewConversation")
+                            .AddArgument("conversationId", 9813)
+                            .AddText("Можно отключить ЗУ.")
+                            .AddText("Устройство заряжено на " + Convert.ToInt32(battery["EstimatedChargeRemaining"]) + "%.")
+                            .Show();
+                        }
+                    }
+                }
+            };
+            timer_minute.Start();
+            
+            //УВЕДОМЛЕНИЯ
+            //NotificationAsync();
+        }
+
+        public sealed class UserNotification
+        {
+            public Windows.ApplicationModel.AppInfo AppInfo { get; }
+            public DateTimeOffset CreationTime { get; }
+            public uint Id { get; }
+            public Windows.UI.Notifications.Notification Notification { get; }
+        }
+
+        public async Task NotificationAsync()
+        {
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Notifications.Management.UserNotificationListener"))
+            {
+                UserNotificationListener listener = UserNotificationListener.Current;
+                UserNotificationListenerAccessStatus accessStatus = await listener.RequestAccessAsync();
+
+                //IReadOnlyList<UserNotification> notifs = await listener.GetNotificationsAsync(NotificationKinds.Toast);
+            }
+            else
+            {
+                MessageBox.Show("На этом устройстве прослушивание недоступно.");
+            }
+        }
+
+        public void GetBatteryPercent()
+        {
+            ManagementClass wmi = new ManagementClass("Win32_Battery");
+            ManagementObjectCollection allBatteries = wmi.GetInstances();
+
+            foreach (var battery in allBatteries)
+            {
+                BatteryState.Content = Convert.ToDouble(battery["EstimatedChargeRemaining"]) + "%";
+                Voltage_battery.Content = Math.Round(Convert.ToDouble(battery["DesignVoltage"]) / 1000, 1) + " kW";
+                Battery_ProgressBar.Value = Convert.ToDouble(battery["EstimatedChargeRemaining"]);
+                if (Convert.ToUInt16(battery["BatteryStatus"]) == 1)
+                {
+                    Battery_Status.Content = "Разряжается";
+                    if (batt_status == 1)
+                    {
+                        batt_min = 0;
+                        batt_start = Convert.ToInt16(battery["EstimatedChargeRemaining"]);
+                        batt_status = 0;
+                        Battery_time.Content = "Вычисление...";
+                    }
+                    var bc = new BrushConverter();
+                    Battery_ProgressBar.Foreground = (Brush)bc.ConvertFrom("#FF0078D7");
+                    //Battery
+                    BitmapImage bi3 = new BitmapImage(); bi3.BeginInit();
+                    if (Convert.ToDouble(battery["EstimatedChargeRemaining"]) >= 80)
+                    {
+                        bi3.UriSource = new Uri("icons/battery_full.png", UriKind.Relative); bi3.EndInit(); Battery.Source = bi3; Battery_main.Source = bi3;
+                    }
+                    else if (Convert.ToDouble(battery["EstimatedChargeRemaining"]) < 80 && Convert.ToDouble(battery["EstimatedChargeRemaining"])  > 40)
+                    {
+                        bi3.UriSource = new Uri("icons/Battery_Normal.png", UriKind.Relative); bi3.EndInit(); Battery.Source = bi3; Battery_main.Source = bi3;
+                    }
+                    else
+                    {
+                        bi3.UriSource = new Uri("icons/Battery_Low.png", UriKind.Relative); bi3.EndInit(); Battery.Source = bi3; Battery_main.Source = bi3;
+                    }
+                }
+                else
+                {
+                    Battery_Status.Content = "Заряжается";
+                    var bc = new BrushConverter();
+                    Battery_ProgressBar.Foreground = (Brush)bc.ConvertFrom("#FF70BD13");
+                    BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/Battery_Charch.png", UriKind.Relative); bi3.EndInit(); Battery.Source = bi3; Battery_main.Source = bi3;
+                    batt_min = 0;
+                    if (batt_status == 0)
+                    {
+                        batt_status = 1;
+                        batt_start = Convert.ToInt16(battery["EstimatedChargeRemaining"]);
+                        batt_min = 0;
+                        Battery_time.Content = "Вычисление...";
+                    }
+                }
+            }
         }
 
         private void On_OFF_Audio(object sender, RoutedEventArgs e)
@@ -210,12 +511,27 @@ namespace ModernNotyfi
         {
             if (SoundDeviceOpen == 0)
             {
-                SoundDeviceOpen = 1;
+                SoundDeviceOpen = 1; not_up = 0;
                 DoubleAnimation SoundDeviceAnimation = new DoubleAnimation();
                 SoundDeviceAnimation.From = SoundBorder.ActualHeight;
                 SoundDeviceAnimation.To = 150;
                 SoundDeviceAnimation.Duration = TimeSpan.FromSeconds(0.5);
                 SoundBorder.BeginAnimation(Border.HeightProperty, SoundDeviceAnimation);
+
+                DoubleAnimation NotifyAnimation = new DoubleAnimation();
+                NotifyAnimation.From = Border_Notify.ActualHeight;
+                NotifyAnimation.To = 52;
+                NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
+                Border_Notify.BeginAnimation(Border.HeightProperty, NotifyAnimation);
+
+                RotateTransform rotateTransform1 = new RotateTransform(90);
+                Open_N_Image.RenderTransform = rotateTransform1;
+
+                ThicknessAnimation Border_NotifyAnimation = new ThicknessAnimation();
+                Border_NotifyAnimation.From = new Thickness(10, 0, 0, 274);
+                Border_NotifyAnimation.To = new Thickness(10, 0, 0, 358);
+                Border_NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
+                Border_Notify.BeginAnimation(Border.MarginProperty, Border_NotifyAnimation);
 
                 ThicknessAnimation Border_MusicAnimation = new ThicknessAnimation();
                 Border_MusicAnimation.From = new Thickness(10, 230, 0, 0);
@@ -226,12 +542,27 @@ namespace ModernNotyfi
             }
             else
             {
-                SoundDeviceOpen = 0;
+                SoundDeviceOpen = 0; not_up = 0;
                 DoubleAnimation SoundDeviceAnimation = new DoubleAnimation();
                 SoundDeviceAnimation.From = SoundBorder.ActualHeight;
                 SoundDeviceAnimation.To = 70;
                 SoundDeviceAnimation.Duration = TimeSpan.FromSeconds(0.5);
                 SoundBorder.BeginAnimation(Border.HeightProperty, SoundDeviceAnimation);
+
+                DoubleAnimation NotifyAnimation = new DoubleAnimation();
+                NotifyAnimation.From = Border_Notify.ActualHeight;
+                NotifyAnimation.To = 52;
+                NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
+                Border_Notify.BeginAnimation(Border.HeightProperty, NotifyAnimation);
+
+                RotateTransform rotateTransform1 = new RotateTransform(90);
+                Open_N_Image.RenderTransform = rotateTransform1;
+
+                ThicknessAnimation Border_NotifyAnimation = new ThicknessAnimation();
+                Border_NotifyAnimation.From = new Thickness(10, 0, 0, 358);
+                Border_NotifyAnimation.To = new Thickness(10, 0, 0, 274);
+                Border_NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
+                Border_Notify.BeginAnimation(Border.MarginProperty, Border_NotifyAnimation);
 
                 ThicknessAnimation Border_MusicAnimation = new ThicknessAnimation();
                 Border_MusicAnimation.From = new Thickness(10, 150, 0, 0);
@@ -258,6 +589,89 @@ namespace ModernNotyfi
         }
 
         // КНОПКИ
+        public void Open_Full_Panel()
+        {
+            //MainPanelGrid
+            ThicknessAnimation Border_MainPanelGrid = new ThicknessAnimation();
+            Border_MainPanelGrid.From = new Thickness(0, 0, -312, 0);
+            Border_MainPanelGrid.To = new Thickness(-360, 0, 0, 0);
+            Border_MainPanelGrid.Duration = TimeSpan.FromSeconds(0.1);
+            MainPanelGrid.BeginAnimation(Border.MarginProperty, Border_MainPanelGrid);
+        }
+        int not_up = 0;
+        private void Nitify_Open_Panel(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation NotifyAnimation = new DoubleAnimation();
+            NotifyAnimation.From = Border_Notify.ActualHeight;
+            if (not_up == 0)
+            {
+                RotateTransform rotateTransform1 = new RotateTransform(270);
+                Open_N_Image.RenderTransform = rotateTransform1;
+                NotifyAnimation.To = 215;
+                not_up = 1;
+            }
+            else
+            {
+                RotateTransform rotateTransform1 = new RotateTransform(90);
+                Open_N_Image.RenderTransform = rotateTransform1;
+                NotifyAnimation.To = 52;
+                not_up = 0;
+            }
+            NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
+            Border_Notify.BeginAnimation(Border.HeightProperty, NotifyAnimation);
+
+            DoubleAnimation SoundDeviceAnimation = new DoubleAnimation();
+            SoundDeviceAnimation.From = SoundBorder.ActualHeight;
+            SoundDeviceAnimation.To = 70;
+            SoundDeviceAnimation.Duration = TimeSpan.FromSeconds(0.5);
+            SoundBorder.BeginAnimation(Border.HeightProperty, SoundDeviceAnimation);
+
+            if (Border_Notify.Margin == new Thickness(10, 0, 0, 358))
+            {
+                ThicknessAnimation Border_NotifyAnimation = new ThicknessAnimation();
+                Border_NotifyAnimation.From = new Thickness(10, 0, 0, 358);
+                Border_NotifyAnimation.To = new Thickness(10, 0, 0, 274);
+                Border_NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
+                Border_Notify.BeginAnimation(Border.MarginProperty, Border_NotifyAnimation);
+            }
+
+            if (Border_Music.Margin == new Thickness(10, 150, 0, 0))
+            {
+                ThicknessAnimation Border_MusicAnimation = new ThicknessAnimation();
+                Border_MusicAnimation.From = new Thickness(10, 150, 0, 0);
+                Border_MusicAnimation.To = new Thickness(10, 230, 0, 0);
+                Border_MusicAnimation.Duration = TimeSpan.FromSeconds(0.5);
+                Border_Music.BeginAnimation(Border.MarginProperty, Border_MusicAnimation);
+            }
+        }
+
+        private void Full_Close_Panel(object sender, RoutedEventArgs e)
+        {
+            ThicknessAnimation Border_MainPanelGrid = new ThicknessAnimation();
+            Border_MainPanelGrid.From = new Thickness(-360, 0, 0, 0); 
+            Border_MainPanelGrid.To = new Thickness(0, 0, -312, 0);
+            Border_MainPanelGrid.Duration = TimeSpan.FromSeconds(0.1);
+            MainPanelGrid.BeginAnimation(Border.MarginProperty, Border_MainPanelGrid);
+        }
+
+        private void Battery_Open_Panel(object sender, RoutedEventArgs e)
+        {
+            Open_Full_Panel();
+            Full_Panel_Tab.SelectedIndex = 0;
+        }
+
+        private void Browser_Open_Panel(object sender, RoutedEventArgs e)
+        {
+            Open_Full_Panel();
+            Full_Panel_Tab.SelectedIndex = 1;
+        }
+
+        private void Clock_Open_Panel(object sender, RoutedEventArgs e)
+        {
+            Open_Full_Panel();
+            Full_Panel_Tab.SelectedIndex = 2;
+        }
+
         private void Wifi_settings_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -392,6 +806,11 @@ namespace ModernNotyfi
         private void Music_Left_Click(object sender, RoutedEventArgs e)
         {
             keybd_event(VK_MEDIA_PREV_TRACK, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
+        }
+
+        private void Battery_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("ms-settings:batterysaver");
         }
     }
 

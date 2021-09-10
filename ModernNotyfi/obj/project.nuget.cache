@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "YqN5wZEOxWlAXCTaiHpoyO2g9Lgo0EIsfDNmAhmxlHwhFU6xY4gFDwrnAahCKQjuB2yuZqzDQKxLTwLw25a3pg==",
+  "dgSpecHash": "5SD3KaHYyhzz72OWGPb0DgFUzLvJDQACThyAViMOX6KUoBA2GUw03n9lInYG3QVwJQAuNNrIkJsZc2g9tdYdMg==",
   "success": true,
   "projectFilePath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\stas1\\.nuget\\packages\\fluentwpf\\0.9.0\\fluentwpf.0.9.0.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.0\\microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net472\\1.0.0\\microsoft.netframework.referenceassemblies.net472.1.0.0.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\microsoft.toolkit.uwp.notifications\\7.0.2\\microsoft.toolkit.uwp.notifications.7.0.2.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\microsoft.windows.sdk.contracts\\10.0.19041.1\\microsoft.windows.sdk.contracts.10.0.19041.1.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\modernwpfui\\0.9.4\\modernwpfui.0.9.4.nupkg.sha512",

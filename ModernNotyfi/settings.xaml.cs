@@ -17,8 +17,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Net;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
+using System.IO;
 
 namespace ModernNotyfi
 {
@@ -39,6 +41,17 @@ namespace ModernNotyfi
             InitializeComponent();
         }
 
+        private async void DisplayDialog(string Title, string Content)
+        {
+            ContentDialog DisplayDialog = new ContentDialog
+            {
+                Title = Title,
+                Content = Content,
+                CloseButtonText = "Закрыть"
+            };
+
+            ContentDialogResult result = await DisplayDialog.ShowAsync();
+        }
 
         private void Settings_Loaded(object sender, RoutedEventArgs e)
         {
@@ -74,6 +87,15 @@ namespace ModernNotyfi
             else
             {
                 Exit_Setting.IsChecked = false;
+            }
+
+            if (Properties.Settings.Default.show_start_notify == true)
+            {
+                Chek_Start_Notify.IsChecked = true;
+            }
+            else
+            {
+                Chek_Start_Notify.IsChecked = false;
             }
 
             if (Properties.Settings.Default.Disign_Shutdown == "old")
@@ -134,9 +156,9 @@ namespace ModernNotyfi
         {
             Settings_Tab.SelectedIndex = 2; Back.Click += Backs;
             Back.Visibility = Visibility.Visible;
-            Titles.Content = "Настройки > Клавиатура";
+            Titles.Content = "Настройки > Мини-приложения";
             NavView.SelectedItem = NavView.MenuItems[1];
-            BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/keyboard.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
+            BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/App_Color.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
 
         private void Open_Personalization_Click(object sender, RoutedEventArgs e)
@@ -202,15 +224,88 @@ namespace ModernNotyfi
             }
         }
 
+        int start_update = 0;
         private void Check_Update_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.last_check_update = DateTime.Now.ToString();
-            Properties.Settings.Default.Save();
-            LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
+            if (start_update == 0)
+            {
+                InfoUpdate.Content = "Проверка...";
+                Properties.Settings.Default.last_check_update = DateTime.Now.ToString();
+                Properties.Settings.Default.Save();
+                LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
 
-            // if: ok
-            BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/ok.png", UriKind.Relative); bi3.EndInit();
-            Update_img.Source = bi3;
+                //DEV VERSION CHECK
+                if (GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") == Assembly.GetExecutingAssembly().GetName().Version.ToString())
+                {
+                    InfoUpdate.Content = "У вас актуальная версия";
+                    BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/ok.png", UriKind.Relative); bi3.EndInit();
+                    Update_img.Source = bi3;
+                }
+                else
+                {
+                    if (GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") != "Error")
+                    {
+                        InfoUpdate.Content = "Доступна новая версия " + GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt");
+                        LastChekUpdate.Content = "Готовы к обновлению.";
+                        Check_Update.Content = "Начать обновление";
+                        BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/restart_fluent.png", UriKind.Relative); bi3.EndInit();
+                        Update_img.Source = bi3;
+                        start_update = 1;
+                    }
+                    else
+                    {
+                        InfoUpdate.Content = "Нет подключения к интернету.";
+                        LastChekUpdate.Content = "Мы не смогли получить ответ от сервера. Проверьте подключение.";
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    Process.Start("update.exe");
+                    Application.Current.Shutdown();
+                }
+                catch
+                {
+                    InfoUpdate.Content = "Ошибка запуска процесса обновления.";
+                    LastChekUpdate.Content = "Не найден файл обновления. Переустановите программу.";
+                }
+            }
+        }
+
+        public string GetContent(string url)
+        {
+            try
+            {
+                WebRequest request = WebRequest.Create(url);
+                request.Proxy = null;
+                request.Method = "GET";
+                request.Timeout = 360000;
+                request.ContentType = "application/x-www-form-urlencoded";
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    Stream requestStream = response.GetResponseStream();
+
+                    if (requestStream == null)
+                    {
+                        return null;
+                    }
+
+                    return new StreamReader(requestStream).ReadToEnd();
+                }
+            }
+            catch (Exception e)
+            {
+                InfoUpdate.Content = "Не удалось проверить обновления";
+                Properties.Settings.Default.last_check_update = DateTime.Now.ToString();
+                Properties.Settings.Default.Save();
+                LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
+                BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/shutdown.png", UriKind.Relative); bi3.EndInit();
+                Update_img.Source = bi3;
+                return "Error";
+            }
         }
 
         private void Save_Settings_Click(object sender, RoutedEventArgs e)
@@ -232,6 +327,15 @@ namespace ModernNotyfi
                 }
                 else {
                     Properties.Settings.Default.Show_Exit = "False";
+                }
+
+                if (Chek_Start_Notify.IsChecked == true)
+                {
+                    Properties.Settings.Default.show_start_notify = true;
+                }
+                else
+                {
+                    Properties.Settings.Default.show_start_notify = false;
                 }
 
                 if (Style_Shutdown.SelectedIndex == 0) { Properties.Settings.Default.Disign_Shutdown = "old"; }
@@ -317,6 +421,11 @@ namespace ModernNotyfi
         public void Chenche_Color(object sender, RoutedEventArgs e)
         {
             color_piker.Text = Convert.ToString(((Button)sender).Tag);
+        }
+
+        private void Open_Sourse(object sender, RoutedEventArgs e)
+        {
+            DisplayDialog("Используемый исходный код.", "1. ModernWpf | Modern styles and controls for your WPF applications\n2. nAudio | Audio and MIDI library for .NET\n3. LiveCharts | Powerful charts, maps and gauges for .Net");
         }
     }
 }

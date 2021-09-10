@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/user-48.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("addons/webview2.exe")]
 
 

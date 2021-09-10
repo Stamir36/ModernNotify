@@ -142,7 +142,6 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\settings.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.Properties.Resources.resources
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.GenerateResource.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.CoreCompileInputs.cache
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.CopyComplete
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\FluentWPF.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Microsoft.Win32.Registry.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\NAudio.dll
@@ -166,6 +165,12 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\welcome.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\welcome.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\XamlAnimatedGif.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\XamlAnimatedGif.pdb
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.AssemblyReference.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\shutdown.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\shutdown.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\LiveCharts.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\LiveCharts.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\LiveCharts.Wpf.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\LiveCharts.Wpf.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.AssemblyReference.cache

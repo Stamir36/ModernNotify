@@ -44,6 +44,14 @@
               "target": "Package",
               "version": "[0.9.0, )"
             },
+            "LiveCharts.Wpf": {
+              "target": "Package",
+              "version": "[0.9.7, )"
+            },
+            "Microsoft.Toolkit.Uwp.Notifications": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
             "Microsoft.Windows.SDK.Contracts": {
               "target": "Package",
               "version": "[10.0.19041.1, )"
