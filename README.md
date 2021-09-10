@@ -1,6 +1,8 @@
 # ModernNotify | Developer Version
 Modern Control Panel for Microsoft Windows<br>
 Language: Russian<br>
+WEB-SITE: http://modernnotify.ml/?i=1<br>
+<br>
 <img src="https://i.ibb.co/GFFcn8D/Image-1.png" alt="Image-1" border="0">
 
 #UPDATE 0.0.0.16
