@@ -2,7 +2,7 @@
 Modern Control Panel for Microsoft Windows<br>
 Language: Russian<br>
 Download:<br>
-https://github.com/Stamir36/ModernNotyfi/blob/main/modernnotify_setup_dev.exe
+https://github.com/Stamir36/ModernNotyfi/raw/main/modernnotify_setup_dev.exe
 <br>
 <br>
 <img src="https://i.ibb.co/GFFcn8D/Image-1.png" alt="Image-1" border="0">
