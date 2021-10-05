@@ -14,20 +14,20 @@
     </Window.Background>
 
     <Grid Grid.IsSharedSizeScope="True">
-        <Button x:Name="Shutdown" HorizontalAlignment="Center" Margin="320,188,330,291" VerticalAlignment="Center" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Width="310" Height="51">
+        <Button x:Name="Shutdown" HorizontalAlignment="Center" Margin="320,188,330,291" VerticalAlignment="Center" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Width="310" Height="51" Click="ShutdownWindows">
             <Grid Height="41" Width="243">
                 <Image HorizontalAlignment="Left" Source="/ModernNotify;component/icons/shutdown_fluent.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
                 <Label x:Name="Text1" Content="Выключить ПК" Margin="37,7,0,7" HorizontalAlignment="Left" Width="206" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" />
             </Grid>
         </Button>
-        <Button x:Name="S_Restart" HorizontalAlignment="Center" Margin="320,244,330,235" VerticalAlignment="Center" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Width="310" Height="51">
+        <Button x:Name="S_Restart" HorizontalAlignment="Center" Margin="320,244,330,235" VerticalAlignment="Center" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Width="310" Height="51" Click="RestartWindows">
             <Grid Height="41" Width="244">
                 <Image HorizontalAlignment="Left" Source="/ModernNotify;component/icons/restart_fluent.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
                 <Label x:Name="Text2" Content="Перезагрузить ПК" Margin="37,7,0,7" HorizontalAlignment="Left" Width="207" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" />
             </Grid>
         </Button>
         <Button x:Name="close" Content="Отменить" Margin="0,0,19,18" HorizontalAlignment="Right" Width="106" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Close" Background="#4CBFBFBF" />
-        <Image x:Name="User_Image" HorizontalAlignment="Center" Height="56" Margin="320,112,584,362" VerticalAlignment="Center" Width="56" Source="/ModernNotify;component/icons/user-48.png"/>
+        <Image x:Name="User_Image" HorizontalAlignment="Center" Height="56" Margin="320,112,584,362" VerticalAlignment="Center" Width="56" Source="/ModernNotify;component/icons/user-48.png" RenderTransformOrigin="0.5,0.5"/>
         <Label x:Name="User_Name" Content="Имя Пользователя" HorizontalAlignment="Center" Margin="381,112,330,362" VerticalAlignment="Center" Height="56" Width="249" Padding="10,0,0,0" FontSize="18" VerticalContentAlignment="Center"/>
         <Button x:Name="Exit_App" HorizontalAlignment="Right" Margin="0,0,130,19" VerticalAlignment="Bottom" Background="#4CBFBFBF" OpacityMask="Black" Cursor="Hand" Width="165" Height="31" Click="Exit_App_Click">
             <Grid Height="30" Width="175">

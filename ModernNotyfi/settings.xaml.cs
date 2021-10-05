@@ -21,6 +21,7 @@ using System.Net;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using System.IO;
+using System.Globalization;
 
 namespace ModernNotyfi
 {
@@ -39,6 +40,12 @@ namespace ModernNotyfi
         public settings()
         {
             InitializeComponent();
+            if (Properties.Settings.Default.UpgradeRequired)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+            }
         }
 
         private async void DisplayDialog(string Title, string Content)
@@ -69,6 +76,8 @@ namespace ModernNotyfi
             //Настройки
             Opacity_Panel_Settings.Value = Properties.Settings.Default.opacity_panel * 100;
             Color_Border.Text = Properties.Settings.Default.color_panel;
+            Border_Preview.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
+            CRadius_Panel_Settings.Value = Properties.Settings.Default.CornerRadius;
             if (Properties.Settings.Default.theme == "light")
             {
                 theme_combo.SelectedIndex = 0;
@@ -78,6 +87,15 @@ namespace ModernNotyfi
             {
                 theme_combo.SelectedIndex = 1;
                 Dark_Theme();
+            }
+
+            if (Properties.Settings.Default.posicion == "rigth")
+            {
+                pos_combo.SelectedIndex = 0;
+            }
+            else
+            {
+                pos_combo.SelectedIndex = 1;
             }
 
             if (Properties.Settings.Default.Show_Exit == "True")
@@ -197,6 +215,15 @@ namespace ModernNotyfi
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/color.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
             color_piker.Text = Color_Border.Text;
             Back.Click += Open_Personalization_Click;
+
+            string hexString = Color_Border.Text;
+
+            if (hexString.IndexOf('#') != -1)
+                hexString = hexString.Replace("#", "");
+
+            Red.Value = int.Parse(hexString.Substring(0, 2), NumberStyles.AllowHexSpecifier);
+            Green.Value = int.Parse(hexString.Substring(2, 2), NumberStyles.AllowHexSpecifier);
+            Blue.Value = int.Parse(hexString.Substring(4, 2), NumberStyles.AllowHexSpecifier);
         }
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -296,7 +323,7 @@ namespace ModernNotyfi
                     return new StreamReader(requestStream).ReadToEnd();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 InfoUpdate.Content = "Не удалось проверить обновления";
                 Properties.Settings.Default.last_check_update = DateTime.Now.ToString();
@@ -314,6 +341,7 @@ namespace ModernNotyfi
             {
                 var bc = new BrushConverter();
                 Border_Preview.Background = (Brush)bc.ConvertFrom(Color_Border.Text);
+                Material_Border.Background = (Brush)bc.ConvertFrom(Color_Border.Text);
 
                 //Сохранение.
                 Properties.Settings.Default.opacity_panel = Opacity_Panel_Settings.Value / 100;
@@ -321,6 +349,9 @@ namespace ModernNotyfi
                 
                 if (theme_combo.SelectedIndex == 0) { Properties.Settings.Default.theme = "light"; }
                 else { Properties.Settings.Default.theme = "black"; }
+
+                if (pos_combo.SelectedIndex == 0) { Properties.Settings.Default.posicion = "rigth"; }
+                else { Properties.Settings.Default.posicion = "left"; }
 
                 if (Exit_Setting.IsChecked == true){
                     Properties.Settings.Default.Show_Exit = "True";
@@ -337,6 +368,7 @@ namespace ModernNotyfi
                 {
                     Properties.Settings.Default.show_start_notify = false;
                 }
+                Properties.Settings.Default.CornerRadius = (int)CRadius_Panel_Settings.Value;
 
                 if (Style_Shutdown.SelectedIndex == 0) { Properties.Settings.Default.Disign_Shutdown = "old"; }
                 else { Properties.Settings.Default.Disign_Shutdown = "new"; }
@@ -361,9 +393,23 @@ namespace ModernNotyfi
             timer.Tick += (o, t) =>
             {
                 Border_Preview.Background.Opacity = Convert.ToDouble(Opacity_Panel_Settings.Value / 100);
+                Material_Border.Background.Opacity = Convert.ToDouble(Opacity_Panel_Settings.Value / 100);
                 timer.Stop();
             };
             timer.Start();
+        }
+
+        private void RGBtoHESH(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            REDtext.Content = Convert.ToInt16(Red.Value); GREENtext.Content = Convert.ToInt16(Green.Value); BLUEtext.Content = Convert.ToInt16(Blue.Value);
+            Color myColor = Color.FromRgb(Convert.ToByte(Red.Value), Convert.ToByte(Green.Value), Convert.ToByte(Blue.Value));
+            string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
+
+            color_piker.Text = "#" + hex;
+
+            var bc = new BrushConverter();
+            Material_Border.Background = (Brush)bc.ConvertFrom(color_piker.Text);
+            Material_Border.Background.Opacity = Convert.ToDouble(Opacity_Panel_Settings.Value / 100);
         }
 
         private void Color_Border_TextChanged(object sender, TextChangedEventArgs e)
@@ -373,6 +419,9 @@ namespace ModernNotyfi
                 var bc = new BrushConverter();
                 Border_Preview.Background = (Brush)bc.ConvertFrom(Color_Border.Text);
                 Border_Preview.Background.Opacity = Convert.ToDouble(Opacity_Panel_Settings.Value / 100);
+
+                Material_Border.Background = (Brush)bc.ConvertFrom(Color_Border.Text);
+                Material_Border.Background.Opacity = Convert.ToDouble(Opacity_Panel_Settings.Value / 100);
             }
             catch
             {
@@ -383,6 +432,8 @@ namespace ModernNotyfi
                 Color_Border.BorderBrush = new SolidColorBrush(Colors.Black);
             }
         }
+
+
 
         private void Site_color_Click(object sender, RoutedEventArgs e)
         {
@@ -426,6 +477,11 @@ namespace ModernNotyfi
         private void Open_Sourse(object sender, RoutedEventArgs e)
         {
             DisplayDialog("Используемый исходный код.", "1. ModernWpf | Modern styles and controls for your WPF applications\n2. nAudio | Audio and MIDI library for .NET\n3. LiveCharts | Powerful charts, maps and gauges for .Net");
+        }
+
+        private void CRadius_Panel_Settings_Value(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Border_Preview.CornerRadius = new CornerRadius(CRadius_Panel_Settings.Value);
         }
     }
 }

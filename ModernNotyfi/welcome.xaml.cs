@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using ModernWpf;
+using System;
 using System.Collections.Generic;
 using System.DirectoryServices.AccountManagement;
 using System.Linq;
@@ -38,7 +40,8 @@ namespace ModernNotyfi
             {
                 User_Name.Text = "Пользователь";
             }
-            
+
+            Step_Progress.Value = 25;
         }
 
         private void Start_App_Click(object sender, RoutedEventArgs e)
@@ -67,7 +70,64 @@ namespace ModernNotyfi
             {
                 MessageBox.Show("Пожалуйста, введите ваше имя (Больше 4 символов, у вас: " + name.Length + ").", "Нет имени");
             }
-            
+            Step_Progress.Value = 50;
+        }
+
+        private void Steap_4(object sender, RoutedEventArgs e)
+        {
+            Step_Text.Content = "Базовая настройка";
+            Step_Progress.Value = 75;
+            WelcomTabs.SelectedIndex = 3;
+            theme_combo.SelectedIndex = 0;
+            pos_combo.SelectedIndex = 0;
+        }
+
+        private void Save_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            if (theme_combo.SelectedIndex == 0) { Properties.Settings.Default.theme = "light"; }
+            else { Properties.Settings.Default.theme = "black"; }
+
+            if (pos_combo.SelectedIndex == 0) { Properties.Settings.Default.posicion = "rigth"; }
+            else { Properties.Settings.Default.posicion = "left"; }
+
+            string ExePath = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + "\\ModernNotify.exe";
+
+            string name = "ModernNotify";
+            RegistryKey reg;
+            reg = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+
+            if ((bool)StartInWindows.IsChecked)
+            {
+                
+                try
+                {
+                    reg.SetValue(name, ExePath);
+                    reg.Close();
+                }
+                catch
+                {
+                    StartInWindows.IsChecked = false;
+                }
+            }
+            else
+            {
+                try
+                {
+                    reg.DeleteValue(name);
+                    reg.Close();
+                }
+                catch
+                {
+                    StartInWindows.IsChecked = false;
+                }
+            }
+
+
+            Properties.Settings.Default.First_Settings = false;
+            Properties.Settings.Default.Save();
+            //OOBE Close
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
     }
 }

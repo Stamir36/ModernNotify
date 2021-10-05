@@ -51,8 +51,8 @@
                     <TabControl x:Name="Settings_Tab" Margin="-71,70,19,63" Background="{x:Null}" Foreground="{x:Null}" TabStripPlacement="Left">
                         <TabItem Header="Menu" Width="14" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid>
-                                
-                                
+
+
                                 <Button x:Name="Open_Main" HorizontalAlignment="Left" Margin="72,23,0,0" VerticalAlignment="Top" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Main_Click">
                                     <Grid Height="41" Width="377">
                                         <Image HorizontalAlignment="Left" Source="icons/maim_settings.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
@@ -91,7 +91,7 @@
                         <TabItem Width="14">
                             <ScrollViewer>
                                 <StackPanel>
-                                    <Grid Height="383">
+                                    <Grid Height="443">
                                         <Label x:Name="text_1" Content="Основные параметры" Margin="70,10,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
                                         <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="75,39,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                             <Border.RenderTransform>
@@ -103,7 +103,7 @@
                                                 </TransformGroup>
                                             </Border.RenderTransform>
                                         </Border>
-                                        <Border BorderThickness="1" Height="57" Margin="70,52,31,0" VerticalAlignment="Top" CornerRadius="15">
+                                        <Border BorderThickness="1" Height="57" Margin="70,52,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                                             <Border.BorderBrush>
                                                 <SolidColorBrush Color="Black" Opacity="0.2"/>
                                             </Border.BorderBrush>
@@ -118,8 +118,8 @@
                                                 </ComboBox>
                                             </Grid>
                                         </Border>
-                                        <Label Content="Функции и взаимодействие" Margin="67,184,0,0" HorizontalAlignment="Left" Width="276" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="72,213,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                        <Label Content="Функции и взаимодействие" Margin="67,240,0,0" HorizontalAlignment="Left" Width="276" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="72,269,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                             <Border.RenderTransform>
                                                 <TransformGroup>
                                                     <ScaleTransform ScaleY="-1"/>
@@ -129,7 +129,7 @@
                                                 </TransformGroup>
                                             </Border.RenderTransform>
                                         </Border>
-                                        <Border BorderThickness="1" Height="57" Margin="70,303,31,0" VerticalAlignment="Top" CornerRadius="15">
+                                        <Border BorderThickness="1" Height="57" Margin="70,359,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                                             <Border.BorderBrush>
                                                 <SolidColorBrush Color="Black" Opacity="0.2"/>
                                             </Border.BorderBrush>
@@ -143,7 +143,7 @@
                                             </Grid>
                                         </Border>
 
-                                        <Border BorderThickness="1" Height="57" Margin="70,241,31,0" VerticalAlignment="Top" CornerRadius="15">
+                                        <Border BorderThickness="1" Height="57" Margin="70,297,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                                             <Border.BorderBrush>
                                                 <SolidColorBrush Color="Black" Opacity="0.2"/>
                                             </Border.BorderBrush>
@@ -158,8 +158,8 @@
                                                 </ComboBox>
                                             </Grid>
                                         </Border>
-                                        <Label Content="Панель выключения." Margin="73,216,0,0" HorizontalAlignment="Left" Width="142" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
-                                        <Border BorderThickness="1" Height="57" Margin="70,113,31,0" VerticalAlignment="Top" CornerRadius="15">
+                                        <Label Content="Панель выключения." Margin="73,272,0,0" HorizontalAlignment="Left" Width="142" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
+                                        <Border BorderThickness="1" Height="57" Margin="70,173,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                                             <Border.BorderBrush>
                                                 <SolidColorBrush Color="Black" Opacity="0.2"/>
                                             </Border.BorderBrush>
@@ -172,20 +172,41 @@
                                                 <CheckBox x:Name="Chek_Start_Notify" HorizontalAlignment="Right" Margin="0,10,20,0" VerticalAlignment="Top" Width="20" Height="32" MinWidth="20" Cursor="Hand"/>
                                             </Grid>
                                         </Border>
+                                        <Border BorderThickness="1" Height="57" Margin="70,112,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                                            <Border.BorderBrush>
+                                                <SolidColorBrush Color="Black" Opacity="0.2"/>
+                                            </Border.BorderBrush>
+                                            <Border.Background>
+                                                <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
+                                            </Border.Background>
+                                            <Grid>
+                                                <Label Content="Местоположение панели" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
+                                                <ComboBox x:Name="pos_combo" HorizontalAlignment="Right" Margin="0,11,10,0" VerticalAlignment="Top" Width="210">
+                                                    <TextBlock><Run Text="Справо"/></TextBlock>
+                                                    <TextBlock><Run Text="Слево"/></TextBlock>
+                                                </ComboBox>
+                                            </Grid>
+                                        </Border>
                                     </Grid>
                                 </StackPanel>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem Width="14">
                             <Grid>
-                                <Label x:Name="text_2" Content="Клавиатура" Margin="70,10,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                <Label x:Name="text_2" Content="Категории и разделы" Margin="70,10,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                <Button x:Name="Open_Start" Margin="70,59,0,0" VerticalAlignment="Top" Width="159" Height="140" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand">
+                                    <Grid Height="148" Width="149">
+                                        <Image HorizontalAlignment="Left" Source="/icons/App_Color.png" Margin="25,1,0,55" Width="94" RenderTransformOrigin="0.75,0.812" />
+                                        <Label Content="Мини-приложения" Margin="0,98,0,0" HorizontalAlignment="Center" Width="141" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
+                                    </Grid>
+                                </Button>
                             </Grid>
                         </TabItem>
                         <TabItem Width="14">
                             <Grid>
                                 <ScrollViewer>
                                     <StackPanel>
-                                        <Grid ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="0,0,10,0" Height="475">
+                                        <Grid ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="0,0,10,0" Height="369">
                                             <Label x:Name="text_3" Content="Вид панелей:" Margin="70,10,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
                                             <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,39,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                                 <Border.RenderTransform>
@@ -199,7 +220,7 @@
                                             </Border>
 
 
-                                            <Border BorderThickness="1" Height="57" Margin="77,56,276,0" VerticalAlignment="Top" CornerRadius="15">
+                                            <Border BorderThickness="1" Height="57" Margin="73,56,280,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                                                 <Border.BorderBrush>
                                                     <SolidColorBrush Color="Black" Opacity="0.2"/>
                                                 </Border.BorderBrush>
@@ -207,11 +228,11 @@
                                                     <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
                                                 </Border.Background>
                                                 <Grid>
-                                                    <Label Content="Прозрачность" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
+                                                    <Label Content="Прозрачность" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="305" FontSize="18"/>
                                                     <Slider x:Name="Opacity_Panel_Settings" Margin="0,11,10,0" VerticalAlignment="Top" Maximum="100" Minimum="50" ValueChanged="ValueUpdate" Value="70" AutoToolTipPlacement="TopLeft" HorizontalAlignment="Right" Width="250"/>
                                                 </Grid>
                                             </Border>
-                                            <Border BorderThickness="1" Height="57" Margin="77,118,276,0" VerticalAlignment="Top" CornerRadius="15">
+                                            <Border BorderThickness="1" Height="57" Margin="73,118,280,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                                                 <Border.BorderBrush>
                                                     <SolidColorBrush Color="Black" Opacity="0.2"/>
                                                 </Border.BorderBrush>
@@ -219,7 +240,7 @@
                                                     <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
                                                 </Border.Background>
                                                 <Grid>
-                                                    <Label Content="Цвет" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
+                                                    <Label Content="Цвет" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="308" FontSize="18"/>
                                                     <TextBox x:Name="Color_Border" Height="23" Margin="0,10,111,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="Color_Border_TextChanged" Foreground="Black" BorderBrush="#99000000" HorizontalAlignment="Right" Width="146"/>
                                                     <Button x:Name="Open_Color" Content="Палитра &gt;" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Click="Open_Color_Click" Cursor="Hand" Width="91"/>
                                                 </Grid>
@@ -240,8 +261,8 @@
                                                     <Label Content="Информация" Margin="43,72,101,32" FontStyle="Italic" />
                                                 </Grid>
                                             </Border>
-                                            <Label x:Name="text_3_Copy" Content="Прочее:" Margin="70,207,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,235,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                            <Label x:Name="text_3_Copy" Content="Прочее:" Margin="70,263,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,291,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                                 <Border.RenderTransform>
                                                     <TransformGroup>
                                                         <ScaleTransform ScaleY="-1"/>
@@ -251,7 +272,20 @@
                                                     </TransformGroup>
                                                 </Border.RenderTransform>
                                             </Border>
-                                            <Border BorderThickness="1" Height="57" Margin="77,245,31,0" VerticalAlignment="Top" CornerRadius="15">
+                                            <Border BorderThickness="1" Height="57" Margin="73,301,35,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
+                                                </Border.BorderBrush>
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
+                                                </Border.Background>
+                                                <Grid Margin="-4,0,4,0">
+                                                    <Label Content="Другие настройки:" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
+                                                    <Button x:Name="Go_Tab_1" Content="Тема приложения" HorizontalAlignment="Right" Margin="0,10,15,0" VerticalAlignment="Top" Width="145" Click="Go_Tab_1_Click" Cursor="Hand"/>
+
+                                                </Grid>
+                                            </Border>
+                                            <Border BorderThickness="1" Height="57" Margin="73,180,35,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                                                 <Border.BorderBrush>
                                                     <SolidColorBrush Color="Black" Opacity="0.2"/>
                                                 </Border.BorderBrush>
@@ -259,9 +293,8 @@
                                                     <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
                                                 </Border.Background>
                                                 <Grid>
-                                                    <Label Content="Другие настройки:" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
-                                                    <Button x:Name="Go_Tab_1" Content="Тема приложения" HorizontalAlignment="Right" Margin="0,10,15,0" VerticalAlignment="Top" Width="145" Click="Go_Tab_1_Click" Cursor="Hand"/>
-
+                                                    <Label Content="Закруглённость углов" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="305" FontSize="18"/>
+                                                    <Slider x:Name="CRadius_Panel_Settings" Margin="0,0,10,0" VerticalAlignment="Center" Maximum="15" ValueChanged="CRadius_Panel_Settings_Value" Value="15" AutoToolTipPlacement="TopLeft" HorizontalAlignment="Right" Width="214"/>
                                                 </Grid>
                                             </Border>
 
@@ -331,150 +364,57 @@
                             </Grid>
                         </TabItem>
                         <TabItem Width="14">
-                            <ScrollViewer Margin="0,0,9,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                <StackPanel Height="397">
-                                    <Grid Height="397">
-                                        <Border BorderThickness="1" Height="57" Margin="81,10,0,0" VerticalAlignment="Top" CornerRadius="15" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="469">
+                            <ScrollViewer HorizontalAlignment="Left" VerticalAlignment="Top" Height="385">
+                                <StackPanel Height="385">
+                                    <Grid Height="397" Width="941">
+                                        <Border BorderThickness="1" Height="57" Margin="81,10,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="469">
                                             <Grid HorizontalAlignment="Left" Width="473">
                                                 <TextBox x:Name="color_piker" HorizontalAlignment="Left" Height="23" Margin="16,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
                                                 <Button x:Name="Color_Save" Content="Сохранить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="100" Click="Color_Save_Click" Cursor="Hand"/>
                                                 <Button x:Name="Site_color" Content="Сайт кодов" HorizontalAlignment="Left" Margin="361,10,-70,0" VerticalAlignment="Top" Click="Site_color_Click" Cursor="Hand" Width="91"/>
                                             </Grid>
                                         </Border>
-                                        <Grid Margin="81,77,355,26">
-                                            <Button Tag="#FFEBEE"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#FFFFEBEE" OpacityMask="Black" Cursor="Hand" Click="Chenche_Color" Margin="-2,25,0,0">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="120">
-                                                    <Label Content="50" Margin="7,7,0,7" HorizontalAlignment="Left" Width="27" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#FFEBEE" Margin="0,7,14,0" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="72" Height="27" VerticalAlignment="Top" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#FFCDD2"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#FFCDD2" OpacityMask="Black" Cursor="Hand" Click="Chenche_Color" Margin="148,25,0,0">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="132">
-                                                    <Label Content="100" Margin="7,7,0,7" HorizontalAlignment="Left" Width="38" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#FFCDD2" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="79" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#EF9A9A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#EF9A9A" OpacityMask="Black" Cursor="Hand" Margin="298,25,0,0" Click="Chenche_Color">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="130">
-                                                    <Label Content="200" Margin="7,7,0,7" HorizontalAlignment="Left" Width="48" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#EF9A9A" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="77" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#E57373" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#E57373" OpacityMask="Black" Cursor="Hand" Margin="-2,80,0,0" Click="Chenche_Color">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="128">
-                                                    <Label Content="300" Margin="7,7,0,7" HorizontalAlignment="Left" Width="39" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#E57373" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="74" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#EF5350" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#EF5350" OpacityMask="Black" Cursor="Hand" Margin="148,80,0,0" Click="Chenche_Color">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="126">
-                                                    <Label Content="400" Margin="7,7,0,7" HorizontalAlignment="Left" Width="38" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#EF5350" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="73" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#F44336" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#F44336" OpacityMask="Black" Cursor="Hand" Margin="298,80,0,0" Click="Chenche_Color">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="125">
-                                                    <Label Content="500" Margin="7,7,0,7" HorizontalAlignment="Left" Width="37" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#F44336" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="76" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#F3E5F5"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#F3E5F5" OpacityMask="Black" Cursor="Hand" Click="Chenche_Color" Margin="-2,165,0,0">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="122">
-                                                    <Label Content="50" Margin="7,7,0,7" HorizontalAlignment="Left" Width="40" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#F3E5F5" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="75" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#E1BEE7"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#E1BEE7" OpacityMask="Black" Cursor="Hand" Click="Chenche_Color" Margin="148,165,0,0">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="127">
-                                                    <Label Content="100" Margin="7,7,0,7" HorizontalAlignment="Left" Width="40" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#E1BEE7" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="75" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#CE93D8" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#CE93D8" OpacityMask="Black" Cursor="Hand" Margin="298,165,0,0" Click="Chenche_Color">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="134">
-                                                    <Label Content="200" Margin="7,7,0,7" HorizontalAlignment="Left" Width="40" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#CE93D8" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="80" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#BA68C8" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#BA68C8" OpacityMask="Black" Cursor="Hand" Margin="-2,220,0,0" Click="Chenche_Color">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="135">
-                                                    <Label Content="300" Margin="7,7,0,7" HorizontalAlignment="Left" Width="40" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#BA68C8" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="80" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#AB47BC" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#AB47BC" OpacityMask="Black" Cursor="Hand" Margin="148,220,0,0" Click="Chenche_Color">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="132">
-                                                    <Label Content="400" Margin="7,7,0,7" HorizontalAlignment="Left" Width="40" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#AB47BC" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="80" />
-                                                </Grid>
-                                            </Button>
-                                            <Button Tag="#9C27B0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="50" Background="#9C27B0" OpacityMask="Black" Cursor="Hand" Margin="298,220,0,0" Click="Chenche_Color">
-                                                <Button.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.1"/>
-                                                </Button.BorderBrush>
-                                                <Grid Height="41" Width="128">
-                                                    <Label Content="500" Margin="7,7,0,7" HorizontalAlignment="Left" Width="40" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                                    <Label Content="#9C27B0" Margin="0,7,14,7" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="80" />
-                                                </Grid>
-                                            </Button>
-                                            <Label Content="Красный" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0"/>
-                                            <Label Content="Розовый" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,142,0,0"/>
-                                        </Grid>
-                                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="669,24,0,203" Width="170" CornerRadius="20" RenderTransformOrigin="0.5,0.5" Height="170">
-                                            <Border.Background>
-                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                    <LinearGradientBrush.RelativeTransform>
-                                                        <TransformGroup>
-                                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                                            <RotateTransform Angle="143" CenterY="0.5" CenterX="0.5"/>
-                                                            <TranslateTransform/>
-                                                        </TransformGroup>
-                                                    </LinearGradientBrush.RelativeTransform>
-                                                    <GradientStop Color="#FFF1A6A6" Offset="0.703"/>
-                                                    <GradientStop Offset="1"/>
-                                                </LinearGradientBrush>
-                                            </Border.Background>
+                                        <Border BorderThickness="1" Height="196" Margin="81,105,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="469">
+                                            <Grid HorizontalAlignment="Left" Width="473">
+                                                <Slider x:Name="Red" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" Width="412" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
+                                                <Slider x:Name="Green" HorizontalAlignment="Left" Margin="20,89,0,0" VerticalAlignment="Top" Width="412" Height="36" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
+                                                <Slider x:Name="Blue" HorizontalAlignment="Left" Margin="20,149,0,0" VerticalAlignment="Top" Width="412" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
+                                                <Label Content="Красный" HorizontalAlignment="Left" Margin="16,10,0,151" Width="72"/>
+                                                <Label Content="Зелёный" HorizontalAlignment="Left" Margin="16,70,0,0" VerticalAlignment="Top" Width="72"/>
+                                                <Label Content="Синий" HorizontalAlignment="Left" Margin="16,130,0,0" VerticalAlignment="Top" Width="51"/>
+                                            </Grid>
                                         </Border>
-                                        <Slider HorizontalAlignment="Left" Margin="655,227,0,0" VerticalAlignment="Top" Width="200"/>
-                                        <Slider HorizontalAlignment="Left" Margin="655,257,0,0" VerticalAlignment="Top" Width="200"/>
-                                        <Slider HorizontalAlignment="Left" Margin="655,287,0,0" VerticalAlignment="Top" Width="200"/>
-                                        <Label Content="R" HorizontalAlignment="Left" Margin="635,232,0,0" VerticalAlignment="Top"/>
-                                        <Label Content="G" HorizontalAlignment="Left" Margin="635,262,0,0" VerticalAlignment="Top"/>
-                                        <Label Content="B" HorizontalAlignment="Left" Margin="635,292,0,0" VerticalAlignment="Top"/>
+
+                                        <Border BorderThickness="1" Height="31" Margin="81,307,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="146">
+                                            <Grid>
+                                                <Border BorderThickness="1" Margin="8,6,0,0" Background="#7FFF0000" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
+                                                <Label x:Name="REDtext" Margin="25,0,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"></Label>
+                                                <Border BorderThickness="1" Margin="52,0,0,0" Background="#7F00FF00" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center"/>
+                                                <Label x:Name="GREENtext" Content="000" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="69,0,0,0"/>
+                                                <Border BorderThickness="1" Margin="96,0,0,0" Background="#7F0000FF" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center"/>
+                                                <Label x:Name="BLUEtext" Margin="113,0,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <Border x:Name="Material_Border" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="642,24,0,65" Width="242" CornerRadius="20" RenderTransformOrigin="0.5,0.5" Background="#FFE6ADAD">
+                                            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Margin="0,-1,0,0" Width="242" CornerRadius="20" RenderTransformOrigin="0.5,0.5" Height="308" VerticalAlignment="Top">
+                                                <Border.Background>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <LinearGradientBrush.RelativeTransform>
+                                                            <TransformGroup>
+                                                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                                <RotateTransform Angle="143" CenterY="0.5" CenterX="0.5"/>
+                                                                <TranslateTransform/>
+                                                            </TransformGroup>
+                                                        </LinearGradientBrush.RelativeTransform>
+                                                        <GradientStop Color="#00F1A6A6" Offset="0.8"/>
+                                                        <GradientStop Offset="1" Color="#7FFDFDFD"/>
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                            </Border>
+                                        </Border>
+                                        <Label Content="Материал" HorizontalAlignment="Left" Margin="642,337,0,0" VerticalAlignment="Top"/>
                                     </Grid>
                                 </StackPanel>
                             </ScrollViewer>

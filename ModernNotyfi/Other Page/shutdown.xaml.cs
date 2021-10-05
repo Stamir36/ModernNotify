@@ -102,5 +102,23 @@ namespace ModernNotyfi
         {
             Application.Current.Shutdown();
         }
+
+        ProcessStartInfo commands = new ProcessStartInfo();
+
+        private void ShutdownWindows(object sender, RoutedEventArgs e)
+        {
+            //Выключение компьютера
+            commands.FileName = "cmd.exe";
+            commands.Arguments = "/c shutdown -s -f -t 00";
+            Process.Start(commands);
+        }
+
+        private void RestartWindows(object sender, RoutedEventArgs e)
+        {
+            //Перезагрузка компьютера
+            commands.FileName = "cmd.exe";
+            commands.Arguments = "/c shutdown -r -f -t 00";
+            Process.Start(commands);
+        }
     }
 }

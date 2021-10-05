@@ -1,6 +1,3 @@
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\ModernNotyfi.exe.config
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\ModernNotyfi.exe
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\ModernNotyfi.pdb
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\FluentWPF.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Win32.Registry.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\ModernWpf.Controls.dll
@@ -150,16 +147,31 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\System.ValueTuple.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\MainWindow.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\settings.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\App.g.cs
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi_MarkupCompile.cache
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi_MarkupCompile.lref
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\App.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\MainWindow.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\settings.baml
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi.g.resources
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi.Properties.Resources.resources
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi.csproj.GenerateResource.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi.csproj.CoreCompileInputs.cache
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi.csproj.CopyComplete
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi.exe
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi.pdb
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi.csproj.AssemblyReference.cache
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\ModernNotify.exe.config
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\ModernNotify.exe
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\ModernNotify.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\LiveCharts.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\LiveCharts.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\LiveCharts.Wpf.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\LiveCharts.Wpf.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\XamlAnimatedGif.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\XamlAnimatedGif.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotyfi.csproj.SuggestedBindingRedirects.cache
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\shutdown.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\welcome.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify_MarkupCompile.cache
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify_MarkupCompile.lref
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\shutdown.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\welcome.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.g.resources
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.exe
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.pdb
