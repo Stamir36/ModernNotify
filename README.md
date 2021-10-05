@@ -31,7 +31,7 @@ ver 0.0.0.16 (new | новое)
 # Скриншоты | Screenshots
 <img src="https://i.ibb.co/Ytx7F55/3.png" alt="3" border="0">
 <img src="https://i.ibb.co/9NNnhr2/2.png" alt="2" border="0">
-<img src="https://i.ibb.co/4Tx51JN/Image-2.png" alt="Image-2" border="0">
+<img src="https://i.ibb.co/z73Zb4h/Image-3.png" alt="Image-3" border="0">
 
 # Лицензия | License
 Исходный код программы является открытым, распространение и модификация разрешается только с согласия автора.<br>
