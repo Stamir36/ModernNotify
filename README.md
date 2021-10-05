@@ -5,15 +5,18 @@ Download:<br>
 https://github.com/Stamir36/ModernNotyfi/raw/main/modernnotify_setup_dev.exe
 <br>
 <br>
-<img src="https://i.ibb.co/Pt6nZqp/1.png" alt="1" border="0"><img src="https://i.ibb.co/593r8Jp/GIF-MN-1.gif" alt="GIF-MN-1" border="0">
+<img src="https://i.ibb.co/Pt6nZqp/1.png" alt="1" border="0">
+
+# Демонстрация | Demonstration
+<br><img src="https://i.ibb.co/593r8Jp/GIF-MN-1.gif" alt="GIF-MN-1" border="0">
 <!--img src="https://i.ibb.co/GFFcn8D/Image-1.png" alt="Image-1" border="0"-->
 
-#UPDATE 0.0.0.16 (new | новое)
+# UPDATE LOG
+ver 0.0.0.16 (new | новое)
 - Новое окно начальной настройки.
 - Отображение уведомлений (пока что отправленых приложением.)
 - Новый дизайн выбора цвета RGB.
-
-#UPDATE 0.0.0.16
+# Старые нововведения 
 Выполнен переход на новую версию Visual Studio.
 Исправлены мелкие ошибки.
 Новое:
