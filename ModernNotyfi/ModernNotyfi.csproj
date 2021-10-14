@@ -221,6 +221,9 @@
     <PackageReference Include="NAudio">
       <Version>2.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Woof.System">
+      <Version>2.8.2</Version>
+    </PackageReference>
     <PackageReference Include="XamlAnimatedGif">
       <Version>2.0.0</Version>
     </PackageReference>
@@ -297,6 +300,22 @@
   <ItemGroup>
     <Resource Include="icons\cloase.png" />
     <Resource Include="icons\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\Media\notes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\Media\spotify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\App_Black_Light.png" />
+    <Resource Include="icons\shutdown_Light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\settings_Light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\Battery_Light.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hfxuEL9eiOGNcd6naA2xJPuaGO+bFhWA+fGBw3jYdU7d+1kwl8ep3HbxuhlPiNKlt2QwnbDBNtFmQeo5h/bbhg==",
+  "dgSpecHash": "9FoePCh6ZyLmtz0LB1uhkoU8prZbcM9I1SHkq3QnX1tHROf++/6Ff/ExWA3beNhsgVsMqqRjpv1GrQ/yC+ONPg==",
   "success": true,
   "projectFilePath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,8 @@
     "C:\\Users\\stas1\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\woof.core\\2.2.0\\woof.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\woof.system\\2.8.2\\woof.system.2.8.2.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\xamlanimatedgif\\2.0.0\\xamlanimatedgif.2.0.0.nupkg.sha512"
   ],
   "logs": []

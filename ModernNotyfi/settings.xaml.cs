@@ -22,6 +22,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using System.IO;
 using System.Globalization;
+using Woof.SystemEx;
 
 namespace ModernNotyfi
 {
@@ -62,14 +63,18 @@ namespace ModernNotyfi
 
         private void Settings_Loaded(object sender, RoutedEventArgs e)
         {
+            var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
+            AccauntImg.ImageSource = userBitmapSmall;
+
+            NameProfile.Content = "Привет, " + Properties.Settings.Default.User_Name;
+
+            EctInfoSys.Content = "";
+
             Version.Content = "Версия приложения: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             version.Content = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
             foreach (ManagementObject os in searcher.Get()) { WindowsVersion.Content =  "Система: " + os["Caption"].ToString(); break; }
-
-            ManagementObjectSearcher search = new ManagementObjectSearcher("Select * From Win32_PhysicalMemory");
-            UInt64 totalRAM = 0; foreach (ManagementObject ram in search.Get()) { totalRAM += (UInt64)ram.GetPropertyValue("Capacity"); }
-            Memory.Content = "RAM: " + totalRAM / 1073741824 + "GB";
+            Memory.Content = "RAM: " + Math.Round(SysInfo.SystemMemoryTotal, 2) + "GB";
 
             LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
             
@@ -290,7 +295,10 @@ namespace ModernNotyfi
             {
                 try
                 {
-                    Process.Start("update.exe");
+                    Process p = new Process();
+                    p.StartInfo.Verb = "runas";
+                    p.StartInfo.FileName = "update.exe";
+                    p.Start();
                     Application.Current.Shutdown();
                 }
                 catch
@@ -482,6 +490,16 @@ namespace ModernNotyfi
         private void CRadius_Panel_Settings_Value(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Border_Preview.CornerRadius = new CornerRadius(CRadius_Panel_Settings.Value);
+        }
+
+        private void Open_Sourse_Code(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/Stamir36/ModernNotyfi");
+        }
+
+        private void Open_Site_Progect(object sender, RoutedEventArgs e)
+        {
+            Process.Start("http://modernnotify.ml/");
         }
     }
 }

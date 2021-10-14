@@ -64,6 +64,10 @@
               "target": "Package",
               "version": "[2.0.1, )"
             },
+            "Woof.System": {
+              "target": "Package",
+              "version": "[2.8.2, )"
+            },
             "XamlAnimatedGif": {
               "target": "Package",
               "version": "[2.0.0, )"

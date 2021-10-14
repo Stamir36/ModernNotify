@@ -32,6 +32,7 @@ using Windows.UI.Notifications.Management;
 using System.IO;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Timers;
 
 namespace ModernNotyfi
 {
@@ -46,6 +47,10 @@ namespace ModernNotyfi
         public int batt_status = 0; // 0 разряд / 1 заряд.
         public int batt_start = 0;
         public int batt_min = 0;
+
+        int music_min = 0;
+        int music_sec = 0;
+        int media_all_sec = 0;
 
         MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
         ProcessStartInfo commands = new ProcessStartInfo();
@@ -74,6 +79,7 @@ namespace ModernNotyfi
 
         private HwndSource _source;
         private const int HOTKEY_ID = 9000;
+
 
         protected override void OnSourceInitialized(EventArgs e)
         {
@@ -216,6 +222,15 @@ namespace ModernNotyfi
         // Инициализация
         public MainWindow()
         {
+
+            // Сохранение настроек после обновления
+            if (Properties.Settings.Default.UpgradeRequired)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+            }
+
             if (Properties.Settings.Default.First_Settings == true)
             {
                 try
@@ -228,20 +243,11 @@ namespace ModernNotyfi
                 {
                     // OOBE Error
                 }
-
             }
 
             BatteryChar = new ChartValues<int> { };
             try
             {
-                // Сохранение настроек после обновления
-                if (Properties.Settings.Default.UpgradeRequired)
-                {
-                    Properties.Settings.Default.Upgrade();
-                    Properties.Settings.Default.UpgradeRequired = false;
-                    Properties.Settings.Default.Save();
-                }
-
                 if (Properties.Settings.Default.theme == "light")
                 {
                     ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
@@ -255,6 +261,24 @@ namespace ModernNotyfi
                 commands.UseShellExecute = false;
 
                 InitializeComponent();
+
+                if (Properties.Settings.Default.theme != "light")
+                {
+                    BitmapImage bi3 = new BitmapImage(); bi3.BeginInit();
+
+                    bi3.UriSource = new Uri("icons/settings_Light.png", UriKind.Relative); bi3.EndInit();
+                    Settings_Icon.Source = bi3;
+
+                    BitmapImage bi2 = new BitmapImage(); bi2.BeginInit();
+                    bi2.UriSource = new Uri("icons/shutdown_Light.png", UriKind.Relative); bi2.EndInit();
+                    shutdownIcon.Source = bi2;
+
+                    BitmapImage bi1 = new BitmapImage(); bi1.BeginInit();
+                    bi1.UriSource = new Uri("icons/App_Black_Light.png", UriKind.Relative); bi1.EndInit();
+                    Battery1.Source = bi1;
+
+                    BatteryLight.Visibility = Visibility.Visible;
+                }
 
                 DataContext = this;
 
@@ -415,6 +439,16 @@ namespace ModernNotyfi
             timer.IsEnabled = true;
             timer.Tick += (o, t) =>
             {
+                try
+                {
+                    int value_prog_sound = (music_sec + (music_min * 60)) * 100 / media_all_sec;
+                    NowSoundProgress.Value = value_prog_sound;
+                }
+                catch
+                {
+                    //Error
+                }
+                
                 if (Notify.Count > 0)
                 {
                     Not_Text.Visibility = Visibility.Hidden;
@@ -557,7 +591,7 @@ namespace ModernNotyfi
                     }
                 }
             };
-            //timer_minute.Start();
+            timer_minute.Start();
 
             //УВЕДОМЛЕНИЯ
             //NotificationAsync();
@@ -650,12 +684,14 @@ namespace ModernNotyfi
                 Audio_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
                 TempAudioOnOff = Convert.ToInt16(mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
                 mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar = 0 / 100.0f;
+                SoundSlider.Value = 0;
             }
             else {
                 AudioOnOff = 1;
                 Audio_settings_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
                 Audio_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
                 mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar = TempAudioOnOff / 100.0f;
+                SoundSlider.Value = TempAudioOnOff;
             }
         }
 
@@ -824,6 +860,29 @@ namespace ModernNotyfi
             MainPanelGrid.BeginAnimation(Border.MarginProperty, Border_MainPanelGrid);
         }
 
+        int onen_about_sound = 0;
+        private void Music_About_Click(object sender, RoutedEventArgs e)
+        {
+            if(onen_about_sound == 0)
+            {
+                ThicknessAnimation Border_MainPanelGrid = new ThicknessAnimation();
+                Border_MainPanelGrid.From = new Thickness(0, 0, 0, 0);
+                Border_MainPanelGrid.To = new Thickness(-250, 0, 0, 0);
+                Border_MainPanelGrid.Duration = TimeSpan.FromSeconds(0.1);
+                SoundGridContent.BeginAnimation(Grid.MarginProperty, Border_MainPanelGrid);
+                onen_about_sound = 1;
+            }
+            else
+            {
+                ThicknessAnimation Border_MainPanelGrid = new ThicknessAnimation();
+                Border_MainPanelGrid.From = new Thickness(-250, 0, 0, 0);
+                Border_MainPanelGrid.To = new Thickness(0, 0, 0, 0);
+                Border_MainPanelGrid.Duration = TimeSpan.FromSeconds(0.1);
+                SoundGridContent.BeginAnimation(Grid.MarginProperty, Border_MainPanelGrid);
+                onen_about_sound = 0;
+            }
+        }
+
         private void Battery_Open_Panel(object sender, RoutedEventArgs e)
         {
             Open_Full_Panel();
@@ -900,7 +959,48 @@ namespace ModernNotyfi
         private static void MediaManager_OnNewSource(MediaManager.MediaSession session)
         {
             ChencheMusic("Источник: " + session.ControlSession.SourceAppUserModelId);
+            if (session.ControlSession.SourceAppUserModelId == "Spotify.exe")
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                    BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/Media/spotify.png", UriKind.Relative); bi3.EndInit();
+                    my.MusicPlayer.Source = bi3;
+                }));
+            }
+            else
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                    BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/Media/notes.png", UriKind.Relative); bi3.EndInit();
+                    my.MusicPlayer.Source = bi3;
+                }));
+            }
+
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                my.SoundTimeNow.Content = Convert.ToString(session.ControlSession.GetTimelineProperties().Position);
+
+                my.SoundTimeAll.Content = session.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm\:ss");
+
+                my.media_all_sec = Convert.ToInt32(session.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(session.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
+
+                var timer = new System.Windows.Threading.DispatcherTimer();
+                var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+                timer.Interval = new TimeSpan(0, 0, 1);
+                timer.IsEnabled = true;
+                timer.Tick += (o, t) =>
+                {
+                    my.SoundTimeNow.Content = session.ControlSession.GetTimelineProperties().Position.ToString(@"mm\:ss");
+                    my.music_min = session.ControlSession.GetTimelineProperties().Position.Minutes;
+                    my.music_sec = session.ControlSession.GetTimelineProperties().Position.Seconds;
+                };
+                timer.Start();
+            }));
         }
+
         private static void MediaManager_OnRemovedSource(MediaManager.MediaSession session)
         {
             ChencheMusic("Очередь пуста");
@@ -918,7 +1018,7 @@ namespace ModernNotyfi
             {
                 _ = NowPlay();
             };
-            //timerChechMusic.Start();
+
         }
 
         private static void MediaManager_OnSongChanged(MediaManager.MediaSession sender, GlobalSystemMediaTransportControlsSessionMediaProperties args)
@@ -931,18 +1031,41 @@ namespace ModernNotyfi
                     ChencheMusic($"{args.Title} {(String.IsNullOrEmpty(args.Artist) ? "" : $"- {args.Artist}")}");
                     MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                     my.NowPlayning.Content = $"{args.Title} {(String.IsNullOrEmpty(args.Artist) ? "" : $"\n{args.Artist}")}";
+                    my.NowPlayning_Autor.Content = $"{(String.IsNullOrEmpty(args.Artist) ? "" : $"{args.Artist}")}";
+                    my.PlayIcon.Icon = new ModernWpf.Controls.SymbolIcon(ModernWpf.Controls.Symbol.Pause);
+
+                    my.SoundTimeAll.Content = sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm\:ss");
+                    my.media_all_sec = Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
+
                 }));
             }
             catch
             {
                 //my.NowPlayning.Content = "Управление музыкой";
             }
-            
+
         }
 
         private static void MediaManager_OnPlaybackStateChanged(MediaManager.MediaSession sender, GlobalSystemMediaTransportControlsSessionPlaybackInfo args)
         {
             ChencheMusic($"Состояние изменено");
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+
+                if (args.PlaybackStatus.ToString() == "Paused") //Paused   || Playing
+                {
+                    my.PlayIcon.Icon = new ModernWpf.Controls.SymbolIcon(ModernWpf.Controls.Symbol.Play);
+                }
+                else
+                {
+                    my.PlayIcon.Icon = new ModernWpf.Controls.SymbolIcon(ModernWpf.Controls.Symbol.Pause);
+                }
+
+                my.SoundTimeAll.Content = sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm\:ss");
+                my.media_all_sec = Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
+
+            }));
         }
 
         private static void ChencheMusic(string Songs)
@@ -954,7 +1077,6 @@ namespace ModernNotyfi
         {
             var gsmtcsm = await GetSystemMediaTransportControlsSessionManager();
             var mediaProperties = await GetMediaProperties(gsmtcsm.GetCurrentSession());
-            //MessageBox.Show(mediaProperties.Title + " - " + mediaProperties.Artist);
             if (mediaProperties.Title.Length > 0)
             {
                 Application.Current.Dispatcher.Invoke(new Action(() =>
@@ -975,16 +1097,31 @@ namespace ModernNotyfi
         private void Play_Pause_Click(object sender, RoutedEventArgs e)
         {
             keybd_event(VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
+            MediaManager.OnNewSource += MediaManager_OnNewSource;
+            MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
+            MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
+            MediaManager.OnSongChanged += MediaManager_OnSongChanged;
+            MediaManager.Start();
         }
 
         private void Music_Right_Click(object sender, RoutedEventArgs e)
         {
             keybd_event(VK_MEDIA_NEXT_TRACK, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
+            MediaManager.OnNewSource += MediaManager_OnNewSource;
+            MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
+            MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
+            MediaManager.OnSongChanged += MediaManager_OnSongChanged;
+            MediaManager.Start();
         }
 
         private void Music_Left_Click(object sender, RoutedEventArgs e)
         {
             keybd_event(VK_MEDIA_PREV_TRACK, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
+            MediaManager.OnNewSource += MediaManager_OnNewSource;
+            MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
+            MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
+            MediaManager.OnSongChanged += MediaManager_OnSongChanged;
+            MediaManager.Start();
         }
 
         private void Battery_Settings_Click(object sender, RoutedEventArgs e)

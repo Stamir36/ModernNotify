@@ -7,6 +7,91 @@
         Title="ModernNotyfi" Height="500" Width="360" WindowStyle="None" Deactivated="ModernNotyfi_Deactivated" Foreground="{x:Null}" Visibility="Visible"
         AllowsTransparency="True" Loaded="ModernNotyfi_Loaded"
         Icon="icon.ico" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Window.Resources>
+
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                       SnapsToDevicePixels="true"
+                       Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                       StrokeDashArray="1 2"
+                       StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <SolidColorBrush x:Key="Button.Static.Background"
+                     Color="Transparent" />
+        <SolidColorBrush x:Key="Button.Static.Border"
+                     Color="Transparent" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background"
+                     Color="Transparent" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border"
+                     Color="Transparent" />
+        <SolidColorBrush x:Key="Button.Pressed.Background"
+                     Color="Transparent" />
+        <SolidColorBrush x:Key="Button.Pressed.Border"
+                     Color="Transparent" />
+        <SolidColorBrush x:Key="Button.Disabled.Background"
+                     Color="Transparent" />
+        <SolidColorBrush x:Key="Button.Disabled.Border"
+                     Color="Transparent" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground"
+                     Color="Transparent" />
+
+        <Style x:Key="DefaultButtonStyle"
+           TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <!--<Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.MouseOver.Background}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.MouseOver.Border}" />
+              </Trigger>-->
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Pressed.Background}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Pressed.Border}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="0"/>
     </Window.Background>
@@ -18,7 +103,6 @@
             <RowDefinition Height="499.002"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="ModernNotify Developer" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="340" Foreground="White" FontSize="12" VerticalContentAlignment="Center" Grid.Row="1"/>
         <Border x:Name="Border_Time" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="51" Margin="10,439,0,0" VerticalAlignment="Top" Width="340" CornerRadius="15">
             <Border.Background>
                 <SolidColorBrush Color="#fff" Opacity="0.7"/>
@@ -43,7 +127,7 @@
                             <Setter Property="CornerRadius" Value="7"/>
                         </Style>
                     </Button.Resources>
-                    <Image HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/settings.png"/>
+                    <Image x:Name="Settings_Icon" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/settings.png"/>
                 </Button>
                 <Button x:Name="Shutdown_Open" HorizontalAlignment="Left" Margin="268,10,0,0" VerticalAlignment="Top" Width="30" Height="29" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Shutdown_Open_Panel">
                     <Button.Resources>
@@ -51,7 +135,7 @@
                             <Setter Property="CornerRadius" Value="7"/>
                         </Style>
                     </Button.Resources>
-                    <Image HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/shutdown.png"/>
+                    <Image x:Name="shutdownIcon" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/shutdown.png"/>
                 </Button>
                 <Button x:Name="Battery_Open" HorizontalAlignment="Left" Margin="238,10,0,0" VerticalAlignment="Top" Width="30" Height="29" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Battery_Open_Panel">
                     <Button.Resources>
@@ -59,7 +143,10 @@
                             <Setter Property="CornerRadius" Value="7"/>
                         </Style>
                     </Button.Resources>
-                    <Image x:Name="Battery" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/battery_full.png"/>
+                    <Grid>
+                        <Image x:Name="Battery" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/battery_full.png"/>
+                        <Image x:Name="BatteryLight" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/Battery_Light.png" Visibility="Hidden"/>
+                    </Grid>
                 </Button>
                 <Button x:Name="Browser_Open" HorizontalAlignment="Left" Margin="208,10,0,0" VerticalAlignment="Top" Width="30" Height="29" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Browser_Open_Panel">
                     <Button.Resources>
@@ -76,19 +163,19 @@
                 <SolidColorBrush Color="#fff" Opacity="0.7"/>
             </Border.Background>
             <Grid>
-                <Button x:Name="Wifi_settings" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="10,7,0,8" Height="56" Width="107" BorderBrush="{x:Null}" Cursor="Hand" Click="Wifi_settings_Click">
-                    <Border CornerRadius="10"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="104" Background="#FFB4C1DA">
+                <Button x:Name="Wifi_settings" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="10,8,273,7" Height="56" Width="55" BorderBrush="{x:Null}" Cursor="Hand" Click="Wifi_settings_Click" Style="{DynamicResource DefaultButtonStyle}">
+                    <Border CornerRadius="5,5,5,5"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="55" VerticalAlignment="Center" Width="55" Background="#FFB4C1DA">
                         <Grid>
-                            <Label Content="Интернет" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="75" Foreground="Black" Height="24"/>
-                            <Image HorizontalAlignment="Left" Height="19" Margin="5,10,0,0" VerticalAlignment="Top" Width="17" Source="icons/wifi.png"/>
+                            <Label Content="Wi-Fi" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Width="33" Foreground="Black" Height="17"/>
+                            <Image HorizontalAlignment="Center" Height="30" Margin="0,2,0,0" VerticalAlignment="Top" Width="30" Source="icons/wifi.png"/>
                         </Grid>
                     </Border>
                 </Button>
-                <Button x:Name="Audio_settings" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="122,8,0,8" Height="55" Width="105" BorderBrush="{x:Null}" Cursor="Hand" Click="On_OFF_Audio">
-                    <Border x:Name="Audio_settings_Color" CornerRadius="10"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="104" Background="CornflowerBlue">
+                <Button x:Name="Audio_settings" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="70,8,212,7" Height="56" Width="56" BorderBrush="{x:Null}" Cursor="Hand" Click="On_OFF_Audio" Style="{DynamicResource DefaultButtonStyle}">
+                    <Border x:Name="Audio_settings_Color" CornerRadius="5,5,5,5"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Background="CornflowerBlue">
                         <Grid>
-                            <Label x:Name="Audio_Settinds_text" Content="Звук" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="41" Foreground="White"/>
-                            <Image HorizontalAlignment="Left" Height="19" Margin="10,10,0,0" VerticalAlignment="Top" Width="17" Source="icons/sound.png"/>
+                            <Label x:Name="Audio_Settinds_text" Content="Звук" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="31" Foreground="White"/>
+                            <Image HorizontalAlignment="Center" Height="30" Margin="0,2,0,0" VerticalAlignment="Top" Width="30" Source="icons/sound.png"/>
                         </Grid>
                     </Border>
                 </Button>
@@ -130,16 +217,15 @@
                 <SolidColorBrush Color="#fff" Opacity="0.7"/>
             </Border.Background>
             <Grid>
-                <Label x:Name="NowPlayning" Content="Текущее воспроизведение" HorizontalAlignment="Left" Margin="16,-2,0,2" FontSize="14" Foreground="Black" Width="190" VerticalContentAlignment="Center"/>
-                <Button x:Name="Play_Pause" HorizontalAlignment="Right" Margin="0,9,52,10" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Click="Play_Pause_Click">
+                <Button x:Name="Play_Pause" Margin="264,9,0,10" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Click="Play_Pause_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
                         </Style>
                     </Button.Resources>
-                    <ui:AppBarButton Icon="Play" Width="44" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <ui:AppBarButton x:Name="PlayIcon" Icon="Play" Width="44" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                 </Button>
-                <Button x:Name="Music_Right" HorizontalAlignment="Right" Margin="0,9,21,10" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Opacity="0.95" Click="Music_Right_Click">
+                <Button x:Name="Music_Right" Margin="295,9,0,10" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Opacity="0.95" Click="Music_Right_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
@@ -156,13 +242,25 @@
                         </ui:AppBarButton.RenderTransform>
                     </ui:AppBarButton>
                 </Button>
-                <Button x:Name="Music_Left" HorizontalAlignment="Right" Margin="0,9,83,10" VerticalAlignment="Stretch" Width="30" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" Click="Music_Left_Click">
+                <Button x:Name="Music_Left" Margin="233,9,0,10" VerticalAlignment="Stretch" Width="30" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" Click="Music_Left_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
                         </Style>
                     </Button.Resources>
                     <ui:AppBarButton Icon="Previous" Width="30" Height="41" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+                <Button x:Name="Music_About" Height="49" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Music_About_Click" Style="{DynamicResource DefaultButtonStyle}" Margin="0,0,105,0">
+                    <Grid Height="39" HorizontalAlignment="Left" VerticalAlignment="Center" Width="223">
+                        <Grid x:Name="SoundGridContent" Margin="0,0,0,0">
+                            <Label x:Name="NowPlayning" Content="Сейчас играет" Margin="35,0,0,0" FontSize="15" Foreground="Black" VerticalContentAlignment="Center" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="191"/>
+                            <Image x:Name="MusicPlayer" HorizontalAlignment="Left" Height="26" Margin="4,0,0,0" VerticalAlignment="Center" Width="24" Source="/icons/Media/notes.png"/>
+                            <Label x:Name="NowPlayning_Autor" Content="Очередь пуста." HorizontalAlignment="Left" Margin="35,0,0,3" FontSize="12" Width="183" VerticalContentAlignment="Center" Height="16" VerticalAlignment="Bottom"/>
+                            <Label x:Name="SoundTimeNow" Content="00:00" HorizontalAlignment="Left" Margin="258,8,0,0" VerticalAlignment="Top" FontSize="12" Width="107"/>
+                            <Label x:Name="SoundTimeAll" Content="00:00" HorizontalAlignment="Left" Margin="360,7,0,0" VerticalAlignment="Top" FontSize="12" Width="103" HorizontalContentAlignment="Right"/>
+                            <ProgressBar x:Name="NowSoundProgress" HorizontalAlignment="Left" Height="10" Margin="258,29,0,0" VerticalAlignment="Top" Width="205"/>
+                        </Grid>
+                    </Grid>
                 </Button>
             </Grid>
         </Border>
@@ -263,7 +361,7 @@
                                         <Setter Property="CornerRadius" Value="7"/>
                                     </Style>
                                 </Button.Resources>
-                                <Image x:Name="SearchIcon" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="/icons/search.png"/>
+                                <Image x:Name="SearchIcon" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/search.png"/>
                             </Button>
                         </Grid>
                     </TabItem>
@@ -291,7 +389,7 @@
                                     <Setter Property="CornerRadius" Value="7"/>
                                 </Style>
                             </Button.Resources>
-                            <Image x:Name="Open_N_Image" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/back.png" RenderTransformOrigin="0.5,0.5">
+                            <Image x:Name="Open_N_Image" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="/icons/back.png" RenderTransformOrigin="0.5,0.5">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>

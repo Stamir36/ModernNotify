@@ -766,6 +766,27 @@
           "lib/net47/System.ValueTuple.dll": {}
         }
       },
+      "Woof.Core/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Woof.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Woof.Core.dll": {}
+        }
+      },
+      "Woof.System/2.8.2": {
+        "type": "package",
+        "dependencies": {
+          "Woof.Core": "2.2.0"
+        },
+        "compile": {
+          "lib/net461/Woof.System.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Woof.System.dll": {}
+        }
+      },
       "XamlAnimatedGif/2.0.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -1524,6 +1545,27 @@
         },
         "runtime": {
           "lib/net47/System.ValueTuple.dll": {}
+        }
+      },
+      "Woof.Core/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Woof.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Woof.Core.dll": {}
+        }
+      },
+      "Woof.System/2.8.2": {
+        "type": "package",
+        "dependencies": {
+          "Woof.Core": "2.2.0"
+        },
+        "compile": {
+          "lib/net461/Woof.System.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Woof.System.dll": {}
         }
       },
       "XamlAnimatedGif/2.0.0": {
@@ -2286,6 +2328,27 @@
           "lib/net47/System.ValueTuple.dll": {}
         }
       },
+      "Woof.Core/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Woof.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Woof.Core.dll": {}
+        }
+      },
+      "Woof.System/2.8.2": {
+        "type": "package",
+        "dependencies": {
+          "Woof.Core": "2.2.0"
+        },
+        "compile": {
+          "lib/net461/Woof.System.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Woof.System.dll": {}
+        }
+      },
       "XamlAnimatedGif/2.0.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -3044,6 +3107,27 @@
         },
         "runtime": {
           "lib/net47/System.ValueTuple.dll": {}
+        }
+      },
+      "Woof.Core/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Woof.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Woof.Core.dll": {}
+        }
+      },
+      "Woof.System/2.8.2": {
+        "type": "package",
+        "dependencies": {
+          "Woof.Core": "2.2.0"
+        },
+        "compile": {
+          "lib/net461/Woof.System.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Woof.System.dll": {}
         }
       },
       "XamlAnimatedGif/2.0.0": {
@@ -4729,6 +4813,32 @@
         "version.txt"
       ]
     },
+    "Woof.Core/2.2.0": {
+      "sha512": "q2dZNtlw+8MSWDYmSbFfwEOCw/ENRU0nv4LzJClYyrtGUTweWpk9qCWup1kAuLiyVj+9A/AO68JXLsxMRuzSQA==",
+      "type": "package",
+      "path": "woof.core/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Woof.Core.dll",
+        "lib/netstandard2.0/Woof.Core.xml",
+        "woof.core.2.2.0.nupkg.sha512",
+        "woof.core.nuspec"
+      ]
+    },
+    "Woof.System/2.8.2": {
+      "sha512": "3Os3uRS9umDjjzS37fvNgeHorJKbKjXLoAmvnZe/0r7ABmd5yOOYWofD6/Gn74FM1lHWtvJqK5soTEE7UqGauA==",
+      "type": "package",
+      "path": "woof.system/2.8.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/Woof.System.dll",
+        "lib/net461/Woof.System.xml",
+        "woof.system.2.8.2.nupkg.sha512",
+        "woof.system.nuspec"
+      ]
+    },
     "XamlAnimatedGif/2.0.0": {
       "sha512": "eZ9JmcL1pxJuvEkdmc0BTbuuGM/0HkFjHa28H2D2I8OXgpK65mmB1dXtr84wfbF3fYOoVKyLMNwGtGC168aIiQ==",
       "type": "package",
@@ -4756,6 +4866,7 @@
       "Microsoft.Windows.SDK.Contracts >= 10.0.19041.1",
       "ModernWpfUI >= 0.9.4",
       "NAudio >= 2.0.1",
+      "Woof.System >= 2.8.2",
       "XamlAnimatedGif >= 2.0.0"
     ]
   },
@@ -4823,6 +4934,10 @@
           "NAudio": {
             "target": "Package",
             "version": "[2.0.1, )"
+          },
+          "Woof.System": {
+            "target": "Package",
+            "version": "[2.8.2, )"
           },
           "XamlAnimatedGif": {
             "target": "Package",

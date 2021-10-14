@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
+using Woof.SystemEx;
 
 namespace ModernNotyfi
 {
@@ -32,16 +33,8 @@ namespace ModernNotyfi
         public shutdown()
         {
             InitializeComponent();
-            try
-            {
-                Image ImageContainer = new Image();
-                ImageSource image = new BitmapImage(new Uri(Environment.CurrentDirectory + "/Data/user.png", UriKind.Absolute));
-                User_Image.Source = image;
-            }
-            catch
-            {
-
-            }
+            var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
+            AccauntImg.ImageSource = userBitmapSmall;
 
             if (Properties.Settings.Default.User_Name != "None")
             {
@@ -65,6 +58,9 @@ namespace ModernNotyfi
                 User_Name.Foreground = Brushes.Black;
                 Text1.Foreground = Brushes.Black;
                 Text2.Foreground = Brushes.Black;
+                Text3.Foreground = Brushes.Black;
+                close.Foreground = Brushes.Black;
+                acctype.Foreground = Brushes.Black;
             }
             else
             {
@@ -72,6 +68,9 @@ namespace ModernNotyfi
                 User_Name.Foreground = Brushes.White;
                 Text1.Foreground = Brushes.White;
                 Text2.Foreground = Brushes.White;
+                Text3.Foreground = Brushes.White;
+                close.Foreground = Brushes.White;
+                acctype.Foreground = Brushes.White;
             }
             if (Properties.Settings.Default.Show_Exit == "False")
             {
