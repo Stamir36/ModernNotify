@@ -146,13 +146,15 @@ namespace ModernNotyfi
 
         public class ItemModel
         {
-            public ItemModel(string name, ImageSource image)
+            public ItemModel(string name, ImageSource image, string sourse)
             {
                 Name = name;
                 Image = image;
+                Sourse = sourse;
             }
 
             public string Name { get; set; }
+            public string Sourse { get; set; }
             public ImageSource Image { get; set; }
         }
 
@@ -177,7 +179,13 @@ namespace ModernNotyfi
         private void Search_App_TextChanged(object sender, TextChangedEventArgs e)
         {
             Items.Clear();
-            var files = Directory.GetFiles("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
+            string name_user = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var appUser = Directory.GetFiles("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
+            var appWindows = Directory.GetFiles(name_user + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
+            var files = new string[appUser.Length + appWindows.Length];
+            appUser.CopyTo(files, 0);
+            appWindows.CopyTo(files, appUser.Length);
+            files = SortFilesPath(files);
             foreach (var file in files)
             {
                 ImageSource imageSource = null;
@@ -198,13 +206,13 @@ namespace ModernNotyfi
 
                 if (Search_App.Text.Length == 0)
                 {
-                    Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource));
+                    Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
                 }
                 else
                 {
                     if (fileInfo.Name.Contains(Search_App.Text))
                     {
-                        Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource));
+                        Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
                     }
                 }
             }
@@ -265,7 +273,7 @@ namespace ModernNotyfi
                 if (Properties.Settings.Default.theme != "light")
                 {
                     BitmapImage bi3 = new BitmapImage(); bi3.BeginInit();
-
+                    
                     bi3.UriSource = new Uri("icons/settings_Light.png", UriKind.Relative); bi3.EndInit();
                     Settings_Icon.Source = bi3;
 
@@ -278,11 +286,29 @@ namespace ModernNotyfi
                     Battery1.Source = bi1;
 
                     BatteryLight.Visibility = Visibility.Visible;
+                    SearchIcons.Foreground = System.Windows.Media.Brushes.White;
+                }
+                else
+                {
+                    SearchIcons.Foreground = System.Windows.Media.Brushes.Black;
+                }
+
+                if (Properties.Settings.Default.Language == "English")
+                {
+                    EnglishInterfase_Settings();
                 }
 
                 DataContext = this;
 
-                var files = Directory.GetFiles("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
+                string name_user = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                var appUser = Directory.GetFiles("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
+                var appWindows = Directory.GetFiles(name_user + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
+                var files = new string[appUser.Length + appWindows.Length];
+                appUser.CopyTo(files, 0);
+                appWindows.CopyTo(files, appUser.Length);
+
+                files = SortFilesPath(files);
+
                 foreach (var file in files)
                 {
                     ImageSource imageSource = null;
@@ -300,7 +326,7 @@ namespace ModernNotyfi
                         }
                     }
 
-                    Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource));
+                    Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
                 }
 
                 // Применение настроек.
@@ -381,6 +407,50 @@ namespace ModernNotyfi
             }
         }
 
+        private string[] SortFilesPath(string[] files)
+        {
+            int valuesort = 0;
+
+            foreach (var sorts in files)
+            {
+                string SubAppUser = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\";
+                string SubAppWindows = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\";
+
+                if (sorts.Contains(SubAppUser))
+                {
+                    files[valuesort] = sorts.Replace(SubAppUser, "") + "||SubAppUser";
+                }
+                else
+                {
+                    files[valuesort] = sorts.Replace(SubAppWindows, "") + "||SubAppWindows";
+                }
+
+                valuesort++;
+            }
+
+            Array.Sort(files);
+            valuesort = 0;
+
+            foreach (var sorts in files)
+            {
+                string SubAppUser = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\";
+                string SubAppWindows = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\";
+
+                if (sorts.Contains("||SubAppUser"))
+                {
+                    files[valuesort] = SubAppUser + sorts.Replace("||SubAppUser", "");
+                }
+                else
+                {
+                    files[valuesort] = SubAppWindows + sorts.Replace("||SubAppWindows", "");
+                }
+
+                valuesort++;
+            }
+
+            return files;
+        }
+
         bool Search_Box = true;
 
         private void Search_Box_Open(object sender, RoutedEventArgs e)
@@ -390,13 +460,14 @@ namespace ModernNotyfi
             {
                 Search_Box = false; 
                 Search_App.Visibility = Visibility.Visible; TextApp.Visibility = Visibility.Hidden;
-                BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/cloase.png", UriKind.Relative); bi3.EndInit(); SearchIcon.Source = bi3;
+                SearchIcons.Symbol = ModernWpf.Controls.Symbol.Cancel;
+
             }
             else
             {
                 Search_Box = true;
                 Search_App.Visibility = Visibility.Hidden; TextApp.Visibility = Visibility.Visible;
-                BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/search.png", UriKind.Relative); bi3.EndInit(); SearchIcon.Source = bi3;
+                SearchIcons.Symbol = ModernWpf.Controls.Symbol.Find;
             }
         }
 
@@ -404,7 +475,7 @@ namespace ModernNotyfi
         {
             if (Apps_List.SelectedIndex != -1)
             {
-                Process.Start("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\" + Items.ElementAt(Apps_List.SelectedIndex).Name + ".lnk");
+                Process.Start(Items.ElementAt(Apps_List.SelectedIndex).Sourse);
                 Full_Close_Panel(null, null);
             }
             Apps_List.SelectedIndex = -1;
@@ -423,12 +494,24 @@ namespace ModernNotyfi
             // Отправка уведомления.
             if (Properties.Settings.Default.show_start_notify && Properties.Settings.Default.First_Settings != true)
             {
-                new ToastContentBuilder()
-                .AddArgument("action", "viewConversation")
-                .AddArgument("conversationId", 9813)
-                .AddText("Откройте панель с Ctrl + Пробел")
-                .AddText("Это уведомление можно отключить в настройках.")
-                .Show();
+                if (Properties.Settings.Default.Language == "English")
+                {
+                    new ToastContentBuilder()
+                    .AddArgument("action", "viewConversation")
+                    .AddArgument("conversationId", 9813)
+                    .AddText("Open the panel with Ctrl + Space")
+                    .AddText("This notification can be turned off in the settings.")
+                    .Show();
+                }
+                else
+                {
+                    new ToastContentBuilder()
+                    .AddArgument("action", "viewConversation")
+                    .AddArgument("conversationId", 9813)
+                    .AddText("Откройте панель с Ctrl + Пробел")
+                    .AddText("Это уведомление можно отключить в настройках.")
+                    .Show();
+                }
             }
             // ------------------------------------------------------------------------------
 
@@ -461,7 +544,13 @@ namespace ModernNotyfi
                 }
 
                 // Время
-                SoundText.Content = "Настройки звука";
+                if (Properties.Settings.Default.Language == "English") {
+                    SoundText.Content = "Sound settings";
+                }
+                else
+                {
+                    SoundText.Content = "Настройки звука";
+                }
                 DateTimeText.Content = DateTime.Now.ToString("HH:mm");
                 DateTimeText1.Content = DateTime.Now.ToString("HH:mm");
                 DateTimeText_Panel.Content = DateTime.Now.ToString("HH:mm");
@@ -507,9 +596,16 @@ namespace ModernNotyfi
             };
             //timer.Start();
 
-            
 
-            Battery_time.Content = "Вычисление";
+            if (Properties.Settings.Default.Language == "English")
+            {
+                Battery_time.Content = "Estimation...";
+            }
+            else
+            {
+                Battery_time.Content = "Вычисление...";
+            }
+                
             ManagementClass wmi = new ManagementClass("Win32_Battery");
             ManagementObjectCollection allBatteries = wmi.GetInstances();
             DataContext = this;
@@ -539,7 +635,15 @@ namespace ModernNotyfi
                     if (Convert.ToUInt16(battery["BatteryStatus"]) == 1 || batt_status == 0) //Разряжается
                     {
                         batt_min++;
-                        Batt_label_time.Content = "Время работы:";
+                        
+                        if (Properties.Settings.Default.Language == "English")
+                        {
+                            Batt_label_time.Content = "Battery life:";
+                        }
+                        else
+                        {
+                            Batt_label_time.Content = "Время работы:";
+                        }
                         if (batt_min >= 1)
                         {
                             int bvar1 = batt_start - Convert.ToInt16(battery["EstimatedChargeRemaining"]);
@@ -555,7 +659,14 @@ namespace ModernNotyfi
                         }
                         else
                         {
-                            Battery_time.Content = "Вычисление...";
+                            if (Properties.Settings.Default.Language == "English")
+                            {
+                                Battery_time.Content = "Estimation...";
+                            }
+                            else
+                            {
+                                Battery_time.Content = "Вычисление...";
+                            }
                         }
 
                         if (Convert.ToInt32(battery["EstimatedChargeRemaining"]) == 25)
@@ -582,7 +693,14 @@ namespace ModernNotyfi
                         }
                         else
                         {
-                            Battery_time.Content = "Вычисление...";
+                            if (Properties.Settings.Default.Language == "English")
+                            {
+                                Battery_time.Content = "Estimation...";
+                            }
+                            else
+                            {
+                                Battery_time.Content = "Вычисление...";
+                            }
                         }
                         if (Convert.ToInt32(battery["EstimatedChargeRemaining"]) == 80)
                         {
@@ -632,13 +750,29 @@ namespace ModernNotyfi
                 Battery_ProgressBar.Value = Convert.ToDouble(battery["EstimatedChargeRemaining"]);
                 if (Convert.ToUInt16(battery["BatteryStatus"]) == 1)
                 {
-                    Battery_Status.Content = "Разряжается";
+
+                    if (Properties.Settings.Default.Language == "English")
+                    {
+                        Battery_Status.Content = "Discharges";
+                    }
+                    else
+                    {
+                        Battery_Status.Content = "Разряжается";
+                    }
+                    
                     if (batt_status == 1)
                     {
                         batt_min = 0;
                         batt_start = Convert.ToInt16(battery["EstimatedChargeRemaining"]);
                         batt_status = 0;
-                        Battery_time.Content = "Вычисление...";
+                        if (Properties.Settings.Default.Language == "English")
+                        {
+                            Battery_time.Content = "Estimation...";
+                        }
+                        else
+                        {
+                            Battery_time.Content = "Вычисление...";
+                        }
                     }
                     var bc = new BrushConverter();
                     Battery_ProgressBar.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#FF0078D7");
@@ -659,7 +793,14 @@ namespace ModernNotyfi
                 }
                 else
                 {
-                    Battery_Status.Content = "Заряжается";
+                    if (Properties.Settings.Default.Language == "English")
+                    {
+                        Battery_Status.Content = "Is charging";
+                    }
+                    else
+                    {
+                        Battery_Status.Content = "Заряжается";
+                    }
                     var bc = new BrushConverter();
                     Battery_ProgressBar.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#FF70BD13");
                     BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/Battery_Charch.png", UriKind.Relative); bi3.EndInit(); Battery.Source = bi3; Battery_main.Source = bi3;
@@ -669,7 +810,14 @@ namespace ModernNotyfi
                         batt_status = 1;
                         batt_start = Convert.ToInt16(battery["EstimatedChargeRemaining"]);
                         batt_min = 0;
-                        Battery_time.Content = "Вычисление...";
+                        if (Properties.Settings.Default.Language == "English")
+                        {
+                            Battery_time.Content = "Estimation...";
+                        }
+                        else
+                        {
+                            Battery_time.Content = "Вычисление...";
+                        }
                     }
                 }
             }
@@ -709,7 +857,14 @@ namespace ModernNotyfi
             {
                 MMDevice mMDevice = speakDevices.ToList()[soundDevice];
                 mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar = Convert.ToInt32(SoundSlider.Value) / 100.0f;
-                SoundText.Content = "Громкость: " + (Convert.ToInt32(SoundSlider.Value) / 100.0f * 100) + "%";
+                if (Properties.Settings.Default.Language == "English")
+                {
+                    SoundText.Content = "Volume: " + (Convert.ToInt32(SoundSlider.Value) / 100.0f * 100) + "%";
+                }
+                else
+                {
+                    SoundText.Content = "Громкость: " + (Convert.ToInt32(SoundSlider.Value) / 100.0f * 100) + "%";
+                }
             }
         }
 
@@ -1085,7 +1240,6 @@ namespace ModernNotyfi
                     my.NowPlayning.Content = mediaProperties.Title;
                 }));
             }
-            
         }
 
         private static async Task<GlobalSystemMediaTransportControlsSessionManager> GetSystemMediaTransportControlsSessionManager() =>
@@ -1132,6 +1286,34 @@ namespace ModernNotyfi
         private void Clear_All_Notify(object sender, RoutedEventArgs e)
         {
             Notify.Clear();
+        }
+
+
+
+
+
+
+
+        public void EnglishInterfase_Settings()
+        {
+            BackText1.Content = "Notifications";
+            NowPlayning.Content = "Now playing";
+            NowPlayning_Autor.Content = "Queue is empty.";
+            Clear_All_N.Content = "Clear all";
+            MyDevice.Content = "My devices";
+            BackText.Content = "Back";
+            text_bbss.Content = "Battery charge";
+            Batt_label_time.Content = "Battery life";
+            waltagetext.Content = "Voltage";
+            textbbgg.Content = "To extend battery life, \nMake a charge between 20% and 80%.";
+            Battery_Settings.Content = "Power settings";
+            TextApp.Content = "Applications";
+            DataTimeText.Content = "Time and date";
+            Audio_Settinds_text.Content = "Sound";
+            SoundText.Content = "Sound settings";
+            TextShutdown.Content = "Shutdown";
+            TextRestartPC.Content = "Reboot PC";
+            EXITtextPROGRAM.Content = "Exit program";
         }
     }
 

@@ -31,16 +31,19 @@ namespace ModernNotyfi
     /// </summary>
     public partial class settings : Window
     {
-        /*
-        public PerformanceCounter myCounter = new PerformanceCounter("Memory", "Available MBytes", null);
-        public double j = 0;
-        j = myCounter.NextValue() / 1024;
-        Memory.Content = "Доступно RAM: " + j.ToString() + "Gb";
-        */
 
         public settings()
         {
             InitializeComponent();
+            if (Properties.Settings.Default.AllowsTransparency == true)
+            {
+                this.AllowsTransparency = true;
+            }
+            else
+            {
+                this.AllowsTransparency = false;
+            }
+
             if (Properties.Settings.Default.UpgradeRequired)
             {
                 Properties.Settings.Default.Upgrade();
@@ -103,6 +106,17 @@ namespace ModernNotyfi
                 pos_combo.SelectedIndex = 1;
             }
 
+            if (Properties.Settings.Default.Language == "Russian")
+            {
+                Language_combo1.SelectedIndex = 0;
+                RussianInterfase_Settings();
+            }
+            else if(Properties.Settings.Default.Language == "English")
+            {
+                Language_combo1.SelectedIndex = 1;
+                EnglishInterfase_Settings();
+            }
+
             if (Properties.Settings.Default.Show_Exit == "True")
             {
                 Exit_Setting.IsChecked = true;
@@ -128,6 +142,15 @@ namespace ModernNotyfi
             else
             {
                 Style_Shutdown.SelectedIndex = 1;
+            }
+
+            if (Properties.Settings.Default.AllowsTransparency == true)
+            {
+                Chek_Allow_Window.IsChecked = true;
+            }
+            else
+            {
+                Chek_Allow_Window.IsChecked= false;
             }
         }
 
@@ -162,7 +185,14 @@ namespace ModernNotyfi
         {
             Back.Visibility = Visibility.Hidden;
             Settings_Tab.SelectedIndex = 0;
-            Titles.Content = "Настройки";
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                Titles.Content = "Настройки";
+            }
+            else if (Language_combo1.SelectedIndex == 1)
+            {
+                Titles.Content = "Settings";
+            }
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/settings.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
 
@@ -170,7 +200,14 @@ namespace ModernNotyfi
         {
             Settings_Tab.SelectedIndex = 1; Back.Click += Backs;
             Back.Visibility = Visibility.Visible;
-            Titles.Content = "Настройки > Основные настройки";
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                Titles.Content = "Настройки > Основные настройки";
+            }
+            else if (Language_combo1.SelectedIndex == 1)
+            {
+                Titles.Content = "Settings > Basic settings";
+            }
             NavView.SelectedItem = NavView.MenuItems[0];
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/maim_settings.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
@@ -179,7 +216,14 @@ namespace ModernNotyfi
         {
             Settings_Tab.SelectedIndex = 2; Back.Click += Backs;
             Back.Visibility = Visibility.Visible;
-            Titles.Content = "Настройки > Мини-приложения";
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                Titles.Content = "Настройки > Мини-приложения";
+            }
+            else if (Language_combo1.SelectedIndex == 1)
+            {
+                Titles.Content = "Settings > Widgets";
+            }
             NavView.SelectedItem = NavView.MenuItems[1];
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/App_Color.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
@@ -188,7 +232,14 @@ namespace ModernNotyfi
         {
             Settings_Tab.SelectedIndex = 3; Back.Click += Backs;
             Back.Visibility = Visibility.Visible;
-            Titles.Content = "Настройки > Персонализация";
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                Titles.Content = "Настройки > Персонализация";
+            }
+            else if (Language_combo1.SelectedIndex == 1)
+            {
+                Titles.Content = "Settings > Personalization";
+            }
             NavView.SelectedItem = NavView.MenuItems[2];
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/Personalization.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
@@ -197,7 +248,14 @@ namespace ModernNotyfi
         {
             Settings_Tab.SelectedIndex = 4; Back.Click += Backs;
             Back.Visibility = Visibility.Visible;
-            Titles.Content = "Настройки > О программе";
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                Titles.Content = "Настройки > О программе";
+            }
+            else if (Language_combo1.SelectedIndex == 1)
+            {
+                Titles.Content = "Settings > About";
+            }
             NavView.SelectedItem = NavView.MenuItems[3];
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/info.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
@@ -206,7 +264,15 @@ namespace ModernNotyfi
         {
             Settings_Tab.SelectedIndex = 5; Back.Click += Backs;
             Back.Visibility = Visibility.Visible;
-            Titles.Content = "Настройки > Обновления программы";
+
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                Titles.Content = "Настройки > Обновления программы";
+            }
+            else if (Language_combo1.SelectedIndex == 1)
+            {
+                Titles.Content = "Settings > Software updates";
+            }
 
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/update.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
@@ -215,7 +281,15 @@ namespace ModernNotyfi
         {
             Settings_Tab.SelectedIndex = 6;
             Back.Visibility = Visibility.Visible;
-            Titles.Content = "Настройки > Персонализация > Цвет";
+
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                Titles.Content = "Настройки > Персонализация > Цвет";
+            }
+            else if (Language_combo1.SelectedIndex == 1)
+            {
+                Titles.Content = "Settings > Personalization > Color";
+            }
 
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/color.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
             color_piker.Text = Color_Border.Text;
@@ -376,10 +450,29 @@ namespace ModernNotyfi
                 {
                     Properties.Settings.Default.show_start_notify = false;
                 }
+
+                if (Chek_Allow_Window.IsChecked == true)
+                {
+                    Properties.Settings.Default.AllowsTransparency = true;
+                }
+                else
+                {
+                    Properties.Settings.Default.AllowsTransparency = false;
+                }
+
                 Properties.Settings.Default.CornerRadius = (int)CRadius_Panel_Settings.Value;
 
                 if (Style_Shutdown.SelectedIndex == 0) { Properties.Settings.Default.Disign_Shutdown = "old"; }
                 else { Properties.Settings.Default.Disign_Shutdown = "new"; }
+
+                if (Language_combo1.SelectedIndex == 0)
+                {
+                    Properties.Settings.Default.Language = "Russian";
+                }
+                else if (Language_combo1.SelectedIndex == 1)
+                {
+                    Properties.Settings.Default.Language = "English";
+                }
 
                 Properties.Settings.Default.Save();
                 //Применение.
@@ -500,6 +593,133 @@ namespace ModernNotyfi
         private void Open_Site_Progect(object sender, RoutedEventArgs e)
         {
             Process.Start("http://modernnotify.ml/");
+        }
+
+        private void Select_Language(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                RussianInterfase_Settings();
+            }
+            if (Language_combo1.SelectedIndex == 1)
+            {
+                EnglishInterfase_Settings();
+            }
+        }
+
+        public void RussianInterfase_Settings()
+        {
+            Titles.Content = "Настройки";
+            localacc.Content = "Локальный аккаунт";
+            text_7.Content = "Категории:";
+            mainsett_text.Content = "Основные параметры";
+            perssetttext.Content = "Персонализация";
+            widgettmaintext.Content = "Мини-приложения";
+            aboutstext.Content = "О программе";
+            text_8.Content = "Прочее:";
+            updatemainsett.Content = "Обновления программы";
+            close.Content = "Закрыть окно";
+            Save_Settings.Content = "Сохранить изменения";
+            NameProfile.Content = "Привет, " + Properties.Settings.Default.User_Name;
+            text_1.Content = "Основные параметры";
+            funnanduse.Content = "Функции и взаимодействие";
+            subbone.Content = "Панель выключения.";
+            thametext.Content = "Тема приложения";
+            text0213023.Content = "Местоположение панели";
+            text3243.Content = "Показывать стартовое уведомление";
+            textstyleshutdown.Content = "Стиль панели выключения";
+            subbone.Content = "Панель выключения.";
+            texts65464.Content = "Кнопка: Выключение приложения";
+            text_2.Content = "Категории и разделы";
+            twxtwidgwtwidgwtmenu.Content = "Мини-приложения";
+            Back.Content = "< Назад";
+            // Ревизия 1.
+            text_3.Content = "Вид панелей:";
+            pparone.Content = "Прозрачность";
+            pcolortext.Content = "Цвет";
+            Open_Color.Content = "Палитра >";
+            pradiusboprder.Content = "Закруглённость углов";
+            infotextpreview.Content = "Информация";
+            text_3_Copy1.Content = "Вид окон";
+            text23r923ri.Content = "Эффекты прозрачности:";
+            otherptext.Content = "Прочее:";
+            texte65930.Content = "Другие настройки:";
+            Go_Tab_2.Content = "Тема приложения";
+            Open_Tab_Update.Content = "Проверить обновления";
+            Open_Site.Content = "Сайт проекта";
+            textaboutproduct.Content = "О продукте:";
+            text_5.Content = "Удобная и красивая панель быстрых действий на вашем \n компьютере под управлением Windows 10 и 11.";
+            Devetxt.Content = "Разработчик:";
+            text_6.Content = "Станислав Мирошниченко";
+            text_5_Copy.Content = "Прочая информация:";
+            text_5_dadsc.Content = "Используемый исходный код";
+            text_5_dvdsacv.Content = "Репозиторий";
+            Check_Update.Content = "Проверить наличие обновлений";
+            inforelithe.Content = "Информация о выпуске";
+            SysInfoHeader.Content = "Информация о системе";
+            Color_Save.Content = "Сохранить";
+            Site_color.Content = "Сайт кодов";
+            redtext.Content = "Крассный";
+            greentext.Content = "Зелёный";
+            bluetext.Content = "Синий";
+        }
+
+        public void EnglishInterfase_Settings()
+        {
+            // Revision 0
+            Titles.Content = "Settings";
+            localacc.Content = "Local account";
+            text_7.Content = "Categories:";
+            mainsett_text.Content = "Main parameters";
+            perssetttext.Content = "Personalization";
+            widgettmaintext.Content = "Widgets";
+            aboutstext.Content = "About the program";
+            text_8.Content = "Other:";
+            updatemainsett.Content = "Software updates";
+            close.Content = "Close";
+            Save_Settings.Content = "Save changes";
+            NameProfile.Content = "Hi, " + Properties.Settings.Default.User_Name + "!";
+            text_1.Content = "Main parameters";
+            funnanduse.Content = "Functions and interactions";
+            subbone.Content = "Shutdown panel";
+            thametext.Content = "Application theme";
+            text0213023.Content = "Panel location";
+            text3243.Content = "Show start notification";
+            textstyleshutdown.Content = "Shutdown bar style";
+            subbone.Content = "Shutdown panel.";
+            texts65464.Content = "Button: Turn off the application";
+            text_2.Content = "Categories and sections";
+            twxtwidgwtwidgwtmenu.Content = "Widgets";
+            Back.Content = "< Back";
+            // Revision 1
+            text_3.Content = "Panel style:";
+            pparone.Content = "Transparency";
+            pcolortext.Content = "Color";
+            Open_Color.Content = "Palette >";
+            pradiusboprder.Content = "Roundness of corners";
+            infotextpreview.Content = "Information";
+            text_3_Copy1.Content = "Window type";
+            text23r923ri.Content = "Transparency Effects:";
+            otherptext.Content = "Other:";
+            texte65930.Content = "Other settings:";
+            Go_Tab_2.Content = "Application theme";
+            Open_Tab_Update.Content = "Check for updates";
+            Open_Site.Content = "Project site";
+            textaboutproduct.Content = "About the product:";
+            text_5.Content = "Convenient and beautiful quick action bar on your \n computer running Windows 10 and 11.";
+            Devetxt.Content = "Developer:";
+            text_6.Content = "Stanislav Miroshnichenko";
+            text_5_Copy.Content = "Other information:";
+            text_5_dadsc.Content = "Source code used";
+            text_5_dvdsacv.Content = "Repository";
+            Check_Update.Content = "Check for updates";
+            inforelithe.Content = "Release Notes";
+            SysInfoHeader.Content = "System information";
+            Color_Save.Content = "Save";
+            Site_color.Content = "Codes site";
+            redtext.Content = "Red";
+            greentext.Content = "Green";
+            bluetext.Content = "Blue";
         }
     }
 }

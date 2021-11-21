@@ -129,6 +129,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="modal_info.xaml.cs">
+      <DependentUpon>modal_info.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Other Page\shutdown.xaml.cs">
       <DependentUpon>shutdown.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="modal_info.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Other Page\shutdown.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -204,16 +211,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentWPF">
-      <Version>0.9.0</Version>
+      <Version>0.10.2</Version>
     </PackageReference>
     <PackageReference Include="LiveCharts.Wpf">
       <Version>0.9.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
-      <Version>7.0.2</Version>
+      <Version>7.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
-      <Version>10.0.19041.1</Version>
+      <Version>10.0.22000.196</Version>
     </PackageReference>
     <PackageReference Include="ModernWpfUI">
       <Version>0.9.4</Version>
@@ -225,7 +232,7 @@
       <Version>2.8.2</Version>
     </PackageReference>
     <PackageReference Include="XamlAnimatedGif">
-      <Version>2.0.0</Version>
+      <Version>2.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

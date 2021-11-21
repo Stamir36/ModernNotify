@@ -6,7 +6,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Name="ModernNotyfi" x:Class="ModernNotyfi.MainWindow"
         Title="ModernNotyfi" Height="500" Width="360" WindowStyle="None" Deactivated="ModernNotyfi_Deactivated" Foreground="{x:Null}" Visibility="Visible"
         AllowsTransparency="True" Loaded="ModernNotyfi_Loaded"
-        Icon="icon.ico" ResizeMode="NoResize" ShowInTaskbar="False">
+        Icon="icon.ico" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True">
     <Window.Resources>
 
         <Style x:Key="FocusVisual">
@@ -199,15 +199,15 @@
                 <Menu Height="Auto" Margin="0">
                     <Grid Height="22" Width="155" PreviewMouseLeftButtonDown="Command_shutdown">
                         <Image Source="icons/shutdown_fluent.png" HorizontalAlignment="Left" Margin="0,2" Width="17"/>
-                        <Label Content="Выключение ПК" Margin="17,0,-33,0" Padding="5,0,0,2"/>
+                        <Label x:Name="TextShutdown" Content="Выключение ПК" Margin="17,0,-33,0" Padding="5,0,0,2"/>
                     </Grid>
                     <Grid Height="22" Width="155" PreviewMouseLeftButtonDown="Command_Restart">
                         <Image Source="icons/restart_fluent.png" HorizontalAlignment="Left" Margin="0,2" Width="17"/>
-                        <Label Content="Перезагрузка ПК" Margin="17,0,-35,0" Padding="5,0,0,2"/>
+                        <Label x:Name="TextRestartPC" Content="Перезагрузка ПК" Margin="17,0,-35,0" Padding="5,0,0,2"/>
                     </Grid>
                     <Grid Height="22" Width="155" PreviewMouseLeftButtonDown="Command_Exit">
                         <Image Source="icons/exit.png" HorizontalAlignment="Left" Margin="0,2" Width="17"/>
-                        <Label Content="Выкл. панель" Margin="17,0,10,0" Padding="5,0,0,2"/>
+                        <Label x:Name="EXITtextPROGRAM" Content="Выкл. панель" Margin="17,0,10,0" Padding="5,0,0,2"/>
                     </Grid>
                 </Menu>
             </Grid>
@@ -286,22 +286,25 @@
                 <TabControl x:Name="Full_Panel_Tab" Margin="10,45,10,-59" TabStripPlacement="Bottom" Background="{x:Null}">
                     <TabItem Header="Battery_Tab">
                         <Grid x:Name="Battery_Tab">
-                            <Label Content="Заряд батареи" HorizontalAlignment="Left" Margin="13,16,0,419" FontSize="14" Width="115"/>
+                            <Label x:Name="text_bbss" Content="Заряд батареи" HorizontalAlignment="Left" Margin="13,16,0,419" FontSize="14" Width="115"/>
                             <Label x:Name="BatteryState" Content="99%" HorizontalAlignment="Left" Margin="13,28,0,375" FontSize="36" Width="120" FontWeight="Bold"/>
                             <Label x:Name="Battery_Status" Content="Заряжается" Margin="0,36,10,398" FontSize="14" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="131"/>
                             <Label Content="Статус:" HorizontalAlignment="Right" Margin="0,16,10,419" FontSize="14" Width="131" HorizontalContentAlignment="Right"/>
                             <ProgressBar x:Name="Battery_ProgressBar" Margin="96,63,10,0" VerticalAlignment="Top" Value="50" Height="10" Foreground="#FF0078D7"/>
                             <Border BorderThickness="1" Height="52" Margin="10,332,10,0" VerticalAlignment="Top" Background="#33F3E6E6" CornerRadius="15" BorderBrush="#33000000">
-                                <Label Content="Чтобы продлить срок службы аккумулятора,&#xA;держите заряд не ниже 20% и не выше 80%." Margin="9" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                <Label x:Name="textbbgg" Content="Чтобы продлить срок службы аккумулятора,&#xA;держите заряд не ниже 20% и не выше 80%." Margin="9" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                             </Border>
-                            <lvc:CartesianChart Margin="10,92,10,202">
+                            <lvc:CartesianChart Margin="10,92,10,202" Pan="Xy" AnimationsSpeed="00:00:00.1000000">
+                                <lvc:CartesianChart.BindingGroup>
+                                    <BindingGroup/>
+                                </lvc:CartesianChart.BindingGroup>
                                 <lvc:CartesianChart.Series>
                                     <lvc:LineSeries Values="{Binding BatteryChar}" 
-                       StrokeThickness="2" 
-                       Stroke="#1C8FC5" 
-                       Fill="Transparent" 
-                       LineSmoothness="1" 
-                       PointGeometrySize="10"/>
+                                       StrokeThickness="2" 
+                                       Stroke="#1C8FC5" 
+                                       Fill="Transparent" 
+                                       LineSmoothness="1" 
+                                       PointGeometrySize="10"/>
                                 </lvc:CartesianChart.Series>
                                 <lvc:CartesianChart.AxisX>
                                     <lvc:Axis IsMerged="True">
@@ -318,12 +321,13 @@
                                     </lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
                             </lvc:CartesianChart>
+                            
                             <Button x:Name="Battery_Settings" Content="Настройки электропитания" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Margin="10,0,10,34" Click="Battery_Settings_Click" Background="#660078D7" />
                             <Border BorderThickness="1" Height="52" Margin="10,275,10,0" VerticalAlignment="Top" Background="#33F3E6E6" CornerRadius="15" BorderBrush="#33000000">
                                 <Grid>
                                     <Label x:Name="Batt_label_time" Content="Время работы:" Margin="20,10,164,25" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
                                     <Label x:Name="Battery_time" Content="1 час 50 минут" Margin="20,21,131,10" FontWeight="Bold"/>
-                                    <Label Content="Напряжение" Margin="0,11,15,26" FontSize="10" HorizontalAlignment="Right"/>
+                                    <Label x:Name="waltagetext" Content="Напряжение" Margin="0,11,15,26" FontSize="10" HorizontalAlignment="Right"/>
                                     <Label x:Name="Voltage_battery" Content="11.0 kW" Margin="0,21,15,10" FontWeight="Bold" HorizontalAlignment="Right" Width="58"/>
                                     <Separator HorizontalAlignment="Right" Height="17" Margin="0,16,67,0" VerticalAlignment="Top" Width="35" FontSize="22" FontWeight="Bold" RenderTransformOrigin="0.495,-0.275">
                                         <Separator.RenderTransform>
@@ -355,13 +359,13 @@
                                 </ListBox>
                             </Grid>
                             <TextBox x:Name="Search_App" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Margin="10,10,45,0" Visibility="Hidden" TextChanged="Search_App_TextChanged"/>
-                            <Button x:Name="App_Open_Search" Margin="0,12,10,0" VerticalAlignment="Top" Height="29" Background="#0CFFFFFF" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Search_Box_Open" HorizontalAlignment="Right" Width="30">
+                            <Button x:Name="SearchIcon" Margin="0,12,10,0" VerticalAlignment="Top" Height="29" Background="#0CFFFFFF" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Search_Box_Open" HorizontalAlignment="Right" Width="30">
                                 <Button.Resources>
                                     <Style TargetType="{x:Type Border}">
                                         <Setter Property="CornerRadius" Value="7"/>
                                     </Style>
                                 </Button.Resources>
-                                <Image x:Name="SearchIcon" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="icons/search.png"/>
+                                <ui:SymbolIcon x:Name="SearchIcons" Symbol="Find" Foreground="Black" />
                             </Button>
                         </Grid>
                     </TabItem>
@@ -369,7 +373,7 @@
                         <Grid x:Name="Clock_Tab">
                             <Label x:Name="DateTimeText_Panel" Content="00:00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="55" Width="144" FontSize="38" FontWeight="Bold" Padding="0" Margin="13,36,0,0"/>
                             <Calendar HorizontalAlignment="Stretch" Margin="0,96,0,29" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                            <Label Content="Время и дата" HorizontalAlignment="Left" Margin="13,16,0,419" FontSize="14" Width="115"/>
+                            <Label x:Name="DataTimeText" Content="Время и дата" HorizontalAlignment="Left" Margin="13,16,0,419" FontSize="14" Width="115"/>
                             <Label x:Name="DateTimeText_sec_main" Content=":00" HorizontalAlignment="Left" Margin="112,56,0,0" VerticalAlignment="Top" Height="29" Width="30" FontWeight="Bold" Padding="0,0,0,3" VerticalContentAlignment="Bottom" FontSize="18"/>
                         </Grid>
                     </TabItem>

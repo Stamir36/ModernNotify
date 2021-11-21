@@ -47,5 +47,11 @@
     <Setting Name="CornerRadius" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8</Value>
     </Setting>
+    <Setting Name="AllowsTransparency" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Russian</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

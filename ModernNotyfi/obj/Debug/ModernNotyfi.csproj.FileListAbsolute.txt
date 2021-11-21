@@ -177,3 +177,6 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.AssemblyRe
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.SuggestedBindingRedirects.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Woof.Core.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Woof.System.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.CopyComplete
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\modal_info.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\modal_info.baml

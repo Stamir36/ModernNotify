@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "9FoePCh6ZyLmtz0LB1uhkoU8prZbcM9I1SHkq3QnX1tHROf++/6Ff/ExWA3beNhsgVsMqqRjpv1GrQ/yC+ONPg==",
+  "dgSpecHash": "LTxGZIrDXY2AghQIdtl6qVaFS0AcFowHaEVH6ssSlwGsYOr+b5dv/ispUSQcKvX4YRyYKCPFwITi5I1CdvAtzA==",
   "success": true,
   "projectFilePath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\stas1\\.nuget\\packages\\fluentwpf\\0.9.0\\fluentwpf.0.9.0.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\fluentwpf\\0.10.2\\fluentwpf.0.10.2.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.0\\microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net472\\1.0.0\\microsoft.netframework.referenceassemblies.net472.1.0.0.nupkg.sha512",
-    "C:\\Users\\stas1\\.nuget\\packages\\microsoft.toolkit.uwp.notifications\\7.0.2\\microsoft.toolkit.uwp.notifications.7.0.2.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\microsoft.toolkit.uwp.notifications\\7.1.1\\microsoft.toolkit.uwp.notifications.7.1.1.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
-    "C:\\Users\\stas1\\.nuget\\packages\\microsoft.windows.sdk.contracts\\10.0.19041.1\\microsoft.windows.sdk.contracts.10.0.19041.1.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\microsoft.windows.sdk.contracts\\10.0.22000.196\\microsoft.windows.sdk.contracts.10.0.22000.196.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\modernwpfui\\0.9.4\\modernwpfui.0.9.4.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\naudio\\2.0.1\\naudio.2.0.1.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\naudio.asio\\2.0.0\\naudio.asio.2.0.0.nupkg.sha512",
@@ -20,6 +20,7 @@
     "C:\\Users\\stas1\\.nuget\\packages\\naudio.wasapi\\2.0.0\\naudio.wasapi.2.0.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\naudio.winforms\\2.0.1\\naudio.winforms.2.0.1.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\naudio.winmm\\2.0.1\\naudio.winmm.2.0.1.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\system.runtime.interopservices.windowsruntime\\4.3.0\\system.runtime.interopservices.windowsruntime.4.3.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\system.runtime.windowsruntime\\4.6.0\\system.runtime.windowsruntime.4.6.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\system.runtime.windowsruntime.ui.xaml\\4.6.0\\system.runtime.windowsruntime.ui.xaml.4.6.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
@@ -27,7 +28,7 @@
     "C:\\Users\\stas1\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\woof.core\\2.2.0\\woof.core.2.2.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\woof.system\\2.8.2\\woof.system.2.8.2.nupkg.sha512",
-    "C:\\Users\\stas1\\.nuget\\packages\\xamlanimatedgif\\2.0.0\\xamlanimatedgif.2.0.0.nupkg.sha512"
+    "C:\\Users\\stas1\\.nuget\\packages\\xamlanimatedgif\\2.0.2\\xamlanimatedgif.2.0.2.nupkg.sha512"
   ],
   "logs": []
 }

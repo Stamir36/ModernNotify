@@ -175,3 +175,8 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotyfi.csproj.CoreComp
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotyfi.csproj.CopyComplete
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.exe
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Woof.Core.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Woof.System.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotyfi.csproj.SuggestedBindingRedirects.cache
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\modal_info.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\modal_info.g.cs
