@@ -1,0 +1,42 @@
+C:\Develop\C#\update\update\bin\Release\update.exe
+C:\Develop\C#\update\update\bin\Release\update.pdb
+C:\Develop\C#\update\update\bin\Release\ModernWpf.Controls.dll
+C:\Develop\C#\update\update\bin\Release\ModernWpf.dll
+C:\Develop\C#\update\update\bin\Release\fa\ModernWpf.resources.dll
+C:\Develop\C#\update\update\bin\Release\System.ValueTuple.dll
+C:\Develop\C#\update\update\obj\Release\update.csproj.AssemblyReference.cache
+C:\Develop\C#\update\update\obj\Release\MainWindow.baml
+C:\Develop\C#\update\update\obj\Release\Properties\DesignTimeResources.baml
+C:\Develop\C#\update\update\obj\Release\App.baml
+C:\Develop\C#\update\update\obj\Release\MainWindow.g.cs
+C:\Develop\C#\update\update\obj\Release\App.g.cs
+C:\Develop\C#\update\update\obj\Release\update_MarkupCompile.cache
+C:\Develop\C#\update\update\obj\Release\update.g.resources
+C:\Develop\C#\update\update\obj\Release\update.csproj.CoreCompileInputs.cache
+C:\Develop\C#\update\update\obj\Release\update.exe
+C:\Develop\C#\update\update\obj\Release\update.pdb
+C:\Develop\C#\update\update\obj\Release\update.csproj.SuggestedBindingRedirects.cache
+C:\Develop\C#\NEW INSTALLER\update\bin\Release\Setup.exe.config
+C:\Develop\C#\NEW INSTALLER\update\bin\Release\Setup.exe
+C:\Develop\C#\NEW INSTALLER\update\bin\Release\Setup.pdb
+C:\Develop\C#\NEW INSTALLER\update\bin\Release\ModernWpf.Controls.dll
+C:\Develop\C#\NEW INSTALLER\update\bin\Release\ModernWpf.dll
+C:\Develop\C#\NEW INSTALLER\update\bin\Release\fa\ModernWpf.resources.dll
+C:\Develop\C#\NEW INSTALLER\update\bin\Release\System.ValueTuple.dll
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\update.csproj.AssemblyReference.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\update.csproj.SuggestedBindingRedirects.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\Interop.IWshRuntimeLibrary.dll
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\update.csproj.ResolveComReference.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\MainWindow.baml
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\Properties\DesignTimeResources.baml
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\App.baml
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\MainWindow.g.cs
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\App.g.cs
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\Setup_MarkupCompile.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\Setup.g.resources
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\update.Properties.Resources.resources
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\update.csproj.GenerateResource.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\update.csproj.CoreCompileInputs.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\update.csproj.CopyComplete
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\Setup.exe
+C:\Develop\C#\NEW INSTALLER\update\obj\Release\Setup.pdb

@@ -1,38 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
-using NAudio;
 using NAudio.CoreAudioApi;
-using System.Reflection;
 using System.Diagnostics;
 using ModernWpf;
 using LiveCharts;
-using LiveCharts.Wpf;
-using Windows.Media;
 using Windows.Media.Control;
 using System.Media;
 using System.Runtime.InteropServices;
 using System.Management;
-using LiveCharts.Dtos;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System.Windows.Interop;
 using Windows.UI.Notifications.Management;
 using System.IO;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using System.Timers;
+using System.Net;
+using System.Reflection;
+using Windows.Devices.Radios;
+using Windows.Devices.WiFi;
 
 namespace ModernNotyfi
 {
@@ -79,7 +72,6 @@ namespace ModernNotyfi
 
         private HwndSource _source;
         private const int HOTKEY_ID = 9000;
-
 
         protected override void OnSourceInitialized(EventArgs e)
         {
@@ -143,6 +135,7 @@ namespace ModernNotyfi
             MainPanelGrid.BeginAnimation(Border.MarginProperty, Border_MainPanelGrid);
         }
 
+        
 
         public class ItemModel
         {
@@ -364,6 +357,17 @@ namespace ModernNotyfi
                     Border_Shutdown.UpdateLayout();
                 }
 
+                if (Properties.Settings.Default.progressbarstyle == "new")
+                {
+                    ValueVolumeBar.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    SoundSlider.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#7FC5C5C5");
+                    SoundSlider.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#FF037BFF"); 
+                    ValueVolumeBar.Visibility = Visibility.Hidden;
+                }
+                
                 // Положение: правый-нижний угол.
                 var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
                 if (Properties.Settings.Default.posicion == "rigth")
@@ -395,6 +399,7 @@ namespace ModernNotyfi
 
                     MMDevice mMDevice = speakDevices.ToList()[soundDevice];
                     SoundSlider.Value = Convert.ToInt16(mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+                    ValueVolumeBar.Value = SoundSlider.Value;
                     SoundDevice.Content = speakDevices.ToList()[soundDevice];
                 }
 
@@ -574,7 +579,8 @@ namespace ModernNotyfi
                 {
                     MMDevice mMDevice = speakDevices.ToList()[soundDevice];
                     SoundSlider.Value = Convert.ToInt16(mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
-                    if(SoundSlider.Value > 0) {
+                    ValueVolumeBar.Value = SoundSlider.Value;
+                    if (SoundSlider.Value > 0) {
                         AudioOnOff = 1;
                         Audio_settings_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
                         Audio_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
@@ -591,8 +597,9 @@ namespace ModernNotyfi
                 MediaManager.OnSongChanged += MediaManager_OnSongChanged;
                 MediaManager.Start();
 
-                //Батарея
-                GetBatteryPercent();
+                
+                GetBatteryPercent(); //Батарея
+                GetConnectionsPCIsEnabledAsync(); // Радио
             };
             //timer.Start();
 
@@ -620,6 +627,7 @@ namespace ModernNotyfi
                 {
                     batt_status = 0;
                 }
+                BatteryChar.Add(Convert.ToInt32(battery["EstimatedChargeRemaining"]));
             }
 
             // МИНУТНЫЙ ТАЙМЕР
@@ -628,91 +636,24 @@ namespace ModernNotyfi
             timer_minute.IsEnabled = true;
             timer_minute.Tick += (o, t) =>
             {
-                foreach (var battery in allBatteries)
-                {
-                    BatteryChar.Add(Convert.ToInt32(battery["EstimatedChargeRemaining"]));
-
-                    if (Convert.ToUInt16(battery["BatteryStatus"]) == 1 || batt_status == 0) //Разряжается
-                    {
-                        batt_min++;
-                        
-                        if (Properties.Settings.Default.Language == "English")
-                        {
-                            Batt_label_time.Content = "Battery life:";
-                        }
-                        else
-                        {
-                            Batt_label_time.Content = "Время работы:";
-                        }
-                        if (batt_min >= 1)
-                        {
-                            int bvar1 = batt_start - Convert.ToInt16(battery["EstimatedChargeRemaining"]);
-                            int min = 0;
-                            if (bvar1 != 0) { min = Convert.ToInt16(battery["EstimatedChargeRemaining"]) * batt_min / bvar1; } else { min = Convert.ToInt16(battery["EstimatedChargeRemaining"]) * batt_min; }
-                            int chas = 0;
-                            if (min > 60)
-                            {
-                                chas = min / 60;
-                                min = min % 60;
-                            }
-                            Battery_time.Content = chas + "ч. " + min + "мин. ";
-                        }
-                        else
-                        {
-                            if (Properties.Settings.Default.Language == "English")
-                            {
-                                Battery_time.Content = "Estimation...";
-                            }
-                            else
-                            {
-                                Battery_time.Content = "Вычисление...";
-                            }
-                        }
-
-                        if (Convert.ToInt32(battery["EstimatedChargeRemaining"]) == 25)
-                        {
-                            SubmitNotification("Батарея почти разряжена.", "Осталось " + Convert.ToInt32(battery["EstimatedChargeRemaining"]) + "%. Подключите зарядное устройство.", "icons/battery_Low.png");
-                        }
-                    }
-                    else
-                    {
-                        batt_min++;
-                        Batt_label_time.Content = "До полного заряда:";
-                        if (batt_min >= 1)
-                        {
-                            int bvar1 = Convert.ToInt16(battery["EstimatedChargeRemaining"]) - batt_start;
-                            int min = 0;
-                            if (bvar1 != 0) { min = 100 * batt_min / bvar1; } else { min = Convert.ToInt16(battery["EstimatedChargeRemaining"]) * batt_min; }
-                            int chas = 0;
-                            if (min > 60)
-                            {
-                                chas = min / 60;
-                                min = min % 60;
-                            }
-                            Battery_time.Content = chas + "ч. " + min + "мин. ";
-                        }
-                        else
-                        {
-                            if (Properties.Settings.Default.Language == "English")
-                            {
-                                Battery_time.Content = "Estimation...";
-                            }
-                            else
-                            {
-                                Battery_time.Content = "Вычисление...";
-                            }
-                        }
-                        if (Convert.ToInt32(battery["EstimatedChargeRemaining"]) == 80)
-                        {
-                            SubmitNotification("Можно отключить ЗУ.", "Устройство заряжено на " + Convert.ToInt32(battery["EstimatedChargeRemaining"]) + "%.", "icons/battery_full.png");
-                        }
-                    }
-                }
+                GetUpdateBatteryStatus();
             };
             timer_minute.Start();
 
+            try
+            {
+                if (GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") != Assembly.GetExecutingAssembly().GetName().Version.ToString())
+                {
+                    SubmitNotification("Доступно обновление!", "Перейдите в настройки для скачивания.", "icons/update.png");
+                }
+            }
+            catch
+            {
+                // Error
+            }
+
             //УВЕДОМЛЕНИЯ
-            //NotificationAsync();
+            //NotificationAsync().Start();
         }
 
         public sealed class UserNotification
@@ -723,7 +664,7 @@ namespace ModernNotyfi
             public Windows.UI.Notifications.Notification Notification { get; }
         }
 
-        public async Task NotificationAsync()
+        public async void NotificationAsync()
         {
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Notifications.Management.UserNotificationListener"))
             {
@@ -735,6 +676,92 @@ namespace ModernNotyfi
             else
             {
                 MessageBox.Show("На этом устройстве прослушивание недоступно.");
+            }
+        }
+        
+        public void GetUpdateBatteryStatus()
+        {
+            ManagementClass wmi = new ManagementClass("Win32_Battery");
+            ManagementObjectCollection allBatteries = wmi.GetInstances();
+            foreach (var battery in allBatteries)
+            {
+                BatteryChar.Add(Convert.ToInt16(Convert.ToDouble(battery["EstimatedChargeRemaining"])));
+
+                if (Convert.ToUInt16(battery["BatteryStatus"]) == 1 || batt_status == 0) //Разряжается
+                {
+                    batt_min++;
+
+                    if (Properties.Settings.Default.Language == "English")
+                    {
+                        Batt_label_time.Content = "Battery life:";
+                    }
+                    else
+                    {
+                        Batt_label_time.Content = "Время работы:";
+                    }
+                    if (batt_min >= 1)
+                    {
+                        int bvar1 = batt_start - Convert.ToInt16(battery["EstimatedChargeRemaining"]);
+                        int min = 0;
+                        if (bvar1 != 0) { min = Convert.ToInt16(battery["EstimatedChargeRemaining"]) * batt_min / bvar1; } else { min = Convert.ToInt16(battery["EstimatedChargeRemaining"]) * batt_min; }
+                        int chas = 0;
+                        if (min > 60)
+                        {
+                            chas = min / 60;
+                            min = min % 60;
+                        }
+                        Battery_time.Content = chas + "ч. " + min + "мин. ";
+                    }
+                    else
+                    {
+                        if (Properties.Settings.Default.Language == "English")
+                        {
+                            Battery_time.Content = "Estimation...";
+                        }
+                        else
+                        {
+                            Battery_time.Content = "Вычисление...";
+                        }
+                    }
+
+                    if (Convert.ToInt32(battery["EstimatedChargeRemaining"]) == 25)
+                    {
+                        SubmitNotification("Батарея почти разряжена.", "Осталось " + Convert.ToInt32(battery["EstimatedChargeRemaining"]) + "%. Подключите зарядное устройство.", "icons/battery_Low.png");
+                    }
+                }
+                else
+                {
+                    batt_min++;
+                    Batt_label_time.Content = "До полного заряда:";
+                    if (batt_min >= 1)
+                    {
+                        int bvar1 = Convert.ToInt16(battery["EstimatedChargeRemaining"]) - batt_start;
+                        int min = 0;
+                        if (bvar1 != 0) { min = 100 * batt_min / bvar1; } else { min = Convert.ToInt16(battery["EstimatedChargeRemaining"]) * batt_min; }
+                        int chas = 0;
+                        if (min > 60)
+                        {
+                            chas = min / 60;
+                            min = min % 60;
+                        }
+                        Battery_time.Content = chas + "ч. " + min + "мин. ";
+                    }
+                    else
+                    {
+                        if (Properties.Settings.Default.Language == "English")
+                        {
+                            Battery_time.Content = "Estimation...";
+                        }
+                        else
+                        {
+                            Battery_time.Content = "Вычисление...";
+                        }
+                    }
+                    if (Convert.ToInt32(battery["EstimatedChargeRemaining"]) == 80)
+                    {
+                        SubmitNotification("Можно отключить ЗУ.", "Устройство заряжено на " + Convert.ToInt32(battery["EstimatedChargeRemaining"]) + "%.", "icons/battery_full.png");
+                    }
+                }
             }
         }
 
@@ -833,6 +860,7 @@ namespace ModernNotyfi
                 TempAudioOnOff = Convert.ToInt16(mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
                 mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar = 0 / 100.0f;
                 SoundSlider.Value = 0;
+                ValueVolumeBar.Value = 0;
             }
             else {
                 AudioOnOff = 1;
@@ -840,6 +868,7 @@ namespace ModernNotyfi
                 Audio_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
                 mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar = TempAudioOnOff / 100.0f;
                 SoundSlider.Value = TempAudioOnOff;
+                ValueVolumeBar.Value = TempAudioOnOff;
             }
         }
 
@@ -857,6 +886,7 @@ namespace ModernNotyfi
             {
                 MMDevice mMDevice = speakDevices.ToList()[soundDevice];
                 mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar = Convert.ToInt32(SoundSlider.Value) / 100.0f;
+                ValueVolumeBar.Value = SoundSlider.Value;
                 if (Properties.Settings.Default.Language == "English")
                 {
                     SoundText.Content = "Volume: " + (Convert.ToInt32(SoundSlider.Value) / 100.0f * 100) + "%";
@@ -945,6 +975,7 @@ namespace ModernNotyfi
             {
                 MMDevice mMDevice = speakDevices.ToList()[soundDevice];
                 SoundSlider.Value = Convert.ToInt16(mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+                ValueVolumeBar.Value = SoundSlider.Value;
                 SoundDevice.Content = speakDevices.ToList()[soundDevice];
             }
         }
@@ -1288,12 +1319,6 @@ namespace ModernNotyfi
             Notify.Clear();
         }
 
-
-
-
-
-
-
         public void EnglishInterfase_Settings()
         {
             BackText1.Content = "Notifications";
@@ -1315,6 +1340,120 @@ namespace ModernNotyfi
             TextRestartPC.Content = "Reboot PC";
             EXITtextPROGRAM.Content = "Exit program";
         }
+
+        public string GetContent(string url)
+        {
+            try
+            {
+                WebRequest request = WebRequest.Create(url);
+                request.Proxy = null;
+                request.Method = "GET";
+                request.Timeout = 360000;
+                request.ContentType = "application/x-www-form-urlencoded";
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    Stream requestStream = response.GetResponseStream();
+
+                    if (requestStream == null)
+                    {
+                        return null;
+                    }
+
+                    return new StreamReader(requestStream).ReadToEnd();
+                }
+            }
+            catch (Exception)
+            {
+                return "Error";
+            }
+        }
+
+        public async void GetConnectionsPCIsEnabledAsync()
+        {
+            var radios = await Radio.GetRadiosAsync();
+            var bluetoothRadio = radios.FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
+            if (bluetoothRadio.State == RadioState.On)
+            {
+                Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
+                Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
+            }
+            else
+            {
+                Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.Gainsboro;
+                Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
+            }
+            var result = await WiFiAdapter.RequestAccessAsync();
+            if (result == WiFiAccessStatus.Allowed)
+            {
+                foreach (var radio in radios)
+                {
+                    if (radio.Kind == RadioKind.WiFi && radio.State == RadioState.On)
+                    {
+                        WiFi_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
+                        WiFi_settings_text.Foreground = System.Windows.Media.Brushes.White;
+                        break;
+                    }
+                    else
+                    {
+                        WiFi_Color.Background = System.Windows.Media.Brushes.Gainsboro;
+                        WiFi_settings_text.Foreground = System.Windows.Media.Brushes.Black;
+                        break;
+                    }
+                }
+            }
+        }
+
+
+
+        private async void Bluetooth_settings_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await Radio.RequestAccessAsync();
+            if (result == RadioAccessStatus.Allowed)
+            {
+                var bluetooth = (await Radio.GetRadiosAsync()).FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
+                if (bluetooth != null && bluetooth.State != RadioState.On)
+                {
+                    await bluetooth.SetStateAsync(RadioState.On);
+                    Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
+                    Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
+                }
+                else
+                {
+                    await bluetooth.SetStateAsync(RadioState.Off);
+                    Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.Gainsboro;
+                    Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
+                }
+            }
+        }
+
+        // TESTING AND EXPEREMENT
+        private async void WIFI_settings_ON_OFF(object sender, RoutedEventArgs e)
+        {
+            var result = await WiFiAdapter.RequestAccessAsync();
+            if (result == WiFiAccessStatus.Allowed)
+            {
+                var radios = await Radio.GetRadiosAsync();
+
+                foreach (var radio in radios)
+                {
+                    if (radio.Kind == RadioKind.WiFi && radio.State != RadioState.On)
+                    {
+                        await radio.SetStateAsync(RadioState.On);
+                        WiFi_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
+                        WiFi_settings_text.Foreground = System.Windows.Media.Brushes.White;
+                        break;
+                    }
+                    else
+                    {
+                        await radio.SetStateAsync(RadioState.Off);
+                        WiFi_Color.Background = System.Windows.Media.Brushes.Gainsboro;
+                        WiFi_settings_text.Foreground = System.Windows.Media.Brushes.Black;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -1323,39 +1462,14 @@ namespace ModernNotyfi
     public static class MediaManager
     {
         public delegate void MediaSessionDelegate(MediaSession session);
-
-        /// <summary>
-        /// Triggered when a new media source gets added to the MediaSessions
-        /// </summary>
         public static event MediaSessionDelegate OnNewSource;
-
-        /// <summary>
-        /// Triggered when a media source gets removed from the MediaSessions
-        /// </summary>
         public static event MediaSessionDelegate OnRemovedSource;
-
-        /// <summary>
-        /// Triggered when a playback state changes of a MediaSession
-        /// </summary>
         public static event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionPlaybackInfo> OnPlaybackStateChanged;
-
-        /// <summary>
-        /// Triggered when a song changes of a MediaSession
-        /// </summary>
         public static event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionMediaProperties> OnSongChanged;
-
-        /// <summary>
-        /// A dictionary of the current MediaSessions
-        /// </summary>
         public static Dictionary<string, MediaSession> CurrentMediaSessions = new Dictionary<string, MediaSession>();
 
 
         private static bool IsStarted;
-
-        /// <summary>
-        /// This starts the MediaManager
-        /// This can be changed to a constructor if you don't care for the first few 'new sources' events
-        /// </summary>
         public static void Start()
         {
             if (!IsStarted)
@@ -1442,31 +1556,5 @@ namespace ModernNotyfi
         }
 
     }
-
-
-
 }
 
-
-
-
-
-
-
-/*
- 
-        public static async Task NowPlay()
-        {
-            var gsmtcsm = await GetSystemMediaTransportControlsSessionManager();
-            var mediaProperties = await GetMediaProperties(gsmtcsm.GetCurrentSession());
-            //MessageBox.Show(mediaProperties.Title + " - " + mediaProperties.Artist);
-        }
-
-        private static async Task<GlobalSystemMediaTransportControlsSessionManager> GetSystemMediaTransportControlsSessionManager() =>
-            await GlobalSystemMediaTransportControlsSessionManager.RequestAsync();
-
-        private static async Task<GlobalSystemMediaTransportControlsSessionMediaProperties> GetMediaProperties(GlobalSystemMediaTransportControlsSession session) =>
-            await session.TryGetMediaPropertiesAsync();
-
-
- */

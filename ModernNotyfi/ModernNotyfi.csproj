@@ -324,5 +324,8 @@
   <ItemGroup>
     <Resource Include="icons\Battery_Light.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\bluetooth.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

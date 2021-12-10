@@ -27,6 +27,7 @@ namespace ModernNotyfi
         {
             InitializeComponent();
             GifImage_Step_2.Visibility = Visibility.Hidden;
+            ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
         }
 
         private void Step_1_Click(object sender, RoutedEventArgs e)
@@ -48,6 +49,9 @@ namespace ModernNotyfi
         private void Start_App_Click(object sender, RoutedEventArgs e)
         {
             //OOBE Close
+            Properties.Settings.Default.First_Settings = false;
+            Properties.Settings.Default.Save();
+
             MainWindow main = new MainWindow();
             main.Show();
             Close();
@@ -55,6 +59,7 @@ namespace ModernNotyfi
 
         private void Step_2_Click(object sender, RoutedEventArgs e)
         {
+            LOG.Content = "";
             string name = User_Name.Text;
             if (name.Length >= 4)
             {
@@ -66,12 +71,12 @@ namespace ModernNotyfi
                 Properties.Settings.Default.Save();
 
                 Step_Text.Content = "Настроим под себя";
+                Step_Progress.Value = 50;
             }
             else
             {
-                MessageBox.Show("Пожалуйста, введите ваше имя (Больше 4 символов, у вас: " + name.Length + ").", "Нет имени");
+                LOG.Content = "Пожалуйста, введите ваше имя (Больше 4 символов, у вас: " + name.Length + ").";
             }
-            Step_Progress.Value = 50;
         }
 
         private void Steap_4(object sender, RoutedEventArgs e)

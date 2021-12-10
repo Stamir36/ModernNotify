@@ -119,5 +119,10 @@ namespace ModernNotyfi
             commands.Arguments = "/c shutdown -r -f -t 00";
             Process.Start(commands);
         }
+
+        private void Run_TaskMenedger_Go(object sender, RoutedEventArgs e)
+        {
+            Process.Start("taskmgr.exe");
+        }
     }
 }

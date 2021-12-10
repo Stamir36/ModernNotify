@@ -1,0 +1,38 @@
+C:\Develop\C#\update\update\bin\Debug\update.exe
+C:\Develop\C#\update\update\bin\Debug\update.pdb
+C:\Develop\C#\update\update\bin\Debug\ModernWpf.Controls.dll
+C:\Develop\C#\update\update\bin\Debug\ModernWpf.dll
+C:\Develop\C#\update\update\bin\Debug\fa\ModernWpf.resources.dll
+C:\Develop\C#\update\update\bin\Debug\System.ValueTuple.dll
+C:\Develop\C#\update\update\obj\Debug\MainWindow.baml
+C:\Develop\C#\update\update\obj\Debug\Properties\DesignTimeResources.baml
+C:\Develop\C#\update\update\obj\Debug\App.baml
+C:\Develop\C#\update\update\obj\Debug\MainWindow.g.cs
+C:\Develop\C#\update\update\obj\Debug\App.g.cs
+C:\Develop\C#\update\update\obj\Debug\update_MarkupCompile.cache
+C:\Develop\C#\update\update\obj\Debug\update.g.resources
+C:\Develop\C#\update\update\obj\Debug\update.csproj.CoreCompileInputs.cache
+C:\Develop\C#\update\update\obj\Debug\update.exe
+C:\Develop\C#\update\update\obj\Debug\update.pdb
+C:\Develop\C#\update\update\obj\Debug\update.csproj.AssemblyReference.cache
+C:\Develop\C#\update\update\obj\Debug\update.csproj.SuggestedBindingRedirects.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\update.csproj.SuggestedBindingRedirects.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\MainWindow.baml
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\Properties\DesignTimeResources.baml
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\App.baml
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\MainWindow.g.cs
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\App.g.cs
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\Setup_MarkupCompile.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\Setup.g.resources
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\update.csproj.CoreCompileInputs.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\Setup.exe
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\Setup.pdb
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\update.csproj.ResolveComReference.cache
+C:\Develop\C#\NEW INSTALLER\update\bin\Debug\Setup.exe.config
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\update.Properties.Resources.resources
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\update.csproj.GenerateResource.cache
+C:\Develop\C#\NEW INSTALLER\update\bin\Debug\Setup.exe
+C:\Develop\C#\NEW INSTALLER\update\bin\Debug\Setup.pdb
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\update.csproj.AssemblyReference.cache
+C:\Develop\C#\NEW INSTALLER\update\obj\Debug\update.csproj.Fody.CopyLocal.cache

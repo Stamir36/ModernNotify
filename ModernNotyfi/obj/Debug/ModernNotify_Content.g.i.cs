@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("addons/webview2.exe")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/bluetooth.png")]
 
 

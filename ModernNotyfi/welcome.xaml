@@ -18,14 +18,24 @@
                 <TabControl x:Name="WelcomTabs" HorizontalAlignment="Left" Height="468" Margin="363,-85,0,0" VerticalAlignment="Top" Width="377">
                     <TabItem Header="Step 1">
                         <Grid>
-                            <Button x:Name="Step_1" HorizontalAlignment="Left" Margin="32,342,0,0" VerticalAlignment="Top" Width="320" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Step_1_Click">
+                            <Border BorderBrush="White" BorderThickness="1" Margin="32,342,25,35" Background="#7F5EADF5"/>
+                            <Button x:Name="Step_1" HorizontalAlignment="Left" Margin="32,342,0,0" VerticalAlignment="Top" Width="320" Height="51" Background="#FF4495EF" OpacityMask="Black" Cursor="Hand" Click="Step_1_Click" BorderBrush="#33C82F2F">
                                 <Grid Height="41" Width="296">
-                                    <Image x:Name="Load" HorizontalAlignment="Left" Source="/icons/Media/right.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                    <Label x:Name="Loading1" Content="Продолжить" Margin="37,7,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Foreground="Black" />
+                                    <Image x:Name="Load" HorizontalAlignment="Left" Source="/icons/back.png" Margin="248,-16,0,25" Width="32" RenderTransformOrigin="0.75,0.812" >
+                                        <Image.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="180"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Image.RenderTransform>
+                                    </Image>
+                                    <Label x:Name="Loading1" Content="Продолжить" Margin="0,7,0,7" HorizontalAlignment="Left" Width="148" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Foreground="White" FontWeight="Normal" FontFamily="Arial Unicode MS" />
                                 </Grid>
                             </Button>
                             <Label Content="От Станислава Мирошниченко" HorizontalAlignment="Left" Margin="72,119,0,0" VerticalAlignment="Top" Height="15" Width="208" FontSize="10" Foreground="Black"/>
-                            <Label Content="Приветствуем в ModernNotify!&#xA;Наше приложение создаст вам на рабочем&#xA;столе панель быстрых действий.&#xA;&#xA;Прежде чем мы начнём, хотим кое-что уточнить." HorizontalAlignment="Left" Margin="32,229,0,0" VerticalAlignment="Top" Height="99" Width="320" Foreground="Black"/>
+                            <Label Content="Приветствуем в ModernNotify!&#xA;Наше приложение создаст вам на рабочем&#xA;столе панель быстрых действий.&#xA;&#xD;&#xA;&#xD;&#xA;&#xA;Прежде чем мы начнём, хотим кое-что уточнить." HorizontalAlignment="Left" Margin="32,193,0,0" VerticalAlignment="Top" Height="144" Width="320" Foreground="Black"/>
                             <Grid HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="177" Margin="32,97,0,0">
                                 <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="icon.ico" Width="27" Height="27" Margin="0,1,0,0"/>
                                 <Label Content="ModernNotify" HorizontalAlignment="Left" Margin="32,5,0,0" VerticalAlignment="Top" Width="119" FontWeight="Bold" Foreground="Black"/>
@@ -34,9 +44,17 @@
                     </TabItem>
                     <TabItem Header="Step 2">
                         <Grid>
-                            <Label Content="Давай создадим тебе профиль." HorizontalAlignment="Left" Margin="32,97,0,0" VerticalAlignment="Top" Height="26" Width="320" Foreground="Black"/>
-                            <TextBox x:Name="User_Name" HorizontalAlignment="Left" Height="23" Margin="32,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320"/>
-                            <Label Content="Мой никнейм" HorizontalAlignment="Left" Margin="32,133,0,0" VerticalAlignment="Top" Height="17" Width="320" Foreground="#FF0C00FF"/>
+                            <Border BorderThickness="1" Height="73" VerticalAlignment="Top" CornerRadius="5,5,5,5" BorderBrush="#33000000" HorizontalAlignment="Left" Width="344" Margin="20,128,0,0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="#7FDADADA" Opacity="0.7"/>
+                                </Border.Background>
+                                <Grid Margin="1,0,-1,0">
+                                    <TextBox x:Name="User_Name" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320"/>
+                                    <Label Content="Мой никнейм" HorizontalAlignment="Center" Margin="0,9,0,0" VerticalAlignment="Top" Height="17" Width="320" Foreground="#FF0C00FF" FontFamily="Bodoni MT" FontStyle="Italic" FontWeight="Normal"/>
+                                </Grid>
+                            </Border>
+
+                            <Label Content="Давай создадим тебе профиль." HorizontalAlignment="Left" Margin="20,97,0,0" VerticalAlignment="Top" Height="26" Width="320" Foreground="Black"/>
                             <Button x:Name="Step_2" Content="Продолжить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Width="178" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Step_2_Click" Margin="0,0, 10, 20" />
 
                         </Grid>

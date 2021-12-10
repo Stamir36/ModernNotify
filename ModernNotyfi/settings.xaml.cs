@@ -106,6 +106,15 @@ namespace ModernNotyfi
                 pos_combo.SelectedIndex = 1;
             }
 
+            if (Properties.Settings.Default.progressbarstyle == "new")
+            {
+                Chek_Allow_NEW_PgBar.IsChecked = true;
+            }
+            else
+            {
+                Chek_Allow_NEW_PgBar.IsChecked = false;
+            }
+
             if (Properties.Settings.Default.Language == "Russian")
             {
                 Language_combo1.SelectedIndex = 0;
@@ -331,8 +340,59 @@ namespace ModernNotyfi
         }
 
         int start_update = 0;
+        public string update_version;
         private void Check_Update_Click(object sender, RoutedEventArgs e)
         {
+            //Проверка модуля обновления.
+            InfoUpdate.Content = "Проверка модуля обновления...";
+            try
+            {
+                FileVersionInfo.GetVersionInfo("update.exe");
+                FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo("update.exe");
+                update_version = myFileVersionInfo.FileVersion;
+            }
+            catch
+            {
+                update_version = "0";
+            }
+
+            try
+            {
+                string url_version_update = "http://version-modernnotify.ml/modernnotify/update_version.txt";
+
+                if (GetContent(url_version_update) == update_version)
+                {
+                    // АКТУАЛЬНАЯ ВЕРСИЯ
+                    CheckUpdateApp();
+                }
+                else
+                {
+                    InfoUpdate.Content = "Загрузка модуля обновления...";
+                    try
+                    {
+                        string link = @"http://version-modernnotify.ml/modernnotify/update.exe";
+                        WebClient webClient = new WebClient();
+                        webClient.DownloadProgressChanged += (o, args) => LastChekUpdate.Content = "Скачивание: " + args.ProgressPercentage + "%";
+                        webClient.DownloadFileCompleted += (o, args) => CheckUpdateApp();
+                        webClient.DownloadFileAsync(new Uri(link), "update.exe");
+                    }
+                    catch
+                    {
+                        InfoUpdate.Content = "Загрузка обновления не удалась.";
+                        LastChekUpdate.Content = "Проверте подключение или попробуйте позже.";
+                    }
+                }
+            }
+            catch
+            {
+                InfoUpdate.Content = "Проверка обновлений не удалась.";
+                LastChekUpdate.Content = "Проверте подключение или попробуйте позже.";
+            }
+        }
+
+        public void CheckUpdateApp()
+        {
+            // Файл обновления существует.
             if (start_update == 0)
             {
                 InfoUpdate.Content = "Проверка...";
@@ -458,6 +518,15 @@ namespace ModernNotyfi
                 else
                 {
                     Properties.Settings.Default.AllowsTransparency = false;
+                }
+
+                if (Chek_Allow_NEW_PgBar.IsChecked == true)
+                {
+                    Properties.Settings.Default.progressbarstyle = "new";
+                }
+                else
+                {
+                    Properties.Settings.Default.progressbarstyle = "old";
                 }
 
                 Properties.Settings.Default.CornerRadius = (int)CRadius_Panel_Settings.Value;
@@ -662,6 +731,7 @@ namespace ModernNotyfi
             redtext.Content = "Крассный";
             greentext.Content = "Зелёный";
             bluetext.Content = "Синий";
+            text23r923ri12.Content = "Широкий слайдер громкости";
         }
 
         public void EnglishInterfase_Settings()
@@ -690,6 +760,7 @@ namespace ModernNotyfi
             texts65464.Content = "Button: Turn off the application";
             text_2.Content = "Categories and sections";
             twxtwidgwtwidgwtmenu.Content = "Widgets";
+            text23r923ri12.Content = "Wide volume slider";
             Back.Content = "< Back";
             // Revision 1
             text_3.Content = "Panel style:";

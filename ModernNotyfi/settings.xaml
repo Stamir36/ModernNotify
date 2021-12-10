@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ModernNotyfi"
         mc:Ignorable="d"
-        Title="Настройки" Height="318" Width="838"
+        Title="Настройки" Height="373" Width="817"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True" MinWidth="960" MinHeight="530" Icon="icons/maim_settings.png" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Visibility="Visible" AllowsTransparency="True" Loaded="Settings_Loaded">
@@ -233,9 +233,9 @@
                         </TabItem>
                         <TabItem Width="14">
                             <Grid>
-                                <ScrollViewer>
-                                    <StackPanel Height="472">
-                                        <Grid ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="0,0,10,0" Height="466">
+                                <ScrollViewer VerticalAlignment="Top">
+                                    <StackPanel Height="560">
+                                        <Grid ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="0,0,10,0" Height="528">
                                             <Label x:Name="text_3" Content="Вид панелей:" Margin="70,10,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
                                             <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,39,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                                 <Border.RenderTransform>
@@ -290,8 +290,8 @@
                                                     <Label x:Name="infotextpreview" Content="Информация" Margin="43,72,101,32" FontStyle="Italic" />
                                                 </Grid>
                                             </Border>
-                                            <Label x:Name="otherptext" Content="Прочее:" Margin="70,359,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,387,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                            <Label x:Name="otherptext" Content="Прочее:" Margin="70,419,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,447,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                                 <Border.RenderTransform>
                                                     <TransformGroup>
                                                         <ScaleTransform ScaleY="-1"/>
@@ -301,7 +301,7 @@
                                                     </TransformGroup>
                                                 </Border.RenderTransform>
                                             </Border>
-                                            <Border BorderThickness="1" Height="57" Margin="73,399,35,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                                            <Border BorderThickness="1" Height="57" Margin="73,459,35,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                                                 <Border.BorderBrush>
                                                     <SolidColorBrush Color="Black" Opacity="0.2"/>
                                                 </Border.BorderBrush>
@@ -326,7 +326,7 @@
                                                     <Slider x:Name="CRadius_Panel_Settings" Margin="0,0,10,0" VerticalAlignment="Center" Maximum="15" ValueChanged="CRadius_Panel_Settings_Value" Value="15" AutoToolTipPlacement="TopLeft" HorizontalAlignment="Right" Width="214"/>
                                                 </Grid>
                                             </Border>
-                                            <Border BorderThickness="1" Height="56" Margin="70,290,38,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                                            <Border BorderThickness="1" Height="56" Margin="73,290,38,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                                                 <Border.BorderBrush>
                                                     <SolidColorBrush Color="Black" Opacity="0.2"/>
                                                 </Border.BorderBrush>
@@ -334,12 +334,12 @@
                                                     <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
                                                 </Border.Background>
                                                 <Grid Margin="-4,0,4,0">
-                                                    <Label x:Name="text23r923ri" Content="Эффекты прозрачности:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Height="24" Width="326" FontSize="18"/>
+                                                    <Label x:Name="text23r923ri" Content="Эффекты прозрачности окна:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Height="24" Width="326" FontSize="18"/>
                                                     <CheckBox x:Name="Chek_Allow_Window" Margin="0,0,22,0" Width="20" Height="32" MinWidth="20" Cursor="Hand" HorizontalAlignment="Right"/>
 
                                                 </Grid>
                                             </Border>
-                                            <Label x:Name="text_3_Copy1" Content="Вид окон:" Margin="70,249,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                            <Label x:Name="text_3_Copy1" Content="Дизайн компонентов:" Margin="70,249,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
                                             <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,277,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                                 <Border.RenderTransform>
                                                     <TransformGroup>
@@ -349,6 +349,19 @@
                                                         <TranslateTransform/>
                                                     </TransformGroup>
                                                 </Border.RenderTransform>
+                                            </Border>
+                                            <Border BorderThickness="1" Height="56" Margin="73,350,38,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
+                                                </Border.BorderBrush>
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
+                                                </Border.Background>
+                                                <Grid Margin="-4,0,4,0">
+                                                    <Label x:Name="text23r923ri12" Content="Широкий слайдер громкости:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Height="24" Width="326" FontSize="18"/>
+                                                    <CheckBox x:Name="Chek_Allow_NEW_PgBar" Margin="0,0,22,0" Width="20" Height="32" MinWidth="20" Cursor="Hand" HorizontalAlignment="Right"/>
+
+                                                </Grid>
                                             </Border>
 
 
@@ -382,7 +395,7 @@
                                         <SolidColorBrush Color="#7FDADADA" Opacity="0.7"/>
                                     </Border.Background>
                                     <Grid>
-                                        <Label x:Name="InfoUpdate" Content="Требуется проверка обновлений" Margin="78,12,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
+                                        <Label x:Name="InfoUpdate" Content="Выполните проверку обновлений" Margin="78,12,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
                                         <Image x:Name="Update_img" HorizontalAlignment="Left" Height="51" Margin="15,10,0,0" VerticalAlignment="Top" Width="51" Source="icons/update.png" RenderTransformOrigin="0.5,0.5"></Image>
                                         <Button x:Name="Check_Update" Content="Проверить наличие обновлений" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="0,18,20,0" VerticalAlignment="Top" Width="240" Cursor="Hand" Click="Check_Update_Click"/>
                                         <Label x:Name="LastChekUpdate" Content="Последняя проверка" HorizontalAlignment="Left" Margin="78,39,0,0" VerticalAlignment="Top"/>

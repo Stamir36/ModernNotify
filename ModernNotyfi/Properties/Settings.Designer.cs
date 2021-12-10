@@ -226,5 +226,17 @@ namespace ModernNotyfi.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("new")]
+        public string progressbarstyle {
+            get {
+                return ((string)(this["progressbarstyle"]));
+            }
+            set {
+                this["progressbarstyle"] = value;
+            }
+        }
     }
 }

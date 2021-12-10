@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ModernNotyfi"
         mc:Ignorable="d"
-        Title="Выключение или перезагрузка" Height="422.947" Width="807.318"
+        Title="Выключение или перезагрузка" Height="411" Width="693"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="False" MinWidth="960" MinHeight="530" Icon="../icons/shutdown.png" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Visibility="Visible" AllowsTransparency="True" Loaded="Settings_Loaded" WindowState="Maximized">
@@ -47,5 +47,21 @@
                 <Label x:Name="acctype" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="69,33,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Border>
+        <Label Content="Быстрые дейстия" Height="56" VerticalAlignment="Center" HorizontalAlignment="Center" Width="318" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" FontSize="20" Margin="0,-230,0,0">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.014"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Button x:Name="Run_TaskMenedger" Margin="20,0,0,91" VerticalAlignment="Bottom" Background="#4CBFBFBF" OpacityMask="Black" Cursor="Hand" Width="165" Click="Run_TaskMenedger_Go" Height="31">
+            <Grid Height="30" Width="175">
+                <Image HorizontalAlignment="Left" Source="/icons/App_Color.png" Margin="0,1,0,13" Width="27" RenderTransformOrigin="0.75,0.812" />
+                <Label x:Name="tskmng_text" Content="Диспетчер задач" Margin="18,-1,0,12" HorizontalAlignment="Left" Width="132" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" />
+            </Grid>
+        </Button>
     </Grid>
 </Window>

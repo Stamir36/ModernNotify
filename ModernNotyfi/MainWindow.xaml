@@ -163,19 +163,35 @@
                 <SolidColorBrush Color="#fff" Opacity="0.7"/>
             </Border.Background>
             <Grid>
-                <Button x:Name="Wifi_settings" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="10,8,273,7" Height="56" Width="55" BorderBrush="{x:Null}" Cursor="Hand" Click="Wifi_settings_Click" Style="{DynamicResource DefaultButtonStyle}">
-                    <Border CornerRadius="5,5,5,5"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="55" VerticalAlignment="Center" Width="55" Background="#FFB4C1DA">
+                <Button x:Name="Wifi_settings" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="10,8,256,7" Height="56" BorderBrush="{x:Null}" Cursor="Hand" Click="WIFI_settings_ON_OFF" Style="{DynamicResource DefaultButtonStyle}">
+                    <Border x:Name="WiFi_Color" CornerRadius="5,5,5,5"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="55" VerticalAlignment="Center" Width="70" Background="Gainsboro">
                         <Grid>
-                            <Label Content="Wi-Fi" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Width="33" Foreground="Black" Height="17"/>
+                            <Label x:Name="WiFi_settings_text" Content="Wi-Fi" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Width="33" Foreground="Black" Height="17"/>
                             <Image HorizontalAlignment="Center" Height="30" Margin="0,2,0,0" VerticalAlignment="Top" Width="30" Source="icons/wifi.png"/>
                         </Grid>
                     </Border>
                 </Button>
-                <Button x:Name="Audio_settings" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="70,8,212,7" Height="56" Width="56" BorderBrush="{x:Null}" Cursor="Hand" Click="On_OFF_Audio" Style="{DynamicResource DefaultButtonStyle}">
-                    <Border x:Name="Audio_settings_Color" CornerRadius="5,5,5,5"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Background="CornflowerBlue">
+                <Button x:Name="Audio_settings" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="162,8,104,7" Height="56" Width="72" BorderBrush="{x:Null}" Cursor="Hand" Click="On_OFF_Audio" Style="{DynamicResource DefaultButtonStyle}">
+                    <Border x:Name="Audio_settings_Color" CornerRadius="5,5,5,5"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="70" Background="CornflowerBlue">
                         <Grid>
-                            <Label x:Name="Audio_Settinds_text" Content="Звук" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="31" Foreground="White"/>
-                            <Image HorizontalAlignment="Center" Height="30" Margin="0,2,0,0" VerticalAlignment="Top" Width="30" Source="icons/sound.png"/>
+                            <Label x:Name="Audio_Settinds_text" Content="Звук" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Width="31" Foreground="White"/>
+                            <Image HorizontalAlignment="Left" Height="30" Margin="22,2,0,0" VerticalAlignment="Top" Width="30" Source="icons/sound.png"/>
+                        </Grid>
+                    </Border>
+                </Button>
+                <Button x:Name="Bluetooth_settings" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="86,8,180,7" Height="56" BorderBrush="{x:Null}" Cursor="Hand" Style="{DynamicResource DefaultButtonStyle}" Width="72" Click="Bluetooth_settings_Click">
+                    <Border x:Name="Bluetooth_Settings_Color" CornerRadius="5,5,5,5"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" VerticalAlignment="Center" Width="70" Background="Gainsboro">
+                        <Grid>
+                            <Label x:Name="Bluetooth_Settinds_text" Content="Bluetooth" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" Width="60" Foreground="Black" Height="17" FontSize="12" HorizontalContentAlignment="Center"/>
+                            <Image HorizontalAlignment="Center" Height="30" Margin="0,2,0,0" VerticalAlignment="Top" Width="30" Source="/icons/bluetooth.png"/>
+                        </Grid>
+                    </Border>
+                </Button>
+                <Button x:Name="settings_Copy" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="236,8,29,6" BorderBrush="{x:Null}" Cursor="Hand" Style="{DynamicResource DefaultButtonStyle}" Click="Bluetooth_settings_Click" Visibility="Hidden">
+                    <Border x:Name="Color_Border" CornerRadius="5,5,5,5"  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" VerticalAlignment="Center" Width="70" Background="Gainsboro">
+                        <Grid>
+                            <Label x:Name="Settinds_text2" Content="..." HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" Width="60" Foreground="Black" Height="17" FontSize="12" HorizontalContentAlignment="Center"/>
+                            <Image HorizontalAlignment="Center" Height="30" Margin="0,2,0,0" VerticalAlignment="Top" Width="30" Source="/icons/color.png"/>
                         </Grid>
                     </Border>
                 </Button>
@@ -187,10 +203,26 @@
             </Border.Background>
             <Grid>
                 <Label x:Name="SoundText" Content="Настройки звука" HorizontalAlignment="Left" Margin="19,10,0,0" FontSize="12" Height="16" VerticalAlignment="Top" Padding="0,0,5,0"/>
-                <Slider x:Name="SoundSlider" Height="32" Margin="47,29,23,0" VerticalAlignment="Top" ValueChanged="SoundSlider_ValueChanged" Maximum="100" Width="270" BorderThickness="10,0,10,0"/>
                 <Image Height="26" VerticalAlignment="Top" Source="icons/sound.png" Margin="17,31,296,0"/>
                 <Button x:Name="SoundDevice" Content="Колонки" HorizontalAlignment="Right" Margin="0,8,23,0" VerticalAlignment="Top" Width="181" FontSize="12" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Height="22" Padding="3,0,3,3" Cursor="Hand" OpacityMask="#FFDE8686" Click="SoundDevice_Click"/>
                 <ListBox x:Name="AudioDevice" Height="75" Margin="19,68,19,0" VerticalAlignment="Top" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" Width="300" SelectionChanged="AudioDevice_SelectionChanged" Background="{x:Null}"/>
+                <ProgressBar x:Name="ValueVolumeBar" HorizontalAlignment="Left" Margin="47,42,0,0" VerticalAlignment="Top" Width="268" Value="100" Height="6" MinHeight="6">
+                    <ProgressBar.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                    <RotateTransform Angle="270" CenterX="0.5" CenterY="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFC264C3"/>
+                            <GradientStop Color="#FF3689F9" Offset="0.468"/>
+                        </LinearGradientBrush>
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+                <Slider x:Name="SoundSlider" Height="32" Margin="47,29,23,0" VerticalAlignment="Top" ValueChanged="SoundSlider_ValueChanged" Maximum="100" Width="270" BorderThickness="10,0,10,0" Background="{x:Null}" Foreground="{x:Null}"/>
 
             </Grid>
         </Border>
@@ -253,7 +285,7 @@
                 <Button x:Name="Music_About" Height="49" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Music_About_Click" Style="{DynamicResource DefaultButtonStyle}" Margin="0,0,105,0">
                     <Grid Height="39" HorizontalAlignment="Left" VerticalAlignment="Center" Width="223">
                         <Grid x:Name="SoundGridContent" Margin="0,0,0,0">
-                            <Label x:Name="NowPlayning" Content="Сейчас играет" Margin="35,0,0,0" FontSize="15" Foreground="Black" VerticalContentAlignment="Center" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="191"/>
+                            <Label x:Name="NowPlayning" Content="Музыка" Margin="35,0,0,0" FontSize="15" Foreground="Black" VerticalContentAlignment="Center" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="191"/>
                             <Image x:Name="MusicPlayer" HorizontalAlignment="Left" Height="26" Margin="4,0,0,0" VerticalAlignment="Center" Width="24" Source="/icons/Media/notes.png"/>
                             <Label x:Name="NowPlayning_Autor" Content="Очередь пуста." HorizontalAlignment="Left" Margin="35,0,0,3" FontSize="12" Width="183" VerticalContentAlignment="Center" Height="16" VerticalAlignment="Bottom"/>
                             <Label x:Name="SoundTimeNow" Content="00:00" HorizontalAlignment="Left" Margin="258,8,0,0" VerticalAlignment="Top" FontSize="12" Width="107"/>
@@ -294,7 +326,7 @@
                             <Border BorderThickness="1" Height="52" Margin="10,332,10,0" VerticalAlignment="Top" Background="#33F3E6E6" CornerRadius="15" BorderBrush="#33000000">
                                 <Label x:Name="textbbgg" Content="Чтобы продлить срок службы аккумулятора,&#xA;держите заряд не ниже 20% и не выше 80%." Margin="9" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                             </Border>
-                            <lvc:CartesianChart Margin="10,92,10,202" Pan="Xy" AnimationsSpeed="00:00:00.1000000">
+                            <lvc:CartesianChart Margin="10,92,10,202" AnimationsSpeed="00:00:00.1000000" ScrollVerticalTo="1">
                                 <lvc:CartesianChart.BindingGroup>
                                     <BindingGroup/>
                                 </lvc:CartesianChart.BindingGroup>
@@ -321,7 +353,7 @@
                                     </lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
                             </lvc:CartesianChart>
-                            
+
                             <Button x:Name="Battery_Settings" Content="Настройки электропитания" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Margin="10,0,10,34" Click="Battery_Settings_Click" Background="#660078D7" />
                             <Border BorderThickness="1" Height="52" Margin="10,275,10,0" VerticalAlignment="Top" Background="#33F3E6E6" CornerRadius="15" BorderBrush="#33000000">
                                 <Grid>
