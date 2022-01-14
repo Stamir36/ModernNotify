@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ModernNotyfi"
+        xmlns:local="clr-namespace:ModernNotyfi" xmlns:ui="http://schemas.modernwpf.com/2019"
         mc:Ignorable="d"
         Title="Подключение устройства" Height="300" Width="541" Icon="/icons/plus.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Window.Background>
@@ -11,11 +11,6 @@
     </Window.Background>
 
     <Grid>
-        <Button x:Name="Close" Content="Отмена подключения" Margin="278,258,0,0" VerticalAlignment="Top" Width="252" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand"/>
-        <Image x:Name="QRcode" Margin="289,31,23,53"/>
-        <Label Content="Отсканируйте код приложением" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
-        <Label Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold"/>
-        <Label x:Name="info" Content="Используйте приложение MN Connect" HorizontalAlignment="Left" Margin="19,265,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
         <Border BorderThickness="2,2,2,2">
             <Border.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -35,5 +30,12 @@
                 </LinearGradientBrush>
             </Border.BorderBrush>
         </Border>
+        <Button x:Name="Close" Content="Отмена подключения" Margin="278,258,0,0" VerticalAlignment="Top" Width="252" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand"/>
+        <Image x:Name="QRcode" Margin="289,31,23,53"/>
+        <Label Content="Отсканируйте код приложением" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
+        <Label Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold"/>
+        <Label x:Name="context" Content="Используйте приложение MN Connect" HorizontalAlignment="Left" Margin="19,265,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
+        <ui:ProgressRing x:Name="progressRing" IsActive="True" Width="0" Height="22" HorizontalAlignment="Left" Margin="19,238,0,0" VerticalAlignment="Top" />
+        <Label x:Name="info" Content="Ожидаем подключение..." HorizontalAlignment="Left" Margin="44,242,0,0" VerticalAlignment="Top" Width="131" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
     </Grid>
 </Window>

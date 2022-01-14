@@ -37,7 +37,7 @@ namespace ModernNotyfi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.9")]
         public double opacity_panel {
             get {
                 return ((double)(this["opacity_panel"]));
@@ -193,7 +193,7 @@ namespace ModernNotyfi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
         public int CornerRadius {
             get {
                 return ((int)(this["CornerRadius"]));

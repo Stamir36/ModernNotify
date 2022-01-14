@@ -1,4 +1,5 @@
-﻿using ModernWpf;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using ModernWpf;
 using Newtonsoft.Json.Linq;
 using QRCoder;
 using System;
@@ -65,6 +66,13 @@ namespace ModernNotyfi
 
                     Properties.Settings.Default.ConnectMobile = Convert.ToString(mobile);
                     Properties.Settings.Default.Save();
+
+                    new ToastContentBuilder()
+                    .AddArgument("action", "viewConversation")
+                        .AddArgument("conversationId", 9813)
+                        .AddText("Связано с устройством " + Convert.ToString(mobile))
+                        .AddText("Просматривайте информацию о ПК в приложении.")
+                    .Show();
 
                     MyDevice myDevice = new MyDevice();
                     myDevice.Show();

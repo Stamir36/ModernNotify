@@ -1,7 +1,9 @@
 ﻿using ModernWpf;
+using ModernWpf.Controls;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Net;
@@ -81,11 +83,12 @@ namespace ModernNotyfi
 
 
                     DeviceName.Content = "Подключено к: " + MOBILE;
-                    BatteeyLevel.Content = "Батарея: " + BATTETY + "%";
+                    BatteeyLevel.Content = BATTETY + "%";
+                    BatteryBarr.Width = Convert.ToInt16(BATTETY) * 2;
                 }
                 catch
                 {
-                    MessageBox.Show("Не удалось соединиться с сервером. Проверьте настройки подключения.", "Нет соединения.");
+                    DisplayDialog("Нет соединения.", "Не удалось соединиться с сервером, возможно, сервер недоступен или пропал интернет.");
                 }
             }
             else
@@ -156,6 +159,55 @@ namespace ModernNotyfi
             Properties.Settings.Default.Save();
             CheckConnectUpdate();
             timer.Stop();
+        }
+
+        private void Help_me_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayDialog("Проблемы с подключением.", "● Сервер недоступен | Не обновляются данные. \n" +
+                "MN Connect использует сервер для связи устройств, из-за ограниченой мощности устройства могут прекратить на некоторое время передавать друг-другу данные, подождите не много, пока нагрузка уменьшится.\n" +
+                "\n● Данные не верные | Телефон отключён.\n" +
+                "Проверьте обновления программ. Старые версии не могут работать с сервером, который требует новый код и функционал. Если новых обновлений нет, попробуйте переподключить устройство.\n" +
+                "\n● Как я могу помочь проекту?\n" +
+                "Чтобы повысить качество работы, нужны ресурсы для сервера. Вы можете поддержать разработчика финансово, связавщись с ним напрямую.");
+        }
+
+        private async void DisplayDialog(string Title, string Content)
+        {
+            ContentDialog DisplayDialog = new ContentDialog
+            {
+                Title = Title,
+                Content = Content,
+                CloseButtonText = "Закрыть"
+            };
+
+            ContentDialogResult result = await DisplayDialog.ShowAsync();
+        }
+
+        bool commandtabopen = false;
+
+        private void Settings_Open_Click(object sender, RoutedEventArgs e)
+        {
+            if (commandtabopen == false)
+            {
+                commands.Visibility = Visibility.Visible;
+                commandtabopen = true;
+            }
+            else
+            {
+                commands.Visibility = Visibility.Hidden;
+                commandtabopen = false;
+            }
+        }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            settings settings = new settings();
+            settings.Show();
+        }
+
+        private void AppBarToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/Stamir36/ModernNotyfi/raw/main/mnconnect.exe");
         }
     }
 }
