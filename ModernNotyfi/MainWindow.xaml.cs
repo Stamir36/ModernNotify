@@ -26,6 +26,7 @@ using System.Net;
 using System.Reflection;
 using Windows.Devices.Radios;
 using Windows.Devices.WiFi;
+using System.Windows.Threading;
 
 namespace ModernNotyfi
 {
@@ -36,6 +37,9 @@ namespace ModernNotyfi
         public int SoundDeviceOpen = 0;
         public int AudioOnOff = 0; //Вкл \ Выкл звук.
         public int TempAudioOnOff = 0;
+
+        public DispatcherTimer timer_minute = new DispatcherTimer();
+        public DispatcherTimer timer = new DispatcherTimer();
 
         public int batt_status = 0; // 0 разряд / 1 заряд.
         public int batt_start = 0;
@@ -410,6 +414,7 @@ namespace ModernNotyfi
                 MessageBox.Show("Информация об ошибке:\n" + e + "\n\nПриложение будет закрыто, для избежания перегрузки памяти.", "Ошибка загрузки", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
             }
+
         }
 
         private string[] SortFilesPath(string[] files)
@@ -494,7 +499,7 @@ namespace ModernNotyfi
 
         public ChartValues<int> BatteryChar { get; set; }
 
-        private void ModernNotyfi_Loaded(object sender, RoutedEventArgs e)
+        public void ModernNotyfi_Loaded(object sender, RoutedEventArgs e)
         {
             // Отправка уведомления.
             if (Properties.Settings.Default.show_start_notify && Properties.Settings.Default.First_Settings != true)
@@ -521,7 +526,6 @@ namespace ModernNotyfi
             // ------------------------------------------------------------------------------
 
             // СЕКУНДНЫЙ ТАЙМЕР
-            var timer = new System.Windows.Threading.DispatcherTimer();
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.IsEnabled = true;
@@ -631,7 +635,6 @@ namespace ModernNotyfi
             }
 
             // МИНУТНЫЙ ТАЙМЕР
-            var timer_minute = new System.Windows.Threading.DispatcherTimer();
             timer_minute.Interval = new TimeSpan(0, 1, 0);
             timer_minute.IsEnabled = true;
             timer_minute.Tick += (o, t) =>
@@ -652,8 +655,8 @@ namespace ModernNotyfi
                 // Error
             }
 
-            //УВЕДОМЛЕНИЯ
-            //NotificationAsync().Start();
+            System.Threading.Thread.Sleep(2000);
+            GetServerInfo();
         }
 
         public sealed class UserNotification
@@ -678,7 +681,56 @@ namespace ModernNotyfi
                 MessageBox.Show("На этом устройстве прослушивание недоступно.");
             }
         }
-        
+
+        public static string GetMotherBoardID()
+        {
+            string mbInfo = String.Empty;
+            ManagementScope scope = new ManagementScope("\\\\" + Environment.MachineName + "\\root\\cimv2");
+            scope.Connect();
+            ManagementObject wmiClass = new ManagementObject(scope, new ManagementPath("Win32_BaseBoard.Tag=\"Base Board\""), new ObjectGetOptions());
+
+            foreach (PropertyData propData in wmiClass.Properties)
+            {
+                if (propData.Name == "SerialNumber")
+                    mbInfo = Convert.ToString(propData.Value);
+            }
+
+            return mbInfo;
+        }
+
+        public async void GetServerInfo()
+        {
+            try
+            {
+                string m1 = Convert.ToString(NowPlayning.Content);
+                m1 = m1.Replace(' ', '_');
+                string m2 = Convert.ToString(NowPlayning_Autor.Content);
+                m2 = m2.Replace(' ', '_');
+                ManagementClass wmi = new ManagementClass("Win32_Battery");
+                ManagementObjectCollection allBatteries = wmi.GetInstances();
+                
+                int bb = Convert.ToInt16(Convert.ToString(BatteryState.Content).Replace('%', ' '));
+                foreach (var battery in allBatteries)
+                {
+                    bb = Convert.ToInt16(battery["EstimatedChargeRemaining"]);
+                }
+                int volume = Convert.ToInt16(SoundSlider.Value);
+                
+                await Task.Run(() => {
+                    using (var webClient = new WebClient())
+                    {
+                        string url = "https://unesell.000webhostapp.com/pc_add_info.php?ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume;
+                        var response = webClient.DownloadString(url);
+                    }
+                });
+            }
+            catch
+            {
+                // Ignore Error Send Server
+                // MessageBox.Show("Error Send:\n" + ex);
+            }
+        }
+
         public void GetUpdateBatteryStatus()
         {
             ManagementClass wmi = new ManagementClass("Win32_Battery");
@@ -877,6 +929,8 @@ namespace ModernNotyfi
         {
             settings settings = new settings();
             settings.Show();
+            timer_minute.Stop();
+            timer.Stop();
             Close();
         }
 
@@ -1173,17 +1227,17 @@ namespace ModernNotyfi
 
                 my.media_all_sec = Convert.ToInt32(session.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(session.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
 
-                var timer = new System.Windows.Threading.DispatcherTimer();
+                var timers = new System.Windows.Threading.DispatcherTimer();
                 var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
-                timer.Interval = new TimeSpan(0, 0, 1);
-                timer.IsEnabled = true;
-                timer.Tick += (o, t) =>
+                timers.Interval = new TimeSpan(0, 0, 1);
+                timers.IsEnabled = true;
+                timers.Tick += (o, t) =>
                 {
                     my.SoundTimeNow.Content = session.ControlSession.GetTimelineProperties().Position.ToString(@"mm\:ss");
                     my.music_min = session.ControlSession.GetTimelineProperties().Position.Minutes;
                     my.music_sec = session.ControlSession.GetTimelineProperties().Position.Seconds;
                 };
-                timer.Start();
+                timers.Start();
             }));
         }
 
@@ -1216,13 +1270,13 @@ namespace ModernNotyfi
                 {
                     ChencheMusic($"{args.Title} {(String.IsNullOrEmpty(args.Artist) ? "" : $"- {args.Artist}")}");
                     MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-                    my.NowPlayning.Content = $"{args.Title} {(String.IsNullOrEmpty(args.Artist) ? "" : $"\n{args.Artist}")}";
+                    my.NowPlayning.Content = $"{args.Title}";
                     my.NowPlayning_Autor.Content = $"{(String.IsNullOrEmpty(args.Artist) ? "" : $"{args.Artist}")}";
                     my.PlayIcon.Icon = new ModernWpf.Controls.SymbolIcon(ModernWpf.Controls.Symbol.Pause);
 
                     my.SoundTimeAll.Content = sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm\:ss");
                     my.media_all_sec = Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
-
+                    my.GetServerInfo();
                 }));
             }
             catch
@@ -1453,6 +1507,12 @@ namespace ModernNotyfi
                     }
                 }
             }
+        }
+
+        private void OpenMyDevice(object sender, RoutedEventArgs e)
+        {
+            MyDevice windowdevice = new MyDevice();
+            windowdevice.Show();
         }
     }
 

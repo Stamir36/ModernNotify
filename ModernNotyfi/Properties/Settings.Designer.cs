@@ -238,5 +238,17 @@ namespace ModernNotyfi.Properties {
                 this["progressbarstyle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("null")]
+        public string ConnectMobile {
+            get {
+                return ((string)(this["ConnectMobile"]));
+            }
+            set {
+                this["ConnectMobile"] = value;
+            }
+        }
     }
 }

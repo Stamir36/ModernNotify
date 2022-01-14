@@ -792,5 +792,11 @@ namespace ModernNotyfi
             greentext.Content = "Green";
             bluetext.Content = "Blue";
         }
+
+        private void Open_MyDivece_Click(object sender, RoutedEventArgs e)
+        {
+            MyDevice myDevice = new MyDevice();
+            myDevice.Show();
+        }
     }
 }

@@ -129,8 +129,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConnectQR.xaml.cs">
+      <DependentUpon>ConnectQR.xaml</DependentUpon>
+    </Compile>
     <Compile Include="modal_info.xaml.cs">
       <DependentUpon>modal_info.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyDevice.xaml.cs">
+      <DependentUpon>MyDevice.xaml</DependentUpon>
     </Compile>
     <Compile Include="Other Page\shutdown.xaml.cs">
       <DependentUpon>shutdown.xaml</DependentUpon>
@@ -141,6 +147,10 @@
     <Compile Include="welcome.xaml.cs">
       <DependentUpon>welcome.xaml</DependentUpon>
     </Compile>
+    <Page Include="ConnectQR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -154,6 +164,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="modal_info.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyDevice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,7 +231,7 @@
       <Version>0.9.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
-      <Version>7.1.1</Version>
+      <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
       <Version>10.0.22000.196</Version>
@@ -227,6 +241,12 @@
     </PackageReference>
     <PackageReference Include="NAudio">
       <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="QRCoder">
+      <Version>1.4.3</Version>
     </PackageReference>
     <PackageReference Include="Woof.System">
       <Version>2.8.2</Version>
@@ -326,6 +346,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\bluetooth.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\Device.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\menubuttom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

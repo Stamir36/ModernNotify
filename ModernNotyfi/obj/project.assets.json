@@ -44,7 +44,7 @@
           "build/_._": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.Notifications/7.1.1": {
+      "Microsoft.Toolkit.Uwp.Notifications/7.1.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETFramework.ReferenceAssemblies": "1.0.0",
@@ -690,6 +690,29 @@
           "lib/netstandard2.0/NAudio.WinMM.dll": {}
         }
       },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "QRCoder/1.4.3": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net40/QRCoder.dll": {}
+        },
+        "runtime": {
+          "lib/net40/QRCoder.dll": {}
+        }
+      },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
         "type": "package",
         "compile": {
@@ -859,7 +882,7 @@
           "build/_._": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.Notifications/7.1.1": {
+      "Microsoft.Toolkit.Uwp.Notifications/7.1.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETFramework.ReferenceAssemblies": "1.0.0",
@@ -1495,6 +1518,29 @@
           "lib/netstandard2.0/NAudio.WinMM.dll": {}
         }
       },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "QRCoder/1.4.3": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net40/QRCoder.dll": {}
+        },
+        "runtime": {
+          "lib/net40/QRCoder.dll": {}
+        }
+      },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
         "type": "package",
         "compile": {
@@ -1652,7 +1698,7 @@
           "build/_._": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.Notifications/7.1.1": {
+      "Microsoft.Toolkit.Uwp.Notifications/7.1.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETFramework.ReferenceAssemblies": "1.0.0",
@@ -2286,6 +2332,29 @@
         },
         "runtime": {
           "lib/netstandard2.0/NAudio.WinMM.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "QRCoder/1.4.3": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net40/QRCoder.dll": {}
+        },
+        "runtime": {
+          "lib/net40/QRCoder.dll": {}
         }
       },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
@@ -2445,7 +2514,7 @@
           "build/_._": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.Notifications/7.1.1": {
+      "Microsoft.Toolkit.Uwp.Notifications/7.1.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETFramework.ReferenceAssemblies": "1.0.0",
@@ -3079,6 +3148,29 @@
         },
         "runtime": {
           "lib/netstandard2.0/NAudio.WinMM.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "QRCoder/1.4.3": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net40/QRCoder.dll": {}
+        },
+        "runtime": {
+          "lib/net40/QRCoder.dll": {}
         }
       },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
@@ -3642,10 +3734,10 @@
         "microsoft.netframework.referenceassemblies.net472.nuspec"
       ]
     },
-    "Microsoft.Toolkit.Uwp.Notifications/7.1.1": {
-      "sha512": "IwDOt79VODPkoWLISsOI9Z2GngHtHCxEOATyU1AB06EQuxEj9sXk3QW9D0MgDkaTJPPKaRnLBOTvTRBUvfhVAA==",
+    "Microsoft.Toolkit.Uwp.Notifications/7.1.2": {
+      "sha512": "cVBRDG8g0K4sBRHFJoNQjwZduDUz+cXP33erIQjAa8fGKF4DsWIuOAQCYGFoXpdXIXjxoaUYuGSxAG6QCvOdtQ==",
       "type": "package",
-      "path": "microsoft.toolkit.uwp.notifications/7.1.1",
+      "path": "microsoft.toolkit.uwp.notifications/7.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3679,7 +3771,7 @@
         "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.Notifications.pdb",
         "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.Notifications.pri",
         "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.Notifications.xml",
-        "microsoft.toolkit.uwp.notifications.7.1.1.nupkg.sha512",
+        "microsoft.toolkit.uwp.notifications.7.1.2.nupkg.sha512",
         "microsoft.toolkit.uwp.notifications.nuspec"
       ]
     },
@@ -4581,6 +4673,54 @@
         "naudio.winmm.nuspec"
       ]
     },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "QRCoder/1.4.3": {
+      "sha512": "fWuFqjm8GTlEb2GqBl3Hi8HZZeZQwBSHxvRPtPjyNbT82H0ff0JwavKRBmMaXCno1Av6McPC8aJzri0Mj2w9Jw==",
+      "type": "package",
+      "path": "qrcoder/1.4.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/QRCoder.dll",
+        "lib/net40/QRCoder.dll",
+        "lib/net5.0-windows7.0/QRCoder.dll",
+        "lib/net5.0/QRCoder.dll",
+        "lib/net6.0-windows7.0/QRCoder.dll",
+        "lib/net6.0/QRCoder.dll",
+        "lib/netstandard1.3/QRCoder.dll",
+        "lib/netstandard2.0/QRCoder.dll",
+        "nuget-icon.png",
+        "nuget-readme.md",
+        "qrcoder.1.4.3.nupkg.sha512",
+        "qrcoder.nuspec"
+      ]
+    },
     "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
       "sha512": "J4GUi3xZQLUBasNwZnjrffN8i5wpHrBtZoLG+OhRyGo/+YunMRWWtwoMDlUAIdmX0uRfpHIBDSV6zyr3yf00TA==",
       "type": "package",
@@ -4975,10 +5115,12 @@
     ".NETFramework,Version=v4.7.2": [
       "FluentWPF >= 0.10.2",
       "LiveCharts.Wpf >= 0.9.7",
-      "Microsoft.Toolkit.Uwp.Notifications >= 7.1.1",
+      "Microsoft.Toolkit.Uwp.Notifications >= 7.1.2",
       "Microsoft.Windows.SDK.Contracts >= 10.0.22000.196",
       "ModernWpfUI >= 0.9.4",
       "NAudio >= 2.0.1",
+      "Newtonsoft.Json >= 13.0.1",
+      "QRCoder >= 1.4.3",
       "Woof.System >= 2.8.2",
       "XamlAnimatedGif >= 2.0.2"
     ]
@@ -5034,7 +5176,7 @@
           },
           "Microsoft.Toolkit.Uwp.Notifications": {
             "target": "Package",
-            "version": "[7.1.1, )"
+            "version": "[7.1.2, )"
           },
           "Microsoft.Windows.SDK.Contracts": {
             "target": "Package",
@@ -5047,6 +5189,14 @@
           "NAudio": {
             "target": "Package",
             "version": "[2.0.1, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.1, )"
+          },
+          "QRCoder": {
+            "target": "Package",
+            "version": "[1.4.3, )"
           },
           "Woof.System": {
             "target": "Package",

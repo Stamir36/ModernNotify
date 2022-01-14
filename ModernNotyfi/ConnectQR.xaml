@@ -1,0 +1,39 @@
+﻿<Window x:Name="QRConnect" x:Class="ModernNotyfi.ConnectQR"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ModernNotyfi"
+        mc:Ignorable="d"
+        Title="Подключение устройства" Height="300" Width="541" Icon="/icons/plus.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+    <Window.Background>
+        <SolidColorBrush x:Name="Window_Back" Color="#F2FFFFFF" Opacity="0.99"/>
+    </Window.Background>
+
+    <Grid>
+        <Button x:Name="Close" Content="Отмена подключения" Margin="278,258,0,0" VerticalAlignment="Top" Width="252" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand"/>
+        <Image x:Name="QRcode" Margin="289,31,23,53"/>
+        <Label Content="Отсканируйте код приложением" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
+        <Label Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold"/>
+        <Label x:Name="info" Content="Используйте приложение MN Connect" HorizontalAlignment="Left" Margin="19,265,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
+        <Border BorderThickness="2,2,2,2">
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                            <RotateTransform Angle="62.241" CenterX="0.5" CenterY="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#7F0000FF"/>
+                    <GradientStop Color="#7FFFFF00" Offset="1"/>
+                    <GradientStop Color="#7FFF0000" Offset="0.312"/>
+                    <GradientStop Color="#7F00F300" Offset="0.76"/>
+                    <GradientStop Color="#7FFFFFFF" Offset="0.52"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+        </Border>
+    </Grid>
+</Window>

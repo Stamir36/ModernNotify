@@ -319,10 +319,10 @@
                     <TabItem Header="Battery_Tab">
                         <Grid x:Name="Battery_Tab">
                             <Label x:Name="text_bbss" Content="Заряд батареи" HorizontalAlignment="Left" Margin="13,16,0,419" FontSize="14" Width="115"/>
-                            <Label x:Name="BatteryState" Content="99%" HorizontalAlignment="Left" Margin="13,28,0,375" FontSize="36" Width="120" FontWeight="Bold"/>
+                            <Label x:Name="BatteryState" Content="100%" HorizontalAlignment="Left" Margin="13,28,0,375" FontSize="36" Width="120" FontWeight="Bold"/>
                             <Label x:Name="Battery_Status" Content="Заряжается" Margin="0,36,10,398" FontSize="14" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="131"/>
                             <Label Content="Статус:" HorizontalAlignment="Right" Margin="0,16,10,419" FontSize="14" Width="131" HorizontalContentAlignment="Right"/>
-                            <ProgressBar x:Name="Battery_ProgressBar" Margin="96,63,10,0" VerticalAlignment="Top" Value="50" Height="10" Foreground="#FF0078D7"/>
+                            <ProgressBar x:Name="Battery_ProgressBar" Margin="108,63,10,0" VerticalAlignment="Top" Value="50" Height="10" Foreground="#FF0078D7"/>
                             <Border BorderThickness="1" Height="52" Margin="10,332,10,0" VerticalAlignment="Top" Background="#33F3E6E6" CornerRadius="15" BorderBrush="#33000000">
                                 <Label x:Name="textbbgg" Content="Чтобы продлить срок службы аккумулятора,&#xA;держите заряд не ниже 20% и не выше 80%." Margin="9" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                             </Border>
@@ -456,7 +456,7 @@
 
                 </ListBox>
                 <Button x:Name="Clear_All_N" Content="Очистить всё" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Clear_All_Notify" Padding="1,0,7,1" Background="{x:Null}" BorderBrush="Transparent" HorizontalContentAlignment="Right" Margin="233,191,10,4" FontSize="11" VerticalContentAlignment="Top"/>
-                <Button x:Name="MyDevice" Content="Мои устройства" HorizontalAlignment="Left" Margin="121,122,0,0" VerticalAlignment="Top" FontSize="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="3,0,3,3" Cursor="Hand" OpacityMask="#FFDE8686" Click="SoundDevice_Click" Width="99" Height="22"/>
+                <Button x:Name="MyDevice" Content="Мои устройства" HorizontalAlignment="Left" Margin="121,122,0,0" VerticalAlignment="Top" FontSize="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="3,0,3,3" Cursor="Hand" OpacityMask="#FFDE8686" Click="OpenMyDevice" Width="99" Height="22"/>
             </Grid>
         </Border>
     </Grid>

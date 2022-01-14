@@ -225,8 +225,14 @@
                                 <Label x:Name="text_2" Content="Категории и разделы" Margin="70,10,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
                                 <Button x:Name="Open_Start" Margin="70,59,0,0" VerticalAlignment="Top" Width="159" Height="140" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand">
                                     <Grid Height="148" Width="149">
-                                        <Image HorizontalAlignment="Left" Source="/icons/App_Color.png" Margin="25,1,0,55" Width="94" RenderTransformOrigin="0.75,0.812" />
-                                        <Label x:Name="twxtwidgwtwidgwtmenu" Content="Мини-приложения" Margin="0,98,0,0" HorizontalAlignment="Center" Width="141" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
+                                        <Image HorizontalAlignment="Left" Source="/icons/App_Color.png" Margin="28,10,0,55" Width="89" RenderTransformOrigin="0.75,0.812" />
+                                        <Label x:Name="twxtwidgwtwidgwtmenu" Content=" Мини-приложения" Margin="0,98,0,0" HorizontalAlignment="Center" Width="149" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" HorizontalContentAlignment="Left" />
+                                    </Grid>
+                                </Button>
+                                <Button x:Name="Open_MyDivece" Margin="245,59,0,0" VerticalAlignment="Top" Width="159" Height="140" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_MyDivece_Click">
+                                    <Grid Height="130" Width="141">
+                                        <Image HorizontalAlignment="Center" Source="/icons/Device.png" Margin="0,10,0,49" Width="100" RenderTransformOrigin="0.75,0.812" />
+                                        <Label x:Name="twxtwidgwtwidgwtmenu1" Content="Мои устройства" Margin="0,98,0,0" HorizontalAlignment="Center" Width="129" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" HorizontalContentAlignment="Center" />
                                     </Grid>
                                 </Button>
                             </Grid>

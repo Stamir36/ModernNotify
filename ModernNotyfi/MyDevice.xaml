@@ -1,0 +1,66 @@
+﻿<Window x:Name="MyDevice1" x:Class="ModernNotyfi.MyDevice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ModernNotyfi"
+        mc:Ignorable="d"
+        Title="Мои устройства" Height="480" Width="800"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True" MinWidth="800" MinHeight="480" Icon="/icons/Device.png" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Visibility="Visible" AllowsTransparency="True" Closed="MyDevice1_Closed">
+    <Window.Background>
+        <SolidColorBrush x:Name="Window_Back" Color="#F2FFFFFF" Opacity="0.99"/>
+    </Window.Background>
+
+    <Grid>
+        <Label x:Name="Titles" Content="Мои устройства" Margin="76,23,320,0" VerticalAlignment="Top" Height="44" FontSize="30" Padding="0,0,0,10" VerticalContentAlignment="Center" FontStyle="Normal" FontWeight="Normal" FontFamily="Onyx"/>
+        <Image x:Name="Sett_img" HorizontalAlignment="Left" Height="38" Margin="28,22,0,0" VerticalAlignment="Top" Width="36" Source="/icons/Device.png"/>
+        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="26,79,0,0" VerticalAlignment="Top" Width="454" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+        </Border>
+        <Button x:Name="Connect" Content="+ Добавить устройство" Margin="0,30,51,0" VerticalAlignment="Top" Width="178" Background="#E51786ED" Foreground="White" HorizontalAlignment="Right" Cursor="Hand" Click="ConnectWindows"/>
+        <Button x:Name="Settings_Open" Margin="0,30,14,0" VerticalAlignment="Top" Height="32" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="1,3,3,3" HorizontalAlignment="Right" Width="32">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </Button.Resources>
+            <Image x:Name="Settings_Icon" HorizontalAlignment="Left" Height="26" VerticalAlignment="Center" Width="28" Source="/icons/menubuttom.png"/>
+        </Button>
+        <Label x:Name="ComputerID" Content="ID компьютера: ххххххххххххххххххххххххххххх" HorizontalAlignment="Left" Margin="10,0,0,10" Height="19" VerticalAlignment="Bottom" Width="454"/>
+        <TabControl x:Name="TabConnect" Margin="-96,86,0,34" TabStripPlacement="Left">
+            <TabItem Header="NoConnect">
+                <Grid>
+                    <Button x:Name="Open_NewDivice" Margin="28,16,0,0" VerticalAlignment="Top" Width="190" Height="283" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="ConnectMain2">
+                        <Grid Height="148" Width="149">
+                            <Image HorizontalAlignment="Center" Source="/icons/plus.png" Margin="0,0,0,56" Width="94" RenderTransformOrigin="0.75,0.812" />
+                            <Label x:Name="twxtwidgwtwidgwtmenu" Content="Подключить" Margin="0,123,0,0" HorizontalAlignment="Center" Width="141" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" HorizontalContentAlignment="Center" />
+                        </Grid>
+                    </Button>
+                    <Label Content="Подключите Android устройство, чтобы получить возможность:&#xA;● Получать уведомления с телефона на компьютер&#xA;● Просматривать уровень заряда батареи&#xA;● Управлять воспроизведением на ПК.&#xA;&#xA;И многое другое!&#xA;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Для подключения используйте Android приложение MN Connect" HorizontalAlignment="Left" Margin="245,16,0,0" VerticalAlignment="Top" Height="208" Width="492"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="YesConnect">
+                <Grid>
+                    <Border BorderBrush="#33000000" BorderThickness="1" Margin="34,10,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="253" Height="78" VerticalAlignment="Top">
+                        <Grid>
+                            <Label x:Name="DeviceName" Content="Подключено к: " HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Width="218"/>
+                            <Label x:Name="BatteeyLevel" Content="Батарея: 100%" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="218"/>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="DisConnect" Content="Отключить устройство" Margin="0,30,51,0" VerticalAlignment="Top" Width="178" Background="#E5ED2B17" Foreground="White" HorizontalAlignment="Right" Cursor="Hand" Click="DisConnect_Click"/>
+
+    </Grid>
+</Window>

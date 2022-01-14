@@ -56,5 +56,8 @@
     <Setting Name="progressbarstyle" Type="System.String" Scope="User">
       <Value Profile="(Default)">new</Value>
     </Setting>
+    <Setting Name="ConnectMobile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">null</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -50,7 +50,7 @@
             },
             "Microsoft.Toolkit.Uwp.Notifications": {
               "target": "Package",
-              "version": "[7.1.1, )"
+              "version": "[7.1.2, )"
             },
             "Microsoft.Windows.SDK.Contracts": {
               "target": "Package",
@@ -63,6 +63,14 @@
             "NAudio": {
               "target": "Package",
               "version": "[2.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.3, )"
             },
             "Woof.System": {
               "target": "Package",
