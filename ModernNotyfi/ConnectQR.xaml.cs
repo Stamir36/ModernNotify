@@ -55,7 +55,7 @@ namespace ModernNotyfi
                 string responseString = string.Empty;
                 using (var webClient = new WebClient())
                 {
-                    responseString = webClient.DownloadString("https://unesell.000webhostapp.com/check_connect.php?id=" + GetMotherBoardID());
+                    responseString = webClient.DownloadString("https://beesportal.online/connect/check_connect.php?id=" + GetMotherBoardID());
                 }
 
                 if (responseString != "null")

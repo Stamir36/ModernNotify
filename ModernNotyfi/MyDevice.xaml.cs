@@ -68,7 +68,7 @@ namespace ModernNotyfi
                     string responseString = string.Empty;
                     using (var webClient = new WebClient())
                     {
-                        responseString = webClient.DownloadString("https://unesell.000webhostapp.com/check_connect.php?id=" + GetMotherBoardID());
+                        responseString = webClient.DownloadString("https://beesportal.online/connect/check_connect.php?id=" + GetMotherBoardID());
                     }
 
                     if (responseString == "null")
@@ -152,7 +152,7 @@ namespace ModernNotyfi
         {
             using (var webClient = new WebClient())
             {
-                var response = webClient.DownloadString("https://unesell.000webhostapp.com/disconnect.php?id=" + GetMotherBoardID());
+                var response = webClient.DownloadString("https://beesportal.online/connect/disconnect.php?id=" + GetMotherBoardID());
             }
 
             Properties.Settings.Default.ConnectMobile = "null";
@@ -207,7 +207,7 @@ namespace ModernNotyfi
 
         private void AppBarToggleButton_Checked(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/Stamir36/ModernNotyfi/raw/main/mnconnect.exe");
+            Process.Start("https://github.com/Stamir36/ModernNotyfi/raw/main/mnconnect.apk");
         }
     }
 }

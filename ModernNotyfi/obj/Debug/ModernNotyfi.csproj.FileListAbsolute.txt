@@ -179,7 +179,6 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Woof.System.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.CopyComplete
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\modal_info.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\modal_info.baml
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.AssemblyReference.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\MyDevice.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\MyDevice.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ConnectQR.g.cs

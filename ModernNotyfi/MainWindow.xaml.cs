@@ -139,8 +139,6 @@ namespace ModernNotyfi
             MainPanelGrid.BeginAnimation(Border.MarginProperty, Border_MainPanelGrid);
         }
 
-        
-
         public class ItemModel
         {
             public ItemModel(string name, ImageSource image, string sourse)
@@ -173,7 +171,7 @@ namespace ModernNotyfi
 
         public ObservableCollection<NotifyModel> Notify { get; set; } = new ObservableCollection<NotifyModel>();
 
-        private void Search_App_TextChanged(object sender, TextChangedEventArgs e)
+        private async void Search_App_TextChanged(object sender, TextChangedEventArgs e)
         {
             Items.Clear();
             string name_user = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -182,7 +180,7 @@ namespace ModernNotyfi
             var files = new string[appUser.Length + appWindows.Length];
             appUser.CopyTo(files, 0);
             appWindows.CopyTo(files, appUser.Length);
-            files = SortFilesPath(files);
+            files = await SortFilesPath(files);
             foreach (var file in files)
             {
                 ImageSource imageSource = null;
@@ -270,7 +268,7 @@ namespace ModernNotyfi
                 if (Properties.Settings.Default.theme != "light")
                 {
                     BitmapImage bi3 = new BitmapImage(); bi3.BeginInit();
-                    
+
                     bi3.UriSource = new Uri("icons/settings_Light.png", UriKind.Relative); bi3.EndInit();
                     Settings_Icon.Source = bi3;
 
@@ -296,35 +294,6 @@ namespace ModernNotyfi
                 }
 
                 DataContext = this;
-
-                string name_user = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                var appUser = Directory.GetFiles("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
-                var appWindows = Directory.GetFiles(name_user + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
-                var files = new string[appUser.Length + appWindows.Length];
-                appUser.CopyTo(files, 0);
-                appWindows.CopyTo(files, appUser.Length);
-
-                files = SortFilesPath(files);
-
-                foreach (var file in files)
-                {
-                    ImageSource imageSource = null;
-
-                    FileInfo fileInfo = new FileInfo(file);
-                    Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(fileInfo.FullName);
-
-                    if (icon != null)
-                    {
-                        using (var bmp = icon.ToBitmap())
-                        {
-                            var stream = new MemoryStream();
-                            bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                            imageSource = BitmapFrame.Create(stream);
-                        }
-                    }
-
-                    Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
-                }
 
                 // Применение настроек.
                 var bc = new BrushConverter();
@@ -368,10 +337,10 @@ namespace ModernNotyfi
                 else
                 {
                     SoundSlider.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#7FC5C5C5");
-                    SoundSlider.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#FF037BFF"); 
+                    SoundSlider.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#FF037BFF");
                     ValueVolumeBar.Visibility = Visibility.Hidden;
                 }
-                
+
                 // Положение: правый-нижний угол.
                 var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
                 if (Properties.Settings.Default.posicion == "rigth")
@@ -384,11 +353,12 @@ namespace ModernNotyfi
                     this.Left = desktopWorkingArea.Left;
                     this.Top = desktopWorkingArea.Bottom - this.Height;
                 }
-                
+
                 // ---------------------------------------------------------------------
                 speakDevices = enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active).ToArray();
                 if (speakDevices.Count() > 0)
                 {
+                    AudioDevice.Items.Clear();
                     for (int i = 0; i < speakDevices.Count(); i++)
                     {
                         ListBoxItem itm = new ListBoxItem();
@@ -407,6 +377,7 @@ namespace ModernNotyfi
                     SoundDevice.Content = speakDevices.ToList()[soundDevice];
                 }
 
+                InitStart();
             }
             catch (Exception e)
             {
@@ -417,7 +388,39 @@ namespace ModernNotyfi
 
         }
 
-        private string[] SortFilesPath(string[] files)
+        public async void InitStart()
+        {
+            string name_user = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var appUser = Directory.GetFiles("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
+            var appWindows = Directory.GetFiles(name_user + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
+            var files = new string[appUser.Length + appWindows.Length];
+            appUser.CopyTo(files, 0);
+            appWindows.CopyTo(files, appUser.Length);
+            
+            files = await SortFilesPath(files);
+
+            foreach (var file in files)
+            {
+                ImageSource imageSource = null;
+
+                FileInfo fileInfo = new FileInfo(file);
+                Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(fileInfo.FullName);
+
+                if (icon != null)
+                {
+                    using (var bmp = icon.ToBitmap())
+                    {
+                        var stream = new MemoryStream();
+                        bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                        imageSource = BitmapFrame.Create(stream);
+                    }
+                }
+
+                Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
+            }
+        }
+
+        private async Task<string[]> SortFilesPath(string[] files) => await Task.Run(() =>
         {
             int valuesort = 0;
 
@@ -459,7 +462,7 @@ namespace ModernNotyfi
             }
 
             return files;
-        }
+        });
 
         bool Search_Box = true;
 
@@ -499,31 +502,43 @@ namespace ModernNotyfi
 
         public ChartValues<int> BatteryChar { get; set; }
 
-        public void ModernNotyfi_Loaded(object sender, RoutedEventArgs e)
+        public async void ModernNotyfi_Loaded(object sender, RoutedEventArgs e)
         {
-            // Отправка уведомления.
-            if (Properties.Settings.Default.show_start_notify && Properties.Settings.Default.First_Settings != true)
+            ModernNotyfi.WindowState = WindowState.Minimized;
+
+            MediaManager.OnNewSource += MediaManager_OnNewSource;
+            MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
+            MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
+            MediaManager.OnSongChanged += MediaManager_OnSongChanged;
+            MediaManager.Start();
+
+            MMDevice mMDevice = speakDevices.ToList()[soundDevice];
+            await Task.Run(() =>
             {
-                if (Properties.Settings.Default.Language == "English")
+                // Отправка уведомления.
+                if (Properties.Settings.Default.show_start_notify && Properties.Settings.Default.First_Settings != true)
                 {
-                    new ToastContentBuilder()
-                    .AddArgument("action", "viewConversation")
-                    .AddArgument("conversationId", 9813)
-                    .AddText("Open the panel with Ctrl + Space")
-                    .AddText("This notification can be turned off in the settings.")
-                    .Show();
+                    if (Properties.Settings.Default.Language == "English")
+                    {
+                        new ToastContentBuilder()
+                        .AddArgument("action", "viewConversation")
+                        .AddArgument("conversationId", 9813)
+                        .AddText("Open the panel with Ctrl + Space")
+                        .AddText("This notification can be turned off in the settings.")
+                        .Show();
+                    }
+                    else
+                    {
+                        new ToastContentBuilder()
+                        .AddArgument("action", "viewConversation")
+                        .AddArgument("conversationId", 9813)
+                        .AddText("Откройте панель с Ctrl + Пробел")
+                        .AddText("Это уведомление можно отключить в настройках.")
+                        .Show();
+                    }
                 }
-                else
-                {
-                    new ToastContentBuilder()
-                    .AddArgument("action", "viewConversation")
-                    .AddArgument("conversationId", 9813)
-                    .AddText("Откройте панель с Ctrl + Пробел")
-                    .AddText("Это уведомление можно отключить в настройках.")
-                    .Show();
-                }
-            }
-            // ------------------------------------------------------------------------------
+                // ------------------------------------------------------------------------------
+            });
 
             // СЕКУНДНЫЙ ТАЙМЕР
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
@@ -531,6 +546,7 @@ namespace ModernNotyfi
             timer.IsEnabled = true;
             timer.Tick += (o, t) =>
             {
+
                 try
                 {
                     int value_prog_sound = (music_sec + (music_min * 60)) * 100 / media_all_sec;
@@ -540,7 +556,7 @@ namespace ModernNotyfi
                 {
                     //Error
                 }
-                
+
                 if (Notify.Count > 0)
                 {
                     Not_Text.Visibility = Visibility.Hidden;
@@ -553,7 +569,8 @@ namespace ModernNotyfi
                 }
 
                 // Время
-                if (Properties.Settings.Default.Language == "English") {
+                if (Properties.Settings.Default.Language == "English")
+                {
                     SoundText.Content = "Sound settings";
                 }
                 else
@@ -581,32 +598,25 @@ namespace ModernNotyfi
                 // ---------------------------------------------------------------------
                 if (speakDevices.Count() > 0)
                 {
-                    MMDevice mMDevice = speakDevices.ToList()[soundDevice];
                     SoundSlider.Value = Convert.ToInt16(mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
                     ValueVolumeBar.Value = SoundSlider.Value;
-                    if (SoundSlider.Value > 0) {
+                    if (SoundSlider.Value > 0)
+                    {
                         AudioOnOff = 1;
                         Audio_settings_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
                         Audio_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
                     }
-                    else {
+                    else
+                    {
                         AudioOnOff = 0;
                         Audio_settings_Color.Background = System.Windows.Media.Brushes.Gainsboro;
                         Audio_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
                     }
                 }
-                MediaManager.OnNewSource += MediaManager_OnNewSource;
-                MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
-                MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
-                MediaManager.OnSongChanged += MediaManager_OnSongChanged;
-                MediaManager.Start();
 
-                
                 GetBatteryPercent(); //Батарея
                 GetConnectionsPCIsEnabledAsync(); // Радио
             };
-            //timer.Start();
-
 
             if (Properties.Settings.Default.Language == "English")
             {
@@ -621,18 +631,21 @@ namespace ModernNotyfi
             ManagementObjectCollection allBatteries = wmi.GetInstances();
             DataContext = this;
 
-            foreach (var battery in allBatteries)
+            await Task.Run(() =>
             {
-                if (Convert.ToUInt16(battery["BatteryStatus"]) == 1)
+                foreach (var battery in allBatteries)
                 {
-                    batt_status = 1;
+                    if (Convert.ToUInt16(battery["BatteryStatus"]) == 1)
+                    {
+                        batt_status = 1;
+                    }
+                    else
+                    {
+                        batt_status = 0;
+                    }
+                    BatteryChar.Add(Convert.ToInt32(battery["EstimatedChargeRemaining"]));
                 }
-                else
-                {
-                    batt_status = 0;
-                }
-                BatteryChar.Add(Convert.ToInt32(battery["EstimatedChargeRemaining"]));
-            }
+            });
 
             // МИНУТНЫЙ ТАЙМЕР
             timer_minute.Interval = new TimeSpan(0, 1, 0);
@@ -717,17 +730,20 @@ namespace ModernNotyfi
                 int volume = Convert.ToInt16(SoundSlider.Value);
                 
                 await Task.Run(() => {
+                    string url = "https://beesportal.online/connect/pc_add_info.php?ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume;
+
                     using (var webClient = new WebClient())
                     {
-                        string url = "https://unesell.000webhostapp.com/pc_add_info.php?ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume;
+                        webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
                         var response = webClient.DownloadString(url);
+                        //MessageBox.Show(response, "Response");
                     }
                 });
             }
-            catch
+            catch(Exception ex)
             {
                 // Ignore Error Send Server
-                // MessageBox.Show("Error Send:\n" + ex);
+                MessageBox.Show("Error Send:\n" + ex);
             }
         }
 

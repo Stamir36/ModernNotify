@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "uzTEfaCI3g6UaqIFsz525Q58+E0xHLyQJQCxmuIw0/DbQYLnMlkIBeiUelYDmQIyK7xuFLXH7X0vGFUDaROdLw==",
+  "success": true,
+  "projectFilePath": "C:\\Develop\\C#\\update\\update\\update.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\stas1\\.nuget\\packages\\modernwpfuis\\1.1.0\\modernwpfuis.1.1.0.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\system.io.compression\\4.3.0\\system.io.compression.4.3.0.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
