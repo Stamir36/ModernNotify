@@ -85,6 +85,16 @@ namespace ModernNotyfi
                     DeviceName.Content = "Подключено к: " + MOBILE;
                     BatteeyLevel.Content = BATTETY + "%";
                     BatteryBarr.Width = Convert.ToInt16(BATTETY) * 2;
+
+                    var bc = new BrushConverter();
+                    if (Convert.ToInt16(BATTETY) > 20)
+                    {
+                        BatteryBarr.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#7F08FF00");
+                    }
+                    else
+                    {
+                        BatteryBarr.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#7FFF0000");
+                    }
                 }
                 catch
                 {

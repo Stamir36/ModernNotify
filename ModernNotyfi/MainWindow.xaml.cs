@@ -27,6 +27,7 @@ using System.Reflection;
 using Windows.Devices.Radios;
 using Windows.Devices.WiFi;
 using System.Windows.Threading;
+using Newtonsoft.Json.Linq;
 
 namespace ModernNotyfi
 {
@@ -546,7 +547,6 @@ namespace ModernNotyfi
             timer.IsEnabled = true;
             timer.Tick += (o, t) =>
             {
-
                 try
                 {
                     int value_prog_sound = (music_sec + (music_min * 60)) * 100 / media_all_sec;
@@ -613,7 +613,7 @@ namespace ModernNotyfi
                         Audio_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
                     }
                 }
-
+                GetMobileInfo();
                 GetBatteryPercent(); //Батарея
                 GetConnectionsPCIsEnabledAsync(); // Радио
             };
@@ -711,6 +711,57 @@ namespace ModernNotyfi
             return mbInfo;
         }
 
+        public async void GetMobileInfo()
+        {
+            try
+            {
+                string responseString = string.Empty;
+
+                await Task.Run(() => {
+                    using (var webClient = new WebClient())
+                    {
+                        responseString = webClient.DownloadString("https://beesportal.online/connect/check_connect.php?id=" + GetMotherBoardID());
+                    }
+                });
+                if (responseString != "null")
+                {
+                    string command = Convert.ToString(JObject.Parse(responseString).SelectToken("command"));
+                    if (command == "volume_up")
+                    {
+                        SoundSlider.Value = SoundSlider.Value + 10;
+                    }
+                    if (command == "volume_down")
+                    {
+                        SoundSlider.Value = SoundSlider.Value - 10;
+                    }
+                    if (command == "back_track")
+                    {
+                        keybd_event(VK_MEDIA_PREV_TRACK, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
+                    }
+                    if (command == "next_track")
+                    {
+                        keybd_event(VK_MEDIA_NEXT_TRACK, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
+                    }
+                    if (command == "play_track")
+                    {
+                        keybd_event(VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
+                    }
+                    if (command == "shutdown")
+                    {
+                        commands.FileName = "cmd.exe";
+                        commands.Arguments = "/c shutdown -s -f -t 00";
+                        Process.Start(commands);
+                    }
+                    GetServerInfo();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Ignore Error Send Server
+                MessageBox.Show("Error Send:\n" + ex);
+            }
+        }
+
         public async void GetServerInfo()
         {
             try
@@ -738,6 +789,9 @@ namespace ModernNotyfi
                         var response = webClient.DownloadString(url);
                         //MessageBox.Show(response, "Response");
                     }
+
+
+
                 });
             }
             catch(Exception ex)

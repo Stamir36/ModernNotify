@@ -185,3 +185,4 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ConnectQR.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ConnectQR.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\QRCoder.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Newtonsoft.Json.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.AssemblyReference.cache
