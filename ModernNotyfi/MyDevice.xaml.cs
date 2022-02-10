@@ -80,11 +80,19 @@ namespace ModernNotyfi
 
                     string BATTETY = Convert.ToString(JObject.Parse(responseString).SelectToken("BATTETY"));
                     string MOBILE = Convert.ToString(JObject.Parse(responseString).SelectToken("MOBILE"));
+                    string MEM1_s = Convert.ToString(JObject.Parse(responseString).SelectToken("MEM1"));
+                    string MEM2_s = Convert.ToString(JObject.Parse(responseString).SelectToken("MEM2"));
 
+                    double MEM1 = Convert.ToDouble(MEM1_s); // Всего
+                    double MEM2 = Convert.ToDouble(MEM2_s); // Доступно
+                    double free = MEM1 - MEM2;
 
                     DeviceName.Content = "Подключено к: " + MOBILE;
                     BatteeyLevel.Content = BATTETY + "%";
                     BatteryBarr.Width = Convert.ToInt16(BATTETY) * 2;
+
+                    MemoryLevel.Content = MEM2 + "Gb";
+                    MemoryBarr.Width = Convert.ToInt16(free * 100 / MEM1) * 2;
 
                     var bc = new BrushConverter();
                     if (Convert.ToInt16(BATTETY) > 20)
@@ -96,9 +104,10 @@ namespace ModernNotyfi
                         BatteryBarr.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#7FFF0000");
                     }
                 }
-                catch
+                catch(Exception e)
                 {
-                    DisplayDialog("Нет соединения.", "Не удалось соединиться с сервером, возможно, сервер недоступен или пропал интернет.");
+                    MessageBox.Show("Error: \n" + e);
+                    //DisplayDialog("Нет соединения.", "Не удалось соединиться с сервером, возможно, сервер недоступен или пропал интернет.");
                 }
             }
             else

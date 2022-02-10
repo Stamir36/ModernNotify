@@ -758,7 +758,7 @@ namespace ModernNotyfi
             catch (Exception ex)
             {
                 // Ignore Error Send Server
-                MessageBox.Show("Error Send:\n" + ex);
+                //MessageBox.Show("Error Send:\n" + ex);
             }
         }
 

@@ -50,9 +50,9 @@
             </TabItem>
             <TabItem Header="YesConnect">
                 <Grid>
-                    <Border BorderBrush="#33000000" BorderThickness="1" Margin="34,10,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="452" Height="51" VerticalAlignment="Top">
+                    <Border BorderBrush="#33000000" BorderThickness="1" Margin="34,10,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="410" Height="51" VerticalAlignment="Top">
                         <Grid>
-                            <Label x:Name="DeviceName" Content="Подключено к: " HorizontalAlignment="Center" VerticalAlignment="Center" Width="421"/>
+                            <Label x:Name="DeviceName" Content="Подключено к: " HorizontalAlignment="Center" VerticalAlignment="Center" Width="388"/>
                         </Grid>
                     </Border>
                     <Border BorderBrush="#7F000000" BorderThickness="1" Margin="34,73,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="78" VerticalAlignment="Top">
@@ -60,6 +60,10 @@
                     <Border x:Name="BatteryBarr" BorderThickness="1" Margin="34,73,0,0" Background="#7F08FF00" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="78" VerticalAlignment="Top"/>
                     <Label x:Name="btext2" Content="Батарея:" HorizontalAlignment="Left" Margin="51,85,0,0" VerticalAlignment="Top" Width="163"/>
                     <Label x:Name="BatteeyLevel" Content="100%" HorizontalAlignment="Left" Margin="50,102,0,0" VerticalAlignment="Top" Width="109" Height="40" FontWeight="Bold" FontSize="26" Grid.IsSharedSizeScope="True"/>
+                    <Border BorderBrush="#7F000000" BorderThickness="1" Margin="244,73,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="78" VerticalAlignment="Top"/>
+                    <Border x:Name="MemoryBarr" BorderThickness="1" Margin="244,73,0,0" Background="#B200BFFF" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="78" VerticalAlignment="Top"/>
+                    <Label x:Name="btext2_Copy" Content="Свободно памяти:" HorizontalAlignment="Left" Margin="261,85,0,0" VerticalAlignment="Top" Width="163"/>
+                    <Label x:Name="MemoryLevel" Content="21.40Gb" HorizontalAlignment="Left" Margin="260,102,0,0" VerticalAlignment="Top" Width="184" Height="40" FontWeight="Bold" FontSize="26" Grid.IsSharedSizeScope="True"/>
 
                 </Grid>
             </TabItem>
