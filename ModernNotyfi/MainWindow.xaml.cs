@@ -89,9 +89,16 @@ namespace ModernNotyfi
 
         protected override void OnClosed(EventArgs e)
         {
-            _source.RemoveHook(HwndHook);
-            _source = null;
-            UnregisterHotKey();
+            try
+            {
+                _source.RemoveHook(HwndHook);
+                _source = null;
+                UnregisterHotKey();
+            }
+            catch (Exception ex)
+            {
+
+            }
             base.OnClosed(e);
         }
 
@@ -235,20 +242,6 @@ namespace ModernNotyfi
                 Properties.Settings.Default.Save();
             }
 
-            if (Properties.Settings.Default.First_Settings == true)
-            {
-                try
-                {
-                    welcome welcome = new welcome();
-                    welcome.Show();
-                    this.Hide();
-                }
-                catch
-                {
-                    // OOBE Error
-                }
-            }
-
             BatteryChar = new ChartValues<int> { };
             try
             {
@@ -386,7 +379,6 @@ namespace ModernNotyfi
                 MessageBox.Show("Информация об ошибке:\n" + e + "\n\nПриложение будет закрыто, для избежания перегрузки памяти.", "Ошибка загрузки", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
             }
-
         }
 
         public async void InitStart()
@@ -543,7 +535,7 @@ namespace ModernNotyfi
 
             // СЕКУНДНЫЙ ТАЙМЕР
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
-            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 500);
             timer.IsEnabled = true;
             timer.Tick += (o, t) =>
             {
@@ -656,6 +648,21 @@ namespace ModernNotyfi
             };
             timer_minute.Start();
 
+            if (Properties.Settings.Default.First_Settings == true)
+            {
+                try
+                {
+                    welcome welcome = new welcome();
+                    welcome.Show();
+                    this.Close();
+                }
+                catch
+                {
+                    // OOBE Error. Пропуск.
+                }
+            }
+
+            System.Threading.Thread.Sleep(2000);
             try
             {
                 if (GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") != Assembly.GetExecutingAssembly().GetName().Version.ToString())
@@ -668,7 +675,6 @@ namespace ModernNotyfi
                 // Error
             }
 
-            System.Threading.Thread.Sleep(2000);
             GetServerInfo();
         }
 
@@ -1004,6 +1010,9 @@ namespace ModernNotyfi
             Close();
         }
 
+        public bool modal_show = false;
+        public int close_time = 10;
+
         private void SoundSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (speakDevices.Count() > 0)
@@ -1019,6 +1028,13 @@ namespace ModernNotyfi
                 {
                     SoundText.Content = "Громкость: " + (Convert.ToInt32(SoundSlider.Value) / 100.0f * 100) + "%";
                 }
+
+                if (!modal_show && ModernNotyfi.WindowState == WindowState.Minimized)
+                {
+                    modal_info modal_Info = new modal_info("volume");
+                    modal_Info.Show();
+                }
+                close_time = 10;
             }
         }
 

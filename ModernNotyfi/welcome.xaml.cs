@@ -26,8 +26,17 @@ namespace ModernNotyfi
         public welcome()
         {
             InitializeComponent();
-            GifImage_Step_2.Visibility = Visibility.Hidden;
-            ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
+
+            try
+            {
+                GifImage_Step_2.Visibility = Visibility.Hidden;
+                ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void Step_1_Click(object sender, RoutedEventArgs e)
@@ -42,6 +51,8 @@ namespace ModernNotyfi
             {
                 User_Name.Text = "Пользователь";
             }
+
+            languege_combo.SelectedIndex = 0;
 
             Step_Progress.Value = 25;
         }
@@ -59,6 +70,17 @@ namespace ModernNotyfi
 
         private void Step_2_Click(object sender, RoutedEventArgs e)
         {
+            if (languege_combo.SelectedIndex == 1)
+            {
+                Properties.Settings.Default.Language = "English";
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                Properties.Settings.Default.Language = "Russian";
+                Properties.Settings.Default.Save();
+            }
+
             LOG.Content = "";
             string name = User_Name.Text;
             if (name.Length >= 4)
@@ -90,8 +112,14 @@ namespace ModernNotyfi
 
         private void Save_Settings_Click(object sender, RoutedEventArgs e)
         {
-            if (theme_combo.SelectedIndex == 0) { Properties.Settings.Default.theme = "light"; }
-            else { Properties.Settings.Default.theme = "black"; }
+            if (theme_combo.SelectedIndex == 0) {
+                Properties.Settings.Default.theme = "light";
+                Properties.Settings.Default.color_panel = "#fff";
+            }
+            else {
+                Properties.Settings.Default.theme = "black";
+                Properties.Settings.Default.color_panel = "#404040";
+            }
 
             if (pos_combo.SelectedIndex == 0) { Properties.Settings.Default.posicion = "rigth"; }
             else { Properties.Settings.Default.posicion = "left"; }
@@ -128,12 +156,13 @@ namespace ModernNotyfi
                 }
             }
 
-
+            //OOBE Close
             Properties.Settings.Default.First_Settings = false;
             Properties.Settings.Default.Save();
-            //OOBE Close
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            Application.Current.Shutdown();
+            
+            MainWindow main = new MainWindow();
+            main.Show();
+            Close();
         }
     }
 }

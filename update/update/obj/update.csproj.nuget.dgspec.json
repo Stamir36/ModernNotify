@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Develop\\C#\\update\\update\\update.csproj": {}
+    "C:\\Develop\\C#\\ModernNotyfi\\update\\update\\update.csproj": {}
   },
   "projects": {
-    "C:\\Develop\\C#\\update\\update\\update.csproj": {
+    "C:\\Develop\\C#\\ModernNotyfi\\update\\update\\update.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Develop\\C#\\update\\update\\update.csproj",
+        "projectUniqueName": "C:\\Develop\\C#\\ModernNotyfi\\update\\update\\update.csproj",
         "projectName": "update",
-        "projectPath": "C:\\Develop\\C#\\update\\update\\update.csproj",
+        "projectPath": "C:\\Develop\\C#\\ModernNotyfi\\update\\update\\update.csproj",
         "packagesPath": "C:\\Users\\stas1\\.nuget\\packages\\",
-        "outputPath": "C:\\Develop\\C#\\update\\update\\obj\\",
+        "outputPath": "C:\\Develop\\C#\\ModernNotyfi\\update\\update\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -40,9 +40,15 @@
       "frameworks": {
         "net472": {
           "dependencies": {
-            "ModernWpfUis": {
+            "Costura.Fody": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[1.1.0, )"
+              "version": "[5.7.0, )"
+            },
+            "ModernWpfUI": {
+              "target": "Package",
+              "version": "[0.9.4, )"
             },
             "System.IO.Compression": {
               "target": "Package",

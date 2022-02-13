@@ -50,7 +50,20 @@
                                 </Border.Background>
                                 <Grid Margin="1,0,-1,0">
                                     <TextBox x:Name="User_Name" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320"/>
-                                    <Label Content="Мой никнейм" HorizontalAlignment="Center" Margin="0,9,0,0" VerticalAlignment="Top" Height="17" Width="320" Foreground="#FF0C00FF" FontFamily="Bodoni MT" FontStyle="Italic" FontWeight="Normal"/>
+                                    <Label Content="Мой никнейм" HorizontalAlignment="Center" Margin="0,9,0,0" VerticalAlignment="Top" Height="17" Width="320" Foreground="#FF0C00FF" FontWeight="Normal"/>
+                                </Grid>
+                            </Border>
+
+                            <Border BorderThickness="1" Height="80" VerticalAlignment="Top" CornerRadius="5,5,5,5" BorderBrush="#33000000" HorizontalAlignment="Left" Width="344" Margin="20,214,0,0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="#7FDADADA" Opacity="0.7"/>
+                                </Border.Background>
+                                <Grid Margin="1,0,-1,0">
+                                    <Label Content="Язык | Language" HorizontalAlignment="Center" Margin="0,9,0,0" VerticalAlignment="Top" Height="17" Width="320" Foreground="#FF0C00FF" FontWeight="Normal"/>
+                                    <ComboBox x:Name="languege_combo" Width="322" Margin="0,31,0,0" HorizontalAlignment="Center">
+                                        <TextBlock><Run Text="Русский"/></TextBlock>
+                                        <TextBlock><Run Text="English"/></TextBlock>
+                                    </ComboBox>
                                 </Grid>
                             </Border>
 

@@ -155,7 +155,6 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\System.Security.Principal.Wi
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\System.ValueTuple.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\XamlAnimatedGif.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\XamlAnimatedGif.pdb
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotyfi.csproj.AssemblyReference.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\MainWindow.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\shutdown.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\settings.g.cs
@@ -180,3 +179,9 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Woof.System.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotyfi.csproj.SuggestedBindingRedirects.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\modal_info.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\modal_info.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Newtonsoft.Json.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\QRCoder.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ConnectQR.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\MyDevice.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ConnectQR.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\MyDevice.baml

@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Unesell Studio")]
 [assembly: AssemblyProduct("ModernNotify Dev")]
-[assembly: AssemblyCopyright("Unesell Copyright ©  2021")]
+[assembly: AssemblyCopyright("Unesell Copyright ©  2022")]
 [assembly: AssemblyTrademark("Unesell")]
 [assembly: AssemblyCulture("")]
 
@@ -51,5 +51,5 @@ using System.Windows;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.1.38")]
-[assembly: AssemblyFileVersion("0.0.1.38")]
+[assembly: AssemblyVersion("0.0.1.41")]
+[assembly: AssemblyFileVersion("0.0.1.41")]

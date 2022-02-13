@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernWpf;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -14,25 +15,34 @@ namespace update
         public string program_version;
         public string program_relise = "ModernNotyfi Dev";
         public string url = "";
+        public string new_version;
 
         public MainWindow()
         {
             InitializeComponent();
+            ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
+            UVersion.Content = "Установщик: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             try
             {
                 FileVersionInfo.GetVersionInfo("ModernNotify.exe");
                 FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo("ModernNotify.exe");
                 program_version = myFileVersionInfo.FileVersion;
+                PVersion.Content = "Приложение: " + myFileVersionInfo.FileVersion;
                 program_relise = myFileVersionInfo.ProductName;
             }
             catch
             {
+                PVersion.Content = "Приложение: " + "Не установлено.";
                 program_version = "0";
             }
 
             try
             {
                 url = "http://version-modernnotify.ml/modernnotify/version_dev.txt";
+                if (Properties.Settings.Default.Server == "GitHub")
+                {
+                    url = @"https://github.com/Stamir36/ModernNotyfi/raw/main/server/modernnotify/version_dev.txt";
+                }
 
                 if (GetContent(url) == program_version)
                 {
@@ -41,9 +51,11 @@ namespace update
                 }
                 else
                 {
+                    Settings.Visibility = Visibility.Hidden;
                     InfoUpdate.Content = "Загрузка обновления...";
                     SubText.Content = "Новая версия: " + GetContent(url);
                     ProgressDownload.Visibility = Visibility.Visible;
+                    new_version = GetContent(url);
                     download_update();
                 }
             }
@@ -53,6 +65,15 @@ namespace update
                 SubText.Content = "Проверте подключение или попробуйте позже.";
                 Close.Content = "Выход";
             }
+
+            if (Properties.Settings.Default.Server == "Site")
+            {
+                theme_combo.SelectedIndex = 0;
+            }
+            else
+            {
+                theme_combo.SelectedIndex = 1;
+            }
         }
 
         public void download_update() // Скачивание обнновления
@@ -60,14 +81,44 @@ namespace update
             try
             {
                 string link = @"http://version-modernnotify.ml/modernnotify/update_dev.zip";
+                if (Properties.Settings.Default.Server == "GitHub")
+                {
+                    link = @"https://github.com/Stamir36/ModernNotyfi/raw/main/server/modernnotify/update_dev.zip";
+                }
+
                 WebClient webClient = new WebClient();
-                webClient.DownloadProgressChanged += (o, args) => ProgressDownload.Value = args.ProgressPercentage;
+                webClient.DownloadProgressChanged += (o, args) => { ProgressDownload.Value = args.ProgressPercentage; SubText.Content = "Прогресс: " + args.ProgressPercentage + "% | Версия: " + new_version; };
                 webClient.DownloadFileCompleted += (o, args) => update();
                 webClient.DownloadFileAsync(new Uri(link), "update.zip");
             }
             catch
             {
                 InfoUpdate.Content = "Загрузка обновления не удалась.";
+                SubText.Content = "Проверте подключение или попробуйте позже.";
+                Close.Content = "Выход";
+            }
+        }
+
+        private void download_mnconnect(object sender, RoutedEventArgs e) // Скачивание MN Connect
+        {
+            InfoUpdate.Content = "Скачивание MN Connect.";
+            SubText.Content = "Загрузка...";
+            Page.SelectedIndex = 0;
+            ProgressDownload.Visibility = Visibility.Visible;
+            try
+            {
+                string link = @"https://github.com/Stamir36/ModernNotyfi/raw/main/mnconnect.apk";
+                WebClient webClient = new WebClient();
+                webClient.DownloadProgressChanged += (o, args) => { ProgressDownload.Value = args.ProgressPercentage; SubText.Content = "Прогресс: " + args.ProgressPercentage + "%"; };
+                webClient.DownloadFileCompleted += (o, args) => {
+                    InfoUpdate.Content = "MN Connect скачен.";
+                    SubText.Content = "Установщик находится в папке программы.";
+                };
+                webClient.DownloadFileAsync(new Uri(link), "mnconnect.apk");
+            }
+            catch
+            {
+                InfoUpdate.Content = "Загрузка MN Connect не удалась.";
                 SubText.Content = "Проверте подключение или попробуйте позже.";
                 Close.Content = "Выход";
             }
@@ -154,6 +205,30 @@ namespace update
                 // none
             }
             Application.Current.Shutdown();
+        }
+
+        private void Open_Settings(object sender, RoutedEventArgs e)
+        {
+            Page.SelectedIndex = 1;
+        }
+
+        private void Update_Open(object sender, RoutedEventArgs e)
+        {
+            Page.SelectedIndex = 0;
+        }
+
+        private void theme_combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(theme_combo.SelectedIndex == 0)
+            {
+                Properties.Settings.Default.Server = "Site";
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                Properties.Settings.Default.Server = "GitHub";
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }
