@@ -1,0 +1,17 @@
+﻿<Window x:Name="Window" x:Class="ModernNotyfi.unesell_login_web"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ModernNotyfi"
+        mc:Ignorable="d"
+        Title="Unesell Account - Связь с приложением" Height="650" Width="1100"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True" MinWidth="1100" MinHeight="650" Icon="/icons/user-48.png" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True">
+    <Window.Background>
+        <SolidColorBrush x:Name="Window_Back" Color="#F2FFFFFF" Opacity="0.99"/>
+    </Window.Background>
+    <Grid>
+        <WebBrowser x:Name="WebLogin" Navigated="WebLogin_Navigated"/>
+    </Grid>
+</Window>

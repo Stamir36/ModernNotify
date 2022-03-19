@@ -25,10 +25,10 @@ namespace ModernNotyfi
     {
         public welcome()
         {
-            InitializeComponent();
-
             try
             {
+                InitializeComponent();
+
                 GifImage_Step_2.Visibility = Visibility.Hidden;
                 ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
             }
@@ -41,128 +41,165 @@ namespace ModernNotyfi
 
         private void Step_1_Click(object sender, RoutedEventArgs e)
         {
-            WelcomTabs.SelectedIndex = 1;
-            Step_Text.Content = "О себе";
             try
             {
-                User_Name.Text = SysInfo.LogonUser.FullName;
+                WelcomTabs.SelectedIndex = 1;
+                Step_Text.Content = "О себе";
+                try
+                {
+                    User_Name.Text = SysInfo.LogonUser.FullName;
+                }
+                catch
+                {
+                    User_Name.Text = "Пользователь";
+                }
+
+                languege_combo.SelectedIndex = 0;
+
+                Step_Progress.Value = 25;
             }
-            catch
+            catch (Exception ex)
             {
-                User_Name.Text = "Пользователь";
+                MessageBox.Show(ex.Message);
             }
-
-            languege_combo.SelectedIndex = 0;
-
-            Step_Progress.Value = 25;
         }
 
         private void Start_App_Click(object sender, RoutedEventArgs e)
         {
-            //OOBE Close
-            Properties.Settings.Default.First_Settings = false;
-            Properties.Settings.Default.Save();
+            try
+            {
+                //OOBE Close
+                Properties.Settings.Default.First_Settings = false;
+                Properties.Settings.Default.Save();
 
-            MainWindow main = new MainWindow();
-            main.Show();
-            Close();
+                MainWindow main = new MainWindow();
+                main.Show();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Step_2_Click(object sender, RoutedEventArgs e)
         {
-            if (languege_combo.SelectedIndex == 1)
+            try
             {
-                Properties.Settings.Default.Language = "English";
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-                Properties.Settings.Default.Language = "Russian";
-                Properties.Settings.Default.Save();
-            }
+                if (languege_combo.SelectedIndex == 1)
+                {
+                    Properties.Settings.Default.Language = "English";
+                    Properties.Settings.Default.Save();
+                }
+                else
+                {
+                    Properties.Settings.Default.Language = "Russian";
+                    Properties.Settings.Default.Save();
+                }
 
-            LOG.Content = "";
-            string name = User_Name.Text;
-            if (name.Length >= 4)
-            {
-                GifImage_Step_1.Visibility = Visibility.Hidden;
-                GifImage_Step_2.Visibility = Visibility.Visible;
-                WelcomTabs.SelectedIndex = 2;
+                LOG.Content = "";
+                string name = User_Name.Text;
+                if (name.Length >= 4)
+                {
+                    GifImage_Step_1.Visibility = Visibility.Hidden;
+                    GifImage_Step_2.Visibility = Visibility.Visible;
+                    WelcomTabs.SelectedIndex = 2;
 
-                Properties.Settings.Default.User_Name = User_Name.Text;
-                Properties.Settings.Default.Save();
+                    Properties.Settings.Default.User_Name = User_Name.Text;
+                    Properties.Settings.Default.Save();
 
-                Step_Text.Content = "Настроим под себя";
-                Step_Progress.Value = 50;
+                    Step_Text.Content = "Настроим под себя";
+                    Step_Progress.Value = 50;
+                }
+                else
+                {
+                    LOG.Content = "Пожалуйста, введите ваше имя (Больше 4 символов, у вас: " + name.Length + ").";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                LOG.Content = "Пожалуйста, введите ваше имя (Больше 4 символов, у вас: " + name.Length + ").";
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void Steap_4(object sender, RoutedEventArgs e)
         {
-            Step_Text.Content = "Базовая настройка";
-            Step_Progress.Value = 75;
-            WelcomTabs.SelectedIndex = 3;
-            theme_combo.SelectedIndex = 0;
-            pos_combo.SelectedIndex = 0;
+            try
+            {
+                Step_Text.Content = "Базовая настройка";
+                Step_Progress.Value = 75;
+                WelcomTabs.SelectedIndex = 3;
+                theme_combo.SelectedIndex = 0;
+                pos_combo.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Save_Settings_Click(object sender, RoutedEventArgs e)
         {
-            if (theme_combo.SelectedIndex == 0) {
-                Properties.Settings.Default.theme = "light";
-                Properties.Settings.Default.color_panel = "#fff";
-            }
-            else {
-                Properties.Settings.Default.theme = "black";
-                Properties.Settings.Default.color_panel = "#404040";
-            }
-
-            if (pos_combo.SelectedIndex == 0) { Properties.Settings.Default.posicion = "rigth"; }
-            else { Properties.Settings.Default.posicion = "left"; }
-
-            string ExePath = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + "\\ModernNotify.exe";
-
-            string name = "ModernNotify";
-            RegistryKey reg;
-            reg = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
-
-            if ((bool)StartInWindows.IsChecked)
+            try
             {
-                
-                try
+                if (theme_combo.SelectedIndex == 0)
                 {
-                    reg.SetValue(name, ExePath);
-                    reg.Close();
+                    Properties.Settings.Default.theme = "light";
+                    Properties.Settings.Default.color_panel = "#fff";
                 }
-                catch
+                else
                 {
-                    StartInWindows.IsChecked = false;
+                    Properties.Settings.Default.theme = "black";
+                    Properties.Settings.Default.color_panel = "#404040";
                 }
-            }
-            else
-            {
-                try
-                {
-                    reg.DeleteValue(name);
-                    reg.Close();
-                }
-                catch
-                {
-                    StartInWindows.IsChecked = false;
-                }
-            }
 
-            //OOBE Close
-            Properties.Settings.Default.First_Settings = false;
-            Properties.Settings.Default.Save();
-            
-            MainWindow main = new MainWindow();
-            main.Show();
-            Close();
+                if (pos_combo.SelectedIndex == 0) { Properties.Settings.Default.posicion = "rigth"; }
+                else { Properties.Settings.Default.posicion = "left"; }
+
+                string ExePath = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + "\\ModernNotify.exe";
+
+                string name = "ModernNotify";
+                RegistryKey reg;
+                reg = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+
+                if ((bool)StartInWindows.IsChecked)
+                {
+
+                    try
+                    {
+                        reg.SetValue(name, ExePath);
+                        reg.Close();
+                    }
+                    catch
+                    {
+                        StartInWindows.IsChecked = false;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        reg.DeleteValue(name);
+                        reg.Close();
+                    }
+                    catch
+                    {
+                        StartInWindows.IsChecked = false;
+                    }
+                }
+
+                //OOBE Close
+                Properties.Settings.Default.First_Settings = false;
+                Properties.Settings.Default.Save();
+
+                MainWindow main = new MainWindow();
+                main.Show();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

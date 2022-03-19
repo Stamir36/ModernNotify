@@ -143,6 +143,9 @@
     <Compile Include="settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Other Page\unesell_login_web.xaml.cs">
+      <DependentUpon>unesell_login_web.xaml</DependentUpon>
+    </Compile>
     <Compile Include="welcome.xaml.cs">
       <DependentUpon>welcome.xaml</DependentUpon>
     </Compile>
@@ -175,6 +178,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Other Page\unesell_login_web.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -355,6 +362,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\mobile.png" />
+    <Resource Include="icons\phone_black.png" />
+    <Resource Include="icons\phone_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\files.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\noconnectnotify.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

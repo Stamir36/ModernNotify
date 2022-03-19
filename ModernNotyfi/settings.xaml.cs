@@ -23,6 +23,7 @@ using Windows.Storage;
 using System.IO;
 using System.Globalization;
 using Woof.SystemEx;
+using System.Windows.Threading;
 
 namespace ModernNotyfi
 {
@@ -31,6 +32,7 @@ namespace ModernNotyfi
     /// </summary>
     public partial class settings : Window
     {
+        public DispatcherTimer timer_sec = new DispatcherTimer();
 
         public settings()
         {
@@ -50,6 +52,14 @@ namespace ModernNotyfi
                 Properties.Settings.Default.UpgradeRequired = false;
                 Properties.Settings.Default.Save();
             }
+
+            timer_sec.Interval = new TimeSpan(0, 0, 1);
+            timer_sec.IsEnabled = true;
+            timer_sec.Tick += (o, t) =>
+            {
+                updateaccount();
+            };
+            timer_sec.Start();
         }
 
         private async void DisplayDialog(string Title, string Content)
@@ -64,12 +74,39 @@ namespace ModernNotyfi
             ContentDialogResult result = await DisplayDialog.ShowAsync();
         }
 
+        bool no_login = true;
+
+        public void updateaccount()
+        {
+            if (Properties.Settings.Default.Unesell_Login == "Yes")
+            {
+                localacc.Content = "Unesell Account";
+                try
+                {
+                    if (no_login)
+                    {
+                        var userBitmapSmall = new BitmapImage(new Uri("http://" + Properties.Settings.Default.Unesell_Avatar));
+                        AccauntImg.ImageSource = userBitmapSmall;
+                        no_login = false;
+                    }
+                }
+                catch
+                {
+                    var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
+                    AccauntImg.ImageSource = userBitmapSmall;
+                }
+                Login_Unesell.Content = "Выйти с этого устройства";
+            }
+        }
+
         private void Settings_Loaded(object sender, RoutedEventArgs e)
         {
             var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
             AccauntImg.ImageSource = userBitmapSmall;
 
             NameProfile.Content = "Привет, " + Properties.Settings.Default.User_Name;
+
+            updateaccount();
 
             EctInfoSys.Content = "";
 
@@ -679,7 +716,14 @@ namespace ModernNotyfi
         public void RussianInterfase_Settings()
         {
             Titles.Content = "Настройки";
-            localacc.Content = "Локальный аккаунт";
+            if (Properties.Settings.Default.Unesell_Login == "Yes")
+            {
+                localacc.Content = "Unesell аккаунт";
+            }
+            else
+            {
+                localacc.Content = "Локальный аккаунт";
+            }
             text_7.Content = "Категории:";
             mainsett_text.Content = "Основные параметры";
             perssetttext.Content = "Персонализация";
@@ -738,7 +782,14 @@ namespace ModernNotyfi
         {
             // Revision 0
             Titles.Content = "Settings";
-            localacc.Content = "Local account";
+            if (Properties.Settings.Default.Unesell_Login == "Yes")
+            {
+                localacc.Content = "Unesell account";
+            }
+            else
+            {
+                localacc.Content = "Local account";
+            }
             text_7.Content = "Categories:";
             mainsett_text.Content = "Main parameters";
             perssetttext.Content = "Personalization";
@@ -797,6 +848,28 @@ namespace ModernNotyfi
         {
             MyDevice myDevice = new MyDevice();
             myDevice.Show();
+        }
+
+        private void LoginWebUnesell(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.Unesell_Login == "Yes")
+            {
+                var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
+                AccauntImg.ImageSource = userBitmapSmall;
+                Login_Unesell.Content = "Войти в Unesell Аккаунт";
+                localacc.Content = "Локальный аккаунт";
+                Properties.Settings.Default.Unesell_id = "";
+                Properties.Settings.Default.Unesell_Email = "";
+                Properties.Settings.Default.Unesell_Avatar = "";
+                Properties.Settings.Default.Unesell_Login = "No";
+                Properties.Settings.Default.Save();
+                no_login = true;
+            }
+            else
+            {
+                unesell_login_web unesell_Login_Web = new unesell_login_web();
+                unesell_Login_Web.Show();
+            }
         }
     }
 }

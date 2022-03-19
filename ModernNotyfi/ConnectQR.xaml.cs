@@ -20,6 +20,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using Windows.UI.Xaml.Controls;
 
 namespace ModernNotyfi
 {
@@ -29,10 +31,23 @@ namespace ModernNotyfi
     public partial class ConnectQR : Window
     {
         String CONNECT_IDENTIFY = "MODERNCONNECT:";
+        public DispatcherTimer timer_sec = new DispatcherTimer();
 
         public ConnectQR()
         {
             InitializeComponent();
+
+            if (Properties.Settings.Default.Language == "English")
+            {
+                ConnectPhoneText.Content = "Connecting a phone";
+                ScanAppMobile.Content = "Scan the code with the mobile app ";
+                context.Content = "Use the MN Connect App";
+                info.Content = "Waiting for connection...";
+                Close.Content = "Cancel connection";
+            }
+
+            code.Content = GetMotherBoardID();
+
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(CONNECT_IDENTIFY + GetMotherBoardID(), QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
@@ -47,16 +62,32 @@ namespace ModernNotyfi
             { Dark_Theme(); }
 
             // Проверка подключения.
-            var timer_minute = new System.Windows.Threading.DispatcherTimer();
-            timer_minute.Interval = new TimeSpan(0, 0, 1);
-            timer_minute.IsEnabled = true;
-            timer_minute.Tick += (o, t) =>
+            timer_sec.Interval = new TimeSpan(0, 0, 1);
+            timer_sec.IsEnabled = true;
+            timer_sec.Tick += (o, t) =>
             {
-                string responseString = string.Empty;
-                using (var webClient = new WebClient())
+                ConnectQRCheck();
+            };
+            timer_sec.Start();
+        }
+
+        public async void ConnectQRCheck()
+        {
+            string responseString = string.Empty;
+
+            try
+            {
+                await Task.Run(() =>
                 {
-                    responseString = webClient.DownloadString("https://beesportal.online/connect/check_connect.php?id=" + GetMotherBoardID());
-                }
+                    using (var webClient = new WebClient())
+                    {
+                        responseString = webClient.DownloadString("http://api.unesell.com/connect/check_connect.php?id=" + GetMotherBoardID());
+                    }
+                });
+
+
+                Task.WaitAll();
+                info.Content = "Ожидаем подключение...";
 
                 if (responseString != "null")
                 {
@@ -76,11 +107,14 @@ namespace ModernNotyfi
 
                     MyDevice myDevice = new MyDevice();
                     myDevice.Show();
-                    timer_minute.Stop();
+                    timer_sec.Stop();
                     Close();
                 }
-            };
-            timer_minute.Start();
+            }
+            catch
+            {
+                info.Content = "Сервер не отвечает, повтор...";
+            }
         }
 
         public void Light_Theme()
@@ -165,7 +199,27 @@ namespace ModernNotyfi
                     mbInfo = Convert.ToString(propData.Value);
             }
 
+            if (mbInfo == "None")
+            {
+                mbInfo = "virtualMachine";
+            }
+
             return mbInfo;
+        }
+
+        private void QR_OPEN(object sender, RoutedEventArgs e)
+        {
+            TabsConnect.SelectedIndex = 0;
+        }
+
+        private void CODE_OPEN(object sender, RoutedEventArgs e)
+        {
+            TabsConnect.SelectedIndex = 1;
+        }
+
+        private void Copy_Code(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(GetMotherBoardID());
         }
     }
 }

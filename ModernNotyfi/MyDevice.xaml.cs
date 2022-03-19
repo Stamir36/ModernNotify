@@ -1,9 +1,12 @@
-﻿using ModernWpf;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using Microsoft.Win32;
+using ModernWpf;
 using ModernWpf.Controls;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Net;
@@ -32,6 +35,13 @@ namespace ModernNotyfi
         public MyDevice()
         {
             InitializeComponent();
+            SelectUpload.Visibility = Visibility.Visible; GoUpload.Visibility = Visibility.Hidden;
+
+            if (Properties.Settings.Default.ConnectMobile != "null")
+            {
+                TabConnect.SelectedIndex = 4;
+            }
+
             ComputerID.Content = "ID компьютера: " + GetMotherBoardID();
             if (Properties.Settings.Default.AllowsTransparency == true)
             { this.AllowsTransparency = true; }
@@ -42,35 +52,72 @@ namespace ModernNotyfi
             else
             {Dark_Theme();}
 
-            CheckConnectUpdate();
+            GoResponseAsync();
 
-            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Interval = new TimeSpan(0, 0, 0, 2, 500);
             timer.IsEnabled = true;
             timer.Tick += (o, t) =>
             {
-                CheckConnectUpdate();
+                GoResponseAsync();
             };
             timer.Start();
         }
 
-        
+        public async void GoResponseAsync()
+        {
+            if (Properties.Settings.Default.ConnectMobile != "null")
+            {
+                string responseString = string.Empty;
 
-        public void CheckConnectUpdate()
+                try
+                {
+                    await Task.Run(() =>
+                    {
+                        using (var webClient = new WebClient())
+                        {
+                            responseString = webClient.DownloadString("http://api.unesell.com/connect/check_connect.php?id=" + GetMotherBoardID());
+                        }
+                    });
+                }
+                catch
+                {
+                    TabConnect.SelectedIndex = 3;
+                }
+
+                Task.WaitAll();
+
+                if (responseString != string.Empty)
+                {
+                    CheckConnectUpdate(responseString);
+                }
+                else
+                {
+                    TabConnect.SelectedIndex = 3;
+                }
+            }
+            else
+            {
+                TabConnect.SelectedIndex = 0;
+                DisConnect.Visibility = Visibility.Hidden;
+                Connect.Visibility = Visibility.Visible;
+            }
+        }
+
+
+        public void CheckConnectUpdate(string responseString)
         {
             //Проверка подключения
             if (Properties.Settings.Default.ConnectMobile != "null")
             {
-                TabConnect.SelectedIndex = 1;
+                if(TabConnect.SelectedIndex == 0)
+                {
+                    TabConnect.SelectedIndex = 1;
+                }
+                
                 DisConnect.Visibility = Visibility.Visible;
                 Connect.Visibility = Visibility.Hidden;
                 try
                 {
-                    string responseString = string.Empty;
-                    using (var webClient = new WebClient())
-                    {
-                        responseString = webClient.DownloadString("https://beesportal.online/connect/check_connect.php?id=" + GetMotherBoardID());
-                    }
-
                     if (responseString == "null")
                     {
                         Properties.Settings.Default.ConnectMobile = "null";
@@ -103,10 +150,15 @@ namespace ModernNotyfi
                     {
                         BatteryBarr.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#7FFF0000");
                     }
+
+                    if (TabConnect.SelectedIndex == 4)
+                    {
+                        TabConnect.SelectedIndex = 1;
+                    }
                 }
                 catch(Exception e)
                 {
-                    MessageBox.Show("Error: \n" + e);
+                    TabConnect.SelectedIndex = 3;
                     //DisplayDialog("Нет соединения.", "Не удалось соединиться с сервером, возможно, сервер недоступен или пропал интернет.");
                 }
             }
@@ -130,6 +182,11 @@ namespace ModernNotyfi
             {
                 if (propData.Name == "SerialNumber")
                     mbInfo = Convert.ToString(propData.Value);
+            }
+
+            if (mbInfo == "None")
+            {
+                mbInfo = "virtualMachine";
             }
 
             return mbInfo;
@@ -169,15 +226,20 @@ namespace ModernNotyfi
 
         private void DisConnect_Click(object sender, RoutedEventArgs e)
         {
-            using (var webClient = new WebClient())
-            {
-                var response = webClient.DownloadString("https://beesportal.online/connect/disconnect.php?id=" + GetMotherBoardID());
-            }
+            try{
+                using (var webClient = new WebClient())
+                {
+                    var response = webClient.DownloadString("http://api.unesell.com/connect/disconnect.php?id=" + GetMotherBoardID());
+                }
 
-            Properties.Settings.Default.ConnectMobile = "null";
-            Properties.Settings.Default.Save();
-            CheckConnectUpdate();
-            timer.Stop();
+                Properties.Settings.Default.ConnectMobile = "null";
+                Properties.Settings.Default.Save();
+                GoResponseAsync();
+                timer.Stop();
+            }
+            catch{
+                DisplayDialog("Отключение не выполнено", "Мы не смогли подключиться к серверу, чтобы отвязать устройство. Пожалуйста, проверьте соединение с сетью.");
+            }
         }
 
         private void Help_me_Click(object sender, RoutedEventArgs e)
@@ -226,7 +288,74 @@ namespace ModernNotyfi
 
         private void AppBarToggleButton_Checked(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/Stamir36/ModernNotyfi/raw/main/mnconnect.apk");
+            Process.Start("https://play.google.com/store/apps/details?id=com.unesell.mnc");
+        }
+
+        private void Files_Page_open(object sender, RoutedEventArgs e)
+        {
+            TabConnect.SelectedIndex = 2;
+        }
+
+        public bool SendBool = true;
+
+        private void OpenFileSelector(object sender, RoutedEventArgs e)
+        {
+            // Выбор файла для загрузки
+            string FileName;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true && SendBool == true)
+            {
+                FileName = openFileDialog.FileName;
+                FileNameUpload.Content = "Подготовка к отправке файла...";
+                SendFileDevice(FileName, openFileDialog.SafeFileName);
+            }
+        }
+
+        private void Open_MyDevice(object sender, RoutedEventArgs e)
+        {
+            TabConnect.SelectedIndex = 1;
+        }
+        
+        private void ImagePanel_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && SendBool == true)
+            {
+                // можно же перетянуть много файлов, так что....
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                FileNameUpload.Content = "Подготовка к отправке файла...";
+                SendFileDevice(files[0], System.IO.Path.GetFileName(files[0]));
+            }
+        }
+
+        public void SendFileDevice(string path, string filename)
+        {
+            // Загрузка на сервер
+            using (var client = new System.Net.WebClient())
+            {
+                SendBool = false; SelectUpload.Visibility = Visibility.Hidden; GoUpload.Visibility = Visibility.Visible;
+                new ToastContentBuilder().AddArgument("action", "viewConversation").AddArgument("conversationId", 9813).AddText("Передача файла...").AddText("Отправка: " + filename).Show();
+                Uri uri_upload = new Uri("http://api.unesell.com/connect/filesend.php?id=" + GetMotherBoardID());
+
+                FileNameUpload.Content = filename;
+
+                client.UploadProgressChanged += new UploadProgressChangedEventHandler(UploadProgressCallback);
+                client.UploadFileCompleted += new UploadFileCompletedEventHandler(UploadFileCompleted);
+                
+                // Загрузка на сервер
+                client.UploadFileAsync(uri_upload, path);
+            }
+        }
+
+        private void UploadProgressCallback(object sender, UploadProgressChangedEventArgs e)
+        {
+            TextProgressUpload.Content = e.ProgressPercentage + "%";
+            ProgressUploadBar.Value = e.ProgressPercentage;
+        }
+
+        private void UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
+        {
+            SendBool = true; SelectUpload.Visibility = Visibility.Visible; GoUpload.Visibility = Visibility.Hidden;
+            new ToastContentBuilder().AddArgument("action", "viewConversation").AddArgument("conversationId", 9813).AddText("Файл загружен!").AddText("MN Connect готов скачивать файл.").Show();
         }
     }
 }

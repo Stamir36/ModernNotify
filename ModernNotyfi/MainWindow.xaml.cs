@@ -261,6 +261,11 @@ namespace ModernNotyfi
 
                 if (Properties.Settings.Default.theme != "light")
                 {
+                    BitmapImage bi4 = new BitmapImage(); bi4.BeginInit();
+
+                    bi4.UriSource = new Uri("icons/phone_white.png", UriKind.Relative); bi4.EndInit();
+                    MN_Connect_Icon.Source = bi4;
+
                     BitmapImage bi3 = new BitmapImage(); bi3.BeginInit();
 
                     bi3.UriSource = new Uri("icons/settings_Light.png", UriKind.Relative); bi3.EndInit();
@@ -497,6 +502,7 @@ namespace ModernNotyfi
 
         public async void ModernNotyfi_Loaded(object sender, RoutedEventArgs e)
         {
+            
             ModernNotyfi.WindowState = WindowState.Minimized;
 
             MediaManager.OnNewSource += MediaManager_OnNewSource;
@@ -532,6 +538,7 @@ namespace ModernNotyfi
                 }
                 // ------------------------------------------------------------------------------
             });
+
 
             // СЕКУНДНЫЙ ТАЙМЕР
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
@@ -605,8 +612,10 @@ namespace ModernNotyfi
                         Audio_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
                     }
                 }
+
                 GetMobileInfo();
                 GetBatteryPercent(); //Батарея
+
                 GetConnectionsPCIsEnabledAsync(); // Радио
             };
 
@@ -714,6 +723,11 @@ namespace ModernNotyfi
                     mbInfo = Convert.ToString(propData.Value);
             }
 
+            if (mbInfo == "None")
+            {
+                mbInfo = "virtualMachine";
+            }
+
             return mbInfo;
         }
 
@@ -726,7 +740,7 @@ namespace ModernNotyfi
                 await Task.Run(() => {
                     using (var webClient = new WebClient())
                     {
-                        responseString = webClient.DownloadString("https://beesportal.online/connect/check_connect.php?id=" + GetMotherBoardID());
+                        responseString = webClient.DownloadString("http://api.unesell.com/connect/check_connect.php?id=" + GetMotherBoardID());
                     }
                 });
                 if (responseString != "null")
@@ -758,6 +772,21 @@ namespace ModernNotyfi
                         commands.Arguments = "/c shutdown -s -f -t 00";
                         Process.Start(commands);
                     }
+                    if (command.Contains("shutdown-s:"))
+                    {
+                        int sec = Convert.ToInt32(command.Replace("shutdown-s:", ""));
+                        commands.FileName = "cmd.exe";
+                        commands.Arguments = "/c shutdown -s -t " + sec;
+                        Process.Start(commands);
+                    }
+                    if (command == "copy_bufer")
+                    {
+                        // Отправить буфер обмена
+                        using (var webClient = new WebClient())
+                        {
+                            webClient.DownloadString("http://api.unesell.com/connect/command_mobile.php?id=" + GetMotherBoardID() + "&command=copy:" + Clipboard.GetText());
+                        }
+                    }
                     GetServerInfo();
                 }
             }
@@ -787,7 +816,7 @@ namespace ModernNotyfi
                 int volume = Convert.ToInt16(SoundSlider.Value);
                 
                 await Task.Run(() => {
-                    string url = "https://beesportal.online/connect/pc_add_info.php?ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume;
+                    string url = "http://api.unesell.com/connect/pc_add_info.php?ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume;
 
                     using (var webClient = new WebClient())
                     {
@@ -803,7 +832,7 @@ namespace ModernNotyfi
             catch(Exception ex)
             {
                 // Ignore Error Send Server
-                MessageBox.Show("Error Send:\n" + ex);
+                //MessageBox.Show("Error Send:\n" + ex);
             }
         }
 
@@ -1511,36 +1540,44 @@ namespace ModernNotyfi
 
         public async void GetConnectionsPCIsEnabledAsync()
         {
-            var radios = await Radio.GetRadiosAsync();
-            var bluetoothRadio = radios.FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
-            if (bluetoothRadio.State == RadioState.On)
+            try
             {
-                Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
-                Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
-            }
-            else
-            {
-                Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.Gainsboro;
-                Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
-            }
-            var result = await WiFiAdapter.RequestAccessAsync();
-            if (result == WiFiAccessStatus.Allowed)
-            {
-                foreach (var radio in radios)
+                var radios = await Radio.GetRadiosAsync();
+                var bluetoothRadio = radios.FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
+                if (bluetoothRadio.State == RadioState.On)
                 {
-                    if (radio.Kind == RadioKind.WiFi && radio.State == RadioState.On)
+                    Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
+                    Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
+                }
+                else
+                {
+                    Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.Gainsboro;
+                    Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
+                }
+                var result = await WiFiAdapter.RequestAccessAsync();
+                if (result == WiFiAccessStatus.Allowed)
+                {
+                    foreach (var radio in radios)
                     {
-                        WiFi_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
-                        WiFi_settings_text.Foreground = System.Windows.Media.Brushes.White;
-                        break;
-                    }
-                    else
-                    {
-                        WiFi_Color.Background = System.Windows.Media.Brushes.Gainsboro;
-                        WiFi_settings_text.Foreground = System.Windows.Media.Brushes.Black;
-                        break;
+                        if (radio.Kind == RadioKind.WiFi && radio.State == RadioState.On)
+                        {
+                            WiFi_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
+                            WiFi_settings_text.Foreground = System.Windows.Media.Brushes.White;
+                            break;
+                        }
+                        else
+                        {
+                            WiFi_Color.Background = System.Windows.Media.Brushes.Gainsboro;
+                            WiFi_settings_text.Foreground = System.Windows.Media.Brushes.Black;
+                            break;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Wifi_settings.IsEnabled = false;
+                Bluetooth_settings.IsEnabled = false;
             }
         }
 
@@ -1548,50 +1585,64 @@ namespace ModernNotyfi
 
         private async void Bluetooth_settings_Click(object sender, RoutedEventArgs e)
         {
-            var result = await Radio.RequestAccessAsync();
-            if (result == RadioAccessStatus.Allowed)
+            try
             {
-                var bluetooth = (await Radio.GetRadiosAsync()).FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
-                if (bluetooth != null && bluetooth.State != RadioState.On)
+                var result = await Radio.RequestAccessAsync();
+                if (result == RadioAccessStatus.Allowed)
                 {
-                    await bluetooth.SetStateAsync(RadioState.On);
-                    Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
-                    Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
+                    var bluetooth = (await Radio.GetRadiosAsync()).FirstOrDefault(radio => radio.Kind == RadioKind.Bluetooth);
+                    if (bluetooth != null && bluetooth.State != RadioState.On)
+                    {
+                        await bluetooth.SetStateAsync(RadioState.On);
+                        Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
+                        Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.White;
+                    }
+                    else
+                    {
+                        await bluetooth.SetStateAsync(RadioState.Off);
+                        Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.Gainsboro;
+                        Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
+                    }
                 }
-                else
-                {
-                    await bluetooth.SetStateAsync(RadioState.Off);
-                    Bluetooth_Settings_Color.Background = System.Windows.Media.Brushes.Gainsboro;
-                    Bluetooth_Settinds_text.Foreground = System.Windows.Media.Brushes.Black;
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Управление сетями на этой ОС недоступно.");
             }
         }
 
         // TESTING AND EXPEREMENT
         private async void WIFI_settings_ON_OFF(object sender, RoutedEventArgs e)
         {
-            var result = await WiFiAdapter.RequestAccessAsync();
-            if (result == WiFiAccessStatus.Allowed)
+            try
             {
-                var radios = await Radio.GetRadiosAsync();
-
-                foreach (var radio in radios)
+                var result = await WiFiAdapter.RequestAccessAsync();
+                if (result == WiFiAccessStatus.Allowed)
                 {
-                    if (radio.Kind == RadioKind.WiFi && radio.State != RadioState.On)
+                    var radios = await Radio.GetRadiosAsync();
+
+                    foreach (var radio in radios)
                     {
-                        await radio.SetStateAsync(RadioState.On);
-                        WiFi_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
-                        WiFi_settings_text.Foreground = System.Windows.Media.Brushes.White;
-                        break;
-                    }
-                    else
-                    {
-                        await radio.SetStateAsync(RadioState.Off);
-                        WiFi_Color.Background = System.Windows.Media.Brushes.Gainsboro;
-                        WiFi_settings_text.Foreground = System.Windows.Media.Brushes.Black;
-                        break;
+                        if (radio.Kind == RadioKind.WiFi && radio.State != RadioState.On)
+                        {
+                            await radio.SetStateAsync(RadioState.On);
+                            WiFi_Color.Background = System.Windows.Media.Brushes.CornflowerBlue;
+                            WiFi_settings_text.Foreground = System.Windows.Media.Brushes.White;
+                            break;
+                        }
+                        else
+                        {
+                            await radio.SetStateAsync(RadioState.Off);
+                            WiFi_Color.Background = System.Windows.Media.Brushes.Gainsboro;
+                            WiFi_settings_text.Foreground = System.Windows.Media.Brushes.Black;
+                            break;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Управление сетями на этой ОС недоступно.");
             }
         }
 
@@ -1599,6 +1650,12 @@ namespace ModernNotyfi
         {
             MyDevice windowdevice = new MyDevice();
             windowdevice.Show();
+        }
+
+        private void MNConnect_Open(object sender, RoutedEventArgs e)
+        {
+            MyDevice mnconnect = new MyDevice();
+            mnconnect.Show();
         }
     }
 

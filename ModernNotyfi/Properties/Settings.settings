@@ -59,5 +59,17 @@
     <Setting Name="ConnectMobile" Type="System.String" Scope="User">
       <Value Profile="(Default)">null</Value>
     </Setting>
+    <Setting Name="Unesell_id" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Unesell_Avatar" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Unesell_Email" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Unesell_Login" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

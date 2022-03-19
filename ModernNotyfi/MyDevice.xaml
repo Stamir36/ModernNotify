@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ModernNotyfi"
         mc:Ignorable="d"
-        Title="Мои устройства" Height="373" Width="551"
+        Title="Мои устройства" Height="137" Width="293"
+        MaxHeight="137" MaxWidth="293"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True" MinWidth="800" MinHeight="480" Icon="/icons/Device.png" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Visibility="Visible" AllowsTransparency="True" Closed="MyDevice1_Closed">
+        Visibility="Visible" AllowsTransparency="True" Closed="MyDevice1_Closed" Drop="ImagePanel_Drop" AllowDrop="true" ResizeMode="CanResize">
     <Window.Background>
         <SolidColorBrush x:Name="Window_Back" Color="#F2FFFFFF" Opacity="0.99"/>
     </Window.Background>
 
     <Grid>
-        <Label x:Name="Titles" Content="Мои устройства" Margin="76,23,320,0" VerticalAlignment="Top" Height="44" FontSize="30" Padding="0,0,0,10" VerticalContentAlignment="Center" FontStyle="Normal" FontWeight="Normal" FontFamily="Onyx"/>
+        <Label x:Name="Titles" Content="Мои устройства" Margin="76,18,320,0" VerticalAlignment="Top" Height="56" FontSize="30" Padding="0,0,0,10" VerticalContentAlignment="Center" FontStyle="Normal" FontWeight="Bold" FontFamily="Segoe UI Semibold"/>
         <Image x:Name="Sett_img" HorizontalAlignment="Left" Height="38" Margin="28,22,0,0" VerticalAlignment="Top" Width="36" Source="/icons/Device.png"/>
         <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="26,79,0,0" VerticalAlignment="Top" Width="454" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
@@ -35,7 +36,7 @@
             </Button.Resources>
             <Image x:Name="Settings_Icon" HorizontalAlignment="Left" Height="26" VerticalAlignment="Center" Width="28" Source="/icons/menubuttom.png"/>
         </Button>
-        <Label x:Name="ComputerID" Content="ID компьютера: ххххххххххххххххххххххххххххх" HorizontalAlignment="Left" Margin="10,0,0,10" Height="19" VerticalAlignment="Bottom" Width="454"/>
+        <Label x:Name="ComputerID" Content="ID компьютера: ххххххххххххххххххххххххххххх" HorizontalAlignment="Left" Margin="10,0,0,10" Height="19" VerticalAlignment="Bottom" Width="470"/>
         <TabControl x:Name="TabConnect" Margin="-96,86,0,34" TabStripPlacement="Left">
             <TabItem Header="NoConnect">
                 <Grid>
@@ -50,21 +51,85 @@
             </TabItem>
             <TabItem Header="YesConnect">
                 <Grid>
-                    <Border BorderBrush="#33000000" BorderThickness="1" Margin="34,10,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="410" Height="51" VerticalAlignment="Top">
+                    <Border BorderBrush="#33000000" BorderThickness="1" Margin="42,14,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="410" Height="51" VerticalAlignment="Top">
                         <Grid>
                             <Label x:Name="DeviceName" Content="Подключено к: " HorizontalAlignment="Center" VerticalAlignment="Center" Width="388"/>
                         </Grid>
                     </Border>
-                    <Border BorderBrush="#7F000000" BorderThickness="1" Margin="34,73,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="78" VerticalAlignment="Top">
+                    <Border BorderBrush="#7F000000" BorderThickness="1" Margin="42,77,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="78" VerticalAlignment="Top">
                     </Border>
-                    <Border x:Name="BatteryBarr" BorderThickness="1" Margin="34,73,0,0" Background="#7F08FF00" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="78" VerticalAlignment="Top"/>
-                    <Label x:Name="btext2" Content="Батарея:" HorizontalAlignment="Left" Margin="51,85,0,0" VerticalAlignment="Top" Width="163"/>
-                    <Label x:Name="BatteeyLevel" Content="100%" HorizontalAlignment="Left" Margin="50,102,0,0" VerticalAlignment="Top" Width="109" Height="40" FontWeight="Bold" FontSize="26" Grid.IsSharedSizeScope="True"/>
-                    <Border BorderBrush="#7F000000" BorderThickness="1" Margin="244,73,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="78" VerticalAlignment="Top"/>
-                    <Border x:Name="MemoryBarr" BorderThickness="1" Margin="244,73,0,0" Background="#B200BFFF" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="78" VerticalAlignment="Top"/>
-                    <Label x:Name="btext2_Copy" Content="Свободно памяти:" HorizontalAlignment="Left" Margin="261,85,0,0" VerticalAlignment="Top" Width="163"/>
-                    <Label x:Name="MemoryLevel" Content="21.40Gb" HorizontalAlignment="Left" Margin="260,102,0,0" VerticalAlignment="Top" Width="184" Height="40" FontWeight="Bold" FontSize="26" Grid.IsSharedSizeScope="True"/>
-
+                    <Border x:Name="BatteryBarr" BorderThickness="1" Margin="42,77,0,0" Background="#7F08FF00" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="78" VerticalAlignment="Top"/>
+                    <Label x:Name="btext2" Content="Батарея:" HorizontalAlignment="Left" Margin="59,89,0,0" VerticalAlignment="Top" Width="163"/>
+                    <Label x:Name="BatteeyLevel" Content="100%" HorizontalAlignment="Left" Margin="58,106,0,0" VerticalAlignment="Top" Width="109" Height="40" FontWeight="Bold" FontSize="26" Grid.IsSharedSizeScope="True"/>
+                    <Border BorderBrush="#7F000000" BorderThickness="1" Margin="251,77,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="78" VerticalAlignment="Top"/>
+                    <Border x:Name="MemoryBarr" BorderThickness="1" Margin="252,77,0,0" Background="#B200BFFF" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="78" VerticalAlignment="Top"/>
+                    <Label x:Name="btext2_Copy" Content="Свободно памяти:" HorizontalAlignment="Left" Margin="270,89,0,0" VerticalAlignment="Top" Width="163"/>
+                    <Label x:Name="MemoryLevel" Content="21.40Gb" HorizontalAlignment="Left" Margin="268,106,0,0" VerticalAlignment="Top" Width="184" Height="40" FontWeight="Bold" FontSize="26" Grid.IsSharedSizeScope="True"/>
+                    <Image HorizontalAlignment="Left" Height="307" Margin="-303,10,0,0" VerticalAlignment="Top" Width="157" Source="/icons/mobile.png"/>
+                    <Button x:Name="Files_Open" Margin="42,201,0,0" VerticalAlignment="Top" Width="205" Height="50" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Files_Page_open">
+                        <Grid Height="41" Width="195">
+                            <Image x:Name="Files_Icon" HorizontalAlignment="Left" Source="/icons/files.png" Margin="5,4,0,7" Width="25" RenderTransformOrigin="0.75,0.812" />
+                            <Label x:Name="mainsett_text" Content="Файлы" Margin="36,8,0,10" HorizontalAlignment="Left" Width="101" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" FontWeight="Normal" FontFamily="Segoe UI Variable Display" />
+                        </Grid>
+                    </Button>
+                    <Label Content="Опции с телефоном:" Margin="42,170,0,0" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="141"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Files">
+                <Grid>
+                    <Border x:Name="File_Upload" Margin="37,10,29,10" BorderBrush="#FF868686" BorderThickness="2,2,2,2" CornerRadius="10,10,10,10">
+                        <Grid>
+                            <Grid x:Name="SelectUpload" Visibility="Hidden">
+                                <Button x:Name="Open_Upload_File" Content="Выбрать файл" Style="{StaticResource AccentButtonStyle}" Margin="0,187,0,0" Width="160" VerticalAlignment="Top" Cursor="Hand" Height="32" Click="OpenFileSelector" HorizontalAlignment="Center" />
+                                <Label Content="Выберите файл или перетащите в окно, который нужно отправить на устройство" HorizontalAlignment="Center" Margin="0,149,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Обмен файлами" HorizontalAlignment="Center" Margin="0,112,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                                <Button x:Name="back_to_device" Margin="10,10,0,0" VerticalAlignment="Top" Width="85" Height="29" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Open_MyDevice" Background="#33444D54">
+                                    <Grid Width="75">
+                                        <Image x:Name="Open_N_Image" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="/icons/back.png" RenderTransformOrigin="0.5,0.5">
+                                            <Image.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="-0.90"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Image.RenderTransform>
+                                        </Image>
+                                        <Label Content="Назад" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" Height="21"/>
+                                    </Grid>
+                                </Button>
+                            </Grid>
+                            <Grid x:Name="GoUpload" Visibility="Visible">
+                                <Label x:Name="FileUploadName" Content="Отправка файла:" HorizontalAlignment="Left" Margin="147,126,0,0" VerticalAlignment="Top" Width="469" FontWeight="Bold" FontSize="18"/>
+                                <Label x:Name="FileNameUpload" Content="Подготовка к отправке файла..." HorizontalAlignment="Left" Margin="147,155,0,0" VerticalAlignment="Top" Width="346"/>
+                                <ProgressBar x:Name="ProgressUploadBar" HorizontalAlignment="Left" Height="11" Margin="147,179,0,0" VerticalAlignment="Top" Width="399" MinHeight="10"/>
+                                <Image HorizontalAlignment="Left" Height="100" Margin="31,107,0,0" VerticalAlignment="Top" Width="100" Source="/icons/files.png"/>
+                                <Label x:Name="TextProgressUpload" Content="0%" HorizontalAlignment="Left" Margin="508,153,0,0" VerticalAlignment="Top" Width="38" HorizontalContentAlignment="Right"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Header="NoInternet">
+                <Grid>
+                    <Label x:Name="NoInternetTitle" Content="Ой, что-то не так... Проверьте интернет!" HorizontalAlignment="Left" Margin="273,136,0,0" VerticalAlignment="Top" Width="469" FontWeight="Bold" FontSize="18"/>
+                    <Label x:Name="NoInternetSubtext" Content="Ошибка подключения к серверу, проверьте интернет-соединение." HorizontalAlignment="Left" Margin="273,165,0,0" VerticalAlignment="Top" Width="440"/>
+                    <Image HorizontalAlignment="Left" Height="191" Margin="69,65,0,0" VerticalAlignment="Top" Width="191" Source="/icons/noconnectnotify.png"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Loading">
+                <Grid>
+                    <Label x:Name="NoInternetTitle1" Content="Подключение" HorizontalAlignment="Left" Margin="365,214,0,0" VerticalAlignment="Top" Width="91" FontWeight="Bold" FontSize="12"/>
+                    <ui:ProgressRing x:Name="progressRing" IsActive="True" Width="77" Height="84" RenderTransformOrigin="0.5,0.5" Margin="370,110,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                        <ui:ProgressRing.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ui:ProgressRing.RenderTransform>
+                    </ui:ProgressRing>
                 </Grid>
             </TabItem>
         </TabControl>

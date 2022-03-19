@@ -91,12 +91,14 @@
                                     </Border.Background>
                                     <Grid>
                                         <Label x:Name="NameProfile" Content="Привет!" Margin="84,12,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
+                                        <ui:ProgressRing x:Name="progressRing" IsActive="True" Width="32" Height="35" HorizontalAlignment="Left" Margin="28,16,0,0" VerticalAlignment="Top" />
                                         <Ellipse Margin="15,7,0,0" Stroke="#7F000000" HorizontalAlignment="Left" Width="57" Height="57" VerticalAlignment="Top">
                                             <Ellipse.Fill>
                                                 <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
                                             </Ellipse.Fill>
                                         </Ellipse>
                                         <Label x:Name="localacc" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="84,39,0,0" VerticalAlignment="Top"/>
+                                        <Button x:Name="Login_Unesell" Content="Войти в Unesell Аккаунт" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="0,18,20,0" VerticalAlignment="Top" Width="210" Cursor="Hand" Click="LoginWebUnesell"/>
                                     </Grid>
                                 </Border>
 

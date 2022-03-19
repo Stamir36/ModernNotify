@@ -185,3 +185,6 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ConnectQR.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\MyDevice.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ConnectQR.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\MyDevice.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotyfi.csproj.AssemblyReference.cache
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\unesell_login_web.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\unesell_login_web.baml

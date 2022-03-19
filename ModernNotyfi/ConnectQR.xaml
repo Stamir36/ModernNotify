@@ -30,12 +30,31 @@
                 </LinearGradientBrush>
             </Border.BorderBrush>
         </Border>
-        <Button x:Name="Close" Content="Отмена подключения" Margin="278,258,0,0" VerticalAlignment="Top" Width="252" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand"/>
-        <Image x:Name="QRcode" Margin="289,31,23,53"/>
-        <Label Content="Отсканируйте код приложением" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
-        <Label Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold"/>
-        <Label x:Name="context" Content="Используйте приложение MN Connect" HorizontalAlignment="Left" Margin="19,265,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
-        <ui:ProgressRing x:Name="progressRing" IsActive="True" Width="0" Height="22" HorizontalAlignment="Left" Margin="19,238,0,0" VerticalAlignment="Top" />
-        <Label x:Name="info" Content="Ожидаем подключение..." HorizontalAlignment="Left" Margin="44,242,0,0" VerticalAlignment="Top" Width="131" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
+        <TabControl x:Name="TabsConnect" Margin="0,-42,0,0">
+            <TabItem Header="QR_CONNECT">
+                <Grid>
+                    <Border Margin="299,27,32,63" Background="White" CornerRadius="10,10,10,10" Height="210" Width="210" BorderBrush="#66000000" BorderThickness="0.7,0.5,0.7,0.9" >
+                        <Image x:Name="QRcode" Margin="5,5,5,5"/>
+                    </Border>
+                    <Button x:Name="Close" Content="Отмена подключения" Margin="363,258,0,0" VerticalAlignment="Top" Width="167" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand"/>
+                    <Label x:Name="ScanAppMobile" Content="Отсканируйте код приложением" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
+                    <Label x:Name="ConnectPhoneText" Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold"/>
+                    <Label x:Name="context" Content="Используйте приложение MN Connect" HorizontalAlignment="Left" Margin="19,265,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
+                    <ui:ProgressRing x:Name="progressRing" IsActive="True" Width="0" Height="22" HorizontalAlignment="Left" Margin="19,238,0,0" VerticalAlignment="Top" />
+                    <Label x:Name="info" Content="Ожидаем подключение..." HorizontalAlignment="Left" Margin="44,242,0,0" VerticalAlignment="Top" Width="187" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
+                    <Button x:Name="Code_open" Content="Ввести код" Margin="241,257,0,0" VerticalAlignment="Top" Width="117" Background="#FFFFB03D" Foreground="White" Click="CODE_OPEN" Cursor="Hand"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="CODE_CONNECT">
+                <Grid>
+                    <Label x:Name="ConnectPhoneText_Copy" Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold"/>
+                    <Label x:Name="ScanAppMobile_Copy" Content="Введите код в приложении для подключения к компьютеру" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" Width="369" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
+                    <Button x:Name="Close_2" Content="Отмена подключения" Margin="363,258,0,0" VerticalAlignment="Top" Width="167" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand"/>
+                    <Button x:Name="Code_open_2" Content="QR-Код" Margin="241,257,0,0" VerticalAlignment="Top" Width="117" Background="#FFFFB03D" Foreground="White" Click="QR_OPEN" Cursor="Hand"/>
+                    <Label x:Name="code" Content="PC_CODE" HorizontalAlignment="Center" VerticalAlignment="Center" Height="99" Width="475" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" FontWeight="Bold" FontSize="18"/>
+                    <Button x:Name="copy_codes" Content="Копировать код" Margin="10,0,0,17" VerticalAlignment="Bottom" Width="215" Click="Copy_Code" Padding="10,1,10,1" Background="{x:Null}" Foreground="#FF003AFF" BorderBrush="Transparent" HorizontalContentAlignment="Left"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

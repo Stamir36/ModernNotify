@@ -6,5 +6,7 @@
     $device = $result->fetch_assoc();
 
     echo json_encode($device);  
+    
+    $mysql->query(" UPDATE `pc_device` SET `command` = '----' WHERE `ID_PC` = '$id' ");
     $mysql->close();  
 ?>

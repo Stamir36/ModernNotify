@@ -437,6 +437,14 @@
                             </Image>
                         </Button>
                         <Label x:Name="BackText1" Content="Уведомления" HorizontalAlignment="Left" Margin="15,18,0,17" FontSize="12" Padding="0,0,5,0" FontWeight="Bold" FontFamily="Global Sans Serif" Width="97"/>
+                        <Button x:Name="MN_Connect_Open" Margin="266,0,0,0" Width="30" Height="29" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="MNConnect_Open">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image x:Name="MN_Connect_Icon" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="20" Source="/icons/phone_black.png"/>
+                        </Button>
                     </Grid>
                 </Border>
                 <Label x:Name="Not_Text" Content="Нет уведомлений" Margin="111,103,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="127" Height="19" VerticalAlignment="Top"/>
