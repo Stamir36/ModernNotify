@@ -131,7 +131,7 @@
     <Compile Include="ConnectQR.xaml.cs">
       <DependentUpon>ConnectQR.xaml</DependentUpon>
     </Compile>
-    <Compile Include="modal_info.xaml.cs">
+    <Compile Include="Other Page\modal_info.xaml.cs">
       <DependentUpon>modal_info.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyDevice.xaml.cs">
@@ -140,6 +140,7 @@
     <Compile Include="Other Page\shutdown.xaml.cs">
       <DependentUpon>shutdown.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scripts\PInvoke.cs" />
     <Compile Include="settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
@@ -165,7 +166,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="modal_info.xaml">
+    <Page Include="Other Page\modal_info.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,6 +209,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="icons\Fonts\font.ttf" />
+    <Resource Include="icons\Fonts\product.ttf" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -231,9 +234,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FluentWPF">
-      <Version>0.10.2</Version>
-    </PackageReference>
     <PackageReference Include="LiveCharts.Wpf">
       <Version>0.9.7</Version>
     </PackageReference>
@@ -257,6 +257,9 @@
     </PackageReference>
     <PackageReference Include="Woof.System">
       <Version>2.8.2</Version>
+    </PackageReference>
+    <PackageReference Include="WPF-UI">
+      <Version>1.2.2</Version>
     </PackageReference>
     <PackageReference Include="XamlAnimatedGif">
       <Version>2.0.2</Version>
@@ -374,5 +377,6 @@
   <ItemGroup>
     <Resource Include="icons\noconnectnotify.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

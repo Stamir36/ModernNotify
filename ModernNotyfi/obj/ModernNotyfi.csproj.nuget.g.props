@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
-    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
-    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
-    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\stas1\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages;C:\Program Files (x86)\Microsoft\Xamarin\NuGet\</NuGetPackageFolders>
-    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.1.0</NuGetToolVersion>
+  <PropertyGroup Condition="'$(ExcludeRestorePackageImports)' != 'true'">
+    <RestoreSuccess Condition="'$(RestoreSuccess)' == ''">True</RestoreSuccess>
+    <RestoreTool Condition="'$(RestoreTool)' == ''">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition="'$(ProjectAssetsFile)' == ''">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition="'$(NuGetPackageRoot)' == ''">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <NuGetPackageFolders Condition="'$(NuGetPackageFolders)' == ''">C:\Users\stas1\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages;C:\Program Files (x86)\Microsoft\Xamarin\NuGet\</NuGetPackageFolders>
+    <NuGetProjectStyle Condition="'$(NuGetProjectStyle)' == ''">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition="'$(NuGetToolVersion)' == ''">6.2.0</NuGetToolVersion>
   </PropertyGroup>
-  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+  <ItemGroup Condition="'$(ExcludeRestorePackageImports)' != 'true'">
     <SourceRoot Include="C:\Users\stas1\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft\Xamarin\NuGet\" />
   </ItemGroup>
-  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+  <ImportGroup Condition="'$(ExcludeRestorePackageImports)' != 'true'">
     <Import Project="$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22000.196\build\Microsoft.Windows.SDK.Contracts.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22000.196\build\Microsoft.Windows.SDK.Contracts.props')" />
   </ImportGroup>
-  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgLiveCharts_Wpf Condition=" '$(PkgLiveCharts_Wpf)' == '' ">C:\Users\stas1\.nuget\packages\livecharts.wpf\0.9.7</PkgLiveCharts_Wpf>
+  <PropertyGroup Condition="'$(ExcludeRestorePackageImports)' != 'true'">
+    <PkgLiveCharts_Wpf Condition="'$(PkgLiveCharts_Wpf)' == ''">C:\Users\stas1\.nuget\packages\livecharts.wpf\0.9.7\</PkgLiveCharts_Wpf>
   </PropertyGroup>
 </Project>

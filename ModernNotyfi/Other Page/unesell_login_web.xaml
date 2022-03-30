@@ -3,15 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+        xmlns:pages="clr-namespace:ModernNotyfi"
         xmlns:local="clr-namespace:ModernNotyfi"
         mc:Ignorable="d"
-        Title="Unesell Account - Связь с приложением" Height="650" Width="1100"
-        xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="True" MinWidth="1100" MinHeight="650" Icon="/icons/user-48.png" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True">
+        Title="Unesell Account - Связь с приложением"
+        WindowStyle="None"
+        Height="650" Width="1100" MinWidth="1100" MinHeight="650" Icon="/icons/user-48.png"
+        Style="{StaticResource UiWindow}" WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <SolidColorBrush x:Name="Window_Back" Color="#F2FFFFFF" Opacity="0.99"/>
+        <SolidColorBrush x:Name="Window_Back" Color="#F22B2B2B" Opacity="0.99"/>
     </Window.Background>
     <Grid>
-        <WebBrowser x:Name="WebLogin" Navigated="WebLogin_Navigated"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Margin="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <WebBrowser x:Name="WebLogin" Navigated="WebLogin_Navigated" Grid.ColumnSpan="2"/>
+
+        </Grid>
+
+
+        <wpfui:TitleBar
+          x:Name="RootTitleBar"
+          Grid.Row="0"
+          NotifyIconImage="pack://application:,,,/icons/App_Color.png"
+          FontFamily="/icons/Fonts/#Google Sans Medium"
+          Title="Unesell Account - Подключение к аккаунту"
+          NotifyIconTooltip="Подключение"
+          UseNotifyIcon="True"
+          UseSnapLayout="True" FontSize="14" FontWeight="Bold" Foreground="White">
+            <wpfui:TitleBar.NotifyIconMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Header="Home" />
+                </ContextMenu>
+            </wpfui:TitleBar.NotifyIconMenu>
+        </wpfui:TitleBar>
+
     </Grid>
 </Window>

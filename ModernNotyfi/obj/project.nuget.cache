@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "4LhRWtkYyiQ+rlsdFcP2aL7ZtOU1vD2vOvhqGTDUf1uISSrneGdi/rWvz1lbfm8Wn3t7WKSbJ8+U2d/le+khrw==",
+  "dgSpecHash": "NjolvzyeCMt0Mx3lqC79nQHZVyw6G9NlzduyGPvGZhlbwgc6JYOzrCE+tS1xVWpRF94MRXomtTUbInsRG6uzjg==",
   "success": true,
   "projectFilePath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\stas1\\.nuget\\packages\\fluentwpf\\0.10.2\\fluentwpf.0.10.2.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.0\\microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
@@ -22,6 +21,7 @@
     "C:\\Users\\stas1\\.nuget\\packages\\naudio.winmm\\2.0.1\\naudio.winmm.2.0.1.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\qrcoder\\1.4.3\\qrcoder.1.4.3.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\system.runtime.interopservices.windowsruntime\\4.3.0\\system.runtime.interopservices.windowsruntime.4.3.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\system.runtime.windowsruntime\\4.6.0\\system.runtime.windowsruntime.4.6.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\system.runtime.windowsruntime.ui.xaml\\4.6.0\\system.runtime.windowsruntime.ui.xaml.4.6.0.nupkg.sha512",
@@ -30,6 +30,7 @@
     "C:\\Users\\stas1\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\woof.core\\2.2.0\\woof.core.2.2.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\woof.system\\2.8.2\\woof.system.2.8.2.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\wpf-ui\\1.2.2\\wpf-ui.1.2.2.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\xamlanimatedgif\\2.0.2\\xamlanimatedgif.2.0.2.nupkg.sha512"
   ],
   "logs": []

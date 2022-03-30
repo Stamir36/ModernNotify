@@ -135,14 +135,11 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\zh-CN\ModernWpf.Controls.resou
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\zh-TW\ModernWpf.Controls.resources.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\MainWindow.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\settings.g.cs
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\App.g.cs
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\App.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\MainWindow.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\settings.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.Properties.Resources.resources
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.GenerateResource.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.CoreCompileInputs.cache
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\FluentWPF.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Microsoft.Win32.Registry.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\NAudio.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\NAudio.Asio.dll
@@ -177,8 +174,6 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.SuggestedB
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Woof.Core.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Woof.System.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.CopyComplete
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\modal_info.g.cs
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\modal_info.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\MyDevice.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\MyDevice.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ConnectQR.g.cs
@@ -188,3 +183,9 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Newtonsoft.Json.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotyfi.csproj.AssemblyReference.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\unesell_login_web.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\unesell_login_web.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\modal_info.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\modal_info.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\App.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\App.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\System.Drawing.Common.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\WPFUI.dll

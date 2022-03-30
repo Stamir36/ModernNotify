@@ -1,0 +1,33 @@
+﻿<Window x:Class="MicaTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" 
+        xmlns:local="clr-namespace:MicaTest"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        Background="Transparent"
+        mc:Ignorable="d"
+        Foreground="{DynamicResource SystemControlPageTextBaseHighBrush}"
+        Loaded="Window_Loaded" Title="MainWindow" Height="246" Width="496">
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+        CaptionHeight="20"
+        ResizeBorderThickness="8"
+        CornerRadius="0"
+        GlassFrameThickness="-1"
+        UseAeroCaptionButtons="True" />
+    </WindowChrome.WindowChrome>
+    <ui:SimpleStackPanel Margin="16,38,16,12" Spacing="12" Orientation="Vertical">
+
+        <TextBlock>Hello from Mica on WPF!</TextBlock>
+        <TextBlock TextWrapping="Wrap">This sample uses ModernWpf for convenience and automatic darkmode styles, but you can very much roll your own.</TextBlock>
+
+        <Button Content="bazinga"/>
+
+        <ProgressBar IsIndeterminate="True" Height="16"/>
+
+        <TextBlock>Here's the WPF Ribbon because I can:</TextBlock>
+
+    </ui:SimpleStackPanel>
+</Window>

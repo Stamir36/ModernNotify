@@ -1,5 +1,4 @@
-﻿using ModernWpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,30 +23,6 @@ namespace ModernNotyfi
         {
             InitializeComponent();
             WebLogin.Source = new Uri("https://unesell.com/login/?auth=yes&app=ModernNotify&service=app&data=2&icon=/assets/img/icons/mnlogo.png&out=http://app.modernnotify/");
-
-
-            if (Properties.Settings.Default.AllowsTransparency == true)
-            { this.AllowsTransparency = true; }
-            else
-            { this.AllowsTransparency = false; }
-            if (Properties.Settings.Default.theme == "light")
-            { Light_Theme(); }
-            else
-            { Dark_Theme(); }
-        }
-        
-
-        public void Light_Theme()
-        {
-            var bc = new BrushConverter();
-            this.Background = (Brush)bc.ConvertFrom("#F2FFFFFF"); // Белый фон
-            ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
-        }
-        public void Dark_Theme()
-        {
-            var bc = new BrushConverter();
-            this.Background = (Brush)bc.ConvertFrom("#F2343434"); // Чёрный фон
-            ThemeManager.SetRequestedTheme(this, ElementTheme.Dark);
         }
 
         private void WebLogin_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)

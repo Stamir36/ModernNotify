@@ -7,15 +7,16 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary
+                  Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
+                <ResourceDictionary
+                  Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
+                
+
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
-                <!--StartupUri="MainWindow.xaml" -->
-                
-                <!-- Other merged dictionaries here -->
-                <!--  FluentWPF Controls  -->
-                <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <!-- Other app resources here -->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

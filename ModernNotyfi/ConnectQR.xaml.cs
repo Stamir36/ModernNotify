@@ -71,6 +71,8 @@ namespace ModernNotyfi
             timer_sec.Start();
         }
 
+        int connectOK = 0;
+
         public async void ConnectQRCheck()
         {
             string responseString = string.Empty;
@@ -91,24 +93,33 @@ namespace ModernNotyfi
 
                 if (responseString != "null")
                 {
-                    info.Content = "Подкючение...";
-                    var mobile = JObject.Parse(responseString).SelectToken("MOBILE");
-                    info.Content = "Соединение с " + Convert.ToString(mobile);
+                    if (connectOK == 0)
+                    {
+                        info.Content = "Подкючение...";
+                        var mobile = JObject.Parse(responseString).SelectToken("MOBILE");
+                        info.Content = "Соединение с " + Convert.ToString(mobile);
 
-                    Properties.Settings.Default.ConnectMobile = Convert.ToString(mobile);
-                    Properties.Settings.Default.Save();
+                        Properties.Settings.Default.ConnectMobile = Convert.ToString(mobile);
+                        Properties.Settings.Default.Save();
 
-                    new ToastContentBuilder()
-                    .AddArgument("action", "viewConversation")
-                        .AddArgument("conversationId", 9813)
-                        .AddText("Связано с устройством " + Convert.ToString(mobile))
-                        .AddText("Просматривайте информацию о ПК в приложении.")
-                    .Show();
+                        new ToastContentBuilder()
+                        .AddArgument("action", "viewConversation")
+                            .AddArgument("conversationId", 9813)
+                            .AddText("Связано с устройством " + Convert.ToString(mobile))
+                            .AddText("Просматривайте информацию о ПК в приложении.")
+                        .Show();
 
-                    MyDevice myDevice = new MyDevice();
-                    myDevice.Show();
-                    timer_sec.Stop();
-                    Close();
+                        MyDevice myDevice = new MyDevice();
+                        myDevice.Show();
+                        timer_sec.Stop();
+                        connectOK = 1;
+                        this.Close();
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
             }
             catch

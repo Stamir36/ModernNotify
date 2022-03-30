@@ -2,15 +2,6 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.7.2": {
-      "FluentWPF/0.10.2": {
-        "type": "package",
-        "compile": {
-          "lib/net45/FluentWPF.dll": {}
-        },
-        "runtime": {
-          "lib/net45/FluentWPF.dll": {}
-        }
-      },
       "LiveCharts/0.9.7": {
         "type": "package",
         "compile": {
@@ -713,6 +704,15 @@
           "lib/net40/QRCoder.dll": {}
         }
       },
+      "System.Drawing.Common/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net461/System.Drawing.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Drawing.Common.dll": {}
+        }
+      },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
         "type": "package",
         "compile": {
@@ -822,6 +822,18 @@
           "lib/net461/Woof.System.dll": {}
         }
       },
+      "WPF-UI/1.2.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0"
+        },
+        "compile": {
+          "lib/net47/WPFUI.dll": {}
+        },
+        "runtime": {
+          "lib/net47/WPFUI.dll": {}
+        }
+      },
       "XamlAnimatedGif/2.0.2": {
         "type": "package",
         "frameworkAssemblies": [
@@ -840,15 +852,6 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win": {
-      "FluentWPF/0.10.2": {
-        "type": "package",
-        "compile": {
-          "lib/net45/FluentWPF.dll": {}
-        },
-        "runtime": {
-          "lib/net45/FluentWPF.dll": {}
-        }
-      },
       "LiveCharts/0.9.7": {
         "type": "package",
         "compile": {
@@ -1541,6 +1544,15 @@
           "lib/net40/QRCoder.dll": {}
         }
       },
+      "System.Drawing.Common/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net461/System.Drawing.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Drawing.Common.dll": {}
+        }
+      },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
         "type": "package",
         "compile": {
@@ -1638,6 +1650,18 @@
           "lib/net461/Woof.System.dll": {}
         }
       },
+      "WPF-UI/1.2.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0"
+        },
+        "compile": {
+          "lib/net47/WPFUI.dll": {}
+        },
+        "runtime": {
+          "lib/net47/WPFUI.dll": {}
+        }
+      },
       "XamlAnimatedGif/2.0.2": {
         "type": "package",
         "frameworkAssemblies": [
@@ -1656,15 +1680,6 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win-x64": {
-      "FluentWPF/0.10.2": {
-        "type": "package",
-        "compile": {
-          "lib/net45/FluentWPF.dll": {}
-        },
-        "runtime": {
-          "lib/net45/FluentWPF.dll": {}
-        }
-      },
       "LiveCharts/0.9.7": {
         "type": "package",
         "compile": {
@@ -2357,6 +2372,15 @@
           "lib/net40/QRCoder.dll": {}
         }
       },
+      "System.Drawing.Common/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net461/System.Drawing.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Drawing.Common.dll": {}
+        }
+      },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
         "type": "package",
         "compile": {
@@ -2452,6 +2476,18 @@
         },
         "runtime": {
           "lib/net461/Woof.System.dll": {}
+        }
+      },
+      "WPF-UI/1.2.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0"
+        },
+        "compile": {
+          "lib/net47/WPFUI.dll": {}
+        },
+        "runtime": {
+          "lib/net47/WPFUI.dll": {}
         }
       },
       "XamlAnimatedGif/2.0.2": {
@@ -2472,15 +2508,6 @@
       }
     },
     ".NETFramework,Version=v4.7.2/win-x86": {
-      "FluentWPF/0.10.2": {
-        "type": "package",
-        "compile": {
-          "lib/net45/FluentWPF.dll": {}
-        },
-        "runtime": {
-          "lib/net45/FluentWPF.dll": {}
-        }
-      },
       "LiveCharts/0.9.7": {
         "type": "package",
         "compile": {
@@ -3173,6 +3200,15 @@
           "lib/net40/QRCoder.dll": {}
         }
       },
+      "System.Drawing.Common/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net461/System.Drawing.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Drawing.Common.dll": {}
+        }
+      },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
         "type": "package",
         "compile": {
@@ -3268,6 +3304,18 @@
         },
         "runtime": {
           "lib/net461/Woof.System.dll": {}
+        }
+      },
+      "WPF-UI/1.2.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0"
+        },
+        "compile": {
+          "lib/net47/WPFUI.dll": {}
+        },
+        "runtime": {
+          "lib/net47/WPFUI.dll": {}
         }
       },
       "XamlAnimatedGif/2.0.2": {
@@ -3289,20 +3337,6 @@
     }
   },
   "libraries": {
-    "FluentWPF/0.10.2": {
-      "sha512": "6bDzdj08dRW4Ynm4GycC2E2MlKFlnH9FPJKRlrIC+a3h+V6a6W7bRiMraviqIZd21JiN6+YggRb76qu/0Zdd0w==",
-      "type": "package",
-      "path": "fluentwpf/0.10.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "fluentwpf.0.10.2.nupkg.sha512",
-        "fluentwpf.nuspec",
-        "lib/net45/FluentWPF.dll",
-        "lib/netcoreapp3.0/FluentWPF.dll"
-      ]
-    },
     "LiveCharts/0.9.7": {
       "sha512": "p4xyBrUaNNfkWZSNsIle0r51cyVyFg0Yi0uBRZM5GQtdFiA/7guZHlffFyNUILIdux10Ch2hUaJpcZENVU9aaQ==",
       "type": "package",
@@ -4721,6 +4755,45 @@
         "qrcoder.nuspec"
       ]
     },
+    "System.Drawing.Common/6.0.0": {
+      "sha512": "NfuoKUiP2nUWwKZN6twGqXioIe1zVD0RIj2t976A+czLHr2nY454RwwXs6JU9Htc6mwqL6Dn/nEL3dpVf2jOhg==",
+      "type": "package",
+      "path": "system.drawing.common/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Drawing.Common.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.Drawing.Common.dll",
+        "lib/net461/System.Drawing.Common.xml",
+        "lib/net6.0/System.Drawing.Common.dll",
+        "lib/net6.0/System.Drawing.Common.xml",
+        "lib/netcoreapp3.1/System.Drawing.Common.dll",
+        "lib/netcoreapp3.1/System.Drawing.Common.xml",
+        "lib/netstandard2.0/System.Drawing.Common.dll",
+        "lib/netstandard2.0/System.Drawing.Common.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "runtimes/unix/lib/net6.0/System.Drawing.Common.dll",
+        "runtimes/unix/lib/net6.0/System.Drawing.Common.xml",
+        "runtimes/unix/lib/netcoreapp3.1/System.Drawing.Common.dll",
+        "runtimes/unix/lib/netcoreapp3.1/System.Drawing.Common.xml",
+        "runtimes/win/lib/net6.0/System.Drawing.Common.dll",
+        "runtimes/win/lib/net6.0/System.Drawing.Common.xml",
+        "runtimes/win/lib/netcoreapp3.1/System.Drawing.Common.dll",
+        "runtimes/win/lib/netcoreapp3.1/System.Drawing.Common.xml",
+        "system.drawing.common.6.0.0.nupkg.sha512",
+        "system.drawing.common.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
       "sha512": "J4GUi3xZQLUBasNwZnjrffN8i5wpHrBtZoLG+OhRyGo/+YunMRWWtwoMDlUAIdmX0uRfpHIBDSV6zyr3yf00TA==",
       "type": "package",
@@ -5092,6 +5165,30 @@
         "woof.system.nuspec"
       ]
     },
+    "WPF-UI/1.2.2": {
+      "sha512": "jFz7zcBElwkyU2yDA9zh0mD6bXxM/4uw2Ctj4NHcN1rKiUVidVPyq/9lZQHcWo7Hubn8Kg50OQVN9p6vYkffPg==",
+      "type": "package",
+      "path": "wpf-ui/1.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net46/WPFUI.dll",
+        "lib/net46/WPFUI.xml",
+        "lib/net47/WPFUI.dll",
+        "lib/net47/WPFUI.xml",
+        "lib/net48/WPFUI.dll",
+        "lib/net48/WPFUI.xml",
+        "lib/net5.0-windows7.0/WPFUI.dll",
+        "lib/net5.0-windows7.0/WPFUI.xml",
+        "lib/net6.0-windows7.0/WPFUI.dll",
+        "lib/net6.0-windows7.0/WPFUI.xml",
+        "lib/netcoreapp3.1/WPFUI.dll",
+        "lib/netcoreapp3.1/WPFUI.xml",
+        "mwpf_icon.png",
+        "wpf-ui.1.2.2.nupkg.sha512",
+        "wpf-ui.nuspec"
+      ]
+    },
     "XamlAnimatedGif/2.0.2": {
       "sha512": "C2ux+lDeu07iRMgc/8zh4p+gxL2bdqoEVshPDfPTEc3pWD5TO3tO4C5fsuoc1SwlPHXEBFwG6cgBg3+DrqPaog==",
       "type": "package",
@@ -5113,7 +5210,6 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
-      "FluentWPF >= 0.10.2",
       "LiveCharts.Wpf >= 0.9.7",
       "Microsoft.Toolkit.Uwp.Notifications >= 7.1.2",
       "Microsoft.Windows.SDK.Contracts >= 10.0.22000.196",
@@ -5121,6 +5217,7 @@
       "NAudio >= 2.0.1",
       "Newtonsoft.Json >= 13.0.1",
       "QRCoder >= 1.4.3",
+      "WPF-UI >= 1.2.2",
       "Woof.System >= 2.8.2",
       "XamlAnimatedGif >= 2.0.2"
     ]
@@ -5166,10 +5263,6 @@
     "frameworks": {
       "net472": {
         "dependencies": {
-          "FluentWPF": {
-            "target": "Package",
-            "version": "[0.10.2, )"
-          },
           "LiveCharts.Wpf": {
             "target": "Package",
             "version": "[0.9.7, )"
@@ -5197,6 +5290,10 @@
           "QRCoder": {
             "target": "Package",
             "version": "[1.4.3, )"
+          },
+          "WPF-UI": {
+            "target": "Package",
+            "version": "[1.2.2, )"
           },
           "Woof.System": {
             "target": "Package",

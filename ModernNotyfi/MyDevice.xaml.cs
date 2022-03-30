@@ -22,11 +22,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Windows.Security.ExchangeActiveSyncProvisioning;
+using WPFUI.Common;
+using WPFUI;
 
 namespace ModernNotyfi
 {
     /// <summary>
-    /// Логика взаимодействия для MyDevice.xaml
+    /// https://wpfui.lepo.co/documentation/
     /// </summary>
     public partial class MyDevice : Window
     {
@@ -34,23 +36,20 @@ namespace ModernNotyfi
 
         public MyDevice()
         {
+            WPFUI.Appearance.Background.Apply(
+              this,                                // Window class
+              WPFUI.Appearance.BackgroundType.Acrylic // Background type
+            );
+
             InitializeComponent();
+            ComputerID.Text = GetMotherBoardID();
+
             SelectUpload.Visibility = Visibility.Visible; GoUpload.Visibility = Visibility.Hidden;
 
             if (Properties.Settings.Default.ConnectMobile != "null")
             {
                 TabConnect.SelectedIndex = 4;
             }
-
-            ComputerID.Content = "ID компьютера: " + GetMotherBoardID();
-            if (Properties.Settings.Default.AllowsTransparency == true)
-            { this.AllowsTransparency = true; }
-            else
-            { this.AllowsTransparency = false; }
-            if (Properties.Settings.Default.theme == "light")
-            {Light_Theme();}
-            else
-            {Dark_Theme();}
 
             GoResponseAsync();
 
@@ -98,8 +97,6 @@ namespace ModernNotyfi
             else
             {
                 TabConnect.SelectedIndex = 0;
-                DisConnect.Visibility = Visibility.Hidden;
-                Connect.Visibility = Visibility.Visible;
             }
         }
 
@@ -113,9 +110,7 @@ namespace ModernNotyfi
                 {
                     TabConnect.SelectedIndex = 1;
                 }
-                
-                DisConnect.Visibility = Visibility.Visible;
-                Connect.Visibility = Visibility.Hidden;
+
                 try
                 {
                     if (responseString == "null")
@@ -134,7 +129,7 @@ namespace ModernNotyfi
                     double MEM2 = Convert.ToDouble(MEM2_s); // Доступно
                     double free = MEM1 - MEM2;
 
-                    DeviceName.Content = "Подключено к: " + MOBILE;
+                    DeviceName.Subtitle = "Связь с " + MOBILE;
                     BatteeyLevel.Content = BATTETY + "%";
                     BatteryBarr.Width = Convert.ToInt16(BATTETY) * 2;
 
@@ -159,17 +154,13 @@ namespace ModernNotyfi
                 catch(Exception e)
                 {
                     TabConnect.SelectedIndex = 3;
-                    //DisplayDialog("Нет соединения.", "Не удалось соединиться с сервером, возможно, сервер недоступен или пропал интернет.");
                 }
             }
             else
             {
                 TabConnect.SelectedIndex = 0;
-                DisConnect.Visibility = Visibility.Hidden;
-                Connect.Visibility = Visibility.Visible;
             }
         }
-
 
         public static string GetMotherBoardID()
         {
@@ -192,27 +183,7 @@ namespace ModernNotyfi
             return mbInfo;
         }
 
-        public void Light_Theme()
-        {
-            var bc = new BrushConverter();
-            this.Background = (Brush)bc.ConvertFrom("#F2FFFFFF"); // Белый фон
-            ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
-        }
-        public void Dark_Theme()
-        {
-            var bc = new BrushConverter();
-            this.Background = (Brush)bc.ConvertFrom("#F2343434"); // Чёрный фон
-            ThemeManager.SetRequestedTheme(this, ElementTheme.Dark);
-        }
-
         private void ConnectWindows(object sender, RoutedEventArgs e)
-        {
-            ConnectQR connectQR = new ConnectQR();
-            connectQR.Show();
-            Close();
-        }
-
-        private void ConnectMain2(object sender, RoutedEventArgs e)
         {
             ConnectQR connectQR = new ConnectQR();
             connectQR.Show();
@@ -244,13 +215,21 @@ namespace ModernNotyfi
 
         private void Help_me_Click(object sender, RoutedEventArgs e)
         {
-            DisplayDialog("Проблемы с подключением.", "● Сервер недоступен | Не обновляются данные. \n" +
-                "MN Connect использует сервер для связи устройств, из-за ограниченой мощности устройства могут прекратить на некоторое время передавать друг-другу данные, подождите не много, пока нагрузка уменьшится.\n" +
-                "\n● Данные не верные | Телефон отключён.\n" +
-                "Проверьте обновления программ. Старые версии не могут работать с сервером, который требует новый код и функционал. Если новых обновлений нет, попробуйте переподключить устройство.\n" +
-                "\n● Как я могу помочь проекту?\n" +
-                "Чтобы повысить качество работы, нужны ресурсы для сервера. Вы можете поддержать разработчика финансово, связавщись с ним напрямую.");
+            ProblemDialog.Show = true;
+            ProblemDialog.Visibility = Visibility.Visible;
         }
+
+        private void CloseSupportDialog(object sender, RoutedEventArgs e)
+        {
+            ProblemDialog.Show = false;
+            ProblemDialog.Visibility = Visibility.Hidden;
+        }
+
+        private void SupportSiteOpen(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://unesell.com/service/support/");
+        }
+
 
         private async void DisplayDialog(string Title, string Content)
         {
@@ -265,20 +244,6 @@ namespace ModernNotyfi
         }
 
         bool commandtabopen = false;
-
-        private void Settings_Open_Click(object sender, RoutedEventArgs e)
-        {
-            if (commandtabopen == false)
-            {
-                commands.Visibility = Visibility.Visible;
-                commandtabopen = true;
-            }
-            else
-            {
-                commands.Visibility = Visibility.Hidden;
-                commandtabopen = false;
-            }
-        }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -356,6 +321,11 @@ namespace ModernNotyfi
         {
             SendBool = true; SelectUpload.Visibility = Visibility.Visible; GoUpload.Visibility = Visibility.Hidden;
             new ToastContentBuilder().AddArgument("action", "viewConversation").AddArgument("conversationId", 9813).AddText("Файл загружен!").AddText("MN Connect готов скачивать файл.").Show();
+        }
+
+        private void Account_Open_Site(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://unesell.com/account/");
         }
     }
 }

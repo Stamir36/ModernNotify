@@ -115,9 +115,9 @@
                             <Setter Property="CornerRadius" Value="7"/>
                         </Style>
                     </Button.Resources>
-                    <Grid Margin="0,-5,0,0">
-                        <Label x:Name="DateTimeText" Content="........." HorizontalAlignment="Left" Margin="2,2,0,-2" VerticalAlignment="Top" Height="28" Width="60" FontSize="20" FontWeight="Bold" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-                        <Label x:Name="DateTimeText_sec" Content="..." HorizontalAlignment="Left" Margin="63,2,0,-3" VerticalAlignment="Top" Height="29" Width="26" FontWeight="Bold" Padding="0,0,0,3" VerticalContentAlignment="Bottom"/>
+                    <Grid Height="35" Width="95">
+                        <Label FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="DateTimeText" Content="00:00" HorizontalAlignment="Left" Margin="2,2,0,0" VerticalAlignment="Top" Height="28" Width="62" FontSize="21" FontWeight="Bold" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                        <Label FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="DateTimeText_sec" Content=":00" HorizontalAlignment="Left" Margin="64,8,0,0" VerticalAlignment="Top" Height="22" Width="26" FontWeight="Bold" Padding="0,0,0,3" VerticalContentAlignment="Bottom"/>
                     </Grid>
                 </Button>
 
@@ -285,11 +285,11 @@
                 <Button x:Name="Music_About" Height="49" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Music_About_Click" Style="{DynamicResource DefaultButtonStyle}" Margin="0,0,105,0">
                     <Grid Height="39" HorizontalAlignment="Left" VerticalAlignment="Center" Width="223">
                         <Grid x:Name="SoundGridContent" Margin="0,0,0,0">
-                            <Label x:Name="NowPlayning" Content="Музыка" Margin="35,0,0,0" FontSize="15" Foreground="Black" VerticalContentAlignment="Center" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="191"/>
+                            <Label FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="NowPlayning" Content="Музыка" Margin="35,0,0,0" FontSize="15" Foreground="Black" VerticalContentAlignment="Center" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="191"/>
                             <Image x:Name="MusicPlayer" HorizontalAlignment="Left" Height="26" Margin="4,0,0,0" VerticalAlignment="Center" Width="24" Source="/icons/Media/notes.png"/>
                             <Label x:Name="NowPlayning_Autor" Content="Очередь пуста." HorizontalAlignment="Left" Margin="35,0,0,3" FontSize="12" Width="183" VerticalContentAlignment="Center" Height="16" VerticalAlignment="Bottom"/>
-                            <Label x:Name="SoundTimeNow" Content="00:00" HorizontalAlignment="Left" Margin="258,8,0,0" VerticalAlignment="Top" FontSize="12" Width="107"/>
-                            <Label x:Name="SoundTimeAll" Content="00:00" HorizontalAlignment="Left" Margin="360,7,0,0" VerticalAlignment="Top" FontSize="12" Width="103" HorizontalContentAlignment="Right"/>
+                            <Label FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="SoundTimeNow" Content="00:00" HorizontalAlignment="Left" Margin="258,8,0,0" VerticalAlignment="Top" FontSize="12" Width="107"/>
+                            <Label FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="SoundTimeAll" Content="00:00" HorizontalAlignment="Left" Margin="360,7,0,0" VerticalAlignment="Top" FontSize="12" Width="103" HorizontalContentAlignment="Right"/>
                             <ProgressBar x:Name="NowSoundProgress" HorizontalAlignment="Left" Height="10" Margin="258,29,0,0" VerticalAlignment="Top" Width="205"/>
                         </Grid>
                     </Grid>
@@ -308,7 +308,7 @@
                             </Button.Resources>
                             <Grid>
                                 <Image HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="16" Source="icons/back.png" Margin="2,0,0,0"/>
-                                <Label x:Name="BackText" Content="Назад" HorizontalAlignment="Left" Margin="22,1,0,0" FontSize="12" Height="15" VerticalAlignment="Top" Padding="0,0,5,0" FontWeight="Bold" FontFamily="Global Sans Serif"/>
+                                <Label FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="BackText" Content="Назад" HorizontalAlignment="Left" Margin="22,1,0,0" FontSize="12" Height="15" VerticalAlignment="Top" Padding="0,0,5,0" FontWeight="Bold"/>
                             </Grid>
                         </Button>
                         <Image x:Name="Battery_main" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top" Width="22" Source="icons/battery_full.png" Margin="0,10,10,0"/>
@@ -354,13 +354,13 @@
                                 </lvc:CartesianChart.AxisY>
                             </lvc:CartesianChart>
 
-                            <Button x:Name="Battery_Settings" Content="Настройки электропитания" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Margin="10,0,10,34" Click="Battery_Settings_Click" Background="#660078D7" />
+                            <Button FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="Battery_Settings" Content="Настройки электропитания" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Margin="10,0,10,34" Click="Battery_Settings_Click" Background="#660078D7" FontSize="12" />
                             <Border BorderThickness="1" Height="52" Margin="10,275,10,0" VerticalAlignment="Top" Background="#33F3E6E6" CornerRadius="15" BorderBrush="#33000000">
                                 <Grid>
-                                    <Label x:Name="Batt_label_time" Content="Время работы:" Margin="20,10,164,25" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
-                                    <Label x:Name="Battery_time" Content="1 час 50 минут" Margin="20,21,131,10" FontWeight="Bold"/>
-                                    <Label x:Name="waltagetext" Content="Напряжение" Margin="0,11,15,26" FontSize="10" HorizontalAlignment="Right"/>
-                                    <Label x:Name="Voltage_battery" Content="11.0 kW" Margin="0,21,15,10" FontWeight="Bold" HorizontalAlignment="Right" Width="58"/>
+                                    <Label x:Name="Batt_label_time" Content="Время работы:" Margin="19,9,0,26" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                                    <Label FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="Battery_time" Content="1 час 50 минут" Margin="21,23,130,8" FontWeight="Bold"/>
+                                    <Label x:Name="waltagetext" Content="Напряжение" Margin="0,9,16,28" FontSize="10" HorizontalAlignment="Right"/>
+                                    <Label FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="Voltage_battery" Content="11.0 kW" Margin="0,22,16,9" FontWeight="Bold" HorizontalAlignment="Right" Width="58"/>
                                     <Separator HorizontalAlignment="Right" Height="17" Margin="0,16,67,0" VerticalAlignment="Top" Width="35" FontSize="22" FontWeight="Bold" RenderTransformOrigin="0.495,-0.275">
                                         <Separator.RenderTransform>
                                             <TransformGroup>
@@ -377,7 +377,7 @@
                     </TabItem>
                     <TabItem Header="Browser">
                         <Grid x:Name="Browser_Tab">
-                            <Label x:Name="TextApp" Content="Приложения" HorizontalAlignment="Left" Margin="13,16,0,419" FontSize="14" Width="95" FontWeight="Bold"/>
+                            <Label FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="TextApp" Content="Приложения" HorizontalAlignment="Left" Margin="13,16,0,419" FontSize="14" Width="95" FontWeight="Bold"/>
                             <Grid Margin="0,53,0,29">
                                 <ListBox ItemsSource="{Binding Items}" x:Name="Apps_List" Background="{x:Null}" Margin="0,0,0,10" SelectionChanged="App_Start">
                                     <ListBox.ItemTemplate>
@@ -403,10 +403,10 @@
                     </TabItem>
                     <TabItem Header="Clock">
                         <Grid x:Name="Clock_Tab">
-                            <Label x:Name="DateTimeText_Panel" Content="00:00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="55" Width="144" FontSize="38" FontWeight="Bold" Padding="0" Margin="13,36,0,0"/>
+                            <Label FontFamily="./icons/Fonts/#Google Sans Medium"  x:Name="DateTimeText_Panel" Content="11:00" HorizontalAlignment="Left" VerticalAlignment="Top" Height="55" Width="98" FontSize="38" FontWeight="Bold" Padding="0" Margin="13,36,0,0"/>
                             <Calendar HorizontalAlignment="Stretch" Margin="0,96,0,29" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                            <Label x:Name="DataTimeText" Content="Время и дата" HorizontalAlignment="Left" Margin="13,16,0,419" FontSize="14" Width="115"/>
-                            <Label x:Name="DateTimeText_sec_main" Content=":00" HorizontalAlignment="Left" Margin="112,56,0,0" VerticalAlignment="Top" Height="29" Width="30" FontWeight="Bold" Padding="0,0,0,3" VerticalContentAlignment="Bottom" FontSize="18"/>
+                            <Label FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="DataTimeText" Content="Время и дата" HorizontalAlignment="Left" Margin="13,16,0,419" FontSize="14" Width="115"/>
+                            <Label FontFamily="./icons/Fonts/#Google Sans Medium"  x:Name="DateTimeText_sec_main" Content=":00" HorizontalAlignment="Left" Margin="105,51,0,0" VerticalAlignment="Top" Height="29" Width="30" FontWeight="Bold" Padding="0,0,0,3" VerticalContentAlignment="Bottom" FontSize="18"/>
                         </Grid>
                     </TabItem>
                 </TabControl>
@@ -436,7 +436,7 @@
                                 </Image.RenderTransform>
                             </Image>
                         </Button>
-                        <Label x:Name="BackText1" Content="Уведомления" HorizontalAlignment="Left" Margin="15,18,0,17" FontSize="12" Padding="0,0,5,0" FontWeight="Bold" FontFamily="Global Sans Serif" Width="97"/>
+                        <Label x:Name="BackText1" FontFamily="./icons/Fonts/#Samsung Sharp Sans" Content="Уведомления" HorizontalAlignment="Left" Margin="15,18,0,17" FontSize="12" Padding="0,0,5,0" FontWeight="Bold" Width="97"/>
                         <Button x:Name="MN_Connect_Open" Margin="266,0,0,0" Width="30" Height="29" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="MNConnect_Open">
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">

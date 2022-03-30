@@ -40,10 +40,6 @@
       "frameworks": {
         "net472": {
           "dependencies": {
-            "FluentWPF": {
-              "target": "Package",
-              "version": "[0.10.2, )"
-            },
             "LiveCharts.Wpf": {
               "target": "Package",
               "version": "[0.9.7, )"
@@ -71,6 +67,10 @@
             "QRCoder": {
               "target": "Package",
               "version": "[1.4.3, )"
+            },
+            "WPF-UI": {
+              "target": "Package",
+              "version": "[1.2.2, )"
             },
             "Woof.System": {
               "target": "Package",
