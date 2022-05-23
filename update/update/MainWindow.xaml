@@ -2,17 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="True"
         ResizeMode="NoResize"
         Title="Обновление" 
         WindowStartupLocation="CenterScreen"
-        Height="129" 
-        Width="470" MinWidth="470" MinHeight="170" MaxWidth="0" MaxHeight="0" Icon="imege/update.png" ShowInTaskbar="True" WindowStyle="SingleBorderWindow">
+        Background="Transparent"
+        Height="246" Width="496" Icon="imege/update.png" ShowInTaskbar="True" WindowStyle="SingleBorderWindow" Loaded="update_window_Loaded">
     <Grid>
-        <TabControl x:Name="Page" TabStripPlacement="Bottom" Margin="0,0,0,-40">
+        <TabControl x:Name="Page" TabStripPlacement="Bottom" Margin="10,0,10,-40" Background="{x:Null}" BorderBrush="{x:Null}">
             <TabItem Header="Update">
-                <Grid>
-                    <Button x:Name="Settings" Margin="420,10,0,0" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" VerticalAlignment="Top" Height="32" Click="Open_Settings">
+                <Grid Margin="0,0,-7,0">
+                    <Button x:Name="Settings" Margin="423,16,17,0" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" VerticalAlignment="Top" Height="32" Click="Open_Settings">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="7"/>
@@ -20,31 +19,32 @@
                         </Button.Resources>
                         <ui:AppBarButton Icon="Setting" Width="30" Height="41" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Button>
-                    <Image HorizontalAlignment="Left" Height="21" Margin="19,12,0,0" VerticalAlignment="Top" Width="20" Source="imege/logo-dark.png" Stretch="UniformToFill"/>
-                    <Label x:Name="InfoUpdate" Content="Проверка обновлений..." HorizontalAlignment="Left" Margin="19,46,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-                    <Label x:Name="SubText" Content="Подключение..." HorizontalAlignment="Left" Margin="19,75,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="Close" Content="Отмена" Margin="382,95,0,0" VerticalAlignment="Top" Width="69" Height="27" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Click="Close_Click"/>
-                    <ProgressBar x:Name="ProgressDownload" Visibility="Hidden" HorizontalAlignment="Left" Height="11" Margin="19,105,0,0" VerticalAlignment="Top" Width="359" MinHeight="6"/>
-                    <Label x:Name="InfoUpdate_Copy" Content="ModernNotify" HorizontalAlignment="Left" Margin="46,13,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+                    <Image HorizontalAlignment="Left" Height="21" Margin="19,19,0,0" VerticalAlignment="Top" Width="20" Source="/imege/logo-dark.png" Stretch="UniformToFill"/>
+                    <Label FontFamily="./#Google Sans Medium" x:Name="InfoUpdate" Content="Проверка обновлений..." HorizontalAlignment="Left" Margin="19,54,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Width="417"/>
+                    <Label FontFamily="./#Google Sans Medium" x:Name="SubText" Content="Подключение..." HorizontalAlignment="Left" Margin="19,168,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="Close" Content="Отмена" Margin="374,163,18,0" VerticalAlignment="Top" Background="#33C3C1C1" BorderBrush="{x:Null}" Click="Close_Click" Height="29"/>
+                    <ProgressBar Visibility="Hidden" x:Name="ProgressDownload" HorizontalAlignment="Center" Height="15" Margin="0,145,0,0" Width="433" MinHeight="6" VerticalAlignment="Top"/>
+                    <Label FontFamily="./#Google Sans Medium" x:Name="InfoUpdate_Copy" Content="ModernNotify" HorizontalAlignment="Left" Margin="48,22,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+                    <Label x:Name="Log" FontFamily="./#Google Sans Medium" Content="" HorizontalAlignment="Left" Margin="19,88,0,0" VerticalAlignment="Top" Width="373" Height="52" FontSize="11"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Settings">
                 <Grid>
-                    <Image HorizontalAlignment="Left" Height="21" Margin="19,9,0,0" VerticalAlignment="Top" Width="20" Source="/imege/update.png" Stretch="UniformToFill"/>
-                    <Label Content="Настройки обновлений" HorizontalAlignment="Left" Margin="46,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
-                    <Label x:Name="PVersion" Content="Приложение: " HorizontalAlignment="Left" Margin="19,83,0,0" VerticalAlignment="Top" Width="221"/>
-                    <Label x:Name="UVersion" Content="Установщик:" HorizontalAlignment="Left" Margin="19,103,0,0" VerticalAlignment="Top" Width="189"/>
-                    <Button x:Name="Back_U" Content="Назад" Margin="382,95,0,0" VerticalAlignment="Top" Width="69" Height="27" Background="#CC366DF5" BorderBrush="{x:Null}" Padding="0" Click="Update_Open" Foreground="#FFFFEFEF"/>
-                    <Button x:Name="mn_connect" Content="Скачать MN Connect" Margin="225,96,0,0" VerticalAlignment="Top" Width="152" Height="26" Background="#CCCA6600" BorderBrush="{x:Null}" Padding="0" Click="download_mnconnect" Foreground="#FFFFEFEF"/>
-                    <Border BorderBrush="#7F000000" BorderThickness="1" Margin="19,39,0,0" Background="#4CD8D8D8" CornerRadius="3,3,3,3" HorizontalAlignment="Left" Width="248" Height="35" VerticalAlignment="Top">
+                    <Image HorizontalAlignment="Left" Height="21" Margin="19,14,0,0" VerticalAlignment="Top" Width="20" Source="/imege/update.png" Stretch="UniformToFill"/>
+                    <Label FontFamily="./#Google Sans Medium" Content="Настройки обновлений" HorizontalAlignment="Left" Margin="50,16,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+                    <Label FontFamily="./#Google Sans Medium" x:Name="PVersion" Content="Приложение: " HorizontalAlignment="Left" Margin="19,156,0,0" VerticalAlignment="Top" Width="221"/>
+                    <Label FontFamily="./#Google Sans Medium" x:Name="UVersion" Content="Установщик:" HorizontalAlignment="Left" Margin="19,176,0,0" VerticalAlignment="Top" Width="189"/>
+                    <Border BorderBrush="#7F000000" BorderThickness="1" Margin="19,45,0,0" Background="#4CD8D8D8" CornerRadius="3,3,3,3" HorizontalAlignment="Left" Width="253" Height="38" VerticalAlignment="Top">
                         <Grid>
-                            <Label Content="Сервер:" Margin="10,7,173,7"/>
+                            <Label Content="Сервер:" Margin="10,7,173,7" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                             <ComboBox x:Name="theme_combo" Width="150" Margin="90,0,0,0" Height="24" VerticalAlignment="Center" FontSize="12" Padding="12,3,0,3" SelectionChanged="theme_combo_SelectionChanged">
                                 <TextBlock><Run Text="Сервер версий"/></TextBlock>
                                 <TextBlock><Run Text="GitHub (Тестирование)"/></TextBlock>
                             </ComboBox>
                         </Grid>
                     </Border>
+                    <Label FontFamily="./#Google Sans Medium" Content="Продукт &quot;Обновление ModernNotify&quot; распространяется&#xD;&#xA;&quot;как есть&quot; и разработчик не несёт никакую ответственность&#xD;&#xA;за возможные неполадки." HorizontalAlignment="Left" Margin="19,88,0,0" VerticalAlignment="Top" Height="56" Width="345" FontSize="10"/>
+                    <Button x:Name="Back_U" Content="Назад" Click="Update_Open" Margin="374,163,0,0" VerticalAlignment="Top" Background="#33C3C1C1" BorderBrush="{x:Null}" Height="29"/>
 
                 </Grid>
             </TabItem>

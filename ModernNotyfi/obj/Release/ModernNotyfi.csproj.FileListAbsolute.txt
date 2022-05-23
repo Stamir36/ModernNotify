@@ -1,7 +1,6 @@
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\ModernNotify.exe.config
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\ModernNotify.exe
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\ModernNotify.pdb
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\FluentWPF.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\LiveCharts.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\LiveCharts.pdb
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\LiveCharts.Wpf.dll
@@ -177,8 +176,6 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.pdb
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Woof.Core.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Woof.System.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotyfi.csproj.SuggestedBindingRedirects.cache
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\modal_info.baml
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\modal_info.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Newtonsoft.Json.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\QRCoder.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ConnectQR.g.cs
@@ -188,3 +185,9 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\MyDevice.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotyfi.csproj.AssemblyReference.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\unesell_login_web.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\unesell_login_web.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\System.Drawing.Common.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\WPFUI.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\modal_info.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\GameBar.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\modal_info.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\GameBar.baml

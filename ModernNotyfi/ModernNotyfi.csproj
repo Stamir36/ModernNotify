@@ -131,6 +131,12 @@
     <Compile Include="ConnectQR.xaml.cs">
       <DependentUpon>ConnectQR.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameBar.xaml.cs">
+      <DependentUpon>GameBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Other Page\DebugWindow.xaml.cs">
+      <DependentUpon>DebugWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Other Page\modal_info.xaml.cs">
       <DependentUpon>modal_info.xaml</DependentUpon>
     </Compile>
@@ -154,6 +160,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GameBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -166,6 +176,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Other Page\DebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Other Page\modal_info.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,9 +295,6 @@
     <Resource Include="icons\update.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons\desktop.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="icons\settings.png" />
     <Resource Include="icons\shutdown.png" />
   </ItemGroup>
@@ -377,6 +388,12 @@
   <ItemGroup>
     <Resource Include="icons\noconnectnotify.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="icons\Media\gradient.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\gif\accountU.png" />
+    <Resource Include="icons\gif\geo_icons.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

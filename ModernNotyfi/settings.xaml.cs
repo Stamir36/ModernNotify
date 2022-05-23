@@ -24,26 +24,50 @@ using System.IO;
 using System.Globalization;
 using Woof.SystemEx;
 using System.Windows.Threading;
+using System.Windows.Interop;
+using WPFUI;
+using WPFUI.Controls;
+using static ModernNotyfi.PInvoke.ParameterTypes;
+using static ModernNotyfi.PInvoke.Methods;
 
 namespace ModernNotyfi
 {
-    /// <summary>
-    /// Логика взаимодействия для settings.xaml
-    /// </summary>
     public partial class settings : Window
     {
         public DispatcherTimer timer_sec = new DispatcherTimer();
 
+
+
         public settings()
         {
             InitializeComponent();
-            if (Properties.Settings.Default.AllowsTransparency == true)
+
+            WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
+
+
+            if (Properties.Settings.Default.WinStyle == "Mica")
             {
-                this.AllowsTransparency = true;
+                WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
             }
             else
             {
-                this.AllowsTransparency = false;
+                WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
+            }
+
+            if (Properties.Settings.Default.theme == "system")
+            {
+                Loaded += (sender, args) =>
+                {
+                    if (Properties.Settings.Default.WinStyle == "Mica")
+                    {
+                        stylewin_combo.SelectedIndex = 0;
+                        WPFUI.Appearance.Watcher.Watch(this, WPFUI.Appearance.BackgroundType.Mica, true);
+                    }
+                    else
+                    {
+                        WPFUI.Appearance.Watcher.Watch(this, WPFUI.Appearance.BackgroundType.Auto, true);
+                    }
+                };
             }
 
             if (Properties.Settings.Default.UpgradeRequired)
@@ -101,6 +125,9 @@ namespace ModernNotyfi
 
         private void Settings_Loaded(object sender, RoutedEventArgs e)
         {
+            MicaBool.IsChecked = Properties.Settings.Default.MicaBool;
+            if (MicaBool.IsChecked == false) { snakshow = true; }
+
             var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
             AccauntImg.ImageSource = userBitmapSmall;
 
@@ -113,25 +140,29 @@ namespace ModernNotyfi
             Version.Content = "Версия приложения: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             version.Content = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
-            foreach (ManagementObject os in searcher.Get()) { WindowsVersion.Content =  "Система: " + os["Caption"].ToString(); break; }
+            foreach (ManagementObject os in searcher.Get()) { WindowsVersion.Content = "Система: " + os["Caption"].ToString(); break; }
             Memory.Content = "RAM: " + Math.Round(SysInfo.SystemMemoryTotal, 2) + "GB";
 
             LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
-            
+
             //Настройки
             Opacity_Panel_Settings.Value = Properties.Settings.Default.opacity_panel * 100;
             Color_Border.Text = Properties.Settings.Default.color_panel;
             Border_Preview.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
             CRadius_Panel_Settings.Value = Properties.Settings.Default.CornerRadius;
+
             if (Properties.Settings.Default.theme == "light")
             {
                 theme_combo.SelectedIndex = 0;
                 Light_Theme();
-            }
-            else
+            } else if(Properties.Settings.Default.theme == "dark")
             {
                 theme_combo.SelectedIndex = 1;
                 Dark_Theme();
+            }
+            else
+            {
+                theme_combo.SelectedIndex = 2;
             }
 
             if (Properties.Settings.Default.posicion == "rigth")
@@ -190,34 +221,30 @@ namespace ModernNotyfi
                 Style_Shutdown.SelectedIndex = 1;
             }
 
-            if (Properties.Settings.Default.AllowsTransparency == true)
+            if (Properties.Settings.Default.WinStyle == "Mica")
             {
-                Chek_Allow_Window.IsChecked = true;
+                if (MicaBool.IsChecked == true)
+                {
+                    ApplyBackgroundEffect(0);
+                }
+                stylewin_combo.SelectedIndex = 0;
             }
-            else
+            if (Properties.Settings.Default.WinStyle == "Acrylic")
             {
-                Chek_Allow_Window.IsChecked= false;
+                if (MicaBool.IsChecked == true)
+                {
+                    ApplyBackgroundEffect(1);
+                }
+                stylewin_combo.SelectedIndex = 1;
             }
-        }
-
-        // ModernWpf.ThemeManager.GetActualTheme(this).ToString(); <- Тема установленная в системе
-        public void Light_Theme()
-        {
-            var bc = new BrushConverter();
-            this.Background = (Brush)bc.ConvertFrom("#F2FFFFFF"); // Белый фон
-            Color_Border.Foreground = (Brush)bc.ConvertFrom("#F2343434");
-            if (Color_Border.Text == "#404040") { Color_Border.Text = "#fff"; }
-
-            ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
-        }
-        public void Dark_Theme()
-        {
-            var bc = new BrushConverter();
-            this.Background = (Brush)bc.ConvertFrom("#F2343434"); // Чёрный фон
-            Color_Border.Foreground = (Brush)bc.ConvertFrom("#F2FFFFFF");
-            if (Color_Border.Text == "#fff") { Color_Border.Text = "#404040"; }
-
-            ThemeManager.SetRequestedTheme(this, ElementTheme.Dark);
+            if (Properties.Settings.Default.WinStyle == "Tabbed")
+            {
+                if (MicaBool.IsChecked == true)
+                {
+                    ApplyBackgroundEffect(2);
+                }
+                stylewin_combo.SelectedIndex = 2;
+            }
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -254,7 +281,6 @@ namespace ModernNotyfi
             {
                 Titles.Content = "Settings > Basic settings";
             }
-            NavView.SelectedItem = NavView.MenuItems[0];
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/maim_settings.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
 
@@ -264,13 +290,12 @@ namespace ModernNotyfi
             Back.Visibility = Visibility.Visible;
             if (Language_combo1.SelectedIndex == 0)
             {
-                Titles.Content = "Настройки > Мини-приложения";
+                Titles.Content = "Настройки > Внутрипрограмные сервисы";
             }
             else if (Language_combo1.SelectedIndex == 1)
             {
-                Titles.Content = "Settings > Widgets";
+                Titles.Content = "Settings > Services and Apps";
             }
-            NavView.SelectedItem = NavView.MenuItems[1];
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/App_Color.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
 
@@ -286,7 +311,6 @@ namespace ModernNotyfi
             {
                 Titles.Content = "Settings > Personalization";
             }
-            NavView.SelectedItem = NavView.MenuItems[2];
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/Personalization.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
 
@@ -302,7 +326,6 @@ namespace ModernNotyfi
             {
                 Titles.Content = "Settings > About";
             }
-            NavView.SelectedItem = NavView.MenuItems[3];
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/info.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
 
@@ -321,6 +344,21 @@ namespace ModernNotyfi
             }
 
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/update.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
+        }
+
+        private void Open_Help_Click(object sender, RoutedEventArgs e)
+        {
+            Settings_Tab.SelectedIndex = 4; Back.Click += Backs;
+            Back.Visibility = Visibility.Visible;
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                Titles.Content = "Настройки > Помощь и информация";
+            }
+            else if (Language_combo1.SelectedIndex == 1)
+            {
+                Titles.Content = "Settings > About";
+            }
+            BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/info.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
 
         private void Open_Color_Click(object sender, RoutedEventArgs e)
@@ -362,16 +400,16 @@ namespace ModernNotyfi
             switch (item.Tag)
             {
                 case "Home":
-                    Open_Main.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    Open_Main.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
                     break;
                 case "Keyboard":
-                    Open_Keyboard.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    Open_Keyboard.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
                     break;
                 case "Library":
-                    Open_Personalization.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    Open_Personalization.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
                     break;
                 case "Help":
-                    Open_Info.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    Open_Info.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
                     break;
             }
         }
@@ -381,7 +419,15 @@ namespace ModernNotyfi
         private void Check_Update_Click(object sender, RoutedEventArgs e)
         {
             //Проверка модуля обновления.
-            InfoUpdate.Content = "Проверка модуля обновления...";
+            if (Properties.Settings.Default.Language == "Russian")
+            {
+                InfoUpdate.Content = "Проверка модуля обновления...";
+            }
+            else if (Properties.Settings.Default.Language == "English")
+            {
+                InfoUpdate.Content = "Checking update module...";
+            }
+            
             try
             {
                 FileVersionInfo.GetVersionInfo("update.exe");
@@ -404,7 +450,16 @@ namespace ModernNotyfi
                 }
                 else
                 {
-                    InfoUpdate.Content = "Загрузка модуля обновления...";
+                    
+                    if (Properties.Settings.Default.Language == "Russian")
+                    {
+                        InfoUpdate.Content = "Загрузка модуля обновления...";
+                    }
+                    else if (Properties.Settings.Default.Language == "English")
+                    {
+                        InfoUpdate.Content = "Loading update module...";
+                    }
+
                     try
                     {
                         string link = @"http://version-modernnotify.ml/modernnotify/update.exe";
@@ -415,15 +470,31 @@ namespace ModernNotyfi
                     }
                     catch
                     {
-                        InfoUpdate.Content = "Загрузка обновления не удалась.";
-                        LastChekUpdate.Content = "Проверте подключение или попробуйте позже.";
+                        if (Properties.Settings.Default.Language == "Russian")
+                        {
+                            InfoUpdate.Content = "Загрузка обновления не удалась.";
+                            LastChekUpdate.Content = "Проверьте подключение или попробуйте позже.";
+                        }
+                        else if (Properties.Settings.Default.Language == "English")
+                        {
+                            InfoUpdate.Content = "Update download failed.";
+                            LastChekUpdate.Content = "Check your connection or try again later.";
+                        }
                     }
                 }
             }
             catch
             {
-                InfoUpdate.Content = "Проверка обновлений не удалась.";
-                LastChekUpdate.Content = "Проверте подключение или попробуйте позже.";
+                if (Properties.Settings.Default.Language == "Russian")
+                {
+                    InfoUpdate.Content = "Загрузка обновления не удалась.";
+                    LastChekUpdate.Content = "Проверьте подключение или попробуйте позже.";
+                }
+                else if (Properties.Settings.Default.Language == "English")
+                {
+                    InfoUpdate.Content = "Update download failed.";
+                    LastChekUpdate.Content = "Check your connection or try again later.";
+                }
             }
         }
 
@@ -432,15 +503,33 @@ namespace ModernNotyfi
             // Файл обновления существует.
             if (start_update == 0)
             {
-                InfoUpdate.Content = "Проверка...";
                 Properties.Settings.Default.last_check_update = DateTime.Now.ToString();
                 Properties.Settings.Default.Save();
-                LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
+                
+                if (Properties.Settings.Default.Language == "Russian")
+                {
+                    InfoUpdate.Content = "Проверка...";
+                    LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
+                }
+                else if (Properties.Settings.Default.Language == "English")
+                {
+                    InfoUpdate.Content = "Checking...";
+                    LastChekUpdate.Content = "Last check: " + Properties.Settings.Default.last_check_update;
+                }
 
                 //DEV VERSION CHECK
                 if (GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") == Assembly.GetExecutingAssembly().GetName().Version.ToString())
                 {
-                    InfoUpdate.Content = "У вас актуальная версия";
+                    
+                    if (Properties.Settings.Default.Language == "Russian")
+                    {
+                        InfoUpdate.Content = "У вас актуальная версия";
+                    }
+                    else if (Properties.Settings.Default.Language == "English")
+                    {
+                        InfoUpdate.Content = "You have the current version.";
+                    }
+
                     BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/ok.png", UriKind.Relative); bi3.EndInit();
                     Update_img.Source = bi3;
                 }
@@ -448,17 +537,34 @@ namespace ModernNotyfi
                 {
                     if (GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") != "Error")
                     {
-                        InfoUpdate.Content = "Доступна новая версия " + GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt");
-                        LastChekUpdate.Content = "Готовы к обновлению.";
-                        Check_Update.Content = "Начать обновление";
+                        if (Properties.Settings.Default.Language == "Russian")
+                        {
+                            InfoUpdate.Content = "Доступна новая версия " + GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt");
+                            LastChekUpdate.Content = "Готовы к обновлению.";
+                            Check_Update.Content = "Начать обновление";
+                        }
+                        else if (Properties.Settings.Default.Language == "English")
+                        {
+                            InfoUpdate.Content = "New version available: " + GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt");
+                            LastChekUpdate.Content = "Ready to upgrade.";
+                            Check_Update.Content = "Start update";
+                        }
                         BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/restart_fluent.png", UriKind.Relative); bi3.EndInit();
                         Update_img.Source = bi3;
                         start_update = 1;
                     }
                     else
                     {
-                        InfoUpdate.Content = "Нет подключения к интернету.";
-                        LastChekUpdate.Content = "Мы не смогли получить ответ от сервера. Проверьте подключение.";
+                        if (Properties.Settings.Default.Language == "Russian")
+                        {
+                            InfoUpdate.Content = "Нет подключения к интернету.";
+                            LastChekUpdate.Content = "Мы не смогли получить ответ от сервера. Проверьте подключение.";
+                        }
+                        else if (Properties.Settings.Default.Language == "English")
+                        {
+                            InfoUpdate.Content = "No internet connection.";
+                            LastChekUpdate.Content = "We were unable to get a response from the server. Check connection.";
+                        }
                     }
                 }
             }
@@ -474,6 +580,14 @@ namespace ModernNotyfi
                 }
                 catch
                 {
+                    if (Properties.Settings.Default.Language == "Russian")
+                    {
+
+                    }
+                    else if (Properties.Settings.Default.Language == "English")
+                    {
+
+                    }
                     InfoUpdate.Content = "Ошибка запуска процесса обновления.";
                     LastChekUpdate.Content = "Не найден файл обновления. Переустановите программу.";
                 }
@@ -525,9 +639,30 @@ namespace ModernNotyfi
                 //Сохранение.
                 Properties.Settings.Default.opacity_panel = Opacity_Panel_Settings.Value / 100;
                 Properties.Settings.Default.color_panel = Color_Border.Text;
-                
+
+                if (MicaBool.IsChecked == true)
+                {
+                    Properties.Settings.Default.MicaBool = true;
+                    if (stylewin_combo.SelectedIndex == 0)
+                    {
+                        Properties.Settings.Default.WinStyle = "Mica";
+                    }
+                    if (stylewin_combo.SelectedIndex == 1)
+                    {
+                        Properties.Settings.Default.WinStyle = "Acrylic";
+                    }
+                    if (stylewin_combo.SelectedIndex == 2)
+                    {
+                        Properties.Settings.Default.WinStyle = "Tabbed";
+                    }
+                }
+                else
+                {
+                    Properties.Settings.Default.MicaBool = false;
+                }
+
                 if (theme_combo.SelectedIndex == 0) { Properties.Settings.Default.theme = "light"; }
-                else { Properties.Settings.Default.theme = "black"; }
+                else if(theme_combo.SelectedIndex == 1) { Properties.Settings.Default.theme = "dark"; } else { Properties.Settings.Default.theme = "system"; }
 
                 if (pos_combo.SelectedIndex == 0) { Properties.Settings.Default.posicion = "rigth"; }
                 else { Properties.Settings.Default.posicion = "left"; }
@@ -546,15 +681,6 @@ namespace ModernNotyfi
                 else
                 {
                     Properties.Settings.Default.show_start_notify = false;
-                }
-
-                if (Chek_Allow_Window.IsChecked == true)
-                {
-                    Properties.Settings.Default.AllowsTransparency = true;
-                }
-                else
-                {
-                    Properties.Settings.Default.AllowsTransparency = false;
                 }
 
                 if (Chek_Allow_NEW_PgBar.IsChecked == true)
@@ -588,7 +714,7 @@ namespace ModernNotyfi
             }
             catch
             {
-                MessageBox.Show("Мы не смогли сохранить данные. Проверьте все изменённые настройки.", "Ошибка применения", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Мы не смогли сохранить данные. Проверьте все изменённые настройки.", "Ошибка применения", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -640,8 +766,6 @@ namespace ModernNotyfi
             }
         }
 
-
-
         private void Site_color_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://htmlcolorcodes.com/");
@@ -649,7 +773,7 @@ namespace ModernNotyfi
 
         private void Open_Tab_Update_Click(object sender, RoutedEventArgs e)
         {
-            Open_Update.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            Open_Update.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
         }
 
         private void theme_combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -658,27 +782,31 @@ namespace ModernNotyfi
             {
                 Light_Theme();
             }
-            else
+            else if (theme_combo.SelectedIndex == 1)
             {
                 Dark_Theme();
+            }
+            else
+            {
+
             }
         }
 
         private void Go_Tab_1_Click(object sender, RoutedEventArgs e)
         {
-            Open_Main.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            Open_Main.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
         }
 
         private void Color_Save_Click(object sender, RoutedEventArgs e)
         {
             Color_Border.Text = color_piker.Text;
-            Open_Personalization.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            Open_Personalization.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
             Back.Click += Backs;
         }
 
         public void Chenche_Color(object sender, RoutedEventArgs e)
         {
-            color_piker.Text = Convert.ToString(((Button)sender).Tag);
+            color_piker.Text = Convert.ToString(((System.Windows.Controls.Button)sender).Tag);
         }
 
         private void Open_Sourse(object sender, RoutedEventArgs e)
@@ -715,7 +843,7 @@ namespace ModernNotyfi
 
         public void RussianInterfase_Settings()
         {
-            Titles.Content = "Настройки";
+            TitleBarApp.Title = "Параметры ModernNotify";
             if (Properties.Settings.Default.Unesell_Login == "Yes")
             {
                 localacc.Content = "Unesell аккаунт";
@@ -725,43 +853,39 @@ namespace ModernNotyfi
                 localacc.Content = "Локальный аккаунт";
             }
             text_7.Content = "Категории:";
-            mainsett_text.Content = "Основные параметры";
-            perssetttext.Content = "Персонализация";
-            widgettmaintext.Content = "Мини-приложения";
-            aboutstext.Content = "О программе";
-            text_8.Content = "Прочее:";
-            updatemainsett.Content = "Обновления программы";
+            mainsett_text.Text = "Основные параметры";
+            perssetttext.Text = "Персонализация";
+            widgettmaintext.Text = "Внутрипрограмные сервисы";
+            aboutstext.Text = "О программе";
+            updatemainsett.Text = "Центр обновления";
             close.Content = "Закрыть окно";
             Save_Settings.Content = "Сохранить изменения";
             NameProfile.Content = "Привет, " + Properties.Settings.Default.User_Name;
             text_1.Content = "Основные параметры";
             funnanduse.Content = "Функции и взаимодействие";
             subbone.Content = "Панель выключения.";
-            thametext.Content = "Тема приложения";
-            text0213023.Content = "Местоположение панели";
-            text3243.Content = "Показывать стартовое уведомление";
-            textstyleshutdown.Content = "Стиль панели выключения";
+            thametext.Title = "Тема приложения";
+            text0213023.Title = "Местоположение панели";
+            text3243.Title = "Показывать стартовое уведомление";
+            textstyleshutdown.Title = "Стиль панели выключения";
             subbone.Content = "Панель выключения.";
-            texts65464.Content = "Кнопка: Выключение приложения";
+            texts65464.Title = "Кнопка: Выключение приложения";
             text_2.Content = "Категории и разделы";
-            twxtwidgwtwidgwtmenu.Content = "Мини-приложения";
             Back.Content = "< Назад";
             // Ревизия 1.
             text_3.Content = "Вид панелей:";
-            pparone.Content = "Прозрачность";
-            pcolortext.Content = "Цвет";
+            pparone.Title = "Прозрачность";
+            pcolortext.Title = "Цвет";
             Open_Color.Content = "Палитра >";
-            pradiusboprder.Content = "Закруглённость углов";
+            pradiusboprder.Title = "Закруглённость углов";
             infotextpreview.Content = "Информация";
             text_3_Copy1.Content = "Вид окон";
-            text23r923ri.Content = "Эффекты прозрачности:";
+            stylewindowtext.Title = "Стиль окон:"; 
             otherptext.Content = "Прочее:";
-            texte65930.Content = "Другие настройки:";
-            Go_Tab_2.Content = "Тема приложения";
             Open_Tab_Update.Content = "Проверить обновления";
             Open_Site.Content = "Сайт проекта";
             textaboutproduct.Content = "О продукте:";
-            text_5.Content = "Удобная и красивая панель быстрых действий на вашем \n компьютере под управлением Windows 10 и 11.";
+            text_5.Content = "Удобная и красивая панель быстрых действий на вашем\nкомпьютере под управлением Windows 10 и 11.";
             Devetxt.Content = "Разработчик:";
             text_6.Content = "Станислав Мирошниченко";
             text_5_Copy.Content = "Прочая информация:";
@@ -775,13 +899,44 @@ namespace ModernNotyfi
             redtext.Content = "Крассный";
             greentext.Content = "Зелёный";
             bluetext.Content = "Синий";
-            text23r923ri12.Content = "Широкий слайдер громкости";
+            text23r923ri12.Title = "Широкий слайдер громкости";
+
+            // Revision 3
+            Login_Unesell.Content = "Войти в Unesell Аккаунт";
+            Tab1.Content = "Главная";
+            Tab2.Content = "Сервисы";
+            Tab3.Content = "Основное";
+            Tab4.Content = "Дизайн";
+            Tab5.Content = "Версия";
+            Tab6.Content = "Помощь";
+            Link1.Content = "Тема приложения";
+            Link2.Content = "Цвет акцента элементов";
+            twxtwidgwtwidgwtmenu1.Text = "Мои устройства";
+            InDevelop.Text = "В разработке";
+            InfoUpdate.Content = "Выполните проверку обновлений";
+            SubText1.Text = "Редактируйте главные параметры приложения, такие как тема, положение и взаимодействие.";
+            SubText2.Text = "Изменяйте внешний вид панели на свой вкус и предпочтения.";
+            SubText3.Text = "Приложения от Unesell Studio встроенные в систему.";
+            SubText4.Text = "Информация о разработчике и продукте. Дополнительные ссылки.";
+            SubText5.Text = "Проверка обновлений ModernNotify и компонентов сервисов.";
+            thametext.Subtitle = "Основной стиль оформления приложения.";
+            text0213023.Subtitle = "Выберите, на какой стороне рабочего стола будет находиться панель.";
+            SubText8.Subtitle = "Выберите перевод приложения";
+            text3243.Subtitle = "При запуске приложения будет выводится подсказка об 'Ctrl + Пробел'";
+            textstyleshutdown.Subtitle = "Панель выключения может быть компактной или на весь экран.";
+            texts65464.Subtitle = "Отображать кнопку 'Закрыть панель' на панели выключения.";
+            pcolortext.Subtitle = "Фоновый цвет панелей";
+            pparone.Subtitle = "Показатель, насколько будет просвечивать фон панель.";
+            pradiusboprder.Subtitle = "Радиус закругления углов панелей.";
+            stylewindowtext.Subtitle = "Только для Windows 11 (build 22581+)";
+            text23r923ri12.Subtitle = "Увеличивает задний план слайдера громкости.";
+            MicaBool.Content = "Разрешить";
         }
 
         public void EnglishInterfase_Settings()
         {
             // Revision 0
-            Titles.Content = "Settings";
+            TitleBarApp.Title = "ModernNotify Settings";
             if (Properties.Settings.Default.Unesell_Login == "Yes")
             {
                 localacc.Content = "Unesell account";
@@ -791,44 +946,40 @@ namespace ModernNotyfi
                 localacc.Content = "Local account";
             }
             text_7.Content = "Categories:";
-            mainsett_text.Content = "Main parameters";
-            perssetttext.Content = "Personalization";
-            widgettmaintext.Content = "Widgets";
-            aboutstext.Content = "About the program";
-            text_8.Content = "Other:";
-            updatemainsett.Content = "Software updates";
+            mainsett_text.Text = "Main parameters";
+            perssetttext.Text = "Personalization";
+            widgettmaintext.Text = "Services and Apps";
+            aboutstext.Text = "About the program";
+            updatemainsett.Text = "Software updates";
             close.Content = "Close";
             Save_Settings.Content = "Save changes";
             NameProfile.Content = "Hi, " + Properties.Settings.Default.User_Name + "!";
             text_1.Content = "Main parameters";
             funnanduse.Content = "Functions and interactions";
             subbone.Content = "Shutdown panel";
-            thametext.Content = "Application theme";
-            text0213023.Content = "Panel location";
-            text3243.Content = "Show start notification";
-            textstyleshutdown.Content = "Shutdown bar style";
+            thametext.Title = "Application theme";
+            text0213023.Title = "Panel location";
+            text3243.Title = "Show start notification";
+            textstyleshutdown.Title = "Shutdown bar style";
             subbone.Content = "Shutdown panel.";
-            texts65464.Content = "Button: Turn off the application";
+            texts65464.Title = "Button: Turn off the application";
             text_2.Content = "Categories and sections";
-            twxtwidgwtwidgwtmenu.Content = "Widgets";
-            text23r923ri12.Content = "Wide volume slider";
+            text23r923ri12.Title = "Wide volume slider";
             Back.Content = "< Back";
             // Revision 1
             text_3.Content = "Panel style:";
-            pparone.Content = "Transparency";
-            pcolortext.Content = "Color";
+            pparone.Title = "Transparency";
+            pcolortext.Title = "Color";
             Open_Color.Content = "Palette >";
-            pradiusboprder.Content = "Roundness of corners";
+            pradiusboprder.Title = "Roundness of corners";
             infotextpreview.Content = "Information";
             text_3_Copy1.Content = "Window type";
-            text23r923ri.Content = "Transparency Effects:";
+            stylewindowtext.Title = "Window style:";
             otherptext.Content = "Other:";
-            texte65930.Content = "Other settings:";
-            Go_Tab_2.Content = "Application theme";
             Open_Tab_Update.Content = "Check for updates";
             Open_Site.Content = "Project site";
             textaboutproduct.Content = "About the product:";
-            text_5.Content = "Convenient and beautiful quick action bar on your \n computer running Windows 10 and 11.";
+            text_5.Content = "Convenient and beautiful quick action bar on your\ncomputer running Windows 10 and 11.";
             Devetxt.Content = "Developer:";
             text_6.Content = "Stanislav Miroshnichenko";
             text_5_Copy.Content = "Other information:";
@@ -842,12 +993,36 @@ namespace ModernNotyfi
             redtext.Content = "Red";
             greentext.Content = "Green";
             bluetext.Content = "Blue";
-        }
-
-        private void Open_MyDivece_Click(object sender, RoutedEventArgs e)
-        {
-            MyDevice myDevice = new MyDevice();
-            myDevice.Show();
+            // Revision 3
+            Login_Unesell.Content = "Login to Unesell Account";
+            Tab1.Content = "Home";
+            Tab2.Content = "Services";
+            Tab3.Content = "Main";
+            Tab4.Content = "Design";
+            Tab5.Content = "Update";
+            Tab6.Content = "Help";
+            Link1.Content = "App Theme";
+            Link2.Content = "Element accent color";
+            twxtwidgwtwidgwtmenu1.Text = "My devices";
+            InDevelop.Text = "In develop";
+            InfoUpdate.Content = "Check for updates";
+            SubText1.Text = "Edit the application's main parameters such as theme, position, and interaction.";
+            SubText2.Text = "Change the appearance of the panel to your taste and preferences.";
+            SubText3.Text = "Applications from Unesell Studio built into the system.";
+            SubText4.Text = "Information about the developer and product. Additional links.";
+            SubText5.Text = "Check for updates to ModernNotify and service components.";
+            thametext.Subtitle = "The main style of the application.";
+            text0213023.Subtitle = "Choose which side of the desktop the panel will be on.";
+            SubText8.Subtitle = "Choose app translation";
+            text3243.Subtitle = "When starting the application, a tooltip about 'Ctrl + Space' will be displayed.";
+            textstyleshutdown.Subtitle = "The shutdown panel can be compact or full screen.";
+            texts65464.Subtitle = "Display a 'Close Panel' button on the shutdown panel.";
+            pcolortext.Subtitle = "Panel background color";
+            pparone.Subtitle = "An indicator of how much the background of the panel will shine through.";
+            pradiusboprder.Subtitle = "Panel corner radius.";
+            stylewindowtext.Subtitle = "Windows 11 only (build 22581+)";
+            text23r923ri12.Subtitle = "Increases the background of the volume slider.";
+            MicaBool.Content = "Allow";
         }
 
         private void LoginWebUnesell(object sender, RoutedEventArgs e)
@@ -869,6 +1044,202 @@ namespace ModernNotyfi
             {
                 unesell_login_web unesell_Login_Web = new unesell_login_web();
                 unesell_Login_Web.Show();
+            }
+        }
+
+        private void OpenGameBar(object sender, MouseButtonEventArgs e)
+        {
+            GameBar gameBar = new GameBar();
+            gameBar.Show();
+        }
+
+        private void Open_MyDivece_Click(object sender, MouseButtonEventArgs e)
+        {
+            MyDevice myDevice = new MyDevice();
+            myDevice.Show();
+        }
+
+        // ModernWpf.ThemeManager.GetActualTheme(this).ToString(); <- Тема установленная в системе
+        public void Light_Theme()
+        {
+            this.Background = Brushes.Transparent;
+            var bc = new BrushConverter();
+            this.Background = (Brush)bc.ConvertFrom("#E5E1E1E1");
+            MicaBool.IsChecked = false;
+
+            WPFUI.Appearance.Theme.Set(WPFUI.Appearance.ThemeType.Light);
+
+            Color_Border.Foreground = (Brush)bc.ConvertFrom("#F2343434");
+            Titles.Foreground = (Brush)bc.ConvertFrom("#FF000000");
+            if (Color_Border.Text == "#404040" || Color_Border.Text == "#333333") { Color_Border.Text = "#ffffff"; }
+        }
+
+        public void Dark_Theme()
+        {
+            //Background="#F21B1B1B"
+            var bc = new BrushConverter();
+            this.Background = (Brush)bc.ConvertFrom("#F21B1B1B");
+            
+            
+            WPFUI.Appearance.Theme.Set(WPFUI.Appearance.ThemeType.Dark);
+
+            Color_Border.Foreground = (Brush)bc.ConvertFrom("#F2FFFFFF");
+            Titles.Foreground = (Brush)bc.ConvertFrom("#FFFFFFFF");
+            if (Color_Border.Text == "#ffffff") { Color_Border.Text = "#404040"; }
+        }
+
+        private void WindowsStyle_Select(object sender, SelectionChangedEventArgs e)
+        {
+            
+            if (MicaBool.IsChecked == true)
+            {
+                // Properties.Settings.Default.WinStyle == "Mica";
+                if (stylewin_combo.SelectedIndex == 0)
+                {
+                    //Mica
+                    ApplyBackgroundEffect(0);
+                }
+                if (stylewin_combo.SelectedIndex == 1)
+                {
+                    //Acrylic
+                    ApplyBackgroundEffect(1);
+                }
+                if (stylewin_combo.SelectedIndex == 2)
+                {
+                    //Tabbed
+                    ApplyBackgroundEffect(2);
+                }
+            }
+
+        }
+
+        private void RefreshFrame()
+        {
+            IntPtr mainWindowPtr = new WindowInteropHelper(this).Handle;
+            HwndSource mainWindowSrc = HwndSource.FromHwnd(mainWindowPtr);
+            mainWindowSrc.CompositionTarget.BackgroundColor = Color.FromArgb(0, 0, 0, 0);
+
+            System.Drawing.Graphics desktop = System.Drawing.Graphics.FromHwnd(mainWindowPtr);
+            float DesktopDpiX = desktop.DpiX;
+
+            MARGINS margins = new MARGINS();
+            margins.cxLeftWidth = Convert.ToInt32(5 * (DesktopDpiX / 96));
+            margins.cxRightWidth = Convert.ToInt32(5 * (DesktopDpiX / 96));
+            margins.cyTopHeight = Convert.ToInt32(((int)ActualHeight + 5) * (DesktopDpiX / 96));
+            margins.cyBottomHeight = Convert.ToInt32(5 * (DesktopDpiX / 96));
+
+            ExtendFrame(mainWindowSrc.Handle, margins);
+        }
+
+        private void RefreshDarkMode()
+        {
+            var isDark = ThemeManager.Current.ActualApplicationTheme == ApplicationTheme.Dark;
+            int flag = isDark ? 1 : 0;
+            SetWindowAttribute(
+                new WindowInteropHelper(this).Handle,
+                DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                flag);
+        }
+
+        // WIN 11 (22581+) STYLE 
+        private void ApplyBackgroundEffect(int index)
+        {
+            theme_combo.SelectedIndex = 1;
+            IntPtr windowHandle = new WindowInteropHelper(this).Handle;
+
+            WPFUI.Appearance.Background.Remove(windowHandle);
+
+            if (Properties.Settings.Default.theme == "dark" || theme_combo.SelectedIndex == 2)
+            {
+                WPFUI.Appearance.Background.ApplyDarkMode(windowHandle);
+            }
+            else
+            {
+                WPFUI.Appearance.Background.RemoveDarkMode(windowHandle);
+            }
+
+            switch (index)
+            {
+                case -1:
+                    this.Background = Brushes.Transparent;
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Auto);
+                    break;
+
+                case 0:
+                    Dark_Theme();
+                    this.Background = Brushes.Transparent;
+                    this.WindowStyle = WindowStyle.None;
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 2);
+                    break;
+
+                case 1:
+                    Dark_Theme();
+                    this.Background = Brushes.Transparent;
+                    this.WindowStyle = WindowStyle.None;
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 3);
+                    break;
+
+                case 2:
+                    Dark_Theme();
+                    this.Background = Brushes.Transparent;
+                    this.WindowStyle = WindowStyle.None;
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 4);
+                    break;
+            }
+        }
+
+        bool snakshow = false;
+
+        private void MicaBoolCheked(object sender, RoutedEventArgs e)
+        {
+            if (MicaBool.IsChecked == true && snakshow)
+            {
+                Properties.Settings.Default.MicaBool = true;
+                RootSnackbar.Show = true;
+                stylewin_combo.SelectedIndex = 0;
+                ApplyBackgroundEffect(0);
+
+                Task.Run(async () =>
+                {
+                    await Task.Delay(5000);
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        RootSnackbar.Show = false;
+                    });
+                });
+            }
+            else
+            {
+                Properties.Settings.Default.MicaBool = false;
+                WPFUI.Appearance.Background.Apply(new WindowInteropHelper(this).Handle, WPFUI.Appearance.BackgroundType.Mica);
+                stylewin_combo.SelectedIndex = -1;
+                stylewin_combo.SelectedIndex = 0;
+                theme_combo.SelectedIndex = 1;
+            }
+            snakshow = true;
+        }
+
+        private void RootSnackbar_OnClosed(Snackbar snackbar)
+        {
+            RootSnackbar.Show = false;
+        }
+
+        private void Language_combo1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Language_combo1.SelectedIndex == 0)
+            {
+                RussianInterfase_Settings();
+            }
+            if (Language_combo1.SelectedIndex == 1)
+            {
+                EnglishInterfase_Settings();
             }
         }
     }

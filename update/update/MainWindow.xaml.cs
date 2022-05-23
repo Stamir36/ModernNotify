@@ -1,5 +1,4 @@
-﻿using ModernWpf;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -7,6 +6,14 @@ using System.Net;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using static update.PInvoke.ParameterTypes;
+using static update.PInvoke.Methods;
+using System.Windows.Interop;
+using System.Windows.Media;
+using ModernWpf;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Management;
 
 namespace update
 {
@@ -17,62 +24,25 @@ namespace update
         public string url = "";
         public string new_version;
 
+
         public MainWindow()
         {
             InitializeComponent();
-            ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
-            UVersion.Content = "Установщик: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        }
+
+        public static bool CheckForInternetConnection() //Проверка интернета
+        {
             try
             {
-                FileVersionInfo.GetVersionInfo("ModernNotify.exe");
-                FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo("ModernNotify.exe");
-                program_version = myFileVersionInfo.FileVersion;
-                PVersion.Content = "Приложение: " + myFileVersionInfo.FileVersion;
-                program_relise = myFileVersionInfo.ProductName;
-            }
-            catch
-            {
-                PVersion.Content = "Приложение: " + "Не установлено.";
-                program_version = "0";
-            }
-
-            try
-            {
-                url = "http://version-modernnotify.ml/modernnotify/version_dev.txt";
-                if (Properties.Settings.Default.Server == "GitHub")
+                using (var client = new WebClient())
+                using (var stream = client.OpenRead("http://version-modernnotify.ml/"))
                 {
-                    url = @"https://github.com/Stamir36/ModernNotyfi/raw/main/server/modernnotify/version_dev.txt";
-                }
-
-                if (GetContent(url) == program_version)
-                {
-                    InfoUpdate.Content = "У вас установлена актуальная версия";
-                    SubText.Content = "Обновление не требуется";
-                }
-                else
-                {
-                    Settings.Visibility = Visibility.Hidden;
-                    InfoUpdate.Content = "Загрузка обновления...";
-                    SubText.Content = "Новая версия: " + GetContent(url);
-                    ProgressDownload.Visibility = Visibility.Visible;
-                    new_version = GetContent(url);
-                    download_update();
+                    return true;
                 }
             }
             catch
             {
-                InfoUpdate.Content = "Проверка обновлений не удалась.";
-                SubText.Content = "Проверте подключение или попробуйте позже.";
-                Close.Content = "Выход";
-            }
-
-            if (Properties.Settings.Default.Server == "Site")
-            {
-                theme_combo.SelectedIndex = 0;
-            }
-            else
-            {
-                theme_combo.SelectedIndex = 1;
+                return false;
             }
         }
 
@@ -94,6 +64,7 @@ namespace update
             catch
             {
                 InfoUpdate.Content = "Загрузка обновления не удалась.";
+                Log.Content = "";
                 SubText.Content = "Проверте подключение или попробуйте позже.";
                 Close.Content = "Выход";
             }
@@ -149,20 +120,31 @@ namespace update
             catch
             {
                 InfoUpdate.Content = "Произошла ошибка.";
+                Log.Content = "";
                 SubText.Content = "Пропробуйте ещё раз.";
                 Close.Content = "Выход";
                 throw;
             }
             finally
             {
-                InfoUpdate.Content = "Завершение обновления.";
-                SubText.Content = "Удаление временных файлов.";
+                InfoUpdate.Content = "Завершение обновления...";
+                Log.Content = "";
+                SubText.Content = "Удаление временных файлов...";
                 File.Delete(zipPath);
 
-                InfoUpdate.Content = "Обновление завершено.";
-                SubText.Content = "Запуск программы.";
-                Process.Start("ModernNotify.exe"); // Запуск программы
-                Application.Current.Shutdown(); // Выход
+                Task.Run(async () =>
+                {
+                    await Task.Delay(2000);
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Process.Start("ModernNotify.exe"); // Запуск программы
+                        Application.Current.Shutdown(); // Выход
+                    });
+                });
+
+                InfoUpdate.Content = "Обновление завершено!";
+                SubText.Content = "Запуск программы...";
             }
         }
 
@@ -229,6 +211,136 @@ namespace update
                 Properties.Settings.Default.Server = "GitHub";
                 Properties.Settings.Default.Save();
             }
+        }
+
+        private void update_window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
+            foreach (ManagementObject os in searcher.Get()) {
+
+                if (os["Caption"].ToString().Contains("Windows 11"))
+                {
+                    ThemeManager.SetRequestedTheme(this, ElementTheme.Dark);
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(new WindowInteropHelper(this).Handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 2);
+                }
+                else
+                {
+                    this.Background = System.Windows.Media.Brushes.White;
+                    ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
+                }
+                //MessageBox.Show(os["Caption"].ToString(), "О системе");
+                break; 
+            }
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(500);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    StartCheckUpdate();
+                });
+            });
+        }
+
+        public void StartCheckUpdate()
+        {
+            UVersion.Content = "Установщик: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            try
+            {
+                FileVersionInfo.GetVersionInfo("ModernNotify.exe");
+                FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo("ModernNotify.exe");
+                program_version = myFileVersionInfo.FileVersion;
+                PVersion.Content = "Приложение: " + myFileVersionInfo.FileVersion;
+                program_relise = myFileVersionInfo.ProductName;
+            }
+            catch
+            {
+                PVersion.Content = "Приложение: " + "Не установлено.";
+                program_version = "0";
+            }
+
+            if (CheckForInternetConnection())
+            {
+                try
+                {
+                    url = "http://version-modernnotify.ml/modernnotify/version_dev.txt";
+                    if (Properties.Settings.Default.Server == "GitHub")
+                    {
+                        url = @"https://github.com/Stamir36/ModernNotyfi/raw/main/server/modernnotify/version_dev.txt";
+                    }
+
+                    if (GetContent(url) == program_version)
+                    {
+                        InfoUpdate.Content = "У вас установлена актуальная версия";
+                        Log.Content = "Всё в порядке, спасибо, что используете ModernNotify!";
+                        SubText.Content = "Обновление не требуется";
+                    }
+                    else
+                    {
+                        Settings.Visibility = Visibility.Hidden;
+                        InfoUpdate.Content = "Загрузка обновления...";
+                        Log.Content = "Пожалуйста, подождите...";
+                        SubText.Content = "Новая версия: " + GetContent(url);
+                        ProgressDownload.Visibility = Visibility.Visible;
+                        new_version = GetContent(url);
+                        download_update();
+                    }
+                }
+                catch
+                {
+                    InfoUpdate.Content = "Проверка обновлений не удалась.";
+                    Log.Content = "";
+                    SubText.Content = "Проверте подключение или попробуйте позже.";
+                    Close.Content = "Выход";
+                }
+            }
+            else
+            {
+                InfoUpdate.Content = "Нет соединения с интернетом.";
+                Log.Content = "Проверьте настройки WiFi или кабеля интернет.\nЕсли всё в порядке, вы можете скачать новое\nобновление напрямую с сайта приложения.";
+                SubText.Content = "Проверте подключение или попробуйте позже.";
+                Close.Content = "Выход";
+            }
+
+            if (Properties.Settings.Default.Server == "Site")
+            {
+                theme_combo.SelectedIndex = 0;
+            }
+            else
+            {
+                theme_combo.SelectedIndex = 1;
+            }
+        }
+
+        private void RefreshFrame()
+        {
+            IntPtr mainWindowPtr = new WindowInteropHelper(this).Handle;
+            HwndSource mainWindowSrc = HwndSource.FromHwnd(mainWindowPtr);
+            mainWindowSrc.CompositionTarget.BackgroundColor = System.Windows.Media.Color.FromArgb(0, 0, 0, 0);
+
+            System.Drawing.Graphics desktop = System.Drawing.Graphics.FromHwnd(mainWindowPtr);
+            float DesktopDpiX = desktop.DpiX;
+
+            MARGINS margins = new MARGINS();
+            margins.cxLeftWidth = Convert.ToInt32(5 * (DesktopDpiX / 96));
+            margins.cxRightWidth = Convert.ToInt32(5 * (DesktopDpiX / 96));
+            margins.cyTopHeight = Convert.ToInt32(((int)ActualHeight + 5) * (DesktopDpiX / 96));
+            margins.cyBottomHeight = Convert.ToInt32(5 * (DesktopDpiX / 96));
+
+            ExtendFrame(mainWindowSrc.Handle, margins);
+        }
+
+        private void RefreshDarkMode()
+        {
+            var isDark = ThemeManager.Current.ActualApplicationTheme == ApplicationTheme.Dark;
+            int flag = isDark ? 1 : 0;
+            SetWindowAttribute(
+                new WindowInteropHelper(this).Handle,
+                DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                flag);
         }
     }
 }

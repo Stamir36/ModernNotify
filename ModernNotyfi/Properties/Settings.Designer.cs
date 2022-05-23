@@ -12,7 +12,7 @@ namespace ModernNotyfi.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -49,7 +49,7 @@ namespace ModernNotyfi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#fff")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#404040")]
         public string color_panel {
             get {
                 return ((string)(this["color_panel"]));
@@ -61,7 +61,7 @@ namespace ModernNotyfi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("light")]
+        [global::System.Configuration.DefaultSettingValueAttribute("dark")]
         public string theme {
             get {
                 return ((string)(this["theme"]));
@@ -205,13 +205,13 @@ namespace ModernNotyfi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool AllowsTransparency {
+        [global::System.Configuration.DefaultSettingValueAttribute("Mica")]
+        public string WinStyle {
             get {
-                return ((bool)(this["AllowsTransparency"]));
+                return ((string)(this["WinStyle"]));
             }
             set {
-                this["AllowsTransparency"] = value;
+                this["WinStyle"] = value;
             }
         }
         
@@ -296,6 +296,18 @@ namespace ModernNotyfi.Properties {
             }
             set {
                 this["Unesell_Login"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MicaBool {
+            get {
+                return ((bool)(this["MicaBool"]));
+            }
+            set {
+                this["MicaBool"] = value;
             }
         }
     }

@@ -1,0 +1,37 @@
+﻿<Window x:Class="ModernNotyfi.Other_Page.DebugWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ModernNotyfi.Other_Page"
+        mc:Ignorable="d"
+        xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+        xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
+        Title="Панель тестирования"
+        Style="{StaticResource UiWindow}"
+        WindowStartupLocation="CenterScreen"
+        Height="389" Width="678" ResizeMode="NoResize" Icon="/icons/App_Color.png">
+    <Grid>
+
+        <wpfui:CardControl
+                Title="Внимание!"
+                Margin="18,282,0,20"
+                FontFamily="/icons/Fonts/#Google Sans Medium"
+                Icon="Bug24" Background="#26FF0000"
+                Subtitle="Панель дебагинга предназначена исключительно для разработчиков!" HorizontalAlignment="Left" Width="642" VerticalAlignment="Bottom"/>
+
+        <ScrollViewer Background="{x:Null}" BorderBrush="{x:Null}" Margin="18,56,18,93">
+            <Grid>
+                <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Запуск окна:" Margin="10,10,473,196"/>
+                <Button Content="Запустить &quot;Setup Page&quot;" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="206" Click="OpenSetupPage" Padding="10,6,10,6"/>
+                <Button Content="Запустить &quot;Unesell Login&quot;" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="206" Click="OpenUnesellLogin" Padding="10,6,10,6"/>
+            </Grid>
+        </ScrollViewer>
+
+        <wpfui:TitleBar
+            FontFamily="/icons/Fonts/#Google Sans Medium"
+            Title="Панель тестирования"
+            Icon="pack://application:,,,/icons/App_Color.png"
+            Grid.Row="0"/>
+    </Grid>
+</Window>

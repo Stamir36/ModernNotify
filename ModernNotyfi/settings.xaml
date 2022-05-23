@@ -3,502 +3,639 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+        Style="{StaticResource UiWindow}"
         xmlns:local="clr-namespace:ModernNotyfi"
-        mc:Ignorable="d"
-        Title="Настройки" Height="418" Width="817"
+        Title="Настройки" Height="418" Width="927"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="True" MinWidth="960" MinHeight="530" Icon="icons/maim_settings.png" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Visibility="Visible" AllowsTransparency="True" Loaded="Settings_Loaded">
+        MinWidth="960" MinHeight="530" Icon="icons/maim_settings.png"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Settings_Loaded" mc:Ignorable="d" Background="#F21B1B1B">
+
+    <!--
+    mc:Ignorable="d"
     <Window.Background>
-        <SolidColorBrush x:Name="Window_Back" Color="#F2FFFFFF" Opacity="0.99"/>
+        <SolidColorBrush x:Name="Window_Back" Color="#F2424242" Opacity="0.5"/>
     </Window.Background>
+    -->
 
     <Grid Grid.IsSharedSizeScope="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="63*"/>
-            <ColumnDefinition Width="890*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="73*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <ui:NavigationView
-            x:Name="NavView"
-            IsTitleBarAutoPaddingEnabled="False"
-            IsBackButtonVisible="Collapsed"
-            IsBackEnabled="True"
-            IsPaneOpen="False"
-            IsSettingsVisible="False"
-            IsTabStop="True" Grid.ColumnSpan="2" ItemInvoked="NavView_ItemInvoked">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <ui:NavigationView.PaneHeader>
-                <Grid HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="177" Margin="0,5,0,0">
-                    <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="icon.ico" Width="27" Height="27" Margin="0,1,0,0"/>
-                    <Label Content="ModernNotify" HorizontalAlignment="Left" Margin="32,5,0,0" VerticalAlignment="Top" Width="119" FontWeight="Bold"/>
-                </Grid>
-            </ui:NavigationView.PaneHeader>
-
-            <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem Icon="Home" Tag="Home"  Content="Основное"/>
-                <ui:NavigationViewItem Icon="Setting" Tag="Keyboard" Content="Мини-приложения" />
-                <ui:NavigationViewItem Icon="Edit" Tag="Library" Content="Персонализация" />
-                <ui:NavigationViewItem Icon="Help" Tag="Help" Content="О программе" />
-            </ui:NavigationView.MenuItems>
-
-            <Border>
+            <Border
+                Grid.Column="1"
+                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                CornerRadius="8,0,0,0">
                 <Grid>
-                    <Button x:Name="close" Content="Закрыть окно" Margin="0,0,203,26" HorizontalAlignment="Right" Width="106" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Close" />
-                    <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Save_Settings" Content="Сохранить изменения" Style="{StaticResource AccentButtonStyle}" Margin="0,0,19,26" HorizontalAlignment="Right" Width="179" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Save_Settings_Click" />
-                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Titles" Content="Настройки" Margin="55,19,25,0" VerticalAlignment="Top" Height="50" FontSize="28" Padding="0,0,0,10" VerticalContentAlignment="Center"/>
-                    <Image x:Name="Sett_img" HorizontalAlignment="Left" Height="28" Margin="23,24,0,0" VerticalAlignment="Top" Width="27" Source="icons/settings.png"/>
-                    <TabControl x:Name="Settings_Tab" Margin="-71,70,19,63" Background="{x:Null}" Foreground="{x:Null}" TabStripPlacement="Left">
-                        <TabItem Header="Menu" Width="14" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                    <Grid x:Name="RootGrid">
+                        <Border>
                             <Grid>
+                                <Button x:Name="close" Content="Закрыть окно" Margin="0,0,203,26" HorizontalAlignment="Right" Width="118" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Close" Padding="10,6,10,6" />
+                                <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Save_Settings" Content="Сохранить изменения" Style="{StaticResource AccentButtonStyle}" Margin="0,0,19,26" HorizontalAlignment="Right" Width="179" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Save_Settings_Click" />
+                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Titles" Content="Настройки" Margin="55,16,25,0" VerticalAlignment="Top" Height="50" FontSize="28" Padding="0,0,0,10" VerticalContentAlignment="Center"/>
+                                <Image x:Name="Sett_img" HorizontalAlignment="Left" Height="28" Margin="23,21,0,0" VerticalAlignment="Top" Width="27" Source="icons/settings.png"/>
+                                <TabControl x:Name="Settings_Tab" Margin="0,-196,10,71" Background="{x:Null}" Foreground="{x:Null}" TabStripPlacement="Right" BorderBrush="{x:Null}">
+                                    <TabItem Header="Menu" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,8,0,0" BorderBrush="{x:Null}">
+                                        <ScrollViewer Background="{x:Null}" BorderBrush="{x:Null}">
+                                            <Grid Margin="-18,0,4,0">
 
+                                                <Grid Margin="45,122,20,0" Height="383" VerticalAlignment="Top">
+                                                    <StackPanel>
+                                                        <wpfui:CardAction x:Name="Open_Main"
+                                                        Margin="0,0,0,8"
+                                                        Click="Open_Main_Click"
+                                                        Icon="ResizeLarge24">
+                                                            <StackPanel>
+                                                                <TextBlock x:Name="mainsett_text"
+                                                                 
+                                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                                Margin="0,0,0,4"
+                                                                FontWeight="Medium"
+                                                                Text="Основные параметры" />
+                                                                <TextBlock x:Name="SubText1"
+                                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                                FontSize="10"
+                                                                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                                Text="Редактируйте главные параметры приложения, такие как тема, положение и взаимодействие." />
+                                                            </StackPanel>
+                                                        </wpfui:CardAction>
 
-                                <Button x:Name="Open_Main" Margin="80,122,0,0" VerticalAlignment="Top" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Main_Click">
-                                    <Grid Height="41" Width="377">
-                                        <Image HorizontalAlignment="Left" Source="icons/maim_settings.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                        <Label x:Name="mainsett_text" Content="Основные параметры" Margin="37,7,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                    </Grid>
-                                </Button>
-                                <Label x:Name="text_7" Content="Категории:" HorizontalAlignment="Left" Margin="80,99,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="Open_Keyboard" Margin="80,182,0,0" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Keyboard_Click" VerticalAlignment="Top">
-                                    <Grid Height="41" Width="377">
-                                        <Image HorizontalAlignment="Left" Source="icons/App_Color.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                        <Label x:Name="widgettmaintext" Content="Мини-приложения" Margin="37,7,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                    </Grid>
-                                </Button>
-                                <Button x:Name="Open_Personalization" Margin="507,122,0,0" VerticalAlignment="Top" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Personalization_Click">
-                                    <Grid Height="41" Width="377">
-                                        <Image HorizontalAlignment="Left" Source="icons/Personalization.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                        <Label x:Name="perssetttext" Content="Персонализация" Margin="30,6,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                    </Grid>
-                                </Button>
-                                <Button x:Name="Open_Info" Margin="507,182,0,0" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Info_Click" VerticalAlignment="Top">
-                                    <Grid Height="41" Width="377">
-                                        <Image HorizontalAlignment="Left" Source="icons/info.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                        <Label x:Name="aboutstext" Content="О программе" Margin="37,7,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                    </Grid>
-                                </Button>
-                                <Button x:Name="Open_Update" Margin="80,274,0,0" VerticalAlignment="Top" Width="414" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_Update_Click">
-                                    <Grid Height="41" Width="377">
-                                        <Image HorizontalAlignment="Left" Source="icons/update.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                        <Label x:Name="updatemainsett" Content="Обновления программы" Margin="37,7,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" />
-                                    </Grid>
-                                </Button>
-                                <Label x:Name="text_8" Content="Прочее:" HorizontalAlignment="Left" Margin="80,251,0,0" VerticalAlignment="Top"/>
-                                <Border BorderThickness="1" Height="73" Margin="73,10,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" BorderBrush="#33000000" HorizontalAlignment="Left" Width="856">
-                                    <Border.Background>
-                                        <SolidColorBrush Color="#7FDADADA" Opacity="0.7"/>
-                                    </Border.Background>
-                                    <Grid>
-                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NameProfile" Content="Привет!" Margin="83,14,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
-                                        <ui:ProgressRing x:Name="progressRing" IsActive="True" Width="32" Height="35" HorizontalAlignment="Left" Margin="28,16,0,0" VerticalAlignment="Top" />
-                                        <Ellipse Margin="15,7,0,0" Stroke="#7F000000" HorizontalAlignment="Left" Width="57" Height="57" VerticalAlignment="Top">
-                                            <Ellipse.Fill>
-                                                <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="localacc" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="84,41,0,0" VerticalAlignment="Top"/>
-                                        <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Login_Unesell" Content="Войти в Unesell Аккаунт" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="0,18,20,0" VerticalAlignment="Top" Width="210" Cursor="Hand" Click="LoginWebUnesell"/>
-                                    </Grid>
-                                </Border>
+                                                        <wpfui:CardAction
+                                                        x:Name="Open_Personalization"
+                                                        Margin="0,0,0,8"
+                                                        Icon="Color24"
+                                                        Click="Open_Personalization_Click">
+                                                            <StackPanel>
+                                                                <TextBlock x:Name="perssetttext"
+                                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                                Margin="0,0,0,4"
+                                                                FontWeight="Medium"
+                                                                Text="Персонализация" />
+                                                                <TextBlock x:Name="SubText2"
+                                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                                FontSize="10"
+                                                                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                                Text="Изменяйте внешний вид панели на свой вкус и предпочтения." />
+                                                            </StackPanel>
+                                                        </wpfui:CardAction>
 
-                            </Grid>
-                        </TabItem>
-                        <TabItem Width="14">
-                            <ScrollViewer>
-                                <StackPanel>
-                                    <Grid Height="486">
-                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_1" Content="Основные параметры" Margin="69,15,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="75,39,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
-                                            <Border.RenderTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform ScaleY="-1"/>
-                                                    <SkewTransform/>
-                                                    <RotateTransform/>
-                                                    <TranslateTransform/>
-                                                </TransformGroup>
-                                            </Border.RenderTransform>
-                                        </Border>
-                                        <Border BorderThickness="1" Height="57" Margin="70,52,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                            <Border.BorderBrush>
-                                                <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                            </Border.BorderBrush>
-                                            <Border.Background>
-                                                <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                            </Border.Background>
-                                            <Grid>
-                                                <Label x:Name="thametext" Content="Тема приложения" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
-                                                <ComboBox x:Name="theme_combo" HorizontalAlignment="Right" Margin="0,11,10,0" VerticalAlignment="Top" Width="210" SelectionChanged="theme_combo_SelectionChanged">
-                                                    <TextBlock>Светлая</TextBlock>
-                                                    <TextBlock>Тёмная</TextBlock>
-                                                </ComboBox>
-                                            </Grid>
-                                        </Border>
-                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="funnanduse" Content="Функции и взаимодействие" Margin="68,307,0,0" HorizontalAlignment="Left" Width="276" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="72,330,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
-                                            <Border.RenderTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform ScaleY="-1"/>
-                                                    <SkewTransform/>
-                                                    <RotateTransform/>
-                                                    <TranslateTransform/>
-                                                </TransformGroup>
-                                            </Border.RenderTransform>
-                                        </Border>
-                                        <Border BorderThickness="1" Height="57" Margin="70,419,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                            <Border.BorderBrush>
-                                                <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                            </Border.BorderBrush>
-                                            <Border.Background>
-                                                <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                            </Border.Background>
-                                            <Grid x:Name="Click_Shitdown_Check">
-                                                <Label x:Name="texts65464" Content="Кнопка: Выключение приложения" HorizontalAlignment="Left" Margin="55,14,0,0" VerticalAlignment="Top" Height="24" Width="359" FontSize="18"/>
-                                                <Image HorizontalAlignment="Left" Height="30" Margin="14,12,0,0" VerticalAlignment="Top" Width="30" Source="icons/exit.png"/>
-                                                <CheckBox x:Name="Exit_Setting" HorizontalAlignment="Right" Margin="0,10,20,0" VerticalAlignment="Top" Width="20" Height="32" MinWidth="20" Cursor="Hand"/>
-                                            </Grid>
-                                        </Border>
+                                                        <wpfui:CardAction x:Name="Open_Keyboard"
+                                                        Margin="0,0,0,8"
+                                                        Click="Open_Keyboard_Click"
+                                                        Icon="Apps24">
+                                                            <StackPanel>
+                                                                <TextBlock x:Name="widgettmaintext"
+                                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                                Margin="0,0,0,4"
+                                                                FontWeight="Medium"
+                                                                Text="Внутрипрограмные сервисы" />
+                                                                <TextBlock x:Name="SubText3"
+                                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                                FontSize="10"
+                                                                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                                Text="Приложения от Unesell Studio встроенные в систему." />
+                                                            </StackPanel>
+                                                        </wpfui:CardAction>
 
-                                        <Border BorderThickness="1" Height="57" Margin="70,357,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                            <Border.BorderBrush>
-                                                <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                            </Border.BorderBrush>
-                                            <Border.Background>
-                                                <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                            </Border.Background>
-                                            <Grid>
-                                                <Label x:Name="textstyleshutdown" Content="Стиль панели выключения" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="235" FontSize="18"/>
-                                                <ComboBox x:Name="Style_Shutdown" HorizontalAlignment="Right" Margin="0,11,10,0" VerticalAlignment="Top" Width="210" SelectionChanged="theme_combo_SelectionChanged">
-                                                    <TextBlock><Run Text="Обычный"/></TextBlock>
-                                                    <TextBlock><Run Text="Современный"/></TextBlock>
-                                                </ComboBox>
-                                            </Grid>
-                                        </Border>
-                                        <Label x:Name="subbone" Content="Панель выключения." Margin="73,332,0,0" HorizontalAlignment="Left" Width="142" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
-                                        <Border BorderThickness="1" Height="57" Margin="70,233,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                            <Border.BorderBrush>
-                                                <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                            </Border.BorderBrush>
-                                            <Border.Background>
-                                                <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                            </Border.Background>
-                                            <Grid x:Name="Click_Shitdown_Check1">
-                                                <Label x:Name="text3243" Content="Показывать стартовое уведомление" HorizontalAlignment="Left" Margin="55,14,0,0" VerticalAlignment="Top" Height="24" Width="359" FontSize="18"/>
-                                                <Image HorizontalAlignment="Left" Height="30" Margin="14,12,0,0" VerticalAlignment="Top" Width="30" Source="icons/info.png"/>
-                                                <CheckBox x:Name="Chek_Start_Notify" HorizontalAlignment="Right" Margin="0,10,20,0" VerticalAlignment="Top" Width="20" Height="32" MinWidth="20" Cursor="Hand"/>
-                                            </Grid>
-                                        </Border>
-                                        <Border BorderThickness="1" Height="57" Margin="70,112,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                            <Border.BorderBrush>
-                                                <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                            </Border.BorderBrush>
-                                            <Border.Background>
-                                                <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                            </Border.Background>
-                                            <Grid>
-                                                <Label x:Name="text0213023" Content="Местоположение панели" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
-                                                <ComboBox x:Name="pos_combo" HorizontalAlignment="Right" Margin="0,11,10,0" VerticalAlignment="Top" Width="210">
-                                                    <TextBlock><Run Text="Справо"/></TextBlock>
-                                                    <TextBlock><Run Text="Слево"/></TextBlock>
-                                                </ComboBox>
-                                            </Grid>
-                                        </Border>
-                                        <Border BorderThickness="1" Height="57" Margin="70,172,31,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                            <Border.BorderBrush>
-                                                <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                            </Border.BorderBrush>
-                                            <Border.Background>
-                                                <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                            </Border.Background>
-                                            <Grid>
-                                                <Label Content="Язык / Language" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
-                                                <ComboBox x:Name="Language_combo1" HorizontalAlignment="Right" Margin="0,11,10,0" VerticalAlignment="Top" Width="210" DataContextChanged="Select_Language">
-                                                    <TextBlock><Run Text="Русский"/></TextBlock>
-                                                    <TextBlock><Run Text="English"/></TextBlock>
-                                                </ComboBox>
-                                            </Grid>
-                                        </Border>
-                                    </Grid>
-                                </StackPanel>
-                            </ScrollViewer>
-                        </TabItem>
-                        <TabItem Width="14">
-                            <Grid>
-                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_2" Content="Категории и разделы" Margin="70,10,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                <Button x:Name="Open_Start" Margin="70,59,0,0" VerticalAlignment="Top" Width="159" Height="140" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand">
-                                    <Grid Height="148" Width="149">
-                                        <Image HorizontalAlignment="Left" Source="/icons/App_Color.png" Margin="28,10,0,55" Width="89" RenderTransformOrigin="0.75,0.812" />
-                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="twxtwidgwtwidgwtmenu" Content=" Мини-приложения" Margin="0,98,0,0" HorizontalAlignment="Center" Width="149" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" HorizontalContentAlignment="Left" />
-                                    </Grid>
-                                </Button>
-                                <Button x:Name="Open_MyDivece" Margin="245,59,0,0" VerticalAlignment="Top" Width="159" Height="140" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Open_MyDivece_Click">
-                                    <Grid Height="130" Width="141">
-                                        <Image HorizontalAlignment="Center" Source="/icons/Device.png" Margin="0,10,0,49" Width="100" RenderTransformOrigin="0.75,0.812" />
-                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="twxtwidgwtwidgwtmenu1" Content="Мои устройства" Margin="0,98,0,0" HorizontalAlignment="Center" Width="129" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" HorizontalContentAlignment="Center" />
-                                    </Grid>
-                                </Button>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Width="14">
-                            <Grid>
-                                <ScrollViewer VerticalAlignment="Top">
-                                    <StackPanel Height="560">
-                                        <Grid ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="0,0,10,0" Height="528">
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_3" Content="Вид панелей:" Margin="71,15,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,39,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
-                                                <Border.RenderTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform ScaleY="-1"/>
-                                                        <SkewTransform/>
-                                                        <RotateTransform/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </Border.RenderTransform>
-                                            </Border>
+                                                        <wpfui:CardAction
+                                                            x:Name="Open_Info"
+                                                            Icon="CalendarQuestionMark20"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Margin="0,0,0,8"
+                                                            Click="Open_Info_Click"
+                                                            Cursor="Hand">
+                                                            <StackPanel>
+                                                                <TextBlock x:Name="aboutstext"
+                                                                Margin="0,0,0,4"
+                                                                FontWeight="Medium"
+                                                                Text="О программе" />
+                                                                <TextBlock x:Name="SubText4"
+                                                                FontSize="10"
+                                                                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                                Text="Информация о разработчеке и продукте. Дополнительные ссылки." />
+                                                            </StackPanel>
+                                                        </wpfui:CardAction>
 
-
-                                            <Border BorderThickness="1" Height="57" Margin="73,56,280,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                                <Border.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                                </Border.BorderBrush>
-                                                <Border.Background>
-                                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                                </Border.Background>
-                                                <Grid>
-                                                    <Label x:Name="pparone" Content="Прозрачность" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="305" FontSize="18"/>
-                                                    <Slider x:Name="Opacity_Panel_Settings" Margin="0,11,10,0" VerticalAlignment="Top" Maximum="100" Minimum="50" ValueChanged="ValueUpdate" Value="70" AutoToolTipPlacement="TopLeft" HorizontalAlignment="Right" Width="250"/>
+                                                        <wpfui:CardAction
+                                                        x:Name="Open_Update"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Margin="0,0,0,8"
+                                                            Click="Open_Update_Click"
+                                                            Icon="ApprovalsApp20">
+                                                            <StackPanel>
+                                                                <TextBlock x:Name="updatemainsett"
+                                                                    Margin="0,0,0,4"
+                                                                    FontWeight="Medium"
+                                                                    Text="Центр обновления" />
+                                                                <TextBlock x:Name="SubText5"
+                                                                FontSize="10"
+                                                                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                                Text="Проверка обновлений ModernNotify и компонентов сервисов." />
+                                                            </StackPanel>
+                                                        </wpfui:CardAction>
+                                                    </StackPanel>
                                                 </Grid>
-                                            </Border>
-                                            <Border BorderThickness="1" Height="57" Margin="73,118,280,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                                <Border.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                                </Border.BorderBrush>
-                                                <Border.Background>
-                                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                                </Border.Background>
-                                                <Grid>
-                                                    <Label x:Name="pcolortext" Content="Цвет" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="308" FontSize="18"/>
-                                                    <TextBox x:Name="Color_Border" Height="23" Margin="0,10,111,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="Color_Border_TextChanged" Foreground="Black" BorderBrush="#99000000" HorizontalAlignment="Right" Width="146"/>
-                                                    <Button x:Name="Open_Color" Content="Палитра &gt;" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Click="Open_Color_Click" Cursor="Hand" Width="91"/>
-                                                </Grid>
-                                            </Border>
+                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_7" Content="Категории:" HorizontalAlignment="Left" Margin="45,99,0,0" VerticalAlignment="Top"/>
+                                                <ui:ProgressRing x:Name="progressRing" IsActive="True" Width="32" Height="35" HorizontalAlignment="Left" Margin="60,28,0,0" VerticalAlignment="Top" />
+                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NameProfile" Content="Привет!" Margin="115,23,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold"/>
+                                                <Ellipse Margin="47,16,0,0" Stroke="#7F000000" HorizontalAlignment="Left" Width="57" Height="57" VerticalAlignment="Top">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="localacc" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="116,48,0,0" VerticalAlignment="Top"/>
+                                                <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Login_Unesell" Content="Войти в Unesell Аккаунт" Style="{StaticResource AccentButtonStyle}" Margin="0,26,20,0" Cursor="Hand" Click="LoginWebUnesell" VerticalAlignment="Top" HorizontalAlignment="Right" Width="210"/>
 
-                                            <Border BorderThickness="1" HorizontalAlignment="Right" Margin="0,46,31,0" Width="240" CornerRadius="15" Height="129" VerticalAlignment="Top">
-                                                <Grid>
-                                                    <Grid.Background>
-                                                        <ImageBrush ImageSource="icons/desktop.png" Opacity="0.8"/>
-                                                    </Grid.Background>
-                                                    <Label Content="Предпросмотр" HorizontalAlignment="Left" Margin="12,9,0,0" VerticalAlignment="Top" Foreground="White" FontStyle="Italic" FontSize="10"/>
-                                                    <Border x:Name="Border_Preview" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="32" Margin="10,67,0,0" VerticalAlignment="Top" Width="218" CornerRadius="15">
-                                                        <Border.Background>
-                                                            <SolidColorBrush Color="#FFECDBDB" Opacity="0.7"/>
-                                                        </Border.Background>
-                                                        <Image Source="icons/sound.png" Margin="8,3,184,4" />
-                                                    </Border>
-                                                    <Label x:Name="infotextpreview" Content="Информация" Margin="43,72,101,32" FontStyle="Italic" />
-                                                </Grid>
-                                            </Border>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="otherptext" Content="Прочее:" Margin="72,426,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,447,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
-                                                <Border.RenderTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform ScaleY="-1"/>
-                                                        <SkewTransform/>
-                                                        <RotateTransform/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </Border.RenderTransform>
-                                            </Border>
-                                            <Border BorderThickness="1" Height="57" Margin="73,459,35,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                                <Border.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                                </Border.BorderBrush>
-                                                <Border.Background>
-                                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                                </Border.Background>
-                                                <Grid Margin="0,0,0,-1">
-                                                    <Label x:Name="texte65930" Content="Другие настройки:" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
-                                                    <Button x:Name="Go_Tab_2" Content="Тема приложения" HorizontalAlignment="Right" Margin="0,10,15,0" VerticalAlignment="Top" Width="145" Click="Go_Tab_1_Click" Cursor="Hand"/>
-
-                                                </Grid>
-                                            </Border>
-                                            <Border BorderThickness="1" Height="57" Margin="73,180,35,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                                <Border.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                                </Border.BorderBrush>
-                                                <Border.Background>
-                                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                                </Border.Background>
-                                                <Grid>
-                                                    <Label x:Name="pradiusboprder" Content="Закруглённость углов" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="305" FontSize="18"/>
-                                                    <Slider x:Name="CRadius_Panel_Settings" Margin="0,0,10,0" VerticalAlignment="Center" Maximum="15" ValueChanged="CRadius_Panel_Settings_Value" Value="15" AutoToolTipPlacement="TopLeft" HorizontalAlignment="Right" Width="214"/>
-                                                </Grid>
-                                            </Border>
-                                            <Border BorderThickness="1" Height="56" Margin="73,290,38,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                                <Border.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                                </Border.BorderBrush>
-                                                <Border.Background>
-                                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                                </Border.Background>
-                                                <Grid Margin="-4,0,4,0">
-                                                    <Label x:Name="text23r923ri" Content="Эффекты прозрачности окна:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Height="24" Width="326" FontSize="18"/>
-                                                    <CheckBox x:Name="Chek_Allow_Window" Margin="0,0,22,0" Width="20" Height="32" MinWidth="20" Cursor="Hand" HorizontalAlignment="Right"/>
-
-                                                </Grid>
-                                            </Border>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_3_Copy1" Content="Дизайн компонентов:" Margin="71,0,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="26" VerticalAlignment="Center" />
-                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="76,277,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
-                                                <Border.RenderTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform ScaleY="-1"/>
-                                                        <SkewTransform/>
-                                                        <RotateTransform/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </Border.RenderTransform>
-                                            </Border>
-                                            <Border BorderThickness="1" Height="56" Margin="73,350,38,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                                <Border.BorderBrush>
-                                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                                </Border.BorderBrush>
-                                                <Border.Background>
-                                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                                </Border.Background>
-                                                <Grid Margin="-4,0,4,0">
-                                                    <Label x:Name="text23r923ri12" Content="Широкий слайдер громкости:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Height="24" Width="326" FontSize="18"/>
-                                                    <CheckBox x:Name="Chek_Allow_NEW_PgBar" Margin="0,0,22,0" Width="20" Height="32" MinWidth="20" Cursor="Hand" HorizontalAlignment="Right"/>
-
-                                                </Grid>
-                                            </Border>
-
-
-                                        </Grid>
-
-                                    </StackPanel>
-
-                                </ScrollViewer>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Width="14">
-                            <Grid>
-                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="ModernNotify" Margin="121,2,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="24" VerticalContentAlignment="Center" Height="33" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0074FF" />
-                                <Image HorizontalAlignment="Left" Height="49" Margin="69,1,0,0" VerticalAlignment="Top" Width="49" Source="icon.ico"/>
-                                <Button x:Name="Open_Tab_Update" Content="Проверить обновления" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Left" Margin="76,66,0,0" VerticalAlignment="Top" Width="174" Click="Open_Tab_Update_Click" Cursor="Hand"/>
-                                <Button x:Name="Open_Site" Content="Сайт проекта" HorizontalAlignment="Left" Margin="255,66,0,0" VerticalAlignment="Top" Width="110" Cursor="Hand" Click="Open_Site_Progect"/>
-                                <Label x:Name="version" Content="version" HorizontalAlignment="Left" Margin="128,30,0,0" VerticalAlignment="Top" Width="154"/>
-                                <Label x:Name="Devetxt" Content="Разработчик:" HorizontalAlignment="Left" Margin="76,181,0,0" VerticalAlignment="Top" Foreground="#FF0023FF" FontWeight="Bold"/>
-                                <Label x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="76,200,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="textaboutproduct" Content="О продукте:" HorizontalAlignment="Left" Margin="76,113,0,0" VerticalAlignment="Top" Foreground="#FF0023FF" FontWeight="Bold"/>
-                                <Label x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11." HorizontalAlignment="Left" Margin="76,132,0,0" VerticalAlignment="Top" Height="48" Width="371" UseLayoutRounding="False"/>
-                                <Button x:Name="text_5_dadsc" Content="Используемый исходный код" HorizontalAlignment="Right" Margin="0,55,10,0" VerticalAlignment="Top" Width="215" Click="Open_Sourse" Padding="1,1,7,1" Background="{x:Null}" Foreground="#FF003AFF" BorderBrush="Transparent" HorizontalContentAlignment="Right"/>
-                                <Label x:Name="text_5_Copy" Content="Прочая информация:" HorizontalAlignment="Right" Margin="0,33,15,0" VerticalAlignment="Top" Height="19" Width="155" UseLayoutRounding="False" HorizontalContentAlignment="Right"/>
-                                <Button x:Name="text_5_dvdsacv" Content="Репозиторий" HorizontalAlignment="Right" Margin="0,78,10,0" VerticalAlignment="Top" Width="215" Click="Open_Sourse_Code" Padding="1,1,7,1" Background="{x:Null}" Foreground="#FF003AFF" BorderBrush="Transparent" HorizontalContentAlignment="Right"/>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Width="14">
-                            <Grid>
-                                <Border BorderBrush="#7F000000" BorderThickness="1" Height="73" Margin="73,10,21,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                    <Border.Background>
-                                        <SolidColorBrush Color="#7FDADADA" Opacity="0.7"/>
-                                    </Border.Background>
-                                    <Grid>
-                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="InfoUpdate" Content="Выполните проверку обновлений" Margin="78,12,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
-                                        <Image x:Name="Update_img" HorizontalAlignment="Left" Height="51" Margin="15,10,0,0" VerticalAlignment="Top" Width="51" Source="icons/update.png" RenderTransformOrigin="0.5,0.5"></Image>
-                                        <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Check_Update" Content="Проверить наличие обновлений" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="0,18,20,0" VerticalAlignment="Top" Width="254" Cursor="Hand" Click="Check_Update_Click"/>
-                                        <Label x:Name="LastChekUpdate" Content="Последняя проверка" HorizontalAlignment="Left" Margin="78,39,0,0" VerticalAlignment="Top"/>
-                                    </Grid>
-                                </Border>
-                                <Rectangle Fill="#4CD0D0DE" HorizontalAlignment="Left" Height="184" Margin="73,113,0,0" VerticalAlignment="Top" Width="420" RadiusY="17.5" RadiusX="17.5"/>
-                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="SysInfoHeader" Content="Информация о системе" HorizontalAlignment="Left" Margin="88,129,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal"/>
-                                <Rectangle Fill="#4CD0D0DE" HorizontalAlignment="Left" Height="184" Margin="509,113,0,0" VerticalAlignment="Top" Width="420" RadiusY="17.5" RadiusX="17.5"/>
-                                <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="88,153,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
-                                    <Border.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleY="-1"/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </Border.RenderTransform>
-                                </Border>
-                                <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="527,154,0,0" VerticalAlignment="Top" Width="337" RenderTransformOrigin="0.5,0.5">
-                                    <Border.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleY="-1"/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </Border.RenderTransform>
-                                </Border>
-                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="inforelithe" Content="Информация о выпуске" HorizontalAlignment="Left" Margin="528,126,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="WindowsVersion" Content="WindowsVersion" HorizontalAlignment="Left" Margin="90,164,0,0" VerticalAlignment="Top"/>
-                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version" Content="Версия: 0.0.0.11" HorizontalAlignment="Left" Margin="529,165,0,0" VerticalAlignment="Top"/>
-                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Memory" Content="Memory" HorizontalAlignment="Left" Margin="90,188,0,0" VerticalAlignment="Top"/>
-                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="EctInfoSys" Content="Ect" HorizontalAlignment="Left" Margin="90,212,0,0" VerticalAlignment="Top" Height="69" Width="313"/>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Width="14">
-                            <ScrollViewer HorizontalAlignment="Left" VerticalAlignment="Top" Height="385">
-                                <StackPanel Height="385">
-                                    <Grid Height="397" Width="941">
-                                        <Border BorderThickness="1" Height="57" Margin="81,10,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="469">
-                                            <Grid HorizontalAlignment="Left" Width="473">
-                                                <TextBox x:Name="color_piker" HorizontalAlignment="Left" Height="23" Margin="16,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
-                                                <Button x:Name="Color_Save" Content="Сохранить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="100" Click="Color_Save_Click" Cursor="Hand"/>
-                                                <Button x:Name="Site_color" Content="Сайт кодов" HorizontalAlignment="Left" Margin="361,10,-70,0" VerticalAlignment="Top" Click="Site_color_Click" Cursor="Hand" Width="91"/>
                                             </Grid>
-                                        </Border>
-                                        <Border BorderThickness="1" Height="196" Margin="81,105,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="469">
-                                            <Grid HorizontalAlignment="Left" Width="473">
-                                                <Slider x:Name="Red" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" Width="412" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
-                                                <Slider x:Name="Green" HorizontalAlignment="Left" Margin="20,89,0,0" VerticalAlignment="Top" Width="412" Height="36" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
-                                                <Slider x:Name="Blue" HorizontalAlignment="Left" Margin="20,149,0,0" VerticalAlignment="Top" Width="412" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
-                                                <Label x:Name="redtext" Content="Красный" HorizontalAlignment="Left" Margin="16,10,0,151" Width="72"/>
-                                                <Label x:Name="greentext" Content="Зелёный" HorizontalAlignment="Left" Margin="16,70,0,0" VerticalAlignment="Top" Width="72"/>
-                                                <Label x:Name="bluetext" Content="Синий" HorizontalAlignment="Left" Margin="16,130,0,0" VerticalAlignment="Top" Width="51"/>
-                                            </Grid>
-                                        </Border>
-
-                                        <Border BorderThickness="1" Height="31" Margin="81,307,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="146">
-                                            <Grid>
-                                                <Border BorderThickness="1" Margin="8,6,0,0" Background="#7FFF0000" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
-                                                <Label x:Name="REDtext" Margin="25,0,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"></Label>
-                                                <Border BorderThickness="1" Margin="52,0,0,0" Background="#7F00FF00" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center"/>
-                                                <Label x:Name="GREENtext" Content="000" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="69,0,0,0"/>
-                                                <Border BorderThickness="1" Margin="96,0,0,0" Background="#7F0000FF" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Center"/>
-                                                <Label x:Name="BLUEtext" Margin="113,0,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"/>
-                                            </Grid>
-                                        </Border>
-
-                                        <Border x:Name="Material_Border" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="642,24,0,65" Width="242" CornerRadius="20" RenderTransformOrigin="0.5,0.5" Background="#FFE6ADAD">
-                                            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Margin="0,-1,0,0" Width="242" CornerRadius="20" RenderTransformOrigin="0.5,0.5" Height="308" VerticalAlignment="Top">
-                                                <Border.Background>
-                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                        <LinearGradientBrush.RelativeTransform>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                    <TabItem Header="Main Setting" Width="80" Margin="188,-27,626,27">
+                                        <ScrollViewer>
+                                            <StackPanel>
+                                                <Grid Height="575">
+                                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_1" Content="Основные параметры" Margin="24,15,0,0" HorizontalAlignment="Left" Width="244" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                                    <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="30,39,0,0" VerticalAlignment="Top" Width="354" RenderTransformOrigin="0.5,0.5">
+                                                        <Border.RenderTransform>
                                                             <TransformGroup>
-                                                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                                                <RotateTransform Angle="143" CenterY="0.5" CenterX="0.5"/>
+                                                                <ScaleTransform ScaleY="-1"/>
+                                                                <SkewTransform/>
+                                                                <RotateTransform/>
                                                                 <TranslateTransform/>
                                                             </TransformGroup>
-                                                        </LinearGradientBrush.RelativeTransform>
-                                                        <GradientStop Color="#00F1A6A6" Offset="0.8"/>
-                                                        <GradientStop Offset="1" Color="#7FFDFDFD"/>
-                                                    </LinearGradientBrush>
-                                                </Border.Background>
+                                                        </Border.RenderTransform>
+                                                    </Border>
+
+                                                    <wpfui:CardControl x:Name="thametext"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        Title="Тема приложения"
+                                                        Grid.Row="0"
+                                                        Icon="DarkTheme24"
+                                                        Subtitle="Основной стиль оформления приложения." Margin="27,53,25,0" Height="68" VerticalAlignment="Top">
+                                                        <ComboBox x:Name="theme_combo" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" SelectionChanged="theme_combo_SelectionChanged" HorizontalContentAlignment="Left">
+                                                            <TextBlock>Светлая</TextBlock>
+                                                            <TextBlock>Тёмная</TextBlock>
+                                                            <TextBlock>Как в системе</TextBlock>
+                                                        </ComboBox>
+                                                    </wpfui:CardControl>
+                                                    <wpfui:CardControl x:Name="text0213023"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        Title="Местоположение панели"
+                                                        Grid.Row="0"
+                                                        Icon="AlignEndHorizontal20"
+                                                        Subtitle="Выберите, на какой стороне рабочего стола будет находиться панель." Margin="27,130,25,0" Height="68" VerticalAlignment="Top">
+                                                        <ComboBox x:Name="pos_combo" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" HorizontalContentAlignment="Left">
+                                                            <TextBlock><Run Text="Справо"/></TextBlock>
+                                                            <TextBlock><Run Text="Слево"/></TextBlock>
+                                                        </ComboBox>
+                                                    </wpfui:CardControl>
+                                                    <wpfui:CardControl x:Name="SubText8"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        Title="Язык / Language"
+                                                        Grid.Row="0"
+                                                        Icon="CodeText20"
+                                                        Subtitle="Выберите перевод приложения" Margin="27,208,25,0" Height="68" VerticalAlignment="Top">
+                                                        <ComboBox x:Name="Language_combo1" HorizontalAlignment="Right" Width="200" DataContextChanged="Select_Language" HorizontalContentAlignment="Left" SelectionChanged="Language_combo1_SelectionChanged">
+                                                            <TextBlock><Run Text="Русский"/></TextBlock>
+                                                            <TextBlock><Run Text="English"/></TextBlock>
+                                                        </ComboBox>
+                                                    </wpfui:CardControl>
+                                                    <wpfui:CardControl x:Name="text3243"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        Title="Показывать стартовое уведомление"
+                                                        Grid.Row="0"
+                                                        Icon="Comment24"
+                                                        Subtitle="При запуске приложения будет выводится подсказка об &quot;Ctrl + Пробел&quot;" Margin="27,286,25,0" Height="68" VerticalAlignment="Top">
+                                                        <wpfui:ToggleSwitch x:Name="Chek_Start_Notify" Cursor="Hand"/>
+                                                    </wpfui:CardControl>
+                                                    <wpfui:CardControl
+                                                        x:Name="textstyleshutdown" Title="Стиль панели выключения"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        Grid.Row="0"
+                                                        Icon="ColorLine24"
+                                                        Subtitle="Панель выключения может быть компактной или на весь экран." Margin="27,420,25,0" Height="68" VerticalAlignment="Top">
+                                                        <ComboBox x:Name="Style_Shutdown" HorizontalAlignment="Right" Width="200" SelectionChanged="theme_combo_SelectionChanged" HorizontalContentAlignment="Left">
+                                                            <TextBlock><Run Text="Обычный"/></TextBlock>
+                                                            <TextBlock><Run Text="Современный"/></TextBlock>
+                                                        </ComboBox>
+                                                    </wpfui:CardControl>
+                                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="funnanduse" Content="Функции и взаимодействие" Margin="23,369,0,0" HorizontalAlignment="Left" Width="293" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                                    <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="27,392,0,0" VerticalAlignment="Top" Width="353" RenderTransformOrigin="0.5,0.5">
+                                                        <Border.RenderTransform>
+                                                            <TransformGroup>
+                                                                <ScaleTransform ScaleY="-1"/>
+                                                                <SkewTransform/>
+                                                                <RotateTransform/>
+                                                                <TranslateTransform/>
+                                                            </TransformGroup>
+                                                        </Border.RenderTransform>
+                                                    </Border>
+                                                    <Label x:Name="subbone" Content="Панель выключения." Margin="28,394,0,0" HorizontalAlignment="Left" Width="151" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
+                                                    <wpfui:CardControl
+                                                        x:Name="texts65464" Title="Кнопка: Выключение приложения"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        Grid.Row="0"
+                                                        Icon="ConferenceRoom24"
+                                                        Subtitle="Отображать кнопку &quot;Закрыть панель&quot; на панели выключения." Margin="27,495,25,0" Height="68" VerticalAlignment="Top">
+                                                        <wpfui:ToggleSwitch x:Name="Exit_Setting" Cursor="Hand"/>
+                                                    </wpfui:CardControl>
+                                                </Grid>
+                                            </StackPanel>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                    <TabItem Header="Apps" Width="80" Margin="292,-66,522,66">
+                                        <Grid>
+                                            <wpfui:Card Grid.Column="0" Margin="30,51,0,0" x:Name="Open_MyDivece" Cursor="Hand" MouseLeftButtonDown="Open_MyDivece_Click" HorizontalAlignment="Left" Width="158" Height="170" VerticalAlignment="Top">
+                                                <StackPanel>
+                                                    <Image
+                                                        Margin="14"
+                                                        RenderOptions.BitmapScalingMode="HighQuality"
+                                                        Source="/icons/Device.png" Height="77" Width="75" />
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        FontSize="16"
+                                                        FontWeight="Bold"
+                                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        x:Name="twxtwidgwtwidgwtmenu1" Text="Мои устройства"/>
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        FontSize="12"
+                                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                        Text="Unesell Studio" />
+                                                </StackPanel>
+                                            </wpfui:Card>
+
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_2" Content="Доступные приложения" Margin="24,13,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                            <wpfui:Card x:Name="Open_Start" Grid.Column="0" Margin="212,51,0,0" Cursor="Hand" MouseLeftButtonDown="OpenGameBar" HorizontalAlignment="Left" Width="158" Height="170" VerticalAlignment="Top">
+                                                <StackPanel>
+                                                    <Image
+                                                        Margin="14"
+                                                        RenderOptions.BitmapScalingMode="HighQuality"
+                                                        Source="/icons/App_Color.png" Height="77" Width="75" />
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        FontSize="16"
+                                                        FontWeight="Bold"
+                                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        Text="Gamebar"/>
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        FontSize="12"
+                                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                        Text="Unesell Studio" />
+                                                </StackPanel>
+                                            </wpfui:Card>
+                                            <Border
+                                                Padding="0"
+                                                Background="White"
+                                                CornerRadius="2" Margin="303,58,0,0" HorizontalAlignment="Left" Width="60" Height="10" VerticalAlignment="Top">
+                                                <TextBlock x:Name="InDevelop"
+                                                    FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                    Margin="0,-1,0,0"
+                                                    Padding="0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="8"
+                                                    FontWeight="Bold"
+                                                    Text="В разработке" Foreground="Black" />
                                             </Border>
-                                        </Border>
-                                        <Label Content="Материал" HorizontalAlignment="Left" Margin="642,337,0,0" VerticalAlignment="Top"/>
-                                    </Grid>
-                                </StackPanel>
-                            </ScrollViewer>
-                        </TabItem>
-                    </TabControl>
-                    <Button x:Name="Back" Content="&lt; Назад" Margin="23,0,0,26" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Backs" Padding="3,5,8,6" Width="106" Visibility="Hidden" />
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Personalization" Width="80" Margin="403,-102,411,102">
+                                        <Grid>
+                                            <ScrollViewer VerticalAlignment="Top">
+                                                <StackPanel>
+                                                    <Grid ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="0,0,10,0" Height="550">
+                                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_3" Content="Вид панелей:" Margin="21,15,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                                        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="26,39,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                                            <Border.RenderTransform>
+                                                                <TransformGroup>
+                                                                    <ScaleTransform ScaleY="-1"/>
+                                                                    <SkewTransform/>
+                                                                    <RotateTransform/>
+                                                                    <TranslateTransform/>
+                                                                </TransformGroup>
+                                                            </Border.RenderTransform>
+                                                        </Border>
+
+                                                        <Border BorderThickness="1" Background="#7F777777" HorizontalAlignment="Right" Margin="0,48,25,0" Width="240" CornerRadius="5" Height="71" VerticalAlignment="Top">
+                                                            <Grid Margin="0,0,0,0">
+                                                                <Label Content="Предпросмотр" HorizontalAlignment="Left" Margin="12,9,0,0" VerticalAlignment="Top" Foreground="White" FontStyle="Italic" FontSize="10"/>
+                                                                <Border x:Name="Border_Preview" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="32" VerticalAlignment="Top" Width="218" CornerRadius="15" Margin="0,29,0,0">
+                                                                    <Border.Background>
+                                                                        <SolidColorBrush Color="#FFECDBDB" Opacity="0.7"/>
+                                                                    </Border.Background>
+                                                                    <Grid>
+                                                                        <Image Source="icons/sound.png" Margin="8,3,184,4" />
+                                                                        <Label x:Name="infotextpreview" Content="Информация" FontStyle="Italic" Margin="35,5,1,5" />
+                                                                    </Grid>
+
+                                                                </Border>
+                                                            </Grid>
+                                                        </Border>
+                                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="otherptext" Content="Прочее:" Margin="23,474,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                                        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="26,497,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                                            <Border.RenderTransform>
+                                                                <TransformGroup>
+                                                                    <ScaleTransform ScaleY="-1"/>
+                                                                    <SkewTransform/>
+                                                                    <RotateTransform/>
+                                                                    <TranslateTransform/>
+                                                                </TransformGroup>
+                                                            </Border.RenderTransform>
+                                                        </Border>
+                                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_3_Copy1" Content="Дизайн компонентов:" Margin="21,281,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="26" VerticalAlignment="Top" />
+                                                        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="26,307,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                                            <Border.RenderTransform>
+                                                                <TransformGroup>
+                                                                    <ScaleTransform ScaleY="-1"/>
+                                                                    <SkewTransform/>
+                                                                    <RotateTransform/>
+                                                                    <TranslateTransform/>
+                                                                </TransformGroup>
+                                                            </Border.RenderTransform>
+                                                        </Border>
+                                                        <wpfui:CardControl x:Name="pcolortext"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Title="Цвет"
+                                                            Icon="Color24"
+                                                            Subtitle="Фоновый цвет панелей." Margin="27,50,270,0" Height="68" VerticalAlignment="Top">
+                                                            <Grid Height="45" Width="245" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                                <wpfui:TextBox x:Name="Color_Border" Height="30" TextWrapping="Wrap" VerticalAlignment="Center" TextChanged="Color_Border_TextChanged" Foreground="Black" BorderBrush="#99000000" HorizontalAlignment="Left" Width="132" Margin="16,0,0,0"/>
+                                                                <wpfui:Button x:Name="Open_Color" Content="Палитра &gt;" Click="Open_Color_Click" Cursor="Hand" Width="90" Margin="155,0,0,0" Padding="6,6,5,6"/>
+                                                            </Grid>
+                                                        </wpfui:CardControl>
+                                                        <wpfui:CardControl
+                                                            x:Name="pparone" Title="Прозрачность"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Icon="Blur24"
+                                                            Subtitle="Показатель, насколько будет просвечивать фон панель." Margin="27,126,25,0" Height="68" VerticalAlignment="Top">
+                                                            <Slider x:Name="Opacity_Panel_Settings" VerticalAlignment="Center" Maximum="100" Minimum="50" ValueChanged="ValueUpdate" Value="70" AutoToolTipPlacement="TopLeft" HorizontalAlignment="Left" Width="225"/>
+                                                        </wpfui:CardControl>
+                                                        <wpfui:CardControl
+                                                            x:Name="pradiusboprder" Title="Закруглённость углов"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Icon="ContractDownLeft24"
+                                                            Subtitle="Радиус закругления углов панелей." Margin="27,203,25,0" Height="68" VerticalAlignment="Top">
+                                                            <Slider x:Name="CRadius_Panel_Settings" VerticalAlignment="Center" Maximum="15" ValueChanged="CRadius_Panel_Settings_Value" Value="15" AutoToolTipPlacement="TopLeft" HorizontalAlignment="Left" Width="225"/>
+                                                        </wpfui:CardControl>
+                                                        <wpfui:Hyperlink x:Name="Link1"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Content="Тема приложения"
+                                                            Icon="Link48" Click="Go_Tab_1_Click" Margin="25,506,0,0" FontSize="11" Height="24" VerticalAlignment="Top" />
+                                                        <Border
+                                                Padding="0"
+                                                Background="#FFFF7171"
+                                                CornerRadius="2" Margin="170,334,0,0" HorizontalAlignment="Left" Width="81" Height="12" VerticalAlignment="Top">
+                                                            <TextBlock
+                                                    FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                    Margin="0,-1,0,0"
+                                                    Padding="0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="8"
+                                                    FontWeight="Bold"
+                                                    Text="Эксперементально" Foreground="White" Background="{x:Null}" />
+                                                        </Border>
+                                                        <wpfui:CardControl
+                                                            x:Name="stylewindowtext" Title="Стиль окон"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Icon="AppGeneric24"
+                                                            Subtitle="Только для Windows 11 (build 22581+)" Margin="27,318,25,0" Height="68" VerticalAlignment="Top">
+                                                            <Grid Width="291">
+                                                                <wpfui:ToggleSwitch x:Name="MicaBool" Cursor="Hand" Content="Разрешить" Margin="-35,0,0,0" IsChecked="False" Checked="MicaBoolCheked"/>
+                                                                <ComboBox x:Name="stylewin_combo" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" SelectionChanged="WindowsStyle_Select" HorizontalContentAlignment="Left">
+                                                                    <TextBlock><Run Text="Mica (По умолчанию)"/></TextBlock>
+                                                                    <TextBlock><Run Text="Acrylic"/></TextBlock>
+                                                                    <TextBlock><Run Text="Tabbed"/></TextBlock>
+                                                                </ComboBox>
+                                                            </Grid>
+                                                        </wpfui:CardControl>
+                                                        <wpfui:CardControl
+                                                            x:Name="text23r923ri12" Title="Широкий слайдер громкости"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Icon="Dock20"
+                                                            Subtitle="Увеличивает задний план слайера громкости." Margin="27,396,25,0" Height="68" VerticalAlignment="Top">
+                                                            <wpfui:ToggleSwitch x:Name="Chek_Allow_NEW_PgBar" Cursor="Hand"/>
+                                                        </wpfui:CardControl>
+                                                        <wpfui:Hyperlink x:Name="Link2"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Content="Цвет акцента элементов"
+                                                            Icon="Link48" NavigateUri="ms-settings:colors" Margin="169,506,0,0" FontSize="11" Height="24" VerticalAlignment="Top" Width="190" />
+
+
+                                                    </Grid>
+
+                                                </StackPanel>
+
+                                            </ScrollViewer>
+
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Version" Width="80" Margin="595,-117,219,117">
+                                        <Grid Margin="16,0,-16,0">
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="ModernNotify" Margin="60,2,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="24" VerticalContentAlignment="Center" Height="33" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0074FF" />
+                                            <Image HorizontalAlignment="Left" Height="49" Margin="8,1,0,0" VerticalAlignment="Top" Width="49" Source="icon.ico"/>
+                                            <Button x:Name="Open_Tab_Update" Content="Проверить обновления" Style="{StaticResource AccentButtonStyle}" Margin="15,66,0,0" VerticalAlignment="Top" Width="174" Click="Open_Tab_Update_Click" Cursor="Hand"/>
+                                            <Button x:Name="Open_Site" Content="Сайт проекта" Margin="194,66,0,0" VerticalAlignment="Top" Cursor="Hand" Click="Open_Site_Progect" Height="33" Padding="10,6,10,6" HorizontalAlignment="Left" Width="130"/>
+                                            <Label x:Name="version" Content="version" HorizontalAlignment="Left" Margin="67,30,0,0" VerticalAlignment="Top" Width="154"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Devetxt" Content="Разработчик:" HorizontalAlignment="Left" Margin="15,181,0,0" VerticalAlignment="Top" Foreground="#FFFFC700" FontWeight="Bold"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="15,200,0,0" VerticalAlignment="Top"/>
+                                            <Label x:Name="textaboutproduct" Content="О продукте:" HorizontalAlignment="Left" Margin="15,113,0,0" VerticalAlignment="Top" Foreground="#FFFFAF00" FontWeight="Bold"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11." HorizontalAlignment="Left" Margin="15,132,0,0" VerticalAlignment="Top" Height="48" Width="371" UseLayoutRounding="False"/>
+
+                                            <wpfui:Hyperlink x:Name="text_5_dadsc" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Используемый исходный код"
+                                            Icon="Link48" Click="Open_Sourse" Margin="0,48,22,0" FontSize="11" Height="24"
+                                            VerticalAlignment="Top" HorizontalAlignment="Right" />
+
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5_Copy" Content="Прочая информация:" HorizontalAlignment="Right" Margin="0,28,26,0" VerticalAlignment="Top" Height="19" Width="155" UseLayoutRounding="False" HorizontalContentAlignment="Right"/>
+                                            <wpfui:Hyperlink x:Name="text_5_dvdsacv" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Репозиторий"
+                                                Icon="Link48" Click="Open_Sourse_Code" Margin="0,72,22,0" FontSize="11" Height="24"
+                                                VerticalAlignment="Top" HorizontalAlignment="Right" Width="103" />
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Update" Margin="694,-172,102,172">
+                                        <Grid>
+                                            <wpfui:Card BorderThickness="1" Height="73" Margin="23,10,10,0" VerticalAlignment="Top" Padding="0,0,0,0">
+                                                <Grid>
+                                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="InfoUpdate" Content="Выполните проверку обновлений" Margin="78,12,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
+                                                    <Image x:Name="Update_img" HorizontalAlignment="Left" Height="51" Margin="15,10,0,0" VerticalAlignment="Top" Width="51" Source="icons/update.png" RenderTransformOrigin="0.5,0.5"></Image>
+                                                    <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Check_Update" Content="Проверить наличие обновлений" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="0,18,20,0" VerticalAlignment="Top" Width="254" Cursor="Hand" Click="Check_Update_Click"/>
+                                                    <Label x:Name="LastChekUpdate" Content="Последняя проверка" HorizontalAlignment="Left" Margin="78,39,0,0" VerticalAlignment="Top" Width="454"/>
+                                                </Grid>
+                                            </wpfui:Card>
+                                            <Rectangle Fill="#26D0D0DE" HorizontalAlignment="Left" Height="184" Margin="23,113,0,0" VerticalAlignment="Top" Width="423" RadiusY="17.5" RadiusX="17.5"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="SysInfoHeader" Content="Информация о системе" HorizontalAlignment="Left" Margin="43,129,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal"/>
+                                            <Rectangle Fill="#26D0D0DE" HorizontalAlignment="Left" Height="184" Margin="465,111,0,0" VerticalAlignment="Top" Width="411" RadiusY="17.5" RadiusX="17.5"/>
+                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="43,153,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                                <Border.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleY="-1"/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Border.RenderTransform>
+                                            </Border>
+                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="482,152,0,0" VerticalAlignment="Top" Width="347" RenderTransformOrigin="0.5,0.5">
+                                                <Border.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleY="-1"/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Border.RenderTransform>
+                                            </Border>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="inforelithe" Content="Информация о выпуске" HorizontalAlignment="Left" Margin="483,126,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Width="164"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="WindowsVersion" Content="WindowsVersion" HorizontalAlignment="Left" Margin="45,164,0,0" VerticalAlignment="Top" Width="313"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version" Content="Версия: 0.0.2.0" HorizontalAlignment="Left" Margin="485,163,0,0" VerticalAlignment="Top" Width="329"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Memory" Content="Memory" HorizontalAlignment="Left" Margin="45,188,0,0" VerticalAlignment="Top" Width="331"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="EctInfoSys" Content="Ect" HorizontalAlignment="Left" Margin="45,212,0,0" VerticalAlignment="Top" Height="69" Width="313"/>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Color" Width="80" Margin="498,-202,316,202">
+                                        <ScrollViewer HorizontalAlignment="Left" VerticalAlignment="Top" Height="385" Margin="-64,0,0,0" Width="962">
+                                            <StackPanel Height="385">
+                                                <Grid Height="397" Width="941">
+                                                    <Border BorderThickness="1" Height="57" Margin="79,6,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="469">
+                                                        <Grid HorizontalAlignment="Left" Width="473">
+                                                            <TextBox x:Name="color_piker" HorizontalAlignment="Left" Height="35" Margin="16,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="225"/>
+                                                            <Button x:Name="Color_Save" Content="Сохранить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="100" Click="Color_Save_Click" Cursor="Hand" Padding="5,5,5,6"/>
+                                                            <Button x:Name="Site_color" Content="Сайт кодов" HorizontalAlignment="Left" Margin="361,10,-70,0" VerticalAlignment="Top" Click="Site_color_Click" Cursor="Hand" Width="91"/>
+                                                        </Grid>
+                                                    </Border>
+                                                    <Border BorderThickness="1" Height="196" Margin="79,86,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="469">
+                                                        <Grid HorizontalAlignment="Left" Width="473">
+                                                            <Slider x:Name="Red" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" Width="412" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
+                                                            <Slider x:Name="Green" HorizontalAlignment="Left" Margin="20,89,0,0" VerticalAlignment="Top" Width="412" Height="36" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
+                                                            <Slider x:Name="Blue" HorizontalAlignment="Left" Margin="20,149,0,0" VerticalAlignment="Top" Width="412" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
+                                                            <Label x:Name="redtext" Content="Красный" HorizontalAlignment="Left" Margin="16,10,0,151" Width="72"/>
+                                                            <Label x:Name="greentext" Content="Зелёный" HorizontalAlignment="Left" Margin="16,70,0,0" VerticalAlignment="Top" Width="72"/>
+                                                            <Label x:Name="bluetext" Content="Синий" HorizontalAlignment="Left" Margin="16,130,0,0" VerticalAlignment="Top" Width="51"/>
+                                                        </Grid>
+                                                    </Border>
+
+                                                    <Border BorderThickness="1" Height="31" Margin="81,292,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="146">
+                                                        <Grid Margin="-2,-4,2,4">
+                                                            <Border BorderThickness="1" Margin="8,10,0,0" Background="#7FFF0000" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
+                                                            <Label x:Name="REDtext" Margin="25,11,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12"></Label>
+                                                            <Border BorderThickness="1" Margin="52,10,0,0" Background="#7F00FF00" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
+                                                            <Label x:Name="GREENtext" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Margin="69,11,0,0"/>
+                                                            <Border BorderThickness="1" Margin="96,10,0,0" Background="#7F0000FF" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
+                                                            <Label x:Name="BLUEtext" Margin="113,11,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12"/>
+                                                        </Grid>
+                                                    </Border>
+
+                                                    <Border x:Name="Material_Border" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="642,8,0,81" Width="242" CornerRadius="20" RenderTransformOrigin="0.5,0.5" Background="#FFE6ADAD">
+                                                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Width="242" CornerRadius="20" RenderTransformOrigin="0.5,0.5" Height="308" VerticalAlignment="Center">
+                                                            <Border.Background>
+                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                    <LinearGradientBrush.RelativeTransform>
+                                                                        <TransformGroup>
+                                                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                                            <RotateTransform Angle="143" CenterY="0.5" CenterX="0.5"/>
+                                                                            <TranslateTransform/>
+                                                                        </TransformGroup>
+                                                                    </LinearGradientBrush.RelativeTransform>
+                                                                    <GradientStop Color="#00F1A6A6" Offset="0.8"/>
+                                                                    <GradientStop Offset="1" Color="#7FFDFDFD"/>
+                                                                </LinearGradientBrush>
+                                                            </Border.Background>
+                                                        </Border>
+                                                    </Border>
+                                                    <Label Content="Материал" HorizontalAlignment="Left" Margin="640,318,0,0" VerticalAlignment="Top"/>
+                                                </Grid>
+                                            </StackPanel>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                </TabControl>
+                                <Button x:Name="Back" Content="&lt; Назад" Margin="23,0,0,26" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Backs" Padding="3,5,8,6" Width="106" Visibility="Hidden" />
+                                <wpfui:Snackbar
+                                    FontFamily="/icons/Fonts/#Google Sans Medium"
+                                    x:Name="RootSnackbar"
+                                    Title="Внимание!"
+                                    MaxWidth="600"
+                                    Closed="RootSnackbar_OnClosed"
+                                    Icon="PuzzlePiece24"
+                                    Message="Активированна эксперементальная функция. Она может работать нестабильно, или не работать вовсе (если ваша версия Windows ниже требовательной)."
+                                    Show="False"
+                                    ShowCloseButton="True"
+                                    Timeout="5000" Margin="23,0,0,20" HorizontalAlignment="Left" Width="355" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <wpfui:Breadcrumb
+                        Margin="18,18,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="24"
+                        Navigation="{Binding ElementName=RootNavigation}" />
                 </Grid>
             </Border>
-        </ui:NavigationView>
+            <wpfui:NavigationStore
+                x:Name="RootNavigation"
+                Grid.Column="0"
+                Margin="6,0,6,0"
+                Frame="{Binding ElementName=RootFrame}">
+                <wpfui:NavigationStore.Items>
+                    <wpfui:NavigationItem x:Name="Tab1"
+                        Content="Главная"
+                        Icon="Home24"
+                        Tag="dashboard" Click="Backs" />
+                    <wpfui:NavigationItem x:Name="Tab2"
+                        Click="Open_Keyboard_Click"
+                        Content="Сервисы"
+                        Icon="Apps24"
+                        Tag="forms" />
+                    <wpfui:NavigationItem x:Name="Tab3"
+                        Click="Open_Main_Click"
+                        Content="Основное"
+                        Icon="ResizeLarge24"
+                        Tag="controls"/>
+                    <wpfui:NavigationItem x:Name="Tab4"
+                        Click="Open_Personalization_Click"
+                        Content="Дизайн"
+                        Icon="Color24"
+                        Tag="colors" />
+                </wpfui:NavigationStore.Items>
+                <wpfui:NavigationStore.Footer>
+                    <wpfui:NavigationItem x:Name="Tab5"
+                        Click="Open_Update_Click"
+                        Content="Версия"
+                        Icon="ApprovalsApp20"
+                        Tag="library" />
+                    <wpfui:NavigationItem x:Name="Tab6"
+                        Content="Помощь"
+                        Icon="QuestionCircle24"
+                        Tag="help" Click="Open_Help_Click"/>
+                </wpfui:NavigationStore.Footer>
+            </wpfui:NavigationStore>
+        </Grid>
+
+        <wpfui:TitleBar x:Name="TitleBarApp"
+          FontFamily="/icons/Fonts/#Google Sans Medium"
+          Title="Параметры ModernNotify"
+          Icon="pack://application:,,,/icons/maim_settings.png"
+          FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2"/>
+
     </Grid>
+
 </Window>

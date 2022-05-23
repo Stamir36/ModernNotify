@@ -9,10 +9,10 @@
       <Value Profile="(Default)">0.9</Value>
     </Setting>
     <Setting Name="color_panel" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#fff</Value>
+      <Value Profile="(Default)">#404040</Value>
     </Setting>
     <Setting Name="theme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">light</Value>
+      <Value Profile="(Default)">dark</Value>
     </Setting>
     <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -47,8 +47,8 @@
     <Setting Name="CornerRadius" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4</Value>
     </Setting>
-    <Setting Name="AllowsTransparency" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="WinStyle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Mica</Value>
     </Setting>
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">Russian</Value>
@@ -70,6 +70,9 @@
     </Setting>
     <Setting Name="Unesell_Login" Type="System.String" Scope="User">
       <Value Profile="(Default)">No</Value>
+    </Setting>
+    <Setting Name="MicaBool" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

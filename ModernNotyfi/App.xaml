@@ -7,15 +7,14 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
+                <ui:XamlControlsResources />
+                <ui:ThemeResources />
+                
+                
                 <ResourceDictionary
                   Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
                 <ResourceDictionary
                   Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
-                
-
-                <ui:ThemeResources />
-                <ui:XamlControlsResources />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,146 +1,203 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+        xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
         xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
         xmlns:local="clr-namespace:ModernNotyfi"
-        xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="ModernNotyfi.welcome"
-        Title="ModernNotyfi" Height="430" Width="800" WindowStyle="None" Foreground="{x:Null}" Visibility="Visible"
-        AllowsTransparency="True"
-        Icon="icons/Personalization.png" Background="{x:Null}" WindowStartupLocation="CenterScreen">
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        d:DesignHeight="450"
+        d:DesignWidth="800"
+        Style="{StaticResource UiWindow}"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+    
+        x:Class="ModernNotyfi.welcome"
+        Title="Первоначальная настройка" Height="430" Width="800" WindowStyle="None"
+        Visibility="Visible"
+        Icon="icons/Personalization.png" MaxHeight="430" MaxWidth="800" Background="#F21B1B1B">
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="10" CornerRadius="5">
-            <Border.Background>
-                <SolidColorBrush Color="White" Opacity="0.9"/>
-            </Border.Background>
-            <Grid>
-                <Image x:Name="GifImage_Step_1" gif:AnimationBehavior.SourceUri="icons/gif/waving_hand.gif" Margin="133,136,466,110"/>
-                <Image x:Name="GifImage_Step_2" gif:AnimationBehavior.SourceUri="icons/gif/gif_settings.gif" Margin="133,136,466,110"/>
-                <TabControl x:Name="WelcomTabs" HorizontalAlignment="Left" Height="468" Margin="363,-85,0,0" VerticalAlignment="Top" Width="377">
-                    <TabItem Header="Step 1">
-                        <Grid>
-                            <Border BorderBrush="White" BorderThickness="1" Margin="32,342,25,35" Background="#7F5EADF5"/>
-                            <Button x:Name="Step_1" HorizontalAlignment="Left" Margin="32,342,0,0" VerticalAlignment="Top" Width="320" Height="51" Background="#FF4495EF" OpacityMask="Black" Cursor="Hand" Click="Step_1_Click" BorderBrush="#33C82F2F">
-                                <Grid Height="41" Width="296">
-                                    <Image x:Name="Load" HorizontalAlignment="Left" Source="/icons/back.png" Margin="248,-16,0,25" Width="32" RenderTransformOrigin="0.75,0.812" >
-                                        <Image.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform/>
-                                                <SkewTransform/>
-                                                <RotateTransform Angle="180"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Image.RenderTransform>
-                                    </Image>
-                                    <Label x:Name="Loading1" Content="Продолжить" Margin="0,7,0,7" HorizontalAlignment="Left" Width="148" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Foreground="White" FontWeight="Normal" FontFamily="Arial Unicode MS" />
-                                </Grid>
-                            </Button>
-                            <Label Content="От Станислава Мирошниченко" HorizontalAlignment="Left" Margin="72,119,0,0" VerticalAlignment="Top" Height="15" Width="208" FontSize="10" Foreground="Black"/>
-                            <Label Content="Приветствуем в ModernNotify!&#xA;Наше приложение создаст вам на рабочем&#xA;столе панель быстрых действий.&#xA;&#xD;&#xA;&#xD;&#xA;&#xA;Прежде чем мы начнём, хотим кое-что уточнить." HorizontalAlignment="Left" Margin="32,193,0,0" VerticalAlignment="Top" Height="144" Width="320" Foreground="Black"/>
-                            <Grid HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="177" Margin="32,97,0,0">
-                                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="icon.ico" Width="27" Height="27" Margin="0,1,0,0"/>
-                                <Label Content="ModernNotify" HorizontalAlignment="Left" Margin="32,5,0,0" VerticalAlignment="Top" Width="119" FontWeight="Bold" Foreground="Black"/>
-                            </Grid>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="Step 2">
-                        <Grid>
-                            <Border BorderThickness="1" Height="73" VerticalAlignment="Top" CornerRadius="5,5,5,5" BorderBrush="#33000000" HorizontalAlignment="Left" Width="344" Margin="20,128,0,0">
-                                <Border.Background>
-                                    <SolidColorBrush Color="#7FDADADA" Opacity="0.7"/>
-                                </Border.Background>
-                                <Grid Margin="1,0,-1,0">
-                                    <TextBox x:Name="User_Name" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320"/>
-                                    <Label Content="Мой никнейм" HorizontalAlignment="Center" Margin="0,9,0,0" VerticalAlignment="Top" Height="17" Width="320" Foreground="#FF0C00FF" FontWeight="Normal"/>
-                                </Grid>
-                            </Border>
 
-                            <Border BorderThickness="1" Height="80" VerticalAlignment="Top" CornerRadius="5,5,5,5" BorderBrush="#33000000" HorizontalAlignment="Left" Width="344" Margin="20,214,0,0">
-                                <Border.Background>
-                                    <SolidColorBrush Color="#7FDADADA" Opacity="0.7"/>
-                                </Border.Background>
-                                <Grid Margin="1,0,-1,0">
-                                    <Label Content="Язык | Language" HorizontalAlignment="Center" Margin="0,9,0,0" VerticalAlignment="Top" Height="17" Width="320" Foreground="#FF0C00FF" FontWeight="Normal"/>
-                                    <ComboBox x:Name="languege_combo" Width="322" Margin="0,31,0,0" HorizontalAlignment="Center">
-                                        <TextBlock><Run Text="Русский"/></TextBlock>
-                                        <TextBlock><Run Text="English"/></TextBlock>
-                                    </ComboBox>
-                                </Grid>
-                            </Border>
 
-                            <Label Content="Давай создадим тебе профиль." HorizontalAlignment="Left" Margin="20,97,0,0" VerticalAlignment="Top" Height="26" Width="320" Foreground="Black"/>
-                            <Button x:Name="Step_2" Content="Продолжить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Width="178" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Step_2_Click" Margin="0,0, 10, 20" />
-
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="Step 3">
-                        <Grid>
-                            <Button x:Name="Step_3" HorizontalAlignment="Left" Margin="31,172,0,0" VerticalAlignment="Top" Width="320" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Steap_4">
-                                <Grid Height="41" Width="296">
-                                    <Image HorizontalAlignment="Left" Source="icons/maim_settings.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                    <Label Content="Настроить параметры" Margin="37,7,0,7" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Foreground="Black" />
-                                </Grid>
-                            </Button>
-                            <Button x:Name="Start_App" HorizontalAlignment="Left" Margin="31,228,0,0" VerticalAlignment="Top" Width="320" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Start_App_Click">
-                                <Grid Height="41" Width="299">
-                                    <Image HorizontalAlignment="Left" Source="icons/ok.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                                    <Label Content="Использовать по умолчанию" Margin="37,7,0,7" HorizontalAlignment="Left" Width="260" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Foreground="Black" />
-                                </Grid>
-                            </Button>
-                            <Label Content="Настроим приложение?" HorizontalAlignment="Left" Margin="31,139,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="Black"/>
-                            <Label Content="Всё настроить под себя вы сможете в настройках." HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="320" Foreground="Black" Margin="31,363,0,0" FontSize="12"/>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="Step 4">
-                        <Grid>
-                            <Border BorderBrush="Black" BorderThickness="1" Margin="15,302,342,106" CornerRadius="2,2,2,2"/>
-
-                            <Label x:Name="text_1" Content="Основные параметры" Margin="10,101,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" Foreground="Black" />
-
-                            <Border BorderThickness="1" Height="57" Margin="10,133,10,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                </Border.BorderBrush>
-                                <Border.Background>
-                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                </Border.Background>
-                                <Grid>
-                                    <Label Foreground="Black" Content="Тема приложения" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
-                                    <ComboBox x:Name="theme_combo" Margin="195,0,0,0" VerticalAlignment="Center" Width="150">
-                                        <TextBlock><Run Text="Светлая"/></TextBlock>
-                                        <TextBlock><Run Text="Тёмная"/></TextBlock>
-                                    </ComboBox>
-                                </Grid>
-                            </Border>
-
-                            <Border BorderThickness="1" Height="57" Margin="10,195,10,0" VerticalAlignment="Top" CornerRadius="5,5,5,5">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
-                                </Border.BorderBrush>
-                                <Border.Background>
-                                    <SolidColorBrush Color="#FFFFEDED" Opacity="0.5"/>
-                                </Border.Background>
-                                <Grid>
-                                    <Label Foreground="Black" Content="Положение" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" Height="24" Width="326" FontSize="18"/>
-                                    <ComboBox x:Name="pos_combo" Margin="196,0,0,0" VerticalAlignment="Center" Width="149">
-                                        <TextBlock><Run Text="Справо"/></TextBlock>
-                                        <TextBlock><Run Text="Слево"/></TextBlock>
-                                    </ComboBox>
-                                </Grid>
-                            </Border>
-
-                            <Button x:Name="Save_Settings" Content="Принять и продолжить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Width="178" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Save_Settings_Click" Margin="0,0,10,20"/>
-                            <Label  Foreground="Black" x:Name="text_1_Copy" Content="Прочее" Margin="10,264,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
-                            <CheckBox x:Name="StartInWindows"  Foreground="Black" Content="" VerticalAlignment="Top" Margin="15,296,0,0" Padding="9,0,0,0" BorderBrush="Black" Background="Black" Width="25"/>
-                            <Label  Foreground="Black" x:Name="text_1_Copy1" Content="Запуск при старте системы" Margin="38,302,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Normal" />
-                        </Grid>
-                    </TabItem>
-
-                </TabControl>
-                <Label x:Name="Step_Text" Content="Добро пожаловать!" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" FontSize="28" FontFamily="Segoe UI Semibold" Width="323" Foreground="Black"/>
-                <ProgressBar x:Name="Step_Progress" HorizontalAlignment="Center" Height="5" Margin="0,403,0,0" VerticalAlignment="Top" Width="778" MinHeight="5"/>
-                <Label  Foreground="Black" x:Name="LOG" Content="" Margin="0,356,0,0" HorizontalAlignment="Center" Width="758" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Normal" />
+        <Grid
+            x:Name="RootWelcomeGrid"
+            Grid.Row="1"
+            Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ProgressBar x:Name="Step_Progress" HorizontalAlignment="Left" Height="5" Margin="0,425,0,0" VerticalAlignment="Top" Width="800" MinHeight="5" Grid.ColumnSpan="2"/>
+            <Grid Grid.Column="0">
+                <Label FontFamily="/icons/Fonts/#Google Sans Medium"  x:Name="LOG" Content="" Margin="10,393,0,0" HorizontalAlignment="Left" Width="758" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Normal" />
+                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Step_Text" Content="Добро пожаловать!" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" FontSize="28" Width="323" Foreground="White"/>
+                <Image x:Name="GifImage_Step_1" gif:AnimationBehavior.SourceUri="icons/gif/waving_hand.gif" Margin="110,150,105,100" Width="180" Height="180"/>
+                <Image x:Name="GifImage_Step_2" gif:AnimationBehavior.SourceUri="icons/gif/gif_settings.gif" Margin="110,150,110,100" Width="180" Height="180"/>
+                <Image x:Name="Step_Image" Margin="110,162,105,88" Width="180" Height="180"/>
             </Grid>
-        </Border>
+            <StackPanel Visibility="Hidden" x:Name="FirsLoading" Grid.Column="1" VerticalAlignment="Center">
+                <wpfui:ProgressRing IsIndeterminate="True" />
+                <TextBlock
+                    FontFamily="/icons/Fonts/#Google Sans Medium"
+                    Margin="0,12,0,0"
+                    FontSize="16"
+                    FontWeight="Medium"
+                    Text="Одну секунду"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+            <TabControl x:Name="WelcomTabs" HorizontalAlignment="Left" Height="530" Margin="394,-116,0,0" VerticalAlignment="Top" Width="377" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
+                <TabItem Header="Step 1">
+                    <Grid>
+                        <wpfui:Button x:Name="Step_1"
+                           Appearance="Secondary"
+                           Click="Step_1_Click"
+                           Content="Продолжить"
+                            Height="31" Margin="169,378,15,0"
+                            VerticalAlignment="Top" />
+
+                        <Label FontFamily="/icons/Fonts/#Google Sans Medium"  Content="От Станислава Мирошниченко" HorizontalAlignment="Left" Margin="72,87,0,0" VerticalAlignment="Top" Height="15" Width="208" FontSize="10" />
+                        <Label FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Приветствуем в ModernNotify!&#xA;Наше приложение создаст вам на рабочем&#xA;столе панель быстрых действий.&#xA;&#xA;&#xA;&#xA;Прежде чем мы начнём, хотим кое-что&#xD;&#xA;настроить." HorizontalAlignment="Left" Margin="32,165,0,0" VerticalAlignment="Top" Height="144" Width="320" Foreground="White" />
+                        <Grid HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="177" Margin="32,55,0,0">
+                            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="icon.ico" Width="27" Height="27" Margin="0,11,0,0"/>
+                            <Label FontFamily="/icons/Fonts/#Google Sans Medium"  Content="ModernNotify" HorizontalAlignment="Left" Margin="32,14,0,0" VerticalAlignment="Top" Width="119" FontWeight="Bold" Foreground="White" />
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Step 2">
+                    <Grid>
+                        <Label x:Name="Step2_text1" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Давай создадим тебе профиль." HorizontalAlignment="Left" Margin="20,97,0,0" VerticalAlignment="Top" Height="26" Width="320" Foreground="White" />
+                        <wpfui:Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Step_2" Content="Продолжить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Width="178" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Margin="0,0, 10, 20" Click="Step_2_Click" />
+
+                        <wpfui:CardControl
+                            Margin="20,128,10,216"
+                            Icon="Edit24">
+                            <StackPanel Height="54">
+                                <TextBlock x:Name="Step2_text2"
+                                    FontFamily="/icons/Fonts/#Google Sans Medium"
+                                    Margin="0,0,0,4"
+                                    FontWeight="Medium"
+                                    Text="Ваш никнейм" />
+                                <TextBox x:Name="User_Name" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="" Width="270"/>
+                            </StackPanel>
+                        </wpfui:CardControl>
+                        <wpfui:CardControl
+                            Margin="20,221,10,118"
+                            Icon="BookLetter20">
+                            <StackPanel Width="277">
+                                <TextBlock
+                                    FontFamily="/icons/Fonts/#Google Sans Medium"
+                                    Margin="0,0,0,4"
+                                    FontWeight="Medium"
+                                    Text="Язык | Language" />
+                                <ComboBox x:Name="languege_combo" Width="271" Height="35" HorizontalAlignment="Left" SelectionChanged="languege_combo_SelectionChanged">
+                                    <TextBlock><Run Text="Русский"/></TextBlock>
+                                    <TextBlock><Run Text="English"/></TextBlock>
+                                </ComboBox>
+                            </StackPanel>
+                        </wpfui:CardControl>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Step 3">
+                    <Grid>
+                        <wpfui:Button x:Name="Step_3" HorizontalAlignment="Left" Margin="31,172,0,0" VerticalAlignment="Top" Width="320" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Steap_4" Padding="20,6,15,6">
+                            <Grid Height="41" Width="296">
+                                <Image HorizontalAlignment="Left" Source="icons/maim_settings.png" Margin="0,2,0,7" Width="32" RenderTransformOrigin="0.75,0.812" />
+                                <Label x:Name="Step3_b1" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Настроить параметры" Margin="40,8,0,6" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch"  />
+                            </Grid>
+                        </wpfui:Button>
+                        <wpfui:Button x:Name="Start_App" HorizontalAlignment="Left" Margin="31,228,0,0" VerticalAlignment="Top" Width="320" Height="51" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Start_App_Click" Padding="20,6,20,6">
+                            <Grid Height="41" Width="299">
+                                <Image HorizontalAlignment="Left" Source="icons/ok.png" Margin="0,2,0,7" Width="32" RenderTransformOrigin="0.75,0.812" />
+                                <Label x:Name="Step3_b2" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Использовать по умолчанию" Margin="40,8,0,6" HorizontalAlignment="Left" Width="260" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch"  />
+                            </Grid>
+                        </wpfui:Button>
+                        <Label x:Name="Step3_text1" Content="Настроим приложение?" HorizontalAlignment="Left" Margin="31,139,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="White" />
+                        <Label x:Name="Step3_text2" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Всё настроить под себя вы сможете в настройках." HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="320"  Margin="31,363,0,0" FontSize="12"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Step 4">
+                    <Grid>
+
+                        <Label FontFamily="/icons/Fonts/#Google Sans Medium"  x:Name="text_1" Content="Основные параметры" Margin="16,105,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"  />
+
+                        <wpfui:Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Save_Settings" Content="Принять и завершить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Width="178" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Save_Settings_Click" Margin="0,0,10,20"/>
+                        <Label FontFamily="/icons/Fonts/#Google Sans Medium"    x:Name="text_1_Copy" Content="Прочее" Margin="16,309,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="20" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" />
+                        <wpfui:ToggleSwitch  Content="Запуск при старте системы" FontFamily="/icons/Fonts/#Google Sans Medium"  x:Name="StartInWindows" Cursor="Hand" Margin="20,326,110,65"/>
+                        <wpfui:CardControl
+                            Margin="20,130,10,210"
+                            Icon="BrightnessHigh24" Height="80" Background="#0FFFFFFF">
+                            <StackPanel Width="270">
+                                <TextBlock x:Name="Step4_text1"
+                                    FontFamily="/icons/Fonts/#Google Sans Medium"
+                                    Margin="0,0,0,4"
+                                    FontWeight="Medium"
+                                    Text="Тема приложения" />
+                                <ComboBox x:Name="theme_combo" Width="270">
+                                    <TextBlock><Run Text="Светлая"/></TextBlock>
+                                    <TextBlock><Run Text="Тёмная"/></TextBlock>
+                                </ComboBox>
+                            </StackPanel>
+                        </wpfui:CardControl>
+                        <wpfui:CardControl
+                            Margin="20,216,10,124"
+                            Icon="CenterHorizontal20" Height="80" Background="#0FFFFFFF" Click="CardControl_Click">
+                            <StackPanel Width="270">
+                                <TextBlock x:Name="Step4_text2"
+                                    FontFamily="/icons/Fonts/#Google Sans Medium"
+                                    Margin="0,0,0,4"
+                                    FontWeight="Medium"
+                                    Text="Расположение панели" />
+                                <ComboBox x:Name="pos_combo" Width="270">
+                                    <TextBlock><Run Text="Справо"/></TextBlock>
+                                    <TextBlock><Run Text="Слево"/></TextBlock>
+                                </ComboBox>
+                            </StackPanel>
+                        </wpfui:CardControl>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="MN Connect">
+                    <Grid>
+                        <Label x:Name="MNconnect_text1" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Связь с телефоном Android" HorizontalAlignment="Left" Margin="20,64,0,0" VerticalAlignment="Top" Height="26" Width="320" Foreground="White"/>
+                        <Label x:Name="MNConnect_text2" Content="Установите приложение MN Connect из Play Маркета." HorizontalAlignment="Left" Margin="20,93,0,0" VerticalAlignment="Top" Height="24" Width="320" Foreground="White" />
+                        <wpfui:Hyperlink x:Name="HyperLincAndroid"
+                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                            Content="MN Connect - Клиент на Android"
+                            Icon="Link48" NavigateUri="https://play.google.com/store/apps/details?id=com.unesell.mnc" Margin="12,0,0,13" FontSize="11" Height="24" VerticalAlignment="Bottom" Width="206" />
+                        <wpfui:Button x:Name="Step_1_Copy"
+                            Appearance="Secondary"
+                            Click="Step_Account_Click"
+                            Content="Пропустить"
+                            Height="31" Margin="234,379,0,0"
+                            VerticalAlignment="Top" Padding="0,6,0,6" />
+                        <Border Background="White" CornerRadius="10,10,10,10" Height="210" BorderBrush="#66000000" BorderThickness="0.7,0.5,0.7,0.9" Margin="78,135,87,75" Width="210" >
+                            <Image x:Name="QRcode" Margin="5,5,5,5"/>
+                        </Border>
+                        <Label x:Name="or_text" Content="Или" HorizontalAlignment="Left" Margin="16,368,0,0" VerticalAlignment="Top" Height="24" Width="41" Foreground="White" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Account">
+                    <Grid>
+                        <wpfui:Button x:Name="Step_1_Copy1"
+                            Appearance="Secondary"
+                            Click="Step3_Open"
+                            Content="Пропустить"
+                            Height="31" Margin="234,379,0,0"
+                            VerticalAlignment="Top" Padding="0,6,0,6" />
+                        <Label x:Name="Account_text1" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Связь с учётной записью" HorizontalAlignment="Left" Margin="20,64,0,0" VerticalAlignment="Top" Height="26" Width="320" Foreground="White"/>
+                        <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Login_Unesell" Content="Войти в Unesell Аккаунт" Style="{StaticResource AccentButtonStyle}" Margin="0,140,145,0" Cursor="Hand" Click="LoginWebUnesell" VerticalAlignment="Top" HorizontalAlignment="Right" Width="210"/>
+                        <Label x:Name="Account_text2" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Можно войти позже в настройках" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="203"  Margin="20,386,0,0" FontSize="12"/>
+                        <Label x:Name="Account_text3" Content="Войдите в свой аккаунт, чтобы синхронизировать аватар&#xD;&#xA;и имя вашей учётной записи с приложением." HorizontalAlignment="Left" Margin="20,93,0,0" VerticalAlignment="Top" Height="42" Width="320" Foreground="White" />
+
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+        </Grid>
+
 
     </Grid>
 </Window>

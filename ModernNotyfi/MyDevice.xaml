@@ -10,11 +10,11 @@
         mc:Ignorable="d"
         Title="Мои устройства" Height="360" Width="634"
         WindowStyle="None" 
-        MinWidth="900" MinHeight="500" Icon="/icons/Device.png"
-        Style="{StaticResource UiWindow}" Closed="MyDevice1_Closed" Drop="ImagePanel_Drop" AllowDrop="true" WindowStartupLocation="CenterScreen">
-    <Window.Background>
-        <SolidColorBrush x:Name="Window_Back" Color="#F22B2B2B" Opacity="0.99"/>
-    </Window.Background>
+        MinWidth="900" MinHeight="500" Icon="/icons/Device.png" Background="#F21B1B1B"
+        Style="{StaticResource UiWindow}" Closed="MyDevice1_Closed" Drop="ImagePanel_Drop" AllowDrop="true" WindowStartupLocation="CenterScreen" Loaded="MyDevice1_Loaded">
+    <!--Window.Background>
+        <SolidColorBrush x:Name="Window_Back" Color="#F2424242" Opacity="0.99"/>
+    </Window.Background-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -40,15 +40,15 @@
                 <Grid>
                     <Grid x:Name="RootGrid">
 
-                        <TabControl x:Name="TabConnect" Margin="0,0,-92,46" TabStripPlacement="Right">
-                            <TabItem Header="NoConnect">
+                        <TabControl x:Name="TabConnect" Margin="0,-181,0,46" TabStripPlacement="Right" Background="{x:Null}" BorderBrush="{x:Null}">
+                            <TabItem Header="NoConnect" Margin="-3,-202,3,202">
                                 <Grid HorizontalAlignment="Left" Width="887">
-                                    <wpfui:CardControl
+                                    <wpfui:CardControl x:Name="NoDeviceCard"
                                         FontFamily="/icons/Fonts/#Google Sans Medium"
                                         Title="Нет подключения"
                                         Margin="25,15,25,0"
                                         Icon="PhoneCheckmark20"
-                                        Subtitle="Свяжите ваш компьютер с телефоном с помощью MN Connect" Height="65" VerticalAlignment="Top" FontSize="14">
+                                        Subtitle="Свяжите ваш компьютер с телефоном с помощью MN Connect" Height="68" VerticalAlignment="Top" FontSize="14">
                                         <wpfui:Button x:Name="Connect"
                                             Click="ConnectWindows"
                                             Content="Подключить устройство" />
@@ -64,18 +64,18 @@
                                             Grid.Column="1"
                                             Margin="12,0,0,0"
                                             VerticalAlignment="Center">
-                                            <TextBlock
+                                            <TextBlock x:Name="Text1"
                                             Margin="0,0,0,4"
                                             FontSize="11"
                                             FontWeight="Medium"
-                                            Text="Управление в любом месте" Foreground="White" />
-                                            <TextBlock
+                                            Text="Управление в любом месте" />
+                                            <TextBlock x:Name="Text2"
                                             FontSize="10"
                                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                             Text="Всё в облаке и без локальных сетей" />
                                         </StackPanel>
                                     </Grid>
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Подключите Android устройство, чтобы получить возможность:&#xA;● Получать уведомления с телефона на компьютер&#xA;● Просматривать уровень заряда батареи&#xA;● Управлять воспроизведением на ПК.&#xA;&#xA;И многое другое!&#xA;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Для подключения используйте Android приложение MN Connect" HorizontalAlignment="Left" Margin="30,92,0,0" VerticalAlignment="Top" Height="208" Width="483" Foreground="White"/>
+                                    <Label x:Name="MainTextBanner" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Подключите Android устройство, чтобы получить возможность:&#xA;● Получать уведомления с телефона на компьютер&#xA;● Просматривать уровень заряда батареи&#xA;● Управлять воспроизведением на ПК.&#xA;&#xA;И многое другое!&#xA;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Для подключения используйте Android приложение MN Connect" HorizontalAlignment="Left" Margin="30,92,0,0" VerticalAlignment="Top" Height="208" Width="483"/>
                                     <Grid Margin="648,143,15,0" Height="49" VerticalAlignment="Top">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
@@ -86,12 +86,12 @@
                                             Grid.Column="1"
                                             Margin="12,0,0,0"
                                             VerticalAlignment="Center">
-                                            <TextBlock
+                                            <TextBlock x:Name="Text3"
                                                 Margin="0,0,0,4"
                                                 FontSize="11"
                                                 FontWeight="Medium"
-                                                Text="Точные данные" Foreground="White" />
-                                            <TextBlock
+                                                Text="Точные данные"/>
+                                            <TextBlock x:Name="Text4"
                                                 FontSize="10"
                                                 Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                                 Text="Задержка всего пару секунд" />
@@ -99,7 +99,7 @@
                                     </Grid>
                                 </Grid>
                             </TabItem>
-                            <TabItem Header="YesConnect">
+                            <TabItem Header="YesConnect" Margin="-3,-202,3,202">
                                 <Grid>
                                     <wpfui:Button Appearance="Secondary" x:Name="Account_Open" Margin="0,99,25,0" VerticalAlignment="Top" Height="52" Cursor="Hand" Padding="10,5,10,5" HorizontalAlignment="Right" Width="191" Click="Account_Open_Site">
                                         <Grid VerticalAlignment="Top" Width="200">
@@ -112,12 +112,12 @@
                                             Grid.Column="1"
                                             Margin="12,0,28,0"
                                             VerticalAlignment="Center">
-                                                <TextBlock
+                                                <TextBlock x:Name="AcountText1"
                                                 Margin="0,0,0,4"
                                                 FontSize="11"
                                                 FontWeight="Medium"
-                                                Text="Мой Unesell Account" Foreground="White" />
-                                                <TextBlock
+                                                Text="Мой Unesell Account" />
+                                                <TextBlock x:Name="AcountText2"
                                                 FontSize="10"
                                                 Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                                 Text="Откроется сайт в браузере" />
@@ -129,7 +129,7 @@
                                         FontFamily="/icons/Fonts/#Google Sans Medium"
                                         Title="Подключено!"
                                         Icon="PhoneCheckmark20"
-                                        Subtitle="Связь с AndroidDevice" Height="65" VerticalAlignment="Top" FontSize="14" Margin="25,15,25,0">
+                                        Subtitle="Связь с AndroidDevice" Height="68" VerticalAlignment="Top" FontSize="14" Margin="25,15,25,0">
                                         <wpfui:Button x:Name="DisConnect"
                                             Appearance="Secondary"
                                             Click="DisConnect_Click"
@@ -138,22 +138,22 @@
                                     <Border BorderBrush="#7F000000" BorderThickness="1" Margin="24,99,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="65" VerticalAlignment="Top">
                                     </Border>
                                     <Border x:Name="BatteryBarr" BorderThickness="1" Margin="24,99,0,0" Background="#7F08FF00" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="65" VerticalAlignment="Top"/>
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2" Content="Батарея:" HorizontalAlignment="Left" Margin="38,108,0,0" VerticalAlignment="Top" Width="163" FontSize="12" Foreground="White"/>
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="BatteeyLevel" Content="100%" HorizontalAlignment="Left" Margin="37,121,0,0" VerticalAlignment="Top" Width="109" Height="40" FontWeight="Bold" FontSize="28" Grid.IsSharedSizeScope="True" Foreground="White"/>
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2" Content="Батарея:" HorizontalAlignment="Left" Margin="38,108,0,0" VerticalAlignment="Top" Width="163" FontSize="12" Foreground="#CCFFFFFF" />
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="BatteeyLevel" Content="100%" HorizontalAlignment="Left" Margin="37,121,0,0" VerticalAlignment="Top" Width="109" Height="40" FontWeight="Bold" FontSize="28" Grid.IsSharedSizeScope="True" Foreground="White" />
                                     <Border BorderBrush="#7F000000" BorderThickness="1" Margin="233,99,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="65" VerticalAlignment="Top"/>
                                     <Border x:Name="MemoryBarr" BorderThickness="1" Margin="233,99,0,0" Background="#B200BFFF" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="65" VerticalAlignment="Top"/>
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy" Content="Свободно памяти:" HorizontalAlignment="Left" Margin="249,108,0,0" VerticalAlignment="Top" Width="163" FontSize="12" Foreground="White"/>
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="MemoryLevel" Content="21.40Gb" HorizontalAlignment="Left" Margin="247,121,0,0" VerticalAlignment="Top" Width="184" Height="40" FontWeight="Bold" FontSize="28" Grid.IsSharedSizeScope="True" Foreground="White"/>
-                                    <Button x:Name="Files_Open" Margin="27,205,0,0" VerticalAlignment="Top" Width="205" Height="50" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Files_Page_open">
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy" Content="Свободно памяти:" HorizontalAlignment="Left" Margin="249,108,0,0" VerticalAlignment="Top" Width="163" FontSize="12" Foreground="#CCFFFFFF" />
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="MemoryLevel" Content="21.40Gb" HorizontalAlignment="Left" Margin="247,121,0,0" VerticalAlignment="Top" Width="184" Height="40" FontWeight="Bold" FontSize="28" Grid.IsSharedSizeScope="True" Foreground="White" />
+                                    <Button x:Name="Files_Open" Margin="30,205,0,0" VerticalAlignment="Top" Width="203" Height="50" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Files_Page_open" HorizontalAlignment="Left" Padding="10,6,10,6">
                                         <Grid Height="41" Width="195">
                                             <Image x:Name="Files_Icon" HorizontalAlignment="Left" Source="/icons/files.png" Margin="5,3,0,8" Width="25" RenderTransformOrigin="0.75,0.812" />
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="mainsett_text" Content="Отправка файлов" Margin="35,11,0,6" HorizontalAlignment="Left" Width="154" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" FontWeight="Normal" />
                                         </Grid>
                                     </Button>
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Опции с телефоном:" Margin="27,178,0,0" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="141" Foreground="White"/>
+                                    <Label x:Name="textcon2" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Опции с телефоном:" Margin="27,178,0,0" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="141"/>
                                 </Grid>
                             </TabItem>
-                            <TabItem Header="Files">
+                            <TabItem Header="Files" Margin="-3,-202,3,202">
                                 <Grid>
                                     <Border x:Name="File_Upload" Margin="33,10,33,10" CornerRadius="10,10,10,10" BorderBrush="#FF525252" BorderThickness="3,3,3,3">
                                         <Grid>
@@ -161,10 +161,10 @@
                                                 <wpfui:Button
                                             Appearance="Secondary"
                                             x:Name="Open_Upload_File" Cursor="Hand" Click="OpenFileSelector" HorizontalAlignment="Center"
-                                            Content="Выбрать файл" Margin="0,198,0,0" VerticalAlignment="Top" />
-                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Выберите файл или перетащите в окно, который нужно отправить на устройство" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" Foreground="White"/>
-                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Обмен файлами" HorizontalAlignment="Center" Margin="0,131,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Foreground="White"/>
-                                                <Button x:Name="back_to_device" FontFamily="/icons/Fonts/#Google Sans Medium" Margin="10,10,0,0" VerticalAlignment="Top" Width="85" Height="29" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Open_MyDevice" Background="#33444D54" Foreground="White">
+                                            Content="Выбрать файл" Margin="0,198,0,0" VerticalAlignment="Top"/>
+                                                <Label x:Name="SendFileTextSubtitle" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Выберите файл или перетащите в окно, который нужно отправить на устройство" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" />
+                                                <Label x:Name="FileSendTitle" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Обмен файлами" HorizontalAlignment="Center" Margin="0,131,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Foreground="White" />
+                                                <Button x:Name="back_to_device" FontFamily="/icons/Fonts/#Google Sans Medium" Margin="15,10,0,0" VerticalAlignment="Top" Width="85" Height="29" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Open_MyDevice" Background="#33444D54" HorizontalAlignment="Left" >
                                                     <Grid Width="75">
                                                         <Image x:Name="Open_N_Image" HorizontalAlignment="Left" Height="21" VerticalAlignment="Center" Width="20" Source="/icons/back.png" RenderTransformOrigin="0.5,0.5">
                                                             <Image.RenderTransform>
@@ -176,56 +176,57 @@
                                                                 </TransformGroup>
                                                             </Image.RenderTransform>
                                                         </Image>
-                                                        <Label Content="Назад" HorizontalAlignment="Left" Margin="23,0,0,2" VerticalAlignment="Center" Height="15" Padding="0,0,0,0"/>
+                                                        <Label x:Name="back" Content="Назад" HorizontalAlignment="Left" Margin="23,0,0,2" VerticalAlignment="Center" Height="15" Padding="0,0,0,0"/>
                                                     </Grid>
                                                 </Button>
                                             </Grid>
                                             <Grid x:Name="GoUpload" Visibility="Hidden">
-                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="FileUploadName" Content="Отправка файла:" HorizontalAlignment="Left" Margin="149,144,0,0" VerticalAlignment="Top" Width="469" FontWeight="Bold" FontSize="18" Background="{x:Null}" Foreground="White"/>
-                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="FileNameUpload" Content="Подготовка к отправке файла..." HorizontalAlignment="Left" Margin="149,173,0,0" VerticalAlignment="Top" Width="346" Background="{x:Null}" Foreground="White"/>
+                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="FileUploadName" Content="Отправка файла:" HorizontalAlignment="Left" Margin="149,144,0,0" VerticalAlignment="Top" Width="469" FontWeight="Bold" FontSize="18" Background="{x:Null}" />
+                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="FileNameUpload" Content="Подготовка к отправке файла..." HorizontalAlignment="Left" Margin="149,173,0,0" VerticalAlignment="Top" Width="346" Background="{x:Null}" />
                                                 <ProgressBar x:Name="ProgressUploadBar" HorizontalAlignment="Left" Height="13" Margin="149,197,0,0" VerticalAlignment="Top" Width="597" MinHeight="10"/>
                                                 <Image HorizontalAlignment="Left" Height="100" Margin="33,125,0,0" VerticalAlignment="Top" Width="100" Source="/icons/files.png"/>
-                                                <Label x:Name="TextProgressUpload" Content="0%" HorizontalAlignment="Left" Margin="746,191,0,0" VerticalAlignment="Top" Width="38" HorizontalContentAlignment="Right" Background="{x:Null}" Foreground="White"/>
+                                                <Label x:Name="TextProgressUpload" Content="0%" HorizontalAlignment="Left" Margin="746,191,0,0" VerticalAlignment="Top" Width="38" HorizontalContentAlignment="Right" Background="{x:Null}" />
                                             </Grid>
                                         </Grid>
                                     </Border>
                                 </Grid>
                             </TabItem>
-                            <TabItem Header="NoInternet">
+                            <TabItem Header="NoInternet" Margin="0,-190,0,190">
                                 <Grid>
                                     <Grid Margin="100,67,139,55" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <StackPanel VerticalAlignment="Center" Height="50" Margin="192,0,0,0">
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NoInternetTitle" Content="Ой, что-то не так... Проверьте интернет!" FontWeight="Bold" FontSize="20" Foreground="White"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NoInternetTitle" Content="Ой, что-то не так... Проверьте интернет!" FontWeight="Bold" FontSize="20" Foreground="White" />
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NoInternetSubtext" Content="Ошибка подключения к серверу, проверьте интернет-соединение." Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
                                         </StackPanel>
                                         <Image Height="192" VerticalAlignment="Center" Source="/icons/noconnectnotify.png" Margin="0,0,459,0"/>
                                     </Grid>
                                 </Grid>
                             </TabItem>
-                            <TabItem Header="Loading">
+                            <TabItem Header="Loading" Margin="0,-190,0,190">
                                 <Grid
                                     x:Name="RootWelcomeGrid"
                                     Grid.Row="1"
                                     Visibility="Visible">
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                         <wpfui:ProgressRing IsIndeterminate="True" />
-                                        <TextBlock
+                                        <TextBlock x:Name="ConnectingText"
+                                            FontFamily="/icons/Fonts/#Google Sans Medium"
                                     Margin="0,12,0,0"
                                     FontSize="16"
                                     FontWeight="Medium"
                                     Text="Подключение к серверу"
                                     TextAlignment="Center"
-                                    TextWrapping="Wrap" Background="{x:Null}" Foreground="White" />
+                                    TextWrapping="Wrap" Background="{x:Null}" />
                                     </StackPanel>
                                 </Grid>
                             </TabItem>
                         </TabControl>
 
                         <StackPanel Margin="15,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="569" Grid.ColumnSpan="2">
-                            <TextBlock FontFamily="/icons/Fonts/#Google Sans Medium" FontWeight="Medium"  Text="ID устройства:" Foreground="White" Background="{x:Null}" />
+                            <TextBlock x:Name="IDDeviceText" FontFamily="/icons/Fonts/#Google Sans Medium" FontWeight="Medium"  Text="ID устройства:" Background="{x:Null}" />
                             <TextBlock x:Name="ComputerID" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="*************************" />
                         </StackPanel>
-                        <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Help_me" Content="Устранение неполадок и поддержка" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="244" Click="Help_me_Click" Padding="1,1,7,1" Background="{x:Null}" Foreground="#FF006DFF" BorderBrush="Transparent" HorizontalContentAlignment="Right" Height="23" FontSize="12" Grid.Column="1"/>
+                        <wpfui:Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Help_me" Content="Устранение неполадок и поддержка" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="229" Click="Help_me_Click" Padding="1,1,0,1" Background="{x:Null}" Foreground="#FF006DFF" BorderBrush="{x:Null}" HorizontalContentAlignment="Right" Height="23" FontSize="12" VerticalContentAlignment="Center"/>
                     </Grid>
                 </Grid>
             </Border>
@@ -233,17 +234,17 @@
 
         <TextBlock x:Name="beta_banner" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Beta" Margin="169,22,692,17" RenderTransformOrigin="0.5,0.5" FontSize="9" FontWeight="Normal" />
 
-        <wpfui:TitleBar
+        <wpfui:TitleBar x:Name="Title"
           Grid.Row="0"
           FontFamily="/icons/Fonts/#Google Sans Medium"
           Title="Мои устройства"
           Icon="pack://application:,,,/icons/Device.png"
-          FontSize="16" FontWeight="Bold" Foreground="White"/>
+          FontSize="16" FontWeight="Bold" />
 
-        <wpfui:Hyperlink
+        <wpfui:Hyperlink x:Name="LinkDownload"
             FontFamily="/icons/Fonts/#Google Sans Medium"
             Content="MN Connect - Клиент на Android"
-            Icon="Link48" NavigateUri="https://play.google.com/store/apps/details?id=com.unesell.mnc" Margin="0,36,8,0" Grid.RowSpan="2" FontSize="11" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" />
+            Icon="Link48" NavigateUri="https://play.google.com/store/apps/details?id=com.unesell.mnc" Margin="0,36,8,0" Grid.RowSpan="2" FontSize="11" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Cursor="Hand" />
 
 
         <wpfui:Dialog
@@ -261,7 +262,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="0,0,0,-18">
-                    <TextBlock FontWeight="Medium" Text="Проблемы с подключением" FontFamily="/icons/Fonts/#Google Sans Medium" Background="{x:Null}" Foreground="White" FontSize="14" />
+                    <TextBlock FontWeight="Medium" Text="Проблемы с подключением" FontFamily="/icons/Fonts/#Google Sans Medium" Background="{x:Null}" FontSize="14" />
                     <TextBlock
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                         Text="Если у вас возникли проблемы с подключением, проверьте наличие интернет соединения. Может быть ситуация, когда сервер перегружен, просим подождать и повторить попытку."

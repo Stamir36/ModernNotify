@@ -44,6 +44,13 @@ namespace ModernNotyfi
                 context.Content = "Use the MN Connect App";
                 info.Content = "Waiting for connection...";
                 Close.Content = "Cancel connection";
+                Close_Copy.Content = "Cancel connection";
+                ConnectPhoneText_Copy.Content = "Connecting a phone";
+                ScanAppMobile_Copy.Content = "Enter the code in the application to connect to a computer";
+                Code_open_Copy.Content = "QR-code";
+                copy_codes.Content = "Copy code";
+                context.Content = "Use the MN Connect App";
+                Code_open.Content = "Enter code";
             }
 
             code.Content = GetMotherBoardID();
@@ -90,6 +97,10 @@ namespace ModernNotyfi
 
                 Task.WaitAll();
                 info.Content = "Ожидаем подключение...";
+                if (Properties.Settings.Default.Language == "English")
+                {
+                    info.Content = "Waiting for connection...";
+                }
 
                 if (responseString != "null")
                 {
@@ -125,6 +136,10 @@ namespace ModernNotyfi
             catch
             {
                 info.Content = "Сервер не отвечает, повтор...";
+                if (Properties.Settings.Default.Language == "English")
+                {
+                    info.Content = "Server not responding, repeat...";
+                }
             }
         }
 

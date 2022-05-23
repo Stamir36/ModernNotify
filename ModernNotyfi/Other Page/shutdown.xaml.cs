@@ -21,6 +21,10 @@ using System.Windows.Shapes;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Woof.SystemEx;
+using WPFUI.Controls;
+using static ModernNotyfi.PInvoke.ParameterTypes;
+using static ModernNotyfi.PInvoke.Methods;
+using System.Windows.Interop;
 
 namespace ModernNotyfi
 {
@@ -44,14 +48,102 @@ namespace ModernNotyfi
             {
                 User_Name.Content = "Пользователь";
             }
-           
 
+            WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
         }
 
+        private void RefreshFrame()
+        {
+            IntPtr mainWindowPtr = new WindowInteropHelper(this).Handle;
+            HwndSource mainWindowSrc = HwndSource.FromHwnd(mainWindowPtr);
+            mainWindowSrc.CompositionTarget.BackgroundColor = Color.FromArgb(0, 0, 0, 0);
+
+            System.Drawing.Graphics desktop = System.Drawing.Graphics.FromHwnd(mainWindowPtr);
+            float DesktopDpiX = desktop.DpiX;
+
+            MARGINS margins = new MARGINS();
+            margins.cxLeftWidth = Convert.ToInt32(5 * (DesktopDpiX / 96));
+            margins.cxRightWidth = Convert.ToInt32(5 * (DesktopDpiX / 96));
+            margins.cyTopHeight = Convert.ToInt32(((int)ActualHeight + 5) * (DesktopDpiX / 96));
+            margins.cyBottomHeight = Convert.ToInt32(5 * (DesktopDpiX / 96));
+
+            ExtendFrame(mainWindowSrc.Handle, margins);
+        }
+
+        private void RefreshDarkMode()
+        {
+            var isDark = ThemeManager.Current.ActualApplicationTheme == ApplicationTheme.Dark;
+            int flag = isDark ? 1 : 0;
+            SetWindowAttribute(
+                new WindowInteropHelper(this).Handle,
+                DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                flag);
+        }
+
+        // WIN 11 (22581+) STYLE 
+        private void ApplyBackgroundEffect(int index)
+        {
+            IntPtr windowHandle = new WindowInteropHelper(this).Handle;
+
+            WPFUI.Appearance.Background.Remove(windowHandle);
+
+            if (Properties.Settings.Default.theme == "dark")
+            {
+                WPFUI.Appearance.Background.ApplyDarkMode(windowHandle);
+            }
+            else
+            {
+                WPFUI.Appearance.Background.RemoveDarkMode(windowHandle);
+            }
+
+            switch (index)
+            {
+                case -1:
+                    this.Background = Brushes.Transparent;
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Auto);
+                    break;
+
+                case 0:
+                    this.Background = Brushes.Transparent;
+                    Dark_Theme();
+                    this.WindowStyle = WindowStyle.None;
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 2);
+                    break;
+
+                case 1:
+                    this.Background = Brushes.Transparent;
+                    Dark_Theme();
+                    this.WindowStyle = WindowStyle.None;
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 3);
+                    break;
+
+                case 2:
+                    this.Background = Brushes.Transparent;
+                    Dark_Theme();
+                    this.WindowStyle = WindowStyle.None;
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 4);
+                    break;
+            }
+        }
 
         private void Settings_Loaded(object sender, RoutedEventArgs e)
         {
+            Dark_Theme();
+            User_Name.Foreground = Brushes.White;
+            Text1.Foreground = Brushes.White;
+            Text2.Foreground = Brushes.White;
+            Text3.Foreground = Brushes.White;
+            close.Foreground = Brushes.White;
+            acctype.Foreground = Brushes.White;
+            ApplyBackgroundEffect(1);
             //Настройки
+            /*
             if (Properties.Settings.Default.theme == "light")
             {
                 Light_Theme();
@@ -76,6 +168,7 @@ namespace ModernNotyfi
             {
                 Exit_App.Visibility = Visibility.Hidden;
             }
+            */
         }
 
         // ModernWpf.ThemeManager.GetActualTheme(this).ToString(); <- Тема установленная в системе
@@ -87,9 +180,7 @@ namespace ModernNotyfi
         }
         public void Dark_Theme()
         {
-            var bc = new BrushConverter();
-            this.Background = (Brush)bc.ConvertFrom("#F2343434"); // Чёрный фон
-            //ThemeManager.SetRequestedTheme(this, ElementTheme.Dark);
+            WPFUI.Appearance.Theme.Set(WPFUI.Appearance.ThemeType.Dark);
         }
 
         private void Close(object sender, RoutedEventArgs e)

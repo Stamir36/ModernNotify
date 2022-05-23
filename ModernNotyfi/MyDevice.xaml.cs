@@ -24,6 +24,9 @@ using System.Windows.Threading;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using WPFUI.Common;
 using WPFUI;
+using static ModernNotyfi.PInvoke.ParameterTypes;
+using static ModernNotyfi.PInvoke.Methods;
+using System.Windows.Interop;
 
 namespace ModernNotyfi
 {
@@ -36,12 +39,39 @@ namespace ModernNotyfi
 
         public MyDevice()
         {
-            WPFUI.Appearance.Background.Apply(
-              this,                                // Window class
-              WPFUI.Appearance.BackgroundType.Acrylic // Background type
-            );
-
             InitializeComponent();
+
+            WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
+
+            if (Properties.Settings.Default.WinStyle == "Mica")
+            {
+                WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
+            }
+            else
+            {
+                WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
+            }
+
+            if (Properties.Settings.Default.theme == "system")
+            {
+                Loaded += (sender, args) =>
+                {
+                    if (Properties.Settings.Default.WinStyle == "Mica")
+                    {
+                        WPFUI.Appearance.Watcher.Watch(this, WPFUI.Appearance.BackgroundType.Mica, true);
+                    }
+                    else
+                    {
+                        WPFUI.Appearance.Watcher.Watch(this, WPFUI.Appearance.BackgroundType.Auto, true);
+                    }
+                };
+            }
+
+            if (Properties.Settings.Default.Language == "English")
+            {
+                EnglishInterfase_Settings();
+            }
+
             ComputerID.Text = GetMotherBoardID();
 
             SelectUpload.Visibility = Visibility.Visible; GoUpload.Visibility = Visibility.Hidden;
@@ -60,6 +90,132 @@ namespace ModernNotyfi
                 GoResponseAsync();
             };
             timer.Start();
+        }
+
+        private void EnglishInterfase_Settings()
+        {
+            beta_banner.Visibility = Visibility.Hidden;
+            Title.Title = "My Device";
+            LinkDownload.Content = "MN Connect - Connect with Android";
+            Help_me.Content = "Troubleshooting and Support";
+            IDDeviceText.Text = "ID Device:";
+            ConnectingText.Text = "Server connection";
+            NoInternetTitle.Content = "Oops, something's wrong... Check the internet!";
+            NoInternetSubtext.Content = "Server connection error, please check your internet connection.";
+            FileSendTitle.Content = "File sharing";
+            SendFileTextSubtitle.Content = "Select a file or drag and drop to the window you want to send to the device";
+            Open_Upload_File.Content = "Select file";
+            back.Content = "Back";
+            NoDeviceCard.Title = "No connection";
+            NoDeviceCard.Subtitle = "Link your computer to your phone using MN Connect";
+            Connect.Content = "Connect Android device";
+            MainTextBanner.Content = "Connect your Android device to be able to:\n● Receive notifications from phone to computer\n● View battery level\n● Control playback on PC.\nAnd much more!\n\n\n\nTo connect, use the Android application MN Connect";
+            Text1.Text = "Manage anywhere";
+            Text2.Text = "All in the cloud, no LANs";
+            Text3.Text = "Exact data";
+            Text4.Text = "Delay just a couple of seconds";
+            DisConnect.Content = "Unlink device.";
+            DeviceName.Title = "Connected!";
+            //DeviceName.Subtitle = "";
+            btext2.Content = "Battery:";
+            btext2_Copy.Content = "Free memory:";
+            textcon2.Content = "Phone options:";
+            mainsett_text.Content = "Sending files";
+            AcountText1.Text = "My Unesell Account";
+            AcountText2.Text = "The site will open in a browser";
+        }
+
+        public void Light_Theme()
+        {
+            var bc = new BrushConverter();
+            this.Background = (Brush)bc.ConvertFrom("#E5E1E1E1");
+            WPFUI.Appearance.Theme.Set(WPFUI.Appearance.ThemeType.Light);
+            //ApplyBackgroundEffect(stylewin_combo.SelectedIndex);
+        }
+
+        public void Dark_Theme()
+        {
+            var bc = new BrushConverter();
+            this.Background = (Brush)bc.ConvertFrom("#F21B1B1B");
+            WPFUI.Appearance.Theme.Set(WPFUI.Appearance.ThemeType.Dark);
+            // ApplyBackgroundEffect(stylewin_combo.SelectedIndex);
+        }
+
+        private void RefreshFrame()
+        {
+            IntPtr mainWindowPtr = new WindowInteropHelper(this).Handle;
+            HwndSource mainWindowSrc = HwndSource.FromHwnd(mainWindowPtr);
+            mainWindowSrc.CompositionTarget.BackgroundColor = Color.FromArgb(0, 0, 0, 0);
+
+            System.Drawing.Graphics desktop = System.Drawing.Graphics.FromHwnd(mainWindowPtr);
+            float DesktopDpiX = desktop.DpiX;
+
+            MARGINS margins = new MARGINS();
+            margins.cxLeftWidth = Convert.ToInt32(5 * (DesktopDpiX / 96));
+            margins.cxRightWidth = Convert.ToInt32(5 * (DesktopDpiX / 96));
+            margins.cyTopHeight = Convert.ToInt32(((int)ActualHeight + 5) * (DesktopDpiX / 96));
+            margins.cyBottomHeight = Convert.ToInt32(5 * (DesktopDpiX / 96));
+
+            ExtendFrame(mainWindowSrc.Handle, margins);
+        }
+
+        private void RefreshDarkMode()
+        {
+            var isDark = ThemeManager.Current.ActualApplicationTheme == ApplicationTheme.Dark;
+            int flag = isDark ? 1 : 0;
+            SetWindowAttribute(
+                new WindowInteropHelper(this).Handle,
+                DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                flag);
+        }
+
+        // WIN 11 (22581+) STYLE 
+        private void ApplyBackgroundEffect(int index)
+        {
+            IntPtr windowHandle = new WindowInteropHelper(this).Handle;
+
+            WPFUI.Appearance.Background.Remove(windowHandle);
+
+            if (Properties.Settings.Default.theme == "dark")
+            {
+                WPFUI.Appearance.Background.ApplyDarkMode(windowHandle);
+            }
+            else
+            {
+                WPFUI.Appearance.Background.RemoveDarkMode(windowHandle);
+            }
+
+            switch (index)
+            {
+                case -1:
+                    this.Background = Brushes.Transparent;
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Auto);
+                    break;
+
+                case 0:
+                    Dark_Theme();
+                    this.Background = Brushes.Transparent;
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 2);
+                    break;
+
+                case 1:
+                    Dark_Theme();
+                    this.Background = Brushes.Transparent;
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 3);
+                    break;
+
+                case 2:
+                    Dark_Theme();
+                    this.Background = Brushes.Transparent;
+                    RefreshFrame();
+                    RefreshDarkMode();
+                    SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 4);
+                    break;
+            }
         }
 
         public async void GoResponseAsync()
@@ -326,6 +482,40 @@ namespace ModernNotyfi
         private void Account_Open_Site(object sender, RoutedEventArgs e)
         {
             Process.Start("https://unesell.com/account/");
+        }
+
+        private void MyDevice1_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.theme == "light")
+            {
+                Light_Theme();
+            }
+            else if (Properties.Settings.Default.theme == "dark")
+            {
+                Dark_Theme();
+            }
+
+            if (Properties.Settings.Default.WinStyle == "Mica")
+            {
+                if (Properties.Settings.Default.MicaBool == true)
+                {
+                    ApplyBackgroundEffect(0);
+                }
+            }
+            if (Properties.Settings.Default.WinStyle == "Acrylic")
+            {
+                if (Properties.Settings.Default.MicaBool == true)
+                {
+                    ApplyBackgroundEffect(1);
+                }
+            }
+            if (Properties.Settings.Default.WinStyle == "Tabbed")
+            {
+                if (Properties.Settings.Default.MicaBool == true)
+                {
+                    ApplyBackgroundEffect(2);
+                }
+            }
         }
     }
 }

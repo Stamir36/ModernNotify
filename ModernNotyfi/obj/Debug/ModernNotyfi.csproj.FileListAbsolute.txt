@@ -189,3 +189,7 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\App.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\App.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\System.Drawing.Common.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\WPFUI.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\GameBar.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\GameBar.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\DebugWindow.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\DebugWindow.baml

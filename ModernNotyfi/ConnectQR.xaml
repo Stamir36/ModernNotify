@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ModernNotyfi" xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:local="clr-namespace:ModernNotyfi" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
         mc:Ignorable="d"
         Title="Подключение устройства" Height="300" Width="541" Icon="/icons/plus.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Window.Background>
-        <SolidColorBrush x:Name="Window_Back" Color="#F2FFFFFF" Opacity="0.99"/>
+        <SolidColorBrush x:Name="Window_Back" Color="Transparent" Opacity="0.99"/>
     </Window.Background>
 
     <Grid>
-        <Border BorderThickness="2,2,2,2">
+        <Border BorderThickness="2,2,2,2" CornerRadius="5,5,5,5">
             <Border.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <LinearGradientBrush.RelativeTransform>
@@ -33,26 +33,26 @@
         <TabControl x:Name="TabsConnect" Margin="0,-42,0,0">
             <TabItem Header="QR_CONNECT">
                 <Grid>
-                    <Border Margin="299,27,32,63" Background="White" CornerRadius="10,10,10,10" Height="210" Width="210" BorderBrush="#66000000" BorderThickness="0.7,0.5,0.7,0.9" >
+                    <Border Margin="299,29,27,65" Background="White" CornerRadius="10,10,10,10" Height="210" BorderBrush="#66000000" BorderThickness="0.7,0.5,0.7,0.9" >
                         <Image x:Name="QRcode" Margin="5,5,5,5"/>
                     </Border>
-                    <Button x:Name="Close" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Отмена подключения" Margin="349,258,0,0" VerticalAlignment="Top" Width="181" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand"/>
-                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="ScanAppMobile"  Content="Отсканируйте код приложением" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
-                    <Label x:Name="ConnectPhoneText" FontFamily="./icons/Fonts/#Samsung Sharp Sans" Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="261" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold"/>
-                    <Label x:Name="context" Content="Используйте приложение MN Connect" HorizontalAlignment="Left" Margin="19,265,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
-                    <ui:ProgressRing x:Name="progressRing" IsActive="True" Width="0" Height="22" HorizontalAlignment="Left" Margin="19,238,0,0" VerticalAlignment="Top" />
-                    <Label x:Name="info" Content="Ожидаем подключение..." HorizontalAlignment="Left" Margin="44,242,0,0" VerticalAlignment="Top" Width="187" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
-                    <Button x:Name="Code_open" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Ввести код" Margin="242,257,0,0" VerticalAlignment="Top" Width="102" Background="#FFFFB03D" Foreground="White" Click="CODE_OPEN" Cursor="Hand" Height="33"/>
+                    <Button x:Name="Close" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Отмена подключения" Margin="348,258,10,0" VerticalAlignment="Top" Width="181" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand" Padding="10,6,10,6"/>
+                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="ScanAppMobile"  Content="Отсканируйте код приложением" HorizontalAlignment="Left" Margin="25,74,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
+                    <Label x:Name="ConnectPhoneText" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,41,0,0" VerticalAlignment="Top" Width="261" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
+                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="context" Content="Используйте приложение MN Connect" HorizontalAlignment="Left" Margin="25,100,0,0" VerticalAlignment="Top" Width="223" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="9" FontStyle="Italic"/>
+                    <wpfui:ProgressRing x:Name="progressRing" IsIndeterminate="True" Width="20" Height="20" HorizontalAlignment="Left" Margin="19,261,0,0" VerticalAlignment="Top" />
+                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="info" Content="Ожидаем подключение..." HorizontalAlignment="Left" Margin="47,265,0,0" VerticalAlignment="Top" Width="187" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
+                    <Button x:Name="Code_open" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Ввести код" Margin="244,258,193,0" VerticalAlignment="Top" Width="102" Background="#FFFFB03D" Foreground="White" Click="CODE_OPEN" Cursor="Hand" Height="30" Padding="10,6,10,6"/>
                 </Grid>
             </TabItem>
             <TabItem Header="CODE_CONNECT">
                 <Grid>
-                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="ConnectPhoneText_Copy" Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,27,0,0" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold"/>
-                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="ScanAppMobile_Copy" Content="Введите код в приложении для подключения к компьютеру" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" Width="369" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
-                    <Label  x:Name="code" Content="PC_CODE" HorizontalAlignment="Center" VerticalAlignment="Center" Height="99" Width="475" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" FontWeight="Bold" FontSize="18"/>
-                    <Button x:Name="copy_codes" Content="Копировать код" Margin="10,0,0,17" VerticalAlignment="Bottom" Width="215" Click="Copy_Code" Padding="10,1,10,1" Background="{x:Null}" Foreground="#FF003AFF" BorderBrush="Transparent" HorizontalContentAlignment="Left"/>
-                    <Button x:Name="Close_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Отмена подключения" Margin="349,258,0,0" VerticalAlignment="Top" Width="181" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand"/>
-                    <Button x:Name="Code_open_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="QR-код" Margin="242,257,0,0" VerticalAlignment="Top" Width="102" Background="#FFFFB03D" Foreground="White" Click="QR_OPEN" Cursor="Hand" Height="33"/>
+                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="ConnectPhoneText_Copy" Content="Подключение телефона" HorizontalAlignment="Left" Margin="25,41,0,0" VerticalAlignment="Top" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
+                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="ScanAppMobile_Copy" Content="Введите код в приложении для подключения к компьютеру" HorizontalAlignment="Left" Margin="25,74,0,0" VerticalAlignment="Top" Width="369" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="13"/>
+                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="code" Content="PC_CODE" HorizontalAlignment="Center" VerticalAlignment="Top" Height="98" Width="475" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" FontWeight="Bold" FontSize="18" Foreground="White" Margin="0,117,0,0"/>
+                    <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="copy_codes" Content="Копировать код" Margin="15,0,309,19" VerticalAlignment="Bottom" Width="215" Click="Copy_Code" Padding="10,1,10,1" Background="{x:Null}" Foreground="#FF003AFF" BorderBrush="Transparent" HorizontalContentAlignment="Left"/>
+                    <Button x:Name="Close_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Отмена подключения" Margin="348,258,10,0" VerticalAlignment="Top" Width="181" Background="#FF0F71F3" Foreground="White" Click="Cansel" Cursor="Hand" Padding="10,6,10,6"/>
+                    <Button x:Name="Code_open_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="QR-код" Margin="243,258,194,0" VerticalAlignment="Top" Width="102" Background="#FFFFB03D" Foreground="White" Click="QR_OPEN" Cursor="Hand" Height="30" Padding="10,6,10,6"/>
                 </Grid>
             </TabItem>
         </TabControl>

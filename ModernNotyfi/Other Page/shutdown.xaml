@@ -3,34 +3,41 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ModernNotyfi"
+        xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+        Style="{StaticResource UiWindow}"
         mc:Ignorable="d"
+
+        xmlns:local="clr-namespace:ModernNotyfi"
         Title="Выключение или перезагрузка" Height="411" Width="693"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="False" MinWidth="960" MinHeight="530" Icon="../icons/shutdown.png" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Visibility="Visible" AllowsTransparency="True" Loaded="Settings_Loaded" WindowState="Maximized">
-    <Window.Background>
-        <SolidColorBrush x:Name="Window_Back" Color="#F2FFFFFF" Opacity="0.99"/>
-    </Window.Background>
-
+        MinWidth="960" MinHeight="530" Icon="../icons/shutdown.png" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Loaded="Settings_Loaded" WindowState="Maximized">
     <Grid Grid.IsSharedSizeScope="True">
         <Button x:Name="Shutdown" HorizontalAlignment="Center" Margin="320,188,330,291" VerticalAlignment="Center" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Width="310" Height="51" Click="ShutdownWindows">
             <Grid Height="41" Width="243">
                 <Image HorizontalAlignment="Left" Source="/ModernNotify;component/icons/shutdown_fluent.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                <Label x:Name="Text1" Content="Выключить ПК" Margin="37,7,0,7" HorizontalAlignment="Left" Width="206" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" />
+                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="Text1" Content="Выключить ПК" Margin="37,7,0,7" HorizontalAlignment="Left" Width="206" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" />
             </Grid>
         </Button>
         <Button x:Name="S_Restart" HorizontalAlignment="Center" Margin="320,244,330,235" VerticalAlignment="Center" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Width="310" Height="51" Click="RestartWindows">
             <Grid Height="41" Width="244">
                 <Image HorizontalAlignment="Left" Source="/ModernNotify;component/icons/restart_fluent.png" Margin="0,4,0,5" Width="32" RenderTransformOrigin="0.75,0.812" />
-                <Label x:Name="Text2" Content="Перезагрузить ПК" Margin="37,7,0,7" HorizontalAlignment="Left" Width="207" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" />
+                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="Text2" Content="Перезагрузить ПК" Margin="37,7,0,7" HorizontalAlignment="Left" Width="207" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" />
             </Grid>
         </Button>
-        <Button x:Name="close" Content="Отменить" Margin="0,0,19,18" HorizontalAlignment="Right" Width="106" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Close" Background="#4CBFBFBF" />
-        <Button x:Name="Exit_App" HorizontalAlignment="Right" Margin="0,0,130,19" VerticalAlignment="Bottom" Background="#4CBFBFBF" OpacityMask="Black" Cursor="Hand" Width="165" Height="31" Click="Exit_App_Click">
+        <Button FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="close" Content="Отменить" Margin="0,0,19,18" HorizontalAlignment="Right" Width="106" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Close" Background="#4CBFBFBF" Padding="10,6,10,6" />
+        <Button FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="Exit_App" HorizontalAlignment="Right" Margin="0,0,130,19" VerticalAlignment="Bottom" Background="#4CBFBFBF" OpacityMask="Black" Cursor="Hand" Width="178" Height="31" Click="Exit_App_Click" Padding="10,6,10,6" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.256"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
             <Grid Height="30" Width="175">
                 <Image HorizontalAlignment="Left" Source="/ModernNotify;component/icons/exit.png" Margin="0,0,0,14" Width="27" RenderTransformOrigin="0.75,0.812" />
-                <Label x:Name="Text3" Content="Выключить панель" Margin="15,-2,0,13" HorizontalAlignment="Left" Width="132" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" />
+                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="Text3" Content="Выключить панель" Margin="0,0,0,11" HorizontalAlignment="Center" Width="143" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" />
             </Grid>
         </Button>
         <Border BorderThickness="1" Height="64" Margin="20,0,0,19" VerticalAlignment="Bottom" CornerRadius="5,5,5,5" BorderBrush="#33000000" HorizontalAlignment="Left" Width="285">
@@ -38,13 +45,13 @@
                 <SolidColorBrush Color="#7FDADADA" Opacity="0.7"/>
             </Border.Background>
             <Grid>
-                <Label x:Name="User_Name" Content="Привет!" Margin="68,10,0,0" HorizontalAlignment="Left" Width="229" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
+                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="User_Name" Content="Привет!" Margin="68,10,0,0" HorizontalAlignment="Left" Width="229" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
                 <Ellipse Margin="15,0,0,0" Stroke="#7F000000" HorizontalAlignment="Left" Width="45" Height="44" VerticalAlignment="Center">
                     <Ellipse.Fill>
                         <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
                     </Ellipse.Fill>
                 </Ellipse>
-                <Label x:Name="acctype" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="69,33,0,0" VerticalAlignment="Top"/>
+                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="acctype" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="69,33,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Border>
         <Label Content="Быстрые дейстия" Height="56" VerticalAlignment="Center" HorizontalAlignment="Center" Width="318" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" FontSize="20" Margin="0,-230,0,0">
@@ -57,10 +64,10 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Button x:Name="Run_TaskMenedger" Margin="20,0,0,91" VerticalAlignment="Bottom" Background="#4CBFBFBF" OpacityMask="Black" Cursor="Hand" Width="165" Click="Run_TaskMenedger_Go" Height="31">
+        <Button x:Name="Run_TaskMenedger" Margin="20,0,0,88" VerticalAlignment="Bottom" Background="#4CBFBFBF" OpacityMask="Black" Cursor="Hand" Width="165" Click="Run_TaskMenedger_Go" Height="31" HorizontalAlignment="Left" Padding="10,6,5,6">
             <Grid Height="30" Width="175">
                 <Image HorizontalAlignment="Left" Source="/icons/App_Color.png" Margin="0,1,0,13" Width="27" RenderTransformOrigin="0.75,0.812" />
-                <Label x:Name="tskmng_text" Content="Диспетчер задач" Margin="18,-1,0,12" HorizontalAlignment="Left" Width="132" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" />
+                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="tskmng_text" Content="Диспетчер задач" Margin="18,-1,0,12" HorizontalAlignment="Left" Width="132" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" />
             </Grid>
         </Button>
     </Grid>
