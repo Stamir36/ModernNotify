@@ -136,7 +136,7 @@ namespace ModernNotyfi
             updateaccount();
 
             EctInfoSys.Content = "";
-
+            
             Version.Content = "Версия приложения: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             version.Content = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");

@@ -35,11 +35,19 @@ namespace ModernNotyfi
     /// </summary>
     public partial class MyDevice : Window
     {
+        //public string api = "http://api.unesell.com/";
+        public string api = "http://localhost/api/";
+
         public DispatcherTimer timer = new DispatcherTimer();
 
         public MyDevice()
         {
             InitializeComponent();
+            info.Content = "Ожидаем подключение...";
+            if (Properties.Settings.Default.Language == "English")
+            {
+                info.Content = "Waiting for connection...";
+            }
 
             WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
 
@@ -120,7 +128,8 @@ namespace ModernNotyfi
             btext2.Content = "Battery:";
             btext2_Copy.Content = "Free memory:";
             textcon2.Content = "Phone options:";
-            mainsett_text.Content = "Sending files";
+            mainsett_text.Text = "Sending files";
+            sendfileText2.Text = "Send file to device";
             AcountText1.Text = "My Unesell Account";
             AcountText2.Text = "The site will open in a browser";
         }
@@ -230,7 +239,7 @@ namespace ModernNotyfi
                     {
                         using (var webClient = new WebClient())
                         {
-                            responseString = webClient.DownloadString("http://api.unesell.com/connect/check_connect.php?id=" + GetMotherBoardID());
+                            responseString = webClient.DownloadString(api + "connect/check_connect.php?id=" + GetMotherBoardID());
                         }
                     });
                 }
@@ -248,6 +257,7 @@ namespace ModernNotyfi
                 else
                 {
                     TabConnect.SelectedIndex = 3;
+
                 }
             }
             else
@@ -286,20 +296,20 @@ namespace ModernNotyfi
                     double free = MEM1 - MEM2;
 
                     DeviceName.Subtitle = "Связь с " + MOBILE;
-                    BatteeyLevel.Content = BATTETY + "%";
-                    BatteryBarr.Width = Convert.ToInt16(BATTETY) * 2;
+                    BatteeyLevel.Text = BATTETY;
+                    BatteryBarr.Progress = Convert.ToInt16(BATTETY);
 
                     MemoryLevel.Content = MEM2 + "Gb";
-                    MemoryBarr.Width = Convert.ToInt16(free * 100 / MEM1) * 2;
+                    MemoryBarr.Progress = Convert.ToInt16(free * 100 / MEM1);
 
                     var bc = new BrushConverter();
                     if (Convert.ToInt16(BATTETY) > 20)
                     {
-                        BatteryBarr.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#7F08FF00");
+                        BatteryBarr.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#7F08FF00");
                     }
                     else
                     {
-                        BatteryBarr.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#7FFF0000");
+                        BatteryBarr.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#FFD64545");
                     }
 
                     if (TabConnect.SelectedIndex == 4)
@@ -356,7 +366,7 @@ namespace ModernNotyfi
             try{
                 using (var webClient = new WebClient())
                 {
-                    var response = webClient.DownloadString("http://api.unesell.com/connect/disconnect.php?id=" + GetMotherBoardID());
+                    var response = webClient.DownloadString(api + "connect/disconnect.php?id=" + GetMotherBoardID());
                 }
 
                 Properties.Settings.Default.ConnectMobile = "null";
@@ -455,7 +465,7 @@ namespace ModernNotyfi
             {
                 SendBool = false; SelectUpload.Visibility = Visibility.Hidden; GoUpload.Visibility = Visibility.Visible;
                 new ToastContentBuilder().AddArgument("action", "viewConversation").AddArgument("conversationId", 9813).AddText("Передача файла...").AddText("Отправка: " + filename).Show();
-                Uri uri_upload = new Uri("http://api.unesell.com/connect/filesend.php?id=" + GetMotherBoardID());
+                Uri uri_upload = new Uri(api + "connect/filesend.php?id=" + GetMotherBoardID());
 
                 FileNameUpload.Content = filename;
 

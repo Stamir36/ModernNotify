@@ -30,6 +30,9 @@ namespace ModernNotyfi
     /// </summary>
     public partial class ConnectQR : Window
     {
+        //public string api = "http://api.unesell.com/";
+        public string api = "http://localhost/api/";
+
         String CONNECT_IDENTIFY = "MODERNCONNECT:";
         public DispatcherTimer timer_sec = new DispatcherTimer();
 
@@ -90,7 +93,7 @@ namespace ModernNotyfi
                 {
                     using (var webClient = new WebClient())
                     {
-                        responseString = webClient.DownloadString("http://api.unesell.com/connect/check_connect.php?id=" + GetMotherBoardID());
+                        responseString = webClient.DownloadString(api + "connect/check_connect.php?id=" + GetMotherBoardID());
                     }
                 });
 

@@ -40,6 +40,7 @@ namespace ModernNotyfi
                     if (sub.Contains("id="))
                     {
                         data = sub.Replace("id=", "");           //id
+                        data = data.Replace("http://app.modernnotify/?", "");
                         Properties.Settings.Default.Unesell_id = data;
                         Properties.Settings.Default.Save();
                     }

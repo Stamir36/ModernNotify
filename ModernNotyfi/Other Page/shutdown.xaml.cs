@@ -134,6 +134,8 @@ namespace ModernNotyfi
 
         private void Settings_Loaded(object sender, RoutedEventArgs e)
         {
+            //if windows 11
+            /*
             Dark_Theme();
             User_Name.Foreground = Brushes.White;
             Text1.Foreground = Brushes.White;
@@ -142,8 +144,10 @@ namespace ModernNotyfi
             close.Foreground = Brushes.White;
             acctype.Foreground = Brushes.White;
             ApplyBackgroundEffect(1);
-            //Настройки
-            /*
+            */
+
+            //Настройки if windows 10
+            
             if (Properties.Settings.Default.theme == "light")
             {
                 Light_Theme();
@@ -168,7 +172,8 @@ namespace ModernNotyfi
             {
                 Exit_App.Visibility = Visibility.Hidden;
             }
-            */
+
+            //this.Background.Opacity = 9;
         }
 
         // ModernWpf.ThemeManager.GetActualTheme(this).ToString(); <- Тема установленная в системе
@@ -180,6 +185,8 @@ namespace ModernNotyfi
         }
         public void Dark_Theme()
         {
+            var bc = new BrushConverter();
+            this.Background = (Brush)bc.ConvertFrom("#CC2B2B2B"); // Тёмный фон
             WPFUI.Appearance.Theme.Set(WPFUI.Appearance.ThemeType.Dark);
         }
 

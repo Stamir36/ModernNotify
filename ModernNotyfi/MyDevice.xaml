@@ -135,22 +135,65 @@
                                             Click="DisConnect_Click"
                                             Content="Отключить устройство" />
                                     </wpfui:CardControl>
-                                    <Border BorderBrush="#7F000000" BorderThickness="1" Margin="24,99,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="65" VerticalAlignment="Top">
-                                    </Border>
-                                    <Border x:Name="BatteryBarr" BorderThickness="1" Margin="24,99,0,0" Background="#7F08FF00" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="65" VerticalAlignment="Top"/>
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2" Content="Батарея:" HorizontalAlignment="Left" Margin="38,108,0,0" VerticalAlignment="Top" Width="163" FontSize="12" Foreground="#CCFFFFFF" />
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="BatteeyLevel" Content="100%" HorizontalAlignment="Left" Margin="37,121,0,0" VerticalAlignment="Top" Width="109" Height="40" FontWeight="Bold" FontSize="28" Grid.IsSharedSizeScope="True" Foreground="White" />
-                                    <Border BorderBrush="#7F000000" BorderThickness="1" Margin="233,99,0,0" Background="#7FE4D9D9" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="200" Height="65" VerticalAlignment="Top"/>
-                                    <Border x:Name="MemoryBarr" BorderThickness="1" Margin="233,99,0,0" Background="#B200BFFF" CornerRadius="10,10,10,10" HorizontalAlignment="Left" Width="180" Height="65" VerticalAlignment="Top"/>
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy" Content="Свободно памяти:" HorizontalAlignment="Left" Margin="249,108,0,0" VerticalAlignment="Top" Width="163" FontSize="12" Foreground="#CCFFFFFF" />
-                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="MemoryLevel" Content="21.40Gb" HorizontalAlignment="Left" Margin="247,121,0,0" VerticalAlignment="Top" Width="184" Height="40" FontWeight="Bold" FontSize="28" Grid.IsSharedSizeScope="True" Foreground="White" />
-                                    <Button x:Name="Files_Open" Margin="30,205,0,0" VerticalAlignment="Top" Width="203" Height="50" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Click="Files_Page_open" HorizontalAlignment="Left" Padding="10,6,10,6">
-                                        <Grid Height="41" Width="195">
-                                            <Image x:Name="Files_Icon" HorizontalAlignment="Left" Source="/icons/files.png" Margin="5,3,0,8" Width="25" RenderTransformOrigin="0.75,0.812" />
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="mainsett_text" Content="Отправка файлов" Margin="35,11,0,6" HorizontalAlignment="Left" Width="154" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" FontWeight="Normal" />
+                                    <wpfui:Card x:Name="MusicCard"
+                                        Height="143"
+                                        Margin="25,0,585,152"
+                                        VerticalAlignment="Bottom" Padding="5,5,5,5"/>
+
+                                    <Grid Margin="60,140,754,219">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="8,0,0,0">
+                                            <TextBlock FontFamily="/icons/Fonts/#Google Sans Medium" Text="99" x:Name="BatteeyLevel" FontSize="21" FontWeight="Bold" Width="35" FlowDirection="RightToLeft"/>
+                                            <TextBlock FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="prochent" Text="%" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,0" Padding="0,0,0,0" Height="18"/>
+                                        </StackPanel>
+                                    </Grid>
+
+
+                                    <wpfui:ProgressRing x:Name="BatteryBarr" Progress="18" Margin="45,106,741,185" Width="100" Height="100" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" >
+                                        <wpfui:ProgressRing.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="90"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </wpfui:ProgressRing.RenderTransform>
+                                    </wpfui:ProgressRing>
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2" Content="Батарея" HorizontalAlignment="Left" Margin="65,211,0,0" VerticalAlignment="Top" Width="60" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy" Content="Свободно памяти" HorizontalAlignment="Left" Margin="152,211,0,0" VerticalAlignment="Top" Width="146" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="MemoryLevel" Content="21.40Gb" HorizontalAlignment="Left" Margin="165,140,0,0" VerticalAlignment="Top" Width="122" Height="37" FontWeight="Bold" FontSize="14" Grid.IsSharedSizeScope="True" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                    <Label x:Name="textcon2" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Опции с телефоном:" Margin="26,260,0,0" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="141"/>
+                                    <wpfui:ProgressRing x:Name="MemoryBarr" Progress="5" Margin="175,106,611,185" Width="100" Height="100" RenderTransformOrigin="0.5,0.5" Foreground="#FF80B9EE" FlowDirection="RightToLeft" >
+                                        <wpfui:ProgressRing.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="90"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </wpfui:ProgressRing.RenderTransform>
+                                    </wpfui:ProgressRing>
+                                    <wpfui:Button Appearance="Secondary" x:Name="Files_Open" Margin="26,284,0,0" Height="52" Cursor="Hand" Padding="10,5,10,5" HorizontalAlignment="Left" Width="221" Click="Files_Page_open" VerticalAlignment="Top">
+                                        <Grid VerticalAlignment="Top" Width="200">
+                                            <d:Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </d:Grid.ColumnDefinitions>
+                                            <wpfui:Icon FontSize="19" Glyph="ArrowCircleUp28" HorizontalAlignment="Left" Margin="0,6,0,6" VerticalAlignment="Stretch" />
+                                            <StackPanel
+                                                VerticalAlignment="Center" HorizontalAlignment="Center" Width="169" Margin="30,0,0,0">
+                                                <TextBlock x:Name="mainsett_text"
+                                                    Margin="0,0,0,4"
+                                                    FontSize="11"
+                                                    FontWeight="Medium"
+                                                    Text="Перерача файла"
+                                                     FontFamily="/icons/Fonts/#Google Sans Medium"/>
+                                                <TextBlock x:Name="sendfileText2"
+                                                    FontSize="10"
+                                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                    Text="Отправить файл на устройство"/>
+                                            </StackPanel>
                                         </Grid>
-                                    </Button>
-                                    <Label x:Name="textcon2" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Опции с телефоном:" Margin="27,178,0,0" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="141"/>
+                                    </wpfui:Button>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Files" Margin="-3,-202,3,202">
@@ -194,10 +237,12 @@
                             <TabItem Header="NoInternet" Margin="0,-190,0,190">
                                 <Grid>
                                     <Grid Margin="100,67,139,55" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <StackPanel VerticalAlignment="Center" Height="50" Margin="192,0,0,0">
+                                        <StackPanel VerticalAlignment="Top" Height="50" Margin="192,50,0,0">
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NoInternetTitle" Content="Ой, что-то не так... Проверьте интернет!" FontWeight="Bold" FontSize="20" Foreground="White" />
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NoInternetSubtext" Content="Ошибка подключения к серверу, проверьте интернет-соединение." Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
                                         </StackPanel>
+                                        <wpfui:ProgressRing x:Name="progressRing" IsIndeterminate="True" Margin="192,121,430,46" Width="25" Height="25" />
+                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="info" Content="Ожидаем подключение..." Margin="228,127,232,47" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
                                         <Image Height="192" VerticalAlignment="Center" Source="/icons/noconnectnotify.png" Margin="0,0,459,0"/>
                                     </Grid>
                                 </Grid>

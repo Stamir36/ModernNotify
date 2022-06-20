@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Woof.SystemEx;
 
 namespace ModernNotyfi.Other_Page
 {
@@ -35,6 +37,18 @@ namespace ModernNotyfi.Other_Page
         {
             unesell_login_web unesell_Login_Web = new unesell_login_web();
             unesell_Login_Web.Show();
+        }
+
+        private void OpenSysInfo(object sender, RoutedEventArgs e)
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+
+            MessageBox.Show("SystemMemoryTotal: " + Math.Round(SysInfo.SystemMemoryTotal, 2) + "GB\n" +
+                "LogonUser: " + SysInfo.LogonUser + "\n" +
+                "SystemMemoryFree: " + Math.Round(SysInfo.SystemMemoryFree, 2) + "Gb\n" +
+                "Cpu: " + SysInfo.Cpu + "\n" +
+                "CpuSpeed: " + SysInfo.CpuSpeed + "\n"
+                , "Системная информация");
         }
     }
 }

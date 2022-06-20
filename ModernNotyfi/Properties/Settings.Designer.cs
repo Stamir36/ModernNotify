@@ -310,5 +310,29 @@ namespace ModernNotyfi.Properties {
                 this["MicaBool"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Panel")]
+        public string Startup {
+            get {
+                return ((string)(this["Startup"]));
+            }
+            set {
+                this["Startup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Windows")]
+        public string System {
+            get {
+                return ((string)(this["System"]));
+            }
+            set {
+                this["System"] = value;
+            }
+        }
     }
 }

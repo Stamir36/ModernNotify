@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NjolvzyeCMt0Mx3lqC79nQHZVyw6G9NlzduyGPvGZhlbwgc6JYOzrCE+tS1xVWpRF94MRXomtTUbInsRG6uzjg==",
+  "dgSpecHash": "Go82pR1dFGhvLBdD38lk3KxJZO8RPqNe9hzAs/JIaT5cAJdMS8H25fibgSp2VX0+mDBeTwqd5owu51h5eYDCgg==",
   "success": true,
-  "projectFilePath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj",
+  "projectFilePath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotify.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\stas1\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",

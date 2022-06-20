@@ -11,7 +11,7 @@
         Title="Выключение или перезагрузка" Height="411" Width="693"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         MinWidth="960" MinHeight="530" Icon="../icons/shutdown.png" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Loaded="Settings_Loaded" WindowState="Maximized">
+        Loaded="Settings_Loaded" WindowState="Maximized" Background="#CC2B2B2B">
     <Grid Grid.IsSharedSizeScope="True">
         <Button x:Name="Shutdown" HorizontalAlignment="Center" Margin="320,188,330,291" VerticalAlignment="Center" Background="#7FFFD4D4" OpacityMask="Black" Cursor="Hand" Width="310" Height="51" Click="ShutdownWindows">
             <Grid Height="41" Width="243">

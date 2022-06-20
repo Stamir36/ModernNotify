@@ -5,9 +5,9 @@
         xmlns:local="clr-namespace:ModernNotyfi"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI" mc:Ignorable="av" x:Name="ModernNotyfi" x:Class="ModernNotyfi.MainWindow"
-        Title="ModernNotyfi" Height="500" Width="360" WindowStyle="None" Deactivated="ModernNotyfi_Deactivated" Foreground="{x:Null}" Visibility="Visible"
+        Title="Control Panel" Height="500" Width="360" WindowStyle="None" Deactivated="ModernNotyfi_Deactivated" Foreground="{x:Null}" Visibility="Visible"
         AllowsTransparency="True" Loaded="ModernNotyfi_Loaded"
-        Icon="icon.ico" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True">
+        Icon="/icons/App_Color.png" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True">
     <Window.Resources>
 
         <Style x:Key="FocusVisual">

@@ -74,5 +74,11 @@
     <Setting Name="MicaBool" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="Startup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Panel</Value>
+    </Setting>
+    <Setting Name="System" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Windows</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

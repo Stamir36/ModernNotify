@@ -30,6 +30,7 @@ using System.Windows.Threading;
 using Newtonsoft.Json.Linq;
 using WPFUI;
 using WPFUI.Controls;
+using Woof.SystemEx;
 
 namespace ModernNotyfi
 {
@@ -46,6 +47,9 @@ namespace ModernNotyfi
 
     public partial class MainWindow : Window
     {
+        //public string api = "http://api.unesell.com/";
+        public string api = "http://localhost/api/";
+
         // БАЗОВЫЕ НАСТРОЙКИ И ПАРАМЕТРЫ ---------------------------------------------------------
         public int soundDevice = 1; //Активное устройство воспроизведения
         public int SoundDeviceOpen = 0;
@@ -253,7 +257,6 @@ namespace ModernNotyfi
         // Инициализация
         public MainWindow()
         {
-
             // Сохранение настроек после обновления
             if (Properties.Settings.Default.UpgradeRequired)
             {
@@ -807,7 +810,7 @@ namespace ModernNotyfi
                 await Task.Run(() => {
                     using (var webClient = new WebClient())
                     {
-                        responseString = webClient.DownloadString("http://api.unesell.com/connect/check_connect.php?id=" + GetMotherBoardID());
+                        responseString = webClient.DownloadString(api + "connect/check_connect.php?id=" + GetMotherBoardID());
                     }
                 });
                 if (responseString != "null")
@@ -851,8 +854,43 @@ namespace ModernNotyfi
                         // Отправить буфер обмена
                         using (var webClient = new WebClient())
                         {
-                            webClient.DownloadString("http://api.unesell.com/connect/command_mobile.php?id=" + GetMotherBoardID() + "&command=copy:" + Clipboard.GetText());
+                            webClient.DownloadString(api + "connect/command_mobile.php?id=" + GetMotherBoardID() + "&command=copy:" + Clipboard.GetText());
                         }
+                    }
+                    if (command == "copy_bufer_web")
+                    {
+                        // Отправить буфер обмена самому себе для интерфейса MyDevice
+                        using (var webClient = new WebClient())
+                        {
+                            webClient.DownloadString(api + "connect/command_mobile.php?id=" + GetMotherBoardID() + "&command=copyWEB:" + Clipboard.GetText());
+                        }
+                    }
+                    if (command == "commands.apps.list")
+                    {
+                        string appList = "";
+                        
+                        for (int i = 1; i <= Items.Count() / 14; i++)
+                        {
+                            appList = "";
+                            for (int y = i * 14 - 14; y < i * 14; y++)
+                            {
+                                appList = appList + Items.ElementAt(y).Name + "|";
+                            }
+
+                            await Task.Run(() => {
+                                appList = appList.Replace(" ", "_");
+                                using (var webClient = new WebClient())
+                                {
+                                    webClient.DownloadString(api + "connect/command_mobile.php?id=" + GetMotherBoardID() + "&command=AppList:" + appList);
+                                }
+                            });
+                            Task.Delay(1000).Wait();
+                        }
+                    }
+                    if (command.Contains("appStart:"))
+                    {
+                        int indexApp = Convert.ToInt32(command.Replace("appStart:", ""));
+                        Process.Start(Items.ElementAt(indexApp).Sourse);
                     }
                     GetServerInfo();
                 }
@@ -883,7 +921,7 @@ namespace ModernNotyfi
                 int volume = Convert.ToInt16(SoundSlider.Value);
                 
                 await Task.Run(() => {
-                    string url = "http://api.unesell.com/connect/pc_add_info.php?ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume;
+                    string url = api + "connect/pc_add_info.php?ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume + "&UnesellID=" + Properties.Settings.Default.Unesell_id + "&SystemInfo=" + Properties.Settings.Default.System + "&SysMemoryTotal=" + Math.Round(SysInfo.SystemMemoryTotal, 2) + "&SysMemoryFree=" + Math.Round(SysInfo.SystemMemoryFree, 2);
 
                     using (var webClient = new WebClient())
                     {
@@ -895,11 +933,12 @@ namespace ModernNotyfi
 
 
                 });
+
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 // Ignore Error Send Server
-                //MessageBox.Show("Error Send:\n" + ex);
+                //System.Windows.MessageBox.Show("Error Send:\n" + ex); Properties.Settings.Default.Unesell_id
             }
         }
 

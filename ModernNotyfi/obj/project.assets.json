@@ -5230,9 +5230,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj",
+      "projectUniqueName": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotify.csproj",
       "projectName": "ModernNotify",
-      "projectPath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotyfi.csproj",
+      "projectPath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotify.csproj",
       "packagesPath": "C:\\Users\\stas1\\.nuget\\packages\\",
       "outputPath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\obj\\",
       "projectStyle": "PackageReference",

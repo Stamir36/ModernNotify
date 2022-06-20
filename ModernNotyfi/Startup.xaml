@@ -1,0 +1,18 @@
+﻿<Window x:Class="ModernNotyfi.Startup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ModernNotyfi"
+        mc:Ignorable="d"
+        xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+        xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
+        Title="Запуск ModernNotify"
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True"
+        Height="50" Width="220" ResizeMode="NoResize" Icon="/icons/maim_settings.png" Background="{x:Null}" WindowStyle="None" Loaded="StartProgram">
+    <Grid>
+        <wpfui:ProgressRing x:Name="progressRing" IsIndeterminate="True" Margin="15,10,180,10" Width="25" Height="25" />
+        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="info" Content="Запускаем сервисы..." Margin="50,15,10,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
+
+    </Grid>
+</Window>

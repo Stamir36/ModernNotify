@@ -193,3 +193,5 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\GameBar.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\GameBar.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\DebugWindow.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\DebugWindow.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernUI.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernUI.baml
