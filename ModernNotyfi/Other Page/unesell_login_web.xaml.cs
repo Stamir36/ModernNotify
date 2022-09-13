@@ -69,5 +69,12 @@ namespace ModernNotyfi
                 this.Close();
             }
         }
+
+        private void OpeUiLogin(object sender, RoutedEventArgs e)
+        {
+            Other_Page.UiLoginUnesell uiLoginUnesell = new Other_Page.UiLoginUnesell();
+            uiLoginUnesell.Show();
+            this.Close();
+        }
     }
 }

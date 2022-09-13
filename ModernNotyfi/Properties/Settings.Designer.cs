@@ -334,5 +334,29 @@ namespace ModernNotyfi.Properties {
                 this["System"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int PanelStyle {
+            get {
+                return ((int)(this["PanelStyle"]));
+            }
+            set {
+                this["PanelStyle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RunServiceBackground {
+            get {
+                return ((bool)(this["RunServiceBackground"]));
+            }
+            set {
+                this["RunServiceBackground"] = value;
+            }
+        }
     }
 }

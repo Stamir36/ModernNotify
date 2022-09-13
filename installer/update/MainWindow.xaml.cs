@@ -34,7 +34,7 @@ namespace update
         {
             try
             {
-                string link = @"http://version-modernnotify.ml/modernnotify/update_dev.zip";
+                string link = @"https://unesell.com/api/version/modernnotify/update_dev.zip";
                 WebClient webClient = new WebClient();
                 webClient.DownloadProgressChanged += (o, args) => ProgressDownload.Value = args.ProgressPercentage;
                 webClient.DownloadFileCompleted += (o, args) => download_updater();
@@ -53,7 +53,7 @@ namespace update
             InfoUpdate.Content = "Загрузка модуля обновления...";
             try
             {
-                string link = @"http://version-modernnotify.ml/modernnotify/update.exe";
+                string link = @"https://unesell.com/api/version/modernnotify/update.exe";
                 WebClient webClient = new WebClient();
                 webClient.DownloadProgressChanged += (o, args) => ProgressDownload.Value = args.ProgressPercentage;
                 webClient.DownloadFileCompleted += (o, args) => update();
@@ -174,7 +174,7 @@ namespace update
 
                 try
                 {
-                    url = "http://version-modernnotify.ml/modernnotify/version_dev.txt";
+                    url = "https://unesell.com/api/version/modernnotify/version_dev.txt";
 
                     InfoUpdate.Content = "Загрузка файлов программы...";
                     SubText.Content = "Версия: " + GetContent(url);
@@ -217,7 +217,7 @@ namespace update
             try
             {
                 using (var client = new WebClient())
-                using (var stream = client.OpenRead("http://version-modernnotify.ml/"))
+                using (var stream = client.OpenRead("https://unesell.com"))
                 {
                     return true;
                 }

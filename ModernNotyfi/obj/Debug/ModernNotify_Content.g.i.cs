@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/mobile.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/phone_black.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/phone_white.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/terminal.png")]
 
 

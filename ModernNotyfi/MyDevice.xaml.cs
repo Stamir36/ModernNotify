@@ -27,6 +27,7 @@ using WPFUI;
 using static ModernNotyfi.PInvoke.ParameterTypes;
 using static ModernNotyfi.PInvoke.Methods;
 using System.Windows.Interop;
+using Woof.SystemEx;
 
 namespace ModernNotyfi
 {
@@ -35,8 +36,8 @@ namespace ModernNotyfi
     /// </summary>
     public partial class MyDevice : Window
     {
-        //public string api = "http://api.unesell.com/";
-        public string api = "http://localhost/api/";
+        public string api = "http://api.unesell.com/";
+        //public string api = "http://localhost/api/";
 
         public DispatcherTimer timer = new DispatcherTimer();
 
@@ -80,6 +81,15 @@ namespace ModernNotyfi
                 EnglishInterfase_Settings();
             }
 
+            if (Properties.Settings.Default.Startup == "Connect")
+            {
+                SettingsOpen.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                SettingsOpen.Visibility = Visibility.Collapsed;
+            }
+
             ComputerID.Text = GetMotherBoardID();
 
             SelectUpload.Visibility = Visibility.Visible; GoUpload.Visibility = Visibility.Hidden;
@@ -91,13 +101,44 @@ namespace ModernNotyfi
 
             GoResponseAsync();
 
+            DriveInfo di = new DriveInfo(@"C:\");
+            double Ffree = (di.AvailableFreeSpace / 1024) / 1024 / 1024;
+            DiskSpaceBar.Value = 100 - (di.AvailableFreeSpace * 100 / di.TotalSize);
+            DiskSpace.Content = Ffree.ToString("#,##") + " Gb";
+
+
             timer.Interval = new TimeSpan(0, 0, 0, 2, 500);
             timer.IsEnabled = true;
             timer.Tick += (o, t) =>
             {
                 GoResponseAsync();
+                Ffree = (di.AvailableFreeSpace / 1024) / 1024 / 1024;
+                DiskSpaceBar.Value = 100 - (di.AvailableFreeSpace * 100 / di.TotalSize);
+                DiskSpace.Content = Ffree.ToString("#,##") + " Gb";
             };
             timer.Start();
+        }
+
+        public void updateaccount()
+        {
+            if (Properties.Settings.Default.Unesell_Login == "Yes")
+            {
+                NameProfile.Text = Properties.Settings.Default.User_Name;
+                try
+                {
+                    var userBitmapSmall = new BitmapImage(new Uri("https://unesell.com/data/users/avatar/" + Properties.Settings.Default.Unesell_Avatar));
+                    AccauntImg.ImageSource = userBitmapSmall;
+                }
+                catch
+                {
+                    var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
+                    AccauntImg.ImageSource = userBitmapSmall;
+                }
+            }
+            else
+            {
+                NameProfile.Text = "Вход не выполнен";
+            }
         }
 
         private void EnglishInterfase_Settings()
@@ -132,6 +173,7 @@ namespace ModernNotyfi
             sendfileText2.Text = "Send file to device";
             AcountText1.Text = "My Unesell Account";
             AcountText2.Text = "The site will open in a browser";
+            SettingsOpen.Content = "Settings";
         }
 
         public void Light_Theme()
@@ -290,6 +332,7 @@ namespace ModernNotyfi
                     string MOBILE = Convert.ToString(JObject.Parse(responseString).SelectToken("MOBILE"));
                     string MEM1_s = Convert.ToString(JObject.Parse(responseString).SelectToken("MEM1"));
                     string MEM2_s = Convert.ToString(JObject.Parse(responseString).SelectToken("MEM2"));
+                    string OS = Convert.ToString(JObject.Parse(responseString).SelectToken("System"));
 
                     double MEM1 = Convert.ToDouble(MEM1_s); // Всего
                     double MEM2 = Convert.ToDouble(MEM2_s); // Доступно
@@ -301,6 +344,8 @@ namespace ModernNotyfi
 
                     MemoryLevel.Content = MEM2 + "Gb";
                     MemoryBarr.Progress = Convert.ToInt16(free * 100 / MEM1);
+                    OSVersionAndroid.Content = OS;
+
 
                     var bc = new BrushConverter();
                     if (Convert.ToInt16(BATTETY) > 20)
@@ -359,6 +404,12 @@ namespace ModernNotyfi
         private void MyDevice1_Closed(object sender, EventArgs e)
         {
             timer.Stop();
+            
+            if (Properties.Settings.Default.RunServiceBackground == false && Properties.Settings.Default.Startup == "Connect")
+            {
+                ServiceMyDeviceNet service = Application.Current.Windows.OfType<ServiceMyDeviceNet>().FirstOrDefault();
+                service.Close();
+            }
         }
 
         private void DisConnect_Click(object sender, RoutedEventArgs e)
@@ -491,7 +542,7 @@ namespace ModernNotyfi
 
         private void Account_Open_Site(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://unesell.com/account/");
+            Process.Start("https://unesell.com/login/?go=mydevice");
         }
 
         private void MyDevice1_Loaded(object sender, RoutedEventArgs e)
@@ -525,6 +576,33 @@ namespace ModernNotyfi
                 {
                     ApplyBackgroundEffect(2);
                 }
+            }
+
+            var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
+            AccauntImg.ImageSource = userBitmapSmall;
+            updateaccount();
+        }
+
+        private void SettingsAllOpen(object sender, RoutedEventArgs e)
+        {
+            settings settings = new settings();
+            settings.Show();
+
+            this.Close();
+        }
+
+        private void ShowMyDeviceConsole(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ServiceMyDeviceNet service = Application.Current.Windows.OfType<ServiceMyDeviceNet>().FirstOrDefault();
+                service.ShowInTaskbar = true;
+                service.Visibility = Visibility.Visible;
+            }
+            catch
+            {
+                ServiceMyDeviceNet service = new ServiceMyDeviceNet();
+                service.Show();
             }
         }
     }

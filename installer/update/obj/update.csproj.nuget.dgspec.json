@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Develop\\C#\\NEW INSTALLER\\update\\update.csproj": {}
+    "C:\\Develop\\C#\\ModernNotyfi\\installer\\update\\update.csproj": {}
   },
   "projects": {
-    "C:\\Develop\\C#\\NEW INSTALLER\\update\\update.csproj": {
+    "C:\\Develop\\C#\\ModernNotyfi\\installer\\update\\update.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Develop\\C#\\NEW INSTALLER\\update\\update.csproj",
+        "projectUniqueName": "C:\\Develop\\C#\\ModernNotyfi\\installer\\update\\update.csproj",
         "projectName": "Setup",
-        "projectPath": "C:\\Develop\\C#\\NEW INSTALLER\\update\\update.csproj",
+        "projectPath": "C:\\Develop\\C#\\ModernNotyfi\\installer\\update\\update.csproj",
         "packagesPath": "C:\\Users\\stas1\\.nuget\\packages\\",
-        "outputPath": "C:\\Develop\\C#\\NEW INSTALLER\\update\\obj\\",
+        "outputPath": "C:\\Develop\\C#\\ModernNotyfi\\installer\\update\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [

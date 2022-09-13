@@ -47,8 +47,8 @@ namespace ModernNotyfi
 
     public partial class MainWindow : Window
     {
-        //public string api = "http://api.unesell.com/";
-        public string api = "http://localhost/api/";
+        public string api = "http://api.unesell.com/";
+        //public string api = "http://localhost/api/";
 
         // БАЗОВЫЕ НАСТРОЙКИ И ПАРАМЕТРЫ ---------------------------------------------------------
         public int soundDevice = 1; //Активное устройство воспроизведения
@@ -429,6 +429,48 @@ namespace ModernNotyfi
 
                 Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
             }
+
+
+            //Синхронизация уведомлений с Unesell Account
+            /*
+            string id = Properties.Settings.Default.Unesell_id;
+            if (!string.IsNullOrEmpty(id))
+            {
+                // api + "applogin.php?email=" + "&password="
+                string responseString = string.Empty;
+                using (var webClient = new WebClient())
+                {
+                    webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+                    responseString = webClient.DownloadString("http://localhost/api/" + "appNotify.php?id=" + id);
+                }
+
+                if (responseString == "null")
+                {
+                    return;
+                }
+                else
+                {
+                    string text = Convert.ToString(JObject.Parse(responseString).SelectToken("text"));
+                    System.Windows.MessageBox.Show(text);
+                    try
+                    {
+                        Task.Run(() =>
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                
+                            });
+                        });
+
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
+            }
+            */
         }
 
         private async Task<string[]> SortFilesPath(string[] files) => await Task.Run(() =>
@@ -559,6 +601,59 @@ namespace ModernNotyfi
             timer.IsEnabled = true;
             timer.Tick += async (o, t) =>
             {
+                if (stopwatch_work)
+                {
+                    Stopwatch_mnsec = Stopwatch_mnsec + 1;
+                    if (Stopwatch_mnsec == 2)
+                    {
+                        Stopwatch_mnsec = 0;
+                        Stopwatch_sec++;
+                    }
+                    if (Stopwatch_sec == 60)
+                    {
+                        Stopwatch_sec = 0;
+                        Stopwatch_min++;
+                    }
+                    if (Stopwatch_min == 60)
+                    {
+                        Stopwatch_min = 0;
+                        Stopwatch_hours++;
+                    }
+
+                    string Stopwatch_hours_s = "";
+                    string Stopwatch_min_s = "";
+                    string Stopwatch_sec_s = "";
+
+                    if (Stopwatch_hours < 10)
+                    {
+                        Stopwatch_hours_s = "0" + Convert.ToString(Stopwatch_hours);
+                    }
+                    else
+                    {
+                        Stopwatch_hours_s = Convert.ToString(Stopwatch_hours);
+                    }
+
+                    if (Stopwatch_min < 10)
+                    {
+                        Stopwatch_min_s = "0" + Convert.ToString(Stopwatch_min);
+                    }
+                    else
+                    {
+                        Stopwatch_min_s = Convert.ToString(Stopwatch_min);
+                    }
+
+                    if (Stopwatch_sec < 10)
+                    {
+                        Stopwatch_sec_s = "0" + Convert.ToString(Stopwatch_sec);
+                    }
+                    else
+                    {
+                        Stopwatch_sec_s = Convert.ToString(Stopwatch_sec);
+                    }
+
+                    Stopwatch.Content = Stopwatch_hours_s + ":" + Stopwatch_min_s + ":" + Stopwatch_sec_s;
+                }
+
                 this.Background = null;
                 try
                 {
@@ -595,6 +690,8 @@ namespace ModernNotyfi
                 DateTimeText_sec.Text = ":" + DateTime.Now.ToString("ss");
                 DateTimeText_Panel.Text = DateTime.Now.ToString("HH:mm");
                 DateTimeText_sec_main.Text = ":" + DateTime.Now.ToString("ss");
+                DataDate.Content = DateTime.Today.ToString("d");
+                TimeSecBar.Progress = Convert.ToInt16(DateTime.Now.ToString("ss")) * 100 / 60;
 
                 // Положение: правый-нижний угол.
                 if (Properties.Settings.Default.posicion == "rigth")
@@ -676,7 +773,7 @@ namespace ModernNotyfi
                 NowPlayning_MusicCard.Content = NowPlayning.Content;
                 NowPlayning_Autor_MusicCard.Content = NowPlayning_Autor.Content;
 
-                GetMobileInfo(); // MN Connect 
+                //GetMobileInfo(); // MN Connect 
                 GetBatteryPercent(); //Батарея
 
                 GetConnectionsPCIsEnabledAsync(); // Радио
@@ -737,7 +834,7 @@ namespace ModernNotyfi
             await Task.Run(() => {
                 try
                 {
-                    if (GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") != Assembly.GetExecutingAssembly().GetName().Version.ToString() && GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") != "Error")
+                    if (GetContent("https://unesell.com/api/version/modernnotify/version_dev.txt") != Assembly.GetExecutingAssembly().GetName().Version.ToString() && GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") != "Error")
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
@@ -754,7 +851,7 @@ namespace ModernNotyfi
             });
 
 
-            GetServerInfo();
+            //GetServerInfo();
         }
 
         public sealed class UserNotification
@@ -892,7 +989,7 @@ namespace ModernNotyfi
                         int indexApp = Convert.ToInt32(command.Replace("appStart:", ""));
                         Process.Start(Items.ElementAt(indexApp).Sourse);
                     }
-                    GetServerInfo();
+                    //GetServerInfo();
                 }
             }
             catch (Exception ex)
@@ -1410,7 +1507,7 @@ namespace ModernNotyfi
         }
 
         // ПРОЧЕЕ
-        private void Shutdown_Open_Panel(object sender, RoutedEventArgs e)
+        public void Shutdown_Open_Panel(object sender, RoutedEventArgs e)
         {
             if (Properties.Settings.Default.Disign_Shutdown == "old")
             {
@@ -1423,13 +1520,13 @@ namespace ModernNotyfi
             }
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        public void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Border_Shutdown.Visibility = Visibility.Hidden;
         }
 
         // РАБОТА С МУЗЫКОЙ
-        private static void MediaManager_OnNewSource(MediaManager.MediaSession session)
+        public static void MediaManager_OnNewSource(MediaManager.MediaSession session)
         {
             ChencheMusic("Источник: " + session.ControlSession.SourceAppUserModelId);
             if (session.ControlSession.SourceAppUserModelId == "Spotify.exe")
@@ -1474,7 +1571,7 @@ namespace ModernNotyfi
             }));
         }
 
-        private static void MediaManager_OnRemovedSource(MediaManager.MediaSession session)
+        public static void MediaManager_OnRemovedSource(MediaManager.MediaSession session)
         {
             ChencheMusic("Очередь пуста");
             Application.Current.Dispatcher.Invoke(new Action(() =>
@@ -1494,7 +1591,7 @@ namespace ModernNotyfi
 
         }
 
-        private static void MediaManager_OnSongChanged(MediaManager.MediaSession sender, GlobalSystemMediaTransportControlsSessionMediaProperties args)
+        public static void MediaManager_OnSongChanged(MediaManager.MediaSession sender, GlobalSystemMediaTransportControlsSessionMediaProperties args)
         {
             MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             try
@@ -1511,7 +1608,7 @@ namespace ModernNotyfi
 
                     my.SoundTimeAll.Content = sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm\:ss");
                     my.media_all_sec = Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
-                    my.GetServerInfo();
+                    //my.GetServerInfo();
                 }));
             }
             catch
@@ -1521,7 +1618,7 @@ namespace ModernNotyfi
 
         }
 
-        private static void MediaManager_OnPlaybackStateChanged(MediaManager.MediaSession sender, GlobalSystemMediaTransportControlsSessionPlaybackInfo args)
+        public static void MediaManager_OnPlaybackStateChanged(MediaManager.MediaSession sender, GlobalSystemMediaTransportControlsSessionPlaybackInfo args)
         {
             ChencheMusic($"Состояние изменено");
             Application.Current.Dispatcher.Invoke(new Action(() =>
@@ -1564,10 +1661,10 @@ namespace ModernNotyfi
             }
         }
 
-        private static async Task<GlobalSystemMediaTransportControlsSessionManager> GetSystemMediaTransportControlsSessionManager() =>
+        public static async Task<GlobalSystemMediaTransportControlsSessionManager> GetSystemMediaTransportControlsSessionManager() =>
             await GlobalSystemMediaTransportControlsSessionManager.RequestAsync();
 
-        private static async Task<GlobalSystemMediaTransportControlsSessionMediaProperties> GetMediaProperties(GlobalSystemMediaTransportControlsSession session) =>
+        public static async Task<GlobalSystemMediaTransportControlsSessionMediaProperties> GetMediaProperties(GlobalSystemMediaTransportControlsSession session) =>
             await session.TryGetMediaPropertiesAsync();
 
         private void Play_Pause_Click(object sender, RoutedEventArgs e)
@@ -1631,6 +1728,7 @@ namespace ModernNotyfi
             TextShutdown.Content = "Shutdown";
             TextRestartPC.Content = "Reboot PC";
             EXITtextPROGRAM.Content = "Exit program";
+            TextStopwatch.Content = "Stopwatch";
         }
 
         public string GetContent(string url)
@@ -1771,6 +1869,37 @@ namespace ModernNotyfi
         {
             MyDevice mnconnect = new MyDevice();
             mnconnect.Show();
+        }
+
+        public bool stopwatch_work = false;
+        int Stopwatch_mnsec = 0;
+        int Stopwatch_sec = 0;
+        int Stopwatch_min = 0;
+        int Stopwatch_hours = 0;
+
+        private void StartStopWatch_Click(object sender, RoutedEventArgs e)
+        {
+            if (stopwatch_work)
+            {
+                stopwatch_work = false;
+                playStopwatchIcon.Glyph = WPFUI.Common.Icon.Play12;
+            }
+            else
+            {
+                stopwatch_work = true;
+                playStopwatchIcon.Glyph = WPFUI.Common.Icon.Pause12;
+            }
+        }
+
+        private void resetStopWatch_Click(object sender, RoutedEventArgs e)
+        {
+            Stopwatch.Content = "00:00:00.000";
+            stopwatch_work = false;
+            Stopwatch_mnsec = 0;
+            Stopwatch_sec = 0;
+            Stopwatch_min = 0;
+            Stopwatch_hours = 0;
+            playStopwatchIcon.Glyph = WPFUI.Common.Icon.Play12;
         }
     }
 

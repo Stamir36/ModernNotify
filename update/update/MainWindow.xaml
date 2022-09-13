@@ -38,13 +38,14 @@
                         <Grid>
                             <Label Content="Сервер:" Margin="10,7,173,7" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                             <ComboBox x:Name="theme_combo" Width="150" Margin="90,0,0,0" Height="24" VerticalAlignment="Center" FontSize="12" Padding="12,3,0,3" SelectionChanged="theme_combo_SelectionChanged">
-                                <TextBlock><Run Text="Сервер версий"/></TextBlock>
+                                <TextBlock><Run Text="Сервер Unesell"/></TextBlock>
                                 <TextBlock><Run Text="GitHub (Тестирование)"/></TextBlock>
                             </ComboBox>
                         </Grid>
                     </Border>
                     <Label FontFamily="./#Google Sans Medium" Content="Продукт &quot;Обновление ModernNotify&quot; распространяется&#xD;&#xA;&quot;как есть&quot; и разработчик не несёт никакую ответственность&#xD;&#xA;за возможные неполадки." HorizontalAlignment="Left" Margin="19,88,0,0" VerticalAlignment="Top" Height="56" Width="345" FontSize="10"/>
                     <Button x:Name="Back_U" Content="Назад" Click="Update_Open" Margin="374,163,0,0" VerticalAlignment="Top" Background="#33C3C1C1" BorderBrush="{x:Null}" Height="29"/>
+                    <Label FontFamily="./#Google Sans Medium" x:Name="InfoUpdate_Copy1" Content="Unesell Studio" HorizontalAlignment="Left" Margin="396,17,0,0" VerticalAlignment="Top" FontSize="8" FontWeight="Bold"/>
 
                 </Grid>
             </TabItem>

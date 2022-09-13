@@ -368,6 +368,7 @@ namespace ModernNotyfi
                     Step_Progress.Value = 80;
                     GifImage_Step_2.Visibility = Visibility.Visible;
                     no_login = false;
+                    Step_Image.Visibility = Visibility.Collapsed;
                     timer_sec.Stop();
                 }
             }

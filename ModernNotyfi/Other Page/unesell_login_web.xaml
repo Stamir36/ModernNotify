@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Unesell Account - Связь с приложением"
         WindowStyle="None"
-        Height="650" Width="1100" MinWidth="1100" MinHeight="650" Icon="/icons/user-48.png"
+        Height="397" Width="794" MinWidth="1100" MinHeight="650" Icon="/icons/user-48.png"
         Style="{StaticResource UiWindow}" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <SolidColorBrush x:Name="Window_Back" Color="#F22B2B2B" Opacity="0.99"/>
@@ -47,6 +47,7 @@
                 </ContextMenu>
             </wpfui:TitleBar.NotifyIconMenu>
         </wpfui:TitleBar>
+        <wpfui:Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Register_Copy" Content="Войти в аккаунт через новый интерфейс" Margin="0,7,200,0" Click="OpeUiLogin" Padding="1,1,0,1" Background="{x:Null}" Foreground="#FFF3F97D" BorderBrush="{x:Null}" HorizontalContentAlignment="Right" FontSize="12" VerticalContentAlignment="Top" Cursor="Hand" Height="19" HorizontalAlignment="Right" Width="271" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -8,41 +8,42 @@
         xmlns:pages="clr-namespace:ModernNotyfi"
         xmlns:local="clr-namespace:ModernNotyfi"
         mc:Ignorable="d"
-        Title="Мои устройства" Height="360" Width="634"
+        Title="Мои устройства" Height="310" Width="636"
         WindowStyle="None" 
-        MinWidth="900" MinHeight="500" Icon="/icons/Device.png" Background="#F21B1B1B"
+        MinWidth="970" MinHeight="535" Icon="/icons/Device.png" Background="#F21B1B1B"
         Style="{StaticResource UiWindow}" Closed="MyDevice1_Closed" Drop="ImagePanel_Drop" AllowDrop="true" WindowStartupLocation="CenterScreen" Loaded="MyDevice1_Loaded">
     <!--Window.Background>
         <SolidColorBrush x:Name="Window_Back" Color="#F2424242" Opacity="0.99"/>
     </Window.Background-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" MinHeight="84" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="0">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+
             <wpfui:NavigationStore
-        x:Name="RootNavigation"
-        Grid.Column="0"
-        Margin="6,0,6,0"
-        Frame="{Binding ElementName=RootFrame}"/>
+                x:Name="RootNavigation"
+                Grid.Column="0"
+                Margin="6,0,6,0"
+                Frame="{Binding ElementName=RootFrame}"/>
 
             <Border
             Grid.Column="1"
             Background="{DynamicResource ControlFillColorDefaultBrush}"
-            CornerRadius="8,0,0,0" Margin="0,10,0,0">
+            CornerRadius="8,0,0,0">
                 <Grid>
                     <Grid x:Name="RootGrid">
 
                         <TabControl x:Name="TabConnect" Margin="0,-181,0,46" TabStripPlacement="Right" Background="{x:Null}" BorderBrush="{x:Null}">
                             <TabItem Header="NoConnect" Margin="-3,-202,3,202">
-                                <Grid HorizontalAlignment="Left" Width="887">
+                                <Grid Margin="0,0,-1,0">
                                     <wpfui:CardControl x:Name="NoDeviceCard"
                                         FontFamily="/icons/Fonts/#Google Sans Medium"
                                         Title="Нет подключения"
@@ -54,7 +55,7 @@
                                             Content="Подключить устройство" />
                                     </wpfui:CardControl>
 
-                                    <Grid Margin="648,93,15,0" Height="49" VerticalAlignment="Top">
+                                    <Grid Margin="0,93,15,0" Height="49" VerticalAlignment="Top" HorizontalAlignment="Right" Width="224">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
@@ -75,8 +76,8 @@
                                             Text="Всё в облаке и без локальных сетей" />
                                         </StackPanel>
                                     </Grid>
-                                    <Label x:Name="MainTextBanner" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Подключите Android устройство, чтобы получить возможность:&#xA;● Получать уведомления с телефона на компьютер&#xA;● Просматривать уровень заряда батареи&#xA;● Управлять воспроизведением на ПК.&#xA;&#xA;И многое другое!&#xA;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Для подключения используйте Android приложение MN Connect" HorizontalAlignment="Left" Margin="30,92,0,0" VerticalAlignment="Top" Height="208" Width="483"/>
-                                    <Grid Margin="648,143,15,0" Height="49" VerticalAlignment="Top">
+                                    <Label x:Name="MainTextBanner" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Подключите Android устройство, чтобы получить возможность:&#xA;● Получать уведомления с телефона на компьютер&#xA;● Просматривать уровень заряда батареи&#xA;● Управлять воспроизведением на ПК.&#xA;&#xA;И многое другое!&#xA;&#xA;&#xA;&#xA;&#xA;Для подключения используйте Android приложение MN Connect" HorizontalAlignment="Left" Margin="30,92,0,0" VerticalAlignment="Top" Height="208" Width="483"/>
+                                    <Grid Margin="0,143,15,0" Height="49" VerticalAlignment="Top" HorizontalAlignment="Right" Width="224">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
@@ -107,7 +108,7 @@
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
-                                            <wpfui:Icon FontSize="19" Glyph="Person48" />
+                                            <wpfui:Icon FontSize="19" Glyph="WebAsset20" />
                                             <StackPanel
                                             Grid.Column="1"
                                             Margin="12,0,28,0"
@@ -116,7 +117,7 @@
                                                 Margin="0,0,0,4"
                                                 FontSize="11"
                                                 FontWeight="Medium"
-                                                Text="Мой Unesell Account" />
+                                                Text="Открыть: MyDevice Web" />
                                                 <TextBlock x:Name="AcountText2"
                                                 FontSize="10"
                                                 Foreground="{DynamicResource TextFillColorTertiaryBrush}"
@@ -135,12 +136,11 @@
                                             Click="DisConnect_Click"
                                             Content="Отключить устройство" />
                                     </wpfui:CardControl>
-                                    <wpfui:Card x:Name="MusicCard"
-                                        Height="143"
-                                        Margin="25,0,585,152"
-                                        VerticalAlignment="Bottom" Padding="5,5,5,5"/>
-
-                                    <Grid Margin="60,140,754,219">
+                                    <wpfui:Card
+                                        Margin="25,96,0,0" Padding="5,5,5,5" Height="143" VerticalAlignment="Top" HorizontalAlignment="Left" Width="276"/>
+                                    <wpfui:Card
+                                        Margin="315,96,0,0" Padding="5,5,5,5" Height="62" VerticalAlignment="Top" HorizontalAlignment="Left" Width="276"/>
+                                    <Grid Margin="60,140,0,0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="8,0,0,0">
                                             <TextBlock FontFamily="/icons/Fonts/#Google Sans Medium" Text="99" x:Name="BatteeyLevel" FontSize="21" FontWeight="Bold" Width="35" FlowDirection="RightToLeft"/>
                                             <TextBlock FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="prochent" Text="%" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,0" Padding="0,0,0,0" Height="18"/>
@@ -148,7 +148,7 @@
                                     </Grid>
 
 
-                                    <wpfui:ProgressRing x:Name="BatteryBarr" Progress="18" Margin="45,106,741,185" Width="100" Height="100" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" >
+                                    <wpfui:ProgressRing x:Name="BatteryBarr" Progress="18" Margin="45,106,0,0" Width="100" Height="100" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" VerticalAlignment="Top" HorizontalAlignment="Left" >
                                         <wpfui:ProgressRing.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -161,8 +161,8 @@
                                     <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2" Content="Батарея" HorizontalAlignment="Left" Margin="65,211,0,0" VerticalAlignment="Top" Width="60" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
                                     <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy" Content="Свободно памяти" HorizontalAlignment="Left" Margin="152,211,0,0" VerticalAlignment="Top" Width="146" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
                                     <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="MemoryLevel" Content="21.40Gb" HorizontalAlignment="Left" Margin="165,140,0,0" VerticalAlignment="Top" Width="122" Height="37" FontWeight="Bold" FontSize="14" Grid.IsSharedSizeScope="True" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                                    <Label x:Name="textcon2" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Опции с телефоном:" Margin="26,260,0,0" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="141"/>
-                                    <wpfui:ProgressRing x:Name="MemoryBarr" Progress="5" Margin="175,106,611,185" Width="100" Height="100" RenderTransformOrigin="0.5,0.5" Foreground="#FF80B9EE" FlowDirection="RightToLeft" >
+                                    <Label x:Name="textcon2" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Опции с телефоном:" Margin="315,166,0,0" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="141"/>
+                                    <wpfui:ProgressRing x:Name="MemoryBarr" Progress="5" Margin="175,106,0,0" Width="100" Height="100" RenderTransformOrigin="0.5,0.5" Foreground="#FF80B9EE" FlowDirection="RightToLeft" HorizontalAlignment="Left" VerticalAlignment="Top" >
                                         <wpfui:ProgressRing.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -172,7 +172,7 @@
                                             </TransformGroup>
                                         </wpfui:ProgressRing.RenderTransform>
                                     </wpfui:ProgressRing>
-                                    <wpfui:Button Appearance="Secondary" x:Name="Files_Open" Margin="26,284,0,0" Height="52" Cursor="Hand" Padding="10,5,10,5" HorizontalAlignment="Left" Width="221" Click="Files_Page_open" VerticalAlignment="Top">
+                                    <wpfui:Button Appearance="Secondary" x:Name="Files_Open" Margin="315,190,0,0" Height="52" Cursor="Hand" Padding="10,5,10,5" HorizontalAlignment="Left" Width="221" Click="Files_Page_open" VerticalAlignment="Top">
                                         <Grid VerticalAlignment="Top" Width="200">
                                             <d:Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
@@ -194,6 +194,27 @@
                                             </StackPanel>
                                         </Grid>
                                     </wpfui:Button>
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy1" Content="Система" HorizontalAlignment="Left" Margin="330,105,0,0" VerticalAlignment="Top" Width="146" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Left" />
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="OSVersionAndroid" Content="Android" HorizontalAlignment="Left" Margin="330,125,0,0" VerticalAlignment="Top" Width="244" FontSize="16" Foreground="#CCFFFFFF" HorizontalContentAlignment="Left" />
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="funnanduse" Content="Состояние компьютера" Margin="23,259,0,0" HorizontalAlignment="Left" Width="293" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                    <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="27,282,0,0" VerticalAlignment="Top" Width="353" RenderTransformOrigin="0.5,0.5">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleY="-1"/>
+                                                <SkewTransform/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Label x:Name="subbone" Content="Данные состояния этого устройства" Margin="27,287,0,0" HorizontalAlignment="Left" Width="288" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
+                                    <wpfui:Card
+                                        Margin="27,320,0,0" Padding="5,5,5,5" Height="62" VerticalAlignment="Top" HorizontalAlignment="Left" Width="276">
+                                        <ProgressBar x:Name="DiskSpaceBar" HorizontalAlignment="Left" Height="15" Margin="22,26,0,0" VerticalAlignment="Top" Width="195"/>
+                                    </wpfui:Card>
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy2" Content="Состояние памяти" HorizontalAlignment="Left" Margin="40,329,0,0" VerticalAlignment="Top" Width="115" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Left" Height="16" />
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="DiskSpace" Content="100 Gb" HorizontalAlignment="Left" Margin="244,352,0,0" VerticalAlignment="Top" Width="50" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Right" Height="16" />
+                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="DiskSpaceTom" Content="C:" HorizontalAlignment="Left" Margin="40,352,0,0" VerticalAlignment="Top" Width="15" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Left" Height="16" />
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Files" Margin="-3,-202,3,202">
@@ -278,20 +299,10 @@
         </Grid>
 
         <TextBlock x:Name="beta_banner" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Beta" Margin="169,22,692,17" RenderTransformOrigin="0.5,0.5" FontSize="9" FontWeight="Normal" />
-
-        <wpfui:TitleBar x:Name="Title"
-          Grid.Row="0"
-          FontFamily="/icons/Fonts/#Google Sans Medium"
-          Title="Мои устройства"
-          Icon="pack://application:,,,/icons/Device.png"
-          FontSize="16" FontWeight="Bold" />
-
-        <wpfui:Hyperlink x:Name="LinkDownload"
+        <wpfui:Hyperlink x:Name="OpenConsole"
             FontFamily="/icons/Fonts/#Google Sans Medium"
-            Content="MN Connect - Клиент на Android"
-            Icon="Link48" NavigateUri="https://play.google.com/store/apps/details?id=com.unesell.mnc" Margin="0,36,8,0" Grid.RowSpan="2" FontSize="11" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Cursor="Hand" />
-
-
+            Content="Показать консоль"
+            Icon="Cast24" Margin="0,0,248,10" FontSize="11" HorizontalAlignment="Right" Cursor="Hand" Click="ShowMyDeviceConsole" Grid.Row="1" Height="24" VerticalAlignment="Bottom" Foreground="#FFBFBFBF" Width="129" />
         <wpfui:Dialog
             x:Name="ProblemDialog"
             Grid.Row="0"
@@ -316,5 +327,54 @@
                 </StackPanel>
             </Grid>
         </wpfui:Dialog>
+
+        <wpfui:TitleBar x:Name="Title"
+          Grid.Row="0"
+          FontFamily="/icons/Fonts/#Google Sans Medium"
+          Title="Мои устройства"
+          Icon="pack://application:,,,/icons/Device.png"
+          FontSize="16" FontWeight="Bold" Height="52" />
+
+        <wpfui:Button Appearance="Secondary" x:Name="Account_Open_Copy" Margin="0,34,27,0" Height="36" Cursor="Hand" Padding="10,0,10,0" Click="Account_Open_Site" VerticalAlignment="Top" HorizontalAlignment="Right" Width="180">
+            <Grid VerticalAlignment="Center" Width="171">
+                <d:Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </d:Grid.ColumnDefinitions>
+
+                <Grid>
+                    <wpfui:ProgressRing IsIndeterminate="True" Width="15" Height="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" />
+
+                    <Ellipse Stroke="#7F000000" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Top">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
+                <TextBlock x:Name="NameProfile" FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                    Margin="33,6,10,6"
+                                                    FontSize="11"
+                                                    FontWeight="Medium"
+                                                    Text="Мой Unesell Account" Height="13" Width="130" />
+            </Grid>
+        </wpfui:Button>
+        <wpfui:Card Margin="10,41,0,0" Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left">
+
+        </wpfui:Card>
+
+        <StackPanel Margin="0,41,217,0"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <wpfui:Hyperlink x:Name="LinkDownload"
+            FontFamily="/icons/Fonts/#Google Sans Medium"
+            Content="MN Connect - Клиент на Android"
+            Icon="Link48" NavigateUri="https://play.google.com/store/apps/details?id=com.unesell.mnc" FontSize="11" Height="24" VerticalAlignment="Top" Cursor="Hand" Width="206" Margin="0,0,5,0" />
+            <wpfui:Hyperlink x:Name="SettingsOpen"
+            FontFamily="/icons/Fonts/#Google Sans Medium"
+            Content="Настройки"
+            Icon="Settings24" FontSize="11" Height="24" VerticalAlignment="Top" Cursor="Hand" Click="SettingsAllOpen" Width="94" Margin="0,0,0,0" />
+        </StackPanel>
+        <wpfui:Card Margin="19,63,941,11" Width="10" Height="10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <wpfui:Card Margin="32,52,928,22" Width="10" Height="10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label x:Name="MenuTitle" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Панель управления устройствами" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" FontSize="18" Height="27" Width="297"/>
+
     </Grid>
 </Window>

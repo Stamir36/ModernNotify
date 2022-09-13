@@ -96,7 +96,7 @@
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="0"/>
     </Window.Background>
-    <Grid x:Name="MainPanelGrid" Grid.IsSharedSizeScope="True" MouseDown="Grid_MouseDown" Margin="-2,0,-310,0">
+    <Grid x:Name="MainPanelGrid" Grid.IsSharedSizeScope="True" MouseDown="Grid_MouseDown" Margin="-2,0,-308,-53">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -226,7 +226,7 @@
                 <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" FontSize="24" Glyph="Speaker248" HorizontalAlignment="Left" Margin="16,32,0,0" VerticalAlignment="Top"/>
                 <Button Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="SoundDevice" Content="Колонки" HorizontalAlignment="Right" Margin="0,8,23,0" VerticalAlignment="Top" Width="181" FontSize="12" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Height="22" Padding="3,0,5,3" Cursor="Hand" Click="SoundDevice_Click" Grid.RowSpan="1" Grid.ColumnSpan="1"/>
                 <ListBox x:Name="AudioDevice" Height="75" Margin="19,68,19,0" VerticalAlignment="Top" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" Width="300" SelectionChanged="AudioDevice_SelectionChanged" Background="{x:Null}"/>
-                <ProgressBar x:Name="ValueVolumeBar" HorizontalAlignment="Left" Margin="47,41,0,0" VerticalAlignment="Top" Width="268" Value="100" Height="8" MinHeight="6" Foreground="#FFFFA400"/>
+                <ProgressBar x:Name="ValueVolumeBar" HorizontalAlignment="Left" Margin="50,40,0,0" VerticalAlignment="Top" Width="268" Value="100" Height="10" MinHeight="6" Foreground="#FFFFA400"/>
                 <Slider x:Name="SoundSlider" Height="26" Margin="47,34,21,0" VerticalAlignment="Top" ValueChanged="SoundSlider_ValueChanged" Maximum="100" Width="270" BorderThickness="10,0,10,0" Background="{x:Null}" Foreground="{x:Null}"/>
 
             </Grid>
@@ -342,7 +342,7 @@
                                 <Grid>
                                     <Label Foreground="{DynamicResource Button.Static.Background}" x:Name="Batt_label_time" Content="Время работы:" Margin="19,9,0,26" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="0,0,0,0"/>
                                     <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="Battery_time" Content="1 час 50 минут" Margin="21,23,130,8" FontWeight="Bold" Padding="0,0,0,0"/>
-                                    <Label Foreground="{DynamicResource Button.Static.Background}" x:Name="waltagetext" Content="Напряжение" Margin="0,9,16,28" FontSize="10" HorizontalAlignment="Right" Padding="0,0,0,0"/>
+                                    <Label Foreground="{DynamicResource Button.Static.Background}" x:Name="waltagetext" Content="Напряжение" Margin="0,9,17,28" FontSize="10" Padding="0,0,0,0" HorizontalAlignment="Right" Width="58"/>
                                     <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="Voltage_battery" Content="11.0 kW" Margin="0,22,16,9" FontWeight="Bold" HorizontalAlignment="Right" Width="58" Padding="0,0,0,0"/>
                                     <Separator HorizontalAlignment="Right" Height="17" Margin="0,16,67,0" VerticalAlignment="Top" Width="35" FontSize="22" FontWeight="Bold" RenderTransformOrigin="0.495,-0.275">
                                         <Separator.RenderTransform>
@@ -386,21 +386,48 @@
                     </TabItem>
                     <TabItem Header="Clock" Margin="2,-162,-2,162">
                         <Grid x:Name="Clock_Tab" Height="460">
-                            <StackPanel Orientation="Horizontal" Margin="10,32,100,384">
-                                <TextBlock Foreground="{DynamicResource Button.Static.Background}"  FontFamily="./icons/Fonts/#Google Sans Medium"  x:Name="DateTimeText_Panel" Text="00:00" FontSize="38" FontWeight="Bold"/>
-                                <TextBlock Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium"  x:Name="DateTimeText_sec_main" Text=":00" FontWeight="Bold" FontSize="18" Background="{x:Null}" Height="25" VerticalAlignment="Bottom"/>
-                            </StackPanel>
-                            <Calendar Margin="0,96,0,31" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0,0" SelectionMode="None" DisplayMode="Month" FirstDayOfWeek="Monday" Grid.RowSpan="1" HorizontalAlignment="Stretch" Width="546" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                                <Calendar.RenderTransform>
+
+                            <wpfui:ProgressRing x:Name="TimeSecBar" Margin="38,61,34,199" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" Height="200" Width="200" Padding="0,0,0,0" EngAngle="359" OverridesDefaultStyle="True" >
+                                <wpfui:ProgressRing.RenderTransform>
                                     <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform AngleY="0.117"/>
-                                        <RotateTransform/>
-                                        <TranslateTransform Y="0.498"/>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform/>
                                     </TransformGroup>
-                                </Calendar.RenderTransform>
-                            </Calendar>
+                                </wpfui:ProgressRing.RenderTransform>
+                            </wpfui:ProgressRing>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,135,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <TextBlock Foreground="{DynamicResource Button.Static.Background}"  FontFamily="./icons/Fonts/#Google Sans Medium"  x:Name="DateTimeText_Panel" Text="00:00" FontSize="38" FontWeight="Bold" Height="46"/>
+                            </StackPanel>
                             <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="DataTimeText" Content="Время и дата" HorizontalAlignment="Left" Margin="12,16,0,426" FontSize="14" Width="115" Padding="0,0,0,0"/>
+                            <TextBlock Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium"  x:Name="DateTimeText_sec_main" Text=":00" FontWeight="Bold" FontSize="14" Background="{x:Null}" Height="24" Margin="75,179,0,257" HorizontalAlignment="Center" Width="22"/>
+                            <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="DataDate" Content="Data" HorizontalAlignment="Left" Margin="12,32,0,410" FontSize="14" Width="115" Padding="0,0,0,0"/>
+
+                            <wpfui:Card Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="55" VerticalAlignment="Top" Margin="10,363,10,0">
+                                <Grid>
+                                    <Label x:Name="TextStopwatch" Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" Content="Секундомер" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="104" Height="14" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,0,0,0"/>
+                                    <Label x:Name="Stopwatch" Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" Content="00:00:00.000" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Width="145" Height="23" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="0,0,0,0" FontSize="20"/>
+                                    <wpfui:Button x:Name="resetStopWatch" Margin="0,12,10,13" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="30" Click="resetStopWatch_Click">
+                                        <wpfui:Button.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="7"/>
+                                            </Style>
+                                        </wpfui:Button.Resources>
+                                        <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" FontSize="20" x:Name="resetStopwatchIcon" Glyph="ArrowClockwise12"/>
+                                    </wpfui:Button>
+                                    <wpfui:Button x:Name="StartStopWatch" Margin="0,12,45,13" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="30" Click="StartStopWatch_Click">
+                                        <wpfui:Button.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="7"/>
+                                            </Style>
+                                        </wpfui:Button.Resources>
+                                        <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" FontSize="20" x:Name="playStopwatchIcon" Glyph="Play12"/>
+                                    </wpfui:Button>
+
+                                </Grid>
+                            </wpfui:Card>
                         </Grid>
                     </TabItem>
                 </TabControl>
@@ -462,7 +489,7 @@
                 <wpfui:Button Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="MyDevice" Content="Мои устройства" HorizontalAlignment="Left" Margin="120,127,0,0" VerticalAlignment="Top" FontSize="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="3,0,3,3" Cursor="Hand" OpacityMask="#FFDE8686" Click="OpenMyDevice" Width="103" Height="22"/>
             </Grid>
         </Border>
-        <wpfui:Card x:Name="MusicCard"
+        <wpfui:Card x:Name="MusicCard" Visibility="Hidden"
             Height="143"
             Margin="366,0,10,10"
             VerticalAlignment="Bottom" Background="#FF313131" Padding="5,5,5,5">

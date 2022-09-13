@@ -24,8 +24,12 @@
             <Grid>
                 <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Запуск окна:" Margin="10,10,473,196"/>
                 <Button Content="Запустить &quot;Setup Page&quot;" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="206" Click="OpenSetupPage" Padding="10,6,10,6"/>
-                <Button Content="Запустить &quot;Unesell Login&quot;" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="206" Click="OpenUnesellLogin" Padding="10,6,10,6"/>
-                <Button Content="Показать информацию о системе" HorizontalAlignment="Left" Margin="221,32,0,0" VerticalAlignment="Top" Width="263" Click="OpenSysInfo" Padding="10,6,10,6"/>
+                <Button Content="Запустить &quot;Unesell Login Web&quot;" HorizontalAlignment="Left" Margin="221,32,0,0" VerticalAlignment="Top" Width="216" Click="OpenUnesellLogin" Padding="10,6,10,6"/>
+                <Button Content="Показать информацию о системе" HorizontalAlignment="Left" Margin="10,97,0,0" Width="262" Click="OpenSysInfo" Padding="10,6,10,6" VerticalAlignment="Top"/>
+                <Button Content="Play NAudio test codes" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="206" Click="NAudioTest" Padding="10,6,10,6"/>
+                <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Информационные фукнкции:" Margin="10,74,450,132"/>
+                <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Запуск тестов:" Margin="10,138,473,68"/>
+                <Button Content="Запустить &quot;UI Login&quot;" HorizontalAlignment="Left" Margin="445,32,0,0" VerticalAlignment="Top" Width="165" Click="OpenUnesellLoginUI" Padding="10,6,10,6"/>
             </Grid>
         </ScrollViewer>
 

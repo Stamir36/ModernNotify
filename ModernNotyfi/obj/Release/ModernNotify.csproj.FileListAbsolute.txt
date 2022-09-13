@@ -197,3 +197,7 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.csproj.CoreComp
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.csproj.CopyComplete
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.exe
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\UiLoginUnesell.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\UiLoginUnesell.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ServiceMyDeviceNet.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ServiceMyDeviceNet.baml

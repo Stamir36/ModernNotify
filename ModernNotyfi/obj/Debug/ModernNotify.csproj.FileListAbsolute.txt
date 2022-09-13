@@ -197,3 +197,7 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotify.exe
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ModernNotify.pdb
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Startup.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Startup.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\UiLoginUnesell.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\UiLoginUnesell.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ServiceMyDeviceNet.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ServiceMyDeviceNet.baml

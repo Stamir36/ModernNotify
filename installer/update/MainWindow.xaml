@@ -20,16 +20,16 @@
             </Image.RenderTransform>
         </Image>
         <Image HorizontalAlignment="Left" Height="21" Margin="19,22,0,0" VerticalAlignment="Top" Width="20" Source="imege/logo-dark.png" Stretch="UniformToFill"/>
-        <Label x:Name="InfoUpdate" Content="Добро пожаловать в программу установки!" HorizontalAlignment="Left" Margin="19,153,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
-        <Label x:Name="SubText" Content="Скачивание ModernNotify" HorizontalAlignment="Left" Margin="19,182,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="Close" Content="Отмена установки" Margin="412,245,0,0" VerticalAlignment="Top" Width="156" Height="30" Background="{x:Null}" BorderBrush="#FFF3B3B3" Padding="0" Click="Close_Click"/>
+        <Label FontFamily="./#Google Sans Medium" x:Name="InfoUpdate" Content="Добро пожаловать в программу установки!" HorizontalAlignment="Left" Margin="19,153,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
+        <Label FontFamily="./#Google Sans Medium" x:Name="SubText" Content="Скачивание ModernNotify" HorizontalAlignment="Left" Margin="19,182,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button FontFamily="./#Google Sans Medium" x:Name="Close" Content="Отмена установки" Margin="412,245,0,0" VerticalAlignment="Top" Width="156" Height="30" Background="{x:Null}" BorderBrush="#FFF3B3B3" Padding="0" Click="Close_Click"/>
         <ProgressBar x:Name="ProgressDownload" Visibility="Hidden" HorizontalAlignment="Left" Height="12" Margin="20,216,0,0" VerticalAlignment="Top" Width="449" MinHeight="10" />
         <Label x:Name="InfoUpdate_Copy" Content="ModernNotify" HorizontalAlignment="Left" Margin="41,23,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
-        <Button x:Name="Install" Content="Продолжить" Margin="17,245,0,0" VerticalAlignment="Top" Height="30" Width="197" Click="Install_Click" Foreground="White" Background="#FF3F78EA" Cursor="Hand" BorderBrush="#7F352323"/>
-        <Label Content="Your life is your style." HorizontalAlignment="Left" Margin="76,41,0,0" VerticalAlignment="Top" Width="143" FontSize="8"/>
+        <Button FontFamily="./#Google Sans Medium" x:Name="Install" Content="Продолжить" Margin="17,245,0,0" VerticalAlignment="Top" Height="30" Width="197" Click="Install_Click" Foreground="White" Background="#FF3F78EA" Cursor="Hand" BorderBrush="#7F352323"/>
+        <Label FontFamily="./#Google Sans Medium" Content="Your life is your style." HorizontalAlignment="Left" Margin="76,41,0,0" VerticalAlignment="Top" Width="143" FontSize="8"/>
         <Grid x:Name="path_grid" Margin="20,210,179,59" Visibility="Hidden">
-            <Button x:Name="CheckPath" Content="Выбрать" Margin="295,0,0,0" FontSize="12" Width="94" FontWeight="Bold" Click="CheckPath_Click"/>
-            <TextBox x:Name="Path_textbox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="290" Height="20" FontSize="12" MinHeight="28" Padding="10,4,6,6" IsEnabled="False" Background="{x:Null}" BorderBrush="Black"/>
+            <Button x:Name="CheckPath" FontFamily="./#Google Sans Medium" Content="Выбрать" Margin="295,0,0,0" FontSize="12" Width="94" FontWeight="Bold" Click="CheckPath_Click"/>
+            <TextBox x:Name="Path_textbox" FontFamily="./#Google Sans Medium" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="290" Height="20" FontSize="12" MinHeight="28" Padding="10,4,6,6" IsEnabled="False" Background="{x:Null}" BorderBrush="Black"/>
         </Grid>
 
     </Grid>

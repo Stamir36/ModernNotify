@@ -35,7 +35,7 @@ namespace update
             try
             {
                 using (var client = new WebClient())
-                using (var stream = client.OpenRead("http://version-modernnotify.ml/"))
+                using (var stream = client.OpenRead("https://unesell.com/"))
                 {
                     return true;
                 }
@@ -50,7 +50,7 @@ namespace update
         {
             try
             {
-                string link = @"http://version-modernnotify.ml/modernnotify/update_dev.zip";
+                string link = @"https://unesell.com/api/version/modernnotify/update_dev.zip";
                 if (Properties.Settings.Default.Server == "GitHub")
                 {
                     link = @"https://github.com/Stamir36/ModernNotyfi/raw/main/server/modernnotify/update_dev.zip";
@@ -266,7 +266,7 @@ namespace update
             {
                 try
                 {
-                    url = "http://version-modernnotify.ml/modernnotify/version_dev.txt";
+                    url = "https://unesell.com/api/version/modernnotify/version_dev.txt";
                     if (Properties.Settings.Default.Server == "GitHub")
                     {
                         url = @"https://github.com/Stamir36/ModernNotyfi/raw/main/server/modernnotify/version_dev.txt";

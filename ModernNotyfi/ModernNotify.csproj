@@ -131,11 +131,17 @@
     <Compile Include="ConnectQR.xaml.cs">
       <DependentUpon>ConnectQR.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ServiceMyDeviceNet.xaml.cs">
+      <DependentUpon>ServiceMyDeviceNet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameBar.xaml.cs">
       <DependentUpon>GameBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModernUI.xaml.cs">
       <DependentUpon>ModernUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Other Page\UiLoginUnesell.xaml.cs">
+      <DependentUpon>UiLoginUnesell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Other Page\DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
@@ -166,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ServiceMyDeviceNet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="GameBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,6 +196,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Other Page\UiLoginUnesell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Other Page\DebugWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -407,6 +421,12 @@
   <ItemGroup>
     <Resource Include="icons\gif\accountU.png" />
     <Resource Include="icons\gif\geo_icons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\terminal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

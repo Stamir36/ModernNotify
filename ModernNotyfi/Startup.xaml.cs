@@ -45,22 +45,37 @@ namespace ModernNotyfi
 
             if (Properties.Settings.Default.Startup == "Panel")
             {
-                MainWindow panel = new MainWindow();
-                panel.Show();
-
-                this.Close();
+                if (Properties.Settings.Default.PanelStyle == 1)
+                {
+                    MainWindow panel = new MainWindow();
+                    panel.Show();
+                }
+                else if(Properties.Settings.Default.PanelStyle == 2)
+                {
+                    ModernUI panel = new ModernUI();
+                    panel.Show();
+                }
+                else
+                {
+                    MainWindow panel = new MainWindow();
+                    panel.Show();
+                }
             }
             else if (Properties.Settings.Default.Startup == "Connect")
             {
                 MyDevice connect = new MyDevice();
                 connect.Show();
-
-                this.Close();
             }
             else
             {
                 MessageBox.Show("Error", "Конфигурация установлена не правильно. Очистите настройки или поставте параметр 'Startup' на значение ''Panel''.");
             }
+
+            // Запуск сервесов.
+            ServiceMyDeviceNet serviceMyDeviceNet = new ServiceMyDeviceNet();
+            serviceMyDeviceNet.Show();
+
+            this.Close();
         }
     }
 }

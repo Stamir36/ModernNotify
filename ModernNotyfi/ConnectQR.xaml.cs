@@ -30,8 +30,8 @@ namespace ModernNotyfi
     /// </summary>
     public partial class ConnectQR : Window
     {
-        //public string api = "http://api.unesell.com/";
-        public string api = "http://localhost/api/";
+        public string api = "http://api.unesell.com/";
+        //public string api = "http://localhost/api/";
 
         String CONNECT_IDENTIFY = "MODERNCONNECT:";
         public DispatcherTimer timer_sec = new DispatcherTimer();

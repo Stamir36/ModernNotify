@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Text;
@@ -49,6 +51,27 @@ namespace ModernNotyfi.Other_Page
                 "Cpu: " + SysInfo.Cpu + "\n" +
                 "CpuSpeed: " + SysInfo.CpuSpeed + "\n"
                 , "Системная информация");
+        }
+
+        private void NAudioTest(object sender, RoutedEventArgs e)
+        {
+            string FileName;
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                FileName = openFileDialog.FileName;
+
+                var reader = new Mp3FileReader(FileName);
+                var waveOut = new WaveOut();
+                waveOut.Init(reader);
+                waveOut.Play();
+            }
+        }
+
+        private void OpenUnesellLoginUI(object sender, RoutedEventArgs e)
+        {
+            UiLoginUnesell uiLoginUnesell = new UiLoginUnesell();
+            uiLoginUnesell.Show();
         }
     }
 }

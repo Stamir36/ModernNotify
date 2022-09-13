@@ -6,7 +6,7 @@
         xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
         Style="{StaticResource UiWindow}"
         xmlns:local="clr-namespace:ModernNotyfi"
-        Title="Настройки" Height="418" Width="927"
+        Title="Настройки" Height="461" Width="710"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         MinWidth="960" MinHeight="530" Icon="icons/maim_settings.png"
         WindowStartupLocation="CenterScreen"
@@ -44,7 +44,7 @@
                     <Grid x:Name="RootGrid">
                         <Border>
                             <Grid>
-                                <Button x:Name="close" Content="Закрыть окно" Margin="0,0,203,26" HorizontalAlignment="Right" Width="118" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Close" Padding="10,6,10,6" />
+                                <Button x:Name="close" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Закрыть окно" Margin="0,0,203,26" HorizontalAlignment="Right" Width="118" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Close" Padding="10,6,10,6" FontSize="14" />
                                 <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Save_Settings" Content="Сохранить изменения" Style="{StaticResource AccentButtonStyle}" Margin="0,0,19,26" HorizontalAlignment="Right" Width="179" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Save_Settings_Click" />
                                 <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Titles" Content="Настройки" Margin="55,16,25,0" VerticalAlignment="Top" Height="50" FontSize="28" Padding="0,0,0,10" VerticalContentAlignment="Center"/>
                                 <Image x:Name="Sett_img" HorizontalAlignment="Left" Height="28" Margin="23,21,0,0" VerticalAlignment="Top" Width="27" Source="icons/settings.png"/>
@@ -150,13 +150,15 @@
                                                     </StackPanel>
                                                 </Grid>
                                                 <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_7" Content="Категории:" HorizontalAlignment="Left" Margin="45,99,0,0" VerticalAlignment="Top"/>
-                                                <ui:ProgressRing x:Name="progressRing" IsActive="True" Width="32" Height="35" HorizontalAlignment="Left" Margin="60,28,0,0" VerticalAlignment="Top" />
-                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NameProfile" Content="Привет!" Margin="115,23,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold"/>
+                                                <wpfui:ProgressRing x:Name="progressRing" IsIndeterminate="True" Width="20" Height="20" HorizontalAlignment="Left" Margin="66,34,0,0" VerticalAlignment="Top" />
+
                                                 <Ellipse Margin="47,16,0,0" Stroke="#7F000000" HorizontalAlignment="Left" Width="57" Height="57" VerticalAlignment="Top">
                                                     <Ellipse.Fill>
                                                         <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
                                                     </Ellipse.Fill>
                                                 </Ellipse>
+                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NameProfile" Content="Привет!" Margin="115,23,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold"/>
+
                                                 <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="localacc" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="116,48,0,0" VerticalAlignment="Top"/>
                                                 <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Login_Unesell" Content="Войти в Unesell Аккаунт" Style="{StaticResource AccentButtonStyle}" Margin="0,26,20,0" Cursor="Hand" Click="LoginWebUnesell" VerticalAlignment="Top" HorizontalAlignment="Right" Width="210"/>
 
@@ -166,7 +168,7 @@
                                     <TabItem Header="Main Setting" Width="80" Margin="188,-27,626,27">
                                         <ScrollViewer>
                                             <StackPanel>
-                                                <Grid Height="575">
+                                                <Grid Height="710">
                                                     <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_1" Content="Основные параметры" Margin="24,15,0,0" HorizontalAlignment="Left" Width="244" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
                                                     <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="30,39,0,0" VerticalAlignment="Top" Width="354" RenderTransformOrigin="0.5,0.5">
                                                         <Border.RenderTransform>
@@ -186,9 +188,9 @@
                                                         Icon="DarkTheme24"
                                                         Subtitle="Основной стиль оформления приложения." Margin="27,53,25,0" Height="68" VerticalAlignment="Top">
                                                         <ComboBox x:Name="theme_combo" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" SelectionChanged="theme_combo_SelectionChanged" HorizontalContentAlignment="Left">
-                                                            <TextBlock>Светлая</TextBlock>
-                                                            <TextBlock>Тёмная</TextBlock>
-                                                            <TextBlock>Как в системе</TextBlock>
+                                                            <TextBlock><Run Text="Светлая"/></TextBlock>
+                                                            <TextBlock><Run Text="Тёмная"/></TextBlock>
+                                                            <TextBlock><Run Text="Как в системе"/></TextBlock>
                                                         </ComboBox>
                                                     </wpfui:CardControl>
                                                     <wpfui:CardControl x:Name="text0213023"
@@ -252,6 +254,26 @@
                                                         Subtitle="Отображать кнопку &quot;Закрыть панель&quot; на панели выключения." Margin="27,495,25,0" Height="68" VerticalAlignment="Top">
                                                         <wpfui:ToggleSwitch x:Name="Exit_Setting" Cursor="Hand"/>
                                                     </wpfui:CardControl>
+                                                    <wpfui:CardControl
+                                                        x:Name="textstyleshutdown_Copy" Title="Запускаемый объект"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        Grid.Row="0"
+                                                        Icon="ContentSettings24"
+                                                        Subtitle="Выберите, что включать при запуске, панель или окно MyDevice." Margin="27,632,25,0" Height="68" VerticalAlignment="Top">
+                                                        <wpfui:Button Appearance="Secondary" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="Startup_Settings" Content="Выбрать запускаемый элемент" HorizontalAlignment="Stretch" VerticalAlignment="Top" Cursor="Hand" Height="32" FontSize="12" Click="StartupChencheOpen"/>
+                                                    </wpfui:CardControl>
+                                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="funnanduse_Copy" Content="Параметры запуска" Margin="23,576,0,0" HorizontalAlignment="Left" Width="293" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                                    <Label x:Name="subbone_Copy" Content="Настройте, как будет запускаться приложение или его сервисы." Margin="28,603,0,0" HorizontalAlignment="Left" Width="525" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
+                                                    <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="28,600,0,0" VerticalAlignment="Top" Width="353" RenderTransformOrigin="0.5,0.5">
+                                                        <Border.RenderTransform>
+                                                            <TransformGroup>
+                                                                <ScaleTransform ScaleY="-1"/>
+                                                                <SkewTransform/>
+                                                                <RotateTransform/>
+                                                                <TranslateTransform/>
+                                                            </TransformGroup>
+                                                        </Border.RenderTransform>
+                                                    </Border>
                                                 </Grid>
                                             </StackPanel>
                                         </ScrollViewer>
@@ -449,15 +471,15 @@
                                     </TabItem>
                                     <TabItem Header="Version" Width="80" Margin="595,-117,219,117">
                                         <Grid Margin="16,0,-16,0">
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="ModernNotify" Margin="60,2,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="24" VerticalContentAlignment="Center" Height="33" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0074FF" />
-                                            <Image HorizontalAlignment="Left" Height="49" Margin="8,1,0,0" VerticalAlignment="Top" Width="49" Source="icon.ico"/>
-                                            <Button x:Name="Open_Tab_Update" Content="Проверить обновления" Style="{StaticResource AccentButtonStyle}" Margin="15,66,0,0" VerticalAlignment="Top" Width="174" Click="Open_Tab_Update_Click" Cursor="Hand"/>
-                                            <Button x:Name="Open_Site" Content="Сайт проекта" Margin="194,66,0,0" VerticalAlignment="Top" Cursor="Hand" Click="Open_Site_Progect" Height="33" Padding="10,6,10,6" HorizontalAlignment="Left" Width="130"/>
-                                            <Label x:Name="version" Content="version" HorizontalAlignment="Left" Margin="67,30,0,0" VerticalAlignment="Top" Width="154"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Devetxt" Content="Разработчик:" HorizontalAlignment="Left" Margin="15,181,0,0" VerticalAlignment="Top" Foreground="#FFFFC700" FontWeight="Bold"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="15,200,0,0" VerticalAlignment="Top"/>
-                                            <Label x:Name="textaboutproduct" Content="О продукте:" HorizontalAlignment="Left" Margin="15,113,0,0" VerticalAlignment="Top" Foreground="#FFFFAF00" FontWeight="Bold"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11." HorizontalAlignment="Left" Margin="15,132,0,0" VerticalAlignment="Top" Height="48" Width="371" UseLayoutRounding="False"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="ModernNotify" Margin="60,12,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="24" VerticalContentAlignment="Center" Height="33" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0074FF" />
+                                            <Image HorizontalAlignment="Left" Height="49" Margin="8,11,0,0" VerticalAlignment="Top" Width="49" Source="icon.ico"/>
+                                            <Button FontFamily="/icons/Fonts/#Google Sans Medium"  x:Name="Open_Tab_Update" Content="Проверить обновления" Style="{StaticResource AccentButtonStyle}" Margin="15,76,0,0" VerticalAlignment="Top" Width="180" Click="Open_Tab_Update_Click" Cursor="Hand"/>
+                                            <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Open_Site" Content="Сайт проекта" Margin="200,76,0,0" Style="{StaticResource AccentButtonStyle}" VerticalAlignment="Top" Cursor="Hand" Click="Open_Site_Progect" Height="30" Padding="10,6,10,6" Width="130" Background="#BF0078D7"/>
+                                            <Label x:Name="version" Content="version" HorizontalAlignment="Left" Margin="67,40,0,0" VerticalAlignment="Top" Width="154"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Devetxt" Content="Разработчик:" HorizontalAlignment="Left" Margin="15,191,0,0" VerticalAlignment="Top" Foreground="#FFFFC700" FontWeight="Bold"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="15,210,0,0" VerticalAlignment="Top"/>
+                                            <Label x:Name="textaboutproduct" Content="О продукте:" HorizontalAlignment="Left" Margin="15,123,0,0" VerticalAlignment="Top" Foreground="#FFFFAF00" FontWeight="Bold"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11." HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" Height="48" Width="371" UseLayoutRounding="False"/>
 
                                             <wpfui:Hyperlink x:Name="text_5_dadsc" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Используемый исходный код"
                                             Icon="Link48" Click="Open_Sourse" Margin="0,48,22,0" FontSize="11" Height="24"
@@ -469,7 +491,7 @@
                                                 VerticalAlignment="Top" HorizontalAlignment="Right" Width="103" />
                                         </Grid>
                                     </TabItem>
-                                    <TabItem Header="Update" Margin="694,-172,102,172">
+                                    <TabItem Header="Update" Margin="706,-166,0,166" HorizontalAlignment="Left" Width="128">
                                         <Grid>
                                             <wpfui:Card BorderThickness="1" Height="73" Margin="23,10,10,0" VerticalAlignment="Top" Padding="0,0,0,0">
                                                 <Grid>
@@ -479,9 +501,9 @@
                                                     <Label x:Name="LastChekUpdate" Content="Последняя проверка" HorizontalAlignment="Left" Margin="78,39,0,0" VerticalAlignment="Top" Width="454"/>
                                                 </Grid>
                                             </wpfui:Card>
-                                            <Rectangle Fill="#26D0D0DE" HorizontalAlignment="Left" Height="184" Margin="23,113,0,0" VerticalAlignment="Top" Width="423" RadiusY="17.5" RadiusX="17.5"/>
+                                            <Rectangle Fill="#26D0D0DE" HorizontalAlignment="Left" Height="136" Margin="23,112,0,0" VerticalAlignment="Top" Width="394" RadiusY="17.5" RadiusX="17.5"/>
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="SysInfoHeader" Content="Информация о системе" HorizontalAlignment="Left" Margin="43,129,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal"/>
-                                            <Rectangle Fill="#26D0D0DE" HorizontalAlignment="Left" Height="184" Margin="465,111,0,0" VerticalAlignment="Top" Width="411" RadiusY="17.5" RadiusX="17.5"/>
+                                            <Rectangle Fill="#26D0D0DE" HorizontalAlignment="Left" Height="136" Margin="456,111,0,0" VerticalAlignment="Top" Width="410" RadiusY="17.5" RadiusX="17.5"/>
                                             <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="43,153,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                                 <Border.RenderTransform>
                                                     <TransformGroup>
@@ -492,7 +514,7 @@
                                                     </TransformGroup>
                                                 </Border.RenderTransform>
                                             </Border>
-                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="482,152,0,0" VerticalAlignment="Top" Width="347" RenderTransformOrigin="0.5,0.5">
+                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="471,152,0,0" VerticalAlignment="Top" Width="347" RenderTransformOrigin="0.5,0.5">
                                                 <Border.RenderTransform>
                                                     <TransformGroup>
                                                         <ScaleTransform ScaleY="-1"/>
@@ -502,11 +524,27 @@
                                                     </TransformGroup>
                                                 </Border.RenderTransform>
                                             </Border>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="inforelithe" Content="Информация о выпуске" HorizontalAlignment="Left" Margin="483,126,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Width="164"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="inforelithe" Content="Информация о выпуске" HorizontalAlignment="Left" Margin="472,126,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Width="164"/>
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="WindowsVersion" Content="WindowsVersion" HorizontalAlignment="Left" Margin="45,164,0,0" VerticalAlignment="Top" Width="313"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version" Content="Версия: 0.0.2.0" HorizontalAlignment="Left" Margin="485,163,0,0" VerticalAlignment="Top" Width="329"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version" Content="Версия: 0.0.2.0" HorizontalAlignment="Left" Margin="474,163,0,0" VerticalAlignment="Top" Width="327" Height="20"/>
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Memory" Content="Memory" HorizontalAlignment="Left" Margin="45,188,0,0" VerticalAlignment="Top" Width="331"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="EctInfoSys" Content="Ect" HorizontalAlignment="Left" Margin="45,212,0,0" VerticalAlignment="Top" Height="69" Width="313"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="EctInfoSys" Content="Ect" HorizontalAlignment="Left" Margin="45,212,0,0" VerticalAlignment="Top" Height="35" Width="313"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="otherptext2" Content="Прочее:" Margin="23,263,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="26,289,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                                <Border.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleY="-1"/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Border.RenderTransform>
+                                            </Border>
+                                            <wpfui:Hyperlink x:Name="LinkOpenUpdate"
+                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                Content="Запустить модуль обновления"
+                                                Icon="Link48" Click="OpenUpdateModule" Margin="25,298,0,0" FontSize="11" Height="24" VerticalAlignment="Top" />
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version_Copy" Content="Програмное обеспечение ModernNotify и MyDevice&#xD;&#xA;распростроняются бесплатно.&#xD;&#xA;Unesell Studio 2022 год." HorizontalAlignment="Left" Margin="474,183,0,0" VerticalAlignment="Top" Width="327" Height="64"/>
                                         </Grid>
                                     </TabItem>
                                     <TabItem Header="Color" Width="80" Margin="498,-202,316,202">
@@ -566,7 +604,7 @@
                                         </ScrollViewer>
                                     </TabItem>
                                 </TabControl>
-                                <Button x:Name="Back" Content="&lt; Назад" Margin="23,0,0,26" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Backs" Padding="3,5,8,6" Width="106" Visibility="Hidden" />
+                                <Button x:Name="Back" Content="Назад" FontFamily="/icons/Fonts/#Google Sans Medium" Margin="23,0,0,26" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Backs" Padding="3,5,8,6" Width="91" Visibility="Hidden" FontSize="14" />
                                 <wpfui:Snackbar
                                     FontFamily="/icons/Fonts/#Google Sans Medium"
                                     x:Name="RootSnackbar"
@@ -635,6 +673,49 @@
           Title="Параметры ModernNotify"
           Icon="pack://application:,,,/icons/maim_settings.png"
           FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2"/>
+
+        <wpfui:Dialog
+            x:Name="StartupDialog"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            ButtonLeftClick="StartupDialogSave"
+            ButtonRightClick="StartupDialogClose"
+            ButtonLeftName="Сохранить"
+            ButtonRightName="Закрыть окно"
+            FontFamily="/icons/Fonts/#Google Sans Medium"
+            Show="False"
+            Visibility="Hidden" Grid.ColumnSpan="2">
+            <Grid>
+                <StackPanel Margin="0,0,0,-18" Height="90">
+                    <TextBlock FontWeight="Medium" Text="Выбор запускаемого объекта" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="14" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="11,10,10,10" Height="36" BorderBrush="{x:Null}" Cursor="Hand" Style="{DynamicResource DefaultButtonStyle}" Grid.RowSpan="1" Width="165" Click="StartMN_Click">
+                            <ToggleButton x:Name="StartModernNotify" Padding="0,0,0,0" Height="35" VerticalAlignment="Top" Width="165">
+                                <wpfui:Card Padding="0,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="165" Height="35">
+                                    <Grid Margin="0,0,0,0" Height="35" Width="165">
+                                        <Label Foreground="{DynamicResource Button.Static.Background}"  FontFamily="./icons/Fonts/#Google Sans Medium" Content="ModernNotify" HorizontalAlignment="Left" Margin="35,6,0,0" VerticalAlignment="Top" Width="115" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0"/>
+                                        <Image Height="20" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Source="/icon.ico"/>
+                                    </Grid>
+                                </wpfui:Card>
+                            </ToggleButton>
+                        </wpfui:Button>
+
+                        <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Margin="10,10,0,10" Height="36" BorderBrush="{x:Null}" Cursor="Hand" Style="{DynamicResource DefaultButtonStyle}" Grid.RowSpan="1" Width="165" Click="StartMD_Click">
+                            <ToggleButton x:Name="StartMyDevice" Padding="0,0,0,0" Height="35" VerticalAlignment="Top" Width="165">
+                                <wpfui:Card Padding="0,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="165" Height="35">
+                                    <Grid Margin="0,0,0,0" Height="35" Width="165">
+                                        <Label Foreground="{DynamicResource Button.Static.Background}"  FontFamily="./icons/Fonts/#Google Sans Medium" Content="MyDevice" HorizontalAlignment="Left" Margin="35,6,0,0" VerticalAlignment="Top" Width="115" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0"/>
+                                        <Image Height="20" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Source="/icons/Device.png"/>
+                                    </Grid>
+                                </wpfui:Card>
+                            </ToggleButton>
+                        </wpfui:Button>
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
+        </wpfui:Dialog>
 
     </Grid>
 

@@ -84,6 +84,14 @@ namespace ModernNotyfi
                 updateaccount();
             };
             timer_sec.Start();
+
+
+            // Закрытие сервисов
+            ServiceMyDeviceNet service = Application.Current.Windows.OfType<ServiceMyDeviceNet>().FirstOrDefault();
+            if (service.IsActive == true)
+            {
+                service.Close();
+            }
         }
 
         private async void DisplayDialog(string Title, string Content)
@@ -109,7 +117,7 @@ namespace ModernNotyfi
                 {
                     if (no_login)
                     {
-                        var userBitmapSmall = new BitmapImage(new Uri("http://" + Properties.Settings.Default.Unesell_Avatar));
+                        var userBitmapSmall = new BitmapImage(new Uri("https://unesell.com/data/users/avatar/" + Properties.Settings.Default.Unesell_Avatar));
                         AccauntImg.ImageSource = userBitmapSmall;
                         no_login = false;
                     }
@@ -245,11 +253,20 @@ namespace ModernNotyfi
                 }
                 stylewin_combo.SelectedIndex = 2;
             }
+
+            if (Properties.Settings.Default.Startup == "Panel")
+            {
+                StartModernNotify.IsChecked = true;
+            }
+            if (Properties.Settings.Default.Startup == "Connect")
+            {
+                StartMyDevice.IsChecked = true;
+            }
         }
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            Startup mainWindow = new Startup();
             mainWindow.Show();
             Close();
         }
@@ -441,7 +458,7 @@ namespace ModernNotyfi
 
             try
             {
-                string url_version_update = "http://version-modernnotify.ml/modernnotify/update_version.txt";
+                string url_version_update = "https://unesell.com/api/version/modernnotify/update_version.txt";
 
                 if (GetContent(url_version_update) == update_version)
                 {
@@ -462,7 +479,7 @@ namespace ModernNotyfi
 
                     try
                     {
-                        string link = @"http://version-modernnotify.ml/modernnotify/update.exe";
+                        string link = @"https://unesell.com/api/version/modernnotify/update.exe";
                         WebClient webClient = new WebClient();
                         webClient.DownloadProgressChanged += (o, args) => LastChekUpdate.Content = "Скачивание: " + args.ProgressPercentage + "%";
                         webClient.DownloadFileCompleted += (o, args) => CheckUpdateApp();
@@ -518,7 +535,7 @@ namespace ModernNotyfi
                 }
 
                 //DEV VERSION CHECK
-                if (GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") == Assembly.GetExecutingAssembly().GetName().Version.ToString())
+                if (GetContent("https://unesell.com/api/version/modernnotify/version_dev.txt") == Assembly.GetExecutingAssembly().GetName().Version.ToString())
                 {
                     
                     if (Properties.Settings.Default.Language == "Russian")
@@ -535,17 +552,17 @@ namespace ModernNotyfi
                 }
                 else
                 {
-                    if (GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt") != "Error")
+                    if (GetContent("https://unesell.com/api/version/modernnotify/version_dev.txt") != "Error")
                     {
                         if (Properties.Settings.Default.Language == "Russian")
                         {
-                            InfoUpdate.Content = "Доступна новая версия " + GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt");
+                            InfoUpdate.Content = "Доступна новая версия " + GetContent("https://unesell.com/api/version/modernnotify/version_dev.txt");
                             LastChekUpdate.Content = "Готовы к обновлению.";
                             Check_Update.Content = "Начать обновление";
                         }
                         else if (Properties.Settings.Default.Language == "English")
                         {
-                            InfoUpdate.Content = "New version available: " + GetContent("http://version-modernnotify.ml/modernnotify/version_dev.txt");
+                            InfoUpdate.Content = "New version available: " + GetContent("https://unesell.com/api/version/modernnotify/version_dev.txt");
                             LastChekUpdate.Content = "Ready to upgrade.";
                             Check_Update.Content = "Start update";
                         }
@@ -618,7 +635,7 @@ namespace ModernNotyfi
             }
             catch (Exception)
             {
-                InfoUpdate.Content = "Не удалось проверить обновления";
+                InfoUpdate.Content = "Не удалось проверить обновления.";
                 Properties.Settings.Default.last_check_update = DateTime.Now.ToString();
                 Properties.Settings.Default.Save();
                 LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
@@ -707,8 +724,10 @@ namespace ModernNotyfi
                 }
 
                 Properties.Settings.Default.Save();
+
+
                 //Применение.
-                MainWindow mainWindow = new MainWindow();
+                Startup mainWindow = new Startup();
                 mainWindow.Show();
                 Close();
             }
@@ -826,7 +845,7 @@ namespace ModernNotyfi
 
         private void Open_Site_Progect(object sender, RoutedEventArgs e)
         {
-            Process.Start("http://modernnotify.ml/");
+            Process.Start("https://unesell.com/modernnotify/");
         }
 
         private void Select_Language(object sender, DependencyPropertyChangedEventArgs e)
@@ -882,6 +901,7 @@ namespace ModernNotyfi
             text_3_Copy1.Content = "Вид окон";
             stylewindowtext.Title = "Стиль окон:"; 
             otherptext.Content = "Прочее:";
+            otherptext2.Content = "Прочее:";
             Open_Tab_Update.Content = "Проверить обновления";
             Open_Site.Content = "Сайт проекта";
             textaboutproduct.Content = "О продукте:";
@@ -931,6 +951,7 @@ namespace ModernNotyfi
             stylewindowtext.Subtitle = "Только для Windows 11 (build 22581+)";
             text23r923ri12.Subtitle = "Увеличивает задний план слайдера громкости.";
             MicaBool.Content = "Разрешить";
+            LinkOpenUpdate.Content = "Запустить модуль обновления";
         }
 
         public void EnglishInterfase_Settings()
@@ -976,6 +997,7 @@ namespace ModernNotyfi
             text_3_Copy1.Content = "Window type";
             stylewindowtext.Title = "Window style:";
             otherptext.Content = "Other:";
+            otherptext2.Content = "Other:";
             Open_Tab_Update.Content = "Check for updates";
             Open_Site.Content = "Project site";
             textaboutproduct.Content = "About the product:";
@@ -1023,6 +1045,7 @@ namespace ModernNotyfi
             stylewindowtext.Subtitle = "Windows 11 only (build 22581+)";
             text23r923ri12.Subtitle = "Increases the background of the volume slider.";
             MicaBool.Content = "Allow";
+            LinkOpenUpdate.Content = "Start update module";
         }
 
         private void LoginWebUnesell(object sender, RoutedEventArgs e)
@@ -1042,8 +1065,8 @@ namespace ModernNotyfi
             }
             else
             {
-                unesell_login_web unesell_Login_Web = new unesell_login_web();
-                unesell_Login_Web.Show();
+                Other_Page.UiLoginUnesell UiLogin = new Other_Page.UiLoginUnesell();
+                UiLogin.Show();
             }
         }
 
@@ -1240,6 +1263,75 @@ namespace ModernNotyfi
             if (Language_combo1.SelectedIndex == 1)
             {
                 EnglishInterfase_Settings();
+            }
+        }
+
+        private void StartupChencheOpen(object sender, RoutedEventArgs e)
+        {
+            // Запуск диагога выбора запускаемого обьекта.
+            StartupDialog.Show = true;
+            StartupDialog.Visibility = Visibility.Visible;
+        }
+
+        private void StartupDialogSave(object sender, RoutedEventArgs e)
+        {
+            if (StartModernNotify.IsChecked == true)
+            {
+                Properties.Settings.Default.Startup = "Panel";
+                Properties.Settings.Default.Save();
+            }
+            if (StartMyDevice.IsChecked == true)
+            {
+                Properties.Settings.Default.Startup = "Connect";
+                Properties.Settings.Default.Save();
+            }
+            StartupDialog.Show = false;
+            StartupDialog.Visibility = Visibility.Hidden;
+        }
+
+        private void StartupDialogClose(object sender, RoutedEventArgs e)
+        {
+            StartupDialog.Show = false;
+            StartupDialog.Visibility = Visibility.Hidden;
+
+            StartModernNotify.IsChecked = false;
+            StartMyDevice.IsChecked = false;
+
+            if (Properties.Settings.Default.Startup == "Panel")
+            {
+                StartModernNotify.IsChecked = true;
+            }
+            if (Properties.Settings.Default.Startup == "Connect")
+            {
+                StartMyDevice.IsChecked = true;
+            }
+        }
+
+        private void StartMN_Click(object sender, RoutedEventArgs e)
+        {
+            StartModernNotify.IsChecked = true;
+            StartMyDevice.IsChecked = false;
+        }
+
+        private void StartMD_Click(object sender, RoutedEventArgs e)
+        {
+            StartModernNotify.IsChecked = false;
+            StartMyDevice.IsChecked = true;
+        }
+
+        private void OpenUpdateModule(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process p = new Process();
+                p.StartInfo.Verb = "runas";
+                p.StartInfo.FileName = "update.exe";
+                p.Start();
+            }
+            catch
+            {
+                DisplayDialog("Невозможно запустить модуль", "Попробуйте проверить наличие обновлений, " +
+                    "или запустите файл update.exe вручную.");
             }
         }
     }
