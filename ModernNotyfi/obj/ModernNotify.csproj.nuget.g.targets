@@ -3,6 +3,6 @@
   <ImportGroup Condition="'$(ExcludeRestorePackageImports)' != 'true'">
     <Import Project="$(NuGetPackageRoot)system.runtime.windowsruntime\4.6.0\buildTransitive\net461\System.Runtime.WindowsRuntime.targets" Condition="Exists('$(NuGetPackageRoot)system.runtime.windowsruntime\4.6.0\buildTransitive\net461\System.Runtime.WindowsRuntime.targets')" />
     <Import Project="$(NuGetPackageRoot)system.runtime.windowsruntime.ui.xaml\4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets" Condition="Exists('$(NuGetPackageRoot)system.runtime.windowsruntime.ui.xaml\4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets')" />
-    <Import Project="$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22000.196\build\Microsoft.Windows.SDK.Contracts.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22000.196\build\Microsoft.Windows.SDK.Contracts.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22621.2\build\Microsoft.Windows.SDK.Contracts.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22621.2\build\Microsoft.Windows.SDK.Contracts.targets')" />
   </ImportGroup>
 </Project>

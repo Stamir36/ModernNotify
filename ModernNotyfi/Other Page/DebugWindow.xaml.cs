@@ -14,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Windows.Devices.Bluetooth;
+using Windows.Devices.Enumeration;
 using Woof.SystemEx;
 
 namespace ModernNotyfi.Other_Page
@@ -72,6 +74,22 @@ namespace ModernNotyfi.Other_Page
         {
             UiLoginUnesell uiLoginUnesell = new UiLoginUnesell();
             uiLoginUnesell.Show();
+        }
+
+        private async Task BluetoothDeviceListAsync()
+        {
+            //DeviceInformationCollection ConnectedBluetoothDevices = await DeviceInformation.FindAllAsync(BluetoothDevice.GetDeviceSelectorFromConnectionStatus(BluetoothConnectionStatus.Connected));
+            
+            DeviceInformationCollection PairedBluetoothDevices = await DeviceInformation.FindAllAsync(BluetoothDevice.GetDeviceSelectorFromPairingState(true));
+            foreach (DeviceInformation item in PairedBluetoothDevices)
+            {
+                MessageBox.Show(item.Name + "\n\nПараметры:\n" + string.Join("\n", item.Properties.ToArray()), "Bluetooth Device");
+            }
+        }
+
+        private void BluetoothDeviceList(object sender, RoutedEventArgs e)
+        {
+            BluetoothDeviceListAsync();
         }
     }
 }

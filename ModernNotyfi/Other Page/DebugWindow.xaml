@@ -30,6 +30,7 @@
                 <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Информационные фукнкции:" Margin="10,74,450,132"/>
                 <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Запуск тестов:" Margin="10,138,473,68"/>
                 <Button Content="Запустить &quot;UI Login&quot;" HorizontalAlignment="Left" Margin="445,32,0,0" VerticalAlignment="Top" Width="165" Click="OpenUnesellLoginUI" Padding="10,6,10,6"/>
+                <Button Content="Устройства Bluetooth" HorizontalAlignment="Left" Margin="277,97,0,0" Width="206" Padding="10,6,10,6" Click="BluetoothDeviceList" VerticalAlignment="Top"/>
             </Grid>
         </ScrollViewer>
 

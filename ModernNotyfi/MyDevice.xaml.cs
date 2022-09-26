@@ -328,22 +328,26 @@ namespace ModernNotyfi
                         return;
                     }
 
+                    // ---------- Получение информации (основной источник проблем) ------------
+
+
                     string BATTETY = Convert.ToString(JObject.Parse(responseString).SelectToken("BATTETY"));
                     string MOBILE = Convert.ToString(JObject.Parse(responseString).SelectToken("MOBILE"));
                     string MEM1_s = Convert.ToString(JObject.Parse(responseString).SelectToken("MEM1"));
                     string MEM2_s = Convert.ToString(JObject.Parse(responseString).SelectToken("MEM2"));
                     string OS = Convert.ToString(JObject.Parse(responseString).SelectToken("System"));
 
+                    MEM1_s = MEM1_s.Replace(".", ","); MEM2_s = MEM2_s.Replace(".", ",");
+
                     double MEM1 = Convert.ToDouble(MEM1_s); // Всего
                     double MEM2 = Convert.ToDouble(MEM2_s); // Доступно
                     double free = MEM1 - MEM2;
+                    MemoryLevel.Content = MEM2 + "Gb";
+                    MemoryBarr.Progress = Convert.ToInt16(free * 100 / MEM1);
 
                     DeviceName.Subtitle = "Связь с " + MOBILE;
                     BatteeyLevel.Text = BATTETY;
                     BatteryBarr.Progress = Convert.ToInt16(BATTETY);
-
-                    MemoryLevel.Content = MEM2 + "Gb";
-                    MemoryBarr.Progress = Convert.ToInt16(free * 100 / MEM1);
                     OSVersionAndroid.Content = OS;
 
 
@@ -356,6 +360,8 @@ namespace ModernNotyfi
                     {
                         BatteryBarr.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#FFD64545");
                     }
+
+                    // ------------------
 
                     if (TabConnect.SelectedIndex == 4)
                     {

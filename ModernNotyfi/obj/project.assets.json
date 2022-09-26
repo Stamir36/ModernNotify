@@ -75,7 +75,7 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.Contracts/10.0.22000.196": {
+      "Microsoft.Windows.SDK.Contracts/10.0.22621.2": {
         "type": "package",
         "dependencies": {
           "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
@@ -125,6 +125,7 @@
           "ref/netstandard2.0/Windows.Graphics.Printing3D.Printing3DContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Deployment.Preview.DeploymentPreviewContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Deployment.SharedPackageContainerContract.winmd": {},
+          "ref/netstandard2.0/Windows.Management.Update.WindowsUpdateContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Workplace.WorkplaceSettingsContract.winmd": {},
           "ref/netstandard2.0/Windows.Media.AppBroadcasting.AppBroadcastingContract.winmd": {},
           "ref/netstandard2.0/Windows.Media.AppRecording.AppRecordingContract.winmd": {},
@@ -915,7 +916,7 @@
           "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Microsoft.Windows.SDK.Contracts/10.0.22000.196": {
+      "Microsoft.Windows.SDK.Contracts/10.0.22621.2": {
         "type": "package",
         "dependencies": {
           "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
@@ -965,6 +966,7 @@
           "ref/netstandard2.0/Windows.Graphics.Printing3D.Printing3DContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Deployment.Preview.DeploymentPreviewContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Deployment.SharedPackageContainerContract.winmd": {},
+          "ref/netstandard2.0/Windows.Management.Update.WindowsUpdateContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Workplace.WorkplaceSettingsContract.winmd": {},
           "ref/netstandard2.0/Windows.Media.AppBroadcasting.AppBroadcastingContract.winmd": {},
           "ref/netstandard2.0/Windows.Media.AppRecording.AppRecordingContract.winmd": {},
@@ -1743,7 +1745,7 @@
           "lib/net461/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Microsoft.Windows.SDK.Contracts/10.0.22000.196": {
+      "Microsoft.Windows.SDK.Contracts/10.0.22621.2": {
         "type": "package",
         "dependencies": {
           "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
@@ -1793,6 +1795,7 @@
           "ref/netstandard2.0/Windows.Graphics.Printing3D.Printing3DContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Deployment.Preview.DeploymentPreviewContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Deployment.SharedPackageContainerContract.winmd": {},
+          "ref/netstandard2.0/Windows.Management.Update.WindowsUpdateContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Workplace.WorkplaceSettingsContract.winmd": {},
           "ref/netstandard2.0/Windows.Media.AppBroadcasting.AppBroadcastingContract.winmd": {},
           "ref/netstandard2.0/Windows.Media.AppRecording.AppRecordingContract.winmd": {},
@@ -2571,7 +2574,7 @@
           "lib/net461/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Microsoft.Windows.SDK.Contracts/10.0.22000.196": {
+      "Microsoft.Windows.SDK.Contracts/10.0.22621.2": {
         "type": "package",
         "dependencies": {
           "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
@@ -2621,6 +2624,7 @@
           "ref/netstandard2.0/Windows.Graphics.Printing3D.Printing3DContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Deployment.Preview.DeploymentPreviewContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Deployment.SharedPackageContainerContract.winmd": {},
+          "ref/netstandard2.0/Windows.Management.Update.WindowsUpdateContract.winmd": {},
           "ref/netstandard2.0/Windows.Management.Workplace.WorkplaceSettingsContract.winmd": {},
           "ref/netstandard2.0/Windows.Media.AppBroadcasting.AppBroadcastingContract.winmd": {},
           "ref/netstandard2.0/Windows.Media.AppRecording.AppRecordingContract.winmd": {},
@@ -3856,10 +3860,10 @@
         "version.txt"
       ]
     },
-    "Microsoft.Windows.SDK.Contracts/10.0.22000.196": {
-      "sha512": "PsZ40Oj4Y4XUjmHo++aJxZZHRo6CUx6t+xoDwQS/pMPzU9DPvQQ0yCMfar1BsGVF4gJUqzh+U29qF0bEdCruAQ==",
+    "Microsoft.Windows.SDK.Contracts/10.0.22621.2": {
+      "sha512": "seUeg7mca0cMrqiKu02GIYv8ntOfgdiXwysvme9o1CglIxI30rbgR82CHV5o9b1szdOQrQbppWIXLA7/INhgcw==",
       "type": "package",
-      "path": "microsoft.windows.sdk.contracts/10.0.22000.196",
+      "path": "microsoft.windows.sdk.contracts/10.0.22621.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3869,7 +3873,7 @@
         "c/Catalogs/cat4ec14c5368b7642563c070cd168960a8.cat",
         "c/Catalogs/cate59830bab4961666e8d8c2af1e5fa771.cat",
         "c/Catalogs/catf105a73f98cfc88c7b64d8f7b39a474c.cat",
-        "microsoft.windows.sdk.contracts.10.0.22000.196.nupkg.sha512",
+        "microsoft.windows.sdk.contracts.10.0.22621.2.nupkg.sha512",
         "microsoft.windows.sdk.contracts.nuspec",
         "ref/netstandard2.0/Windows.AI.MachineLearning.MachineLearningContract.winmd",
         "ref/netstandard2.0/Windows.AI.MachineLearning.Preview.MachineLearningPreviewContract.winmd",
@@ -3913,6 +3917,7 @@
         "ref/netstandard2.0/Windows.Graphics.Printing3D.Printing3DContract.winmd",
         "ref/netstandard2.0/Windows.Management.Deployment.Preview.DeploymentPreviewContract.winmd",
         "ref/netstandard2.0/Windows.Management.Deployment.SharedPackageContainerContract.winmd",
+        "ref/netstandard2.0/Windows.Management.Update.WindowsUpdateContract.winmd",
         "ref/netstandard2.0/Windows.Management.Workplace.WorkplaceSettingsContract.winmd",
         "ref/netstandard2.0/Windows.Media.AppBroadcasting.AppBroadcastingContract.winmd",
         "ref/netstandard2.0/Windows.Media.AppRecording.AppRecordingContract.winmd",
@@ -5212,7 +5217,7 @@
     ".NETFramework,Version=v4.7.2": [
       "LiveCharts.Wpf >= 0.9.7",
       "Microsoft.Toolkit.Uwp.Notifications >= 7.1.2",
-      "Microsoft.Windows.SDK.Contracts >= 10.0.22000.196",
+      "Microsoft.Windows.SDK.Contracts >= 10.0.22621.2",
       "ModernWpfUI >= 0.9.4",
       "NAudio >= 2.0.1",
       "Newtonsoft.Json >= 13.0.1",
@@ -5273,7 +5278,7 @@
           },
           "Microsoft.Windows.SDK.Contracts": {
             "target": "Package",
-            "version": "[10.0.22000.196, )"
+            "version": "[10.0.22621.2, )"
           },
           "ModernWpfUI": {
             "target": "Package",
@@ -5303,12 +5308,7 @@
             "target": "Package",
             "version": "[2.0.2, )"
           }
-        },
-        "imports": [
-          "uap10.0.22000"
-        ],
-        "assetTargetFallback": true,
-        "warn": true
+        }
       }
     },
     "runtimes": {

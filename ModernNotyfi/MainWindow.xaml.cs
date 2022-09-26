@@ -25,6 +25,7 @@ using System.Drawing;
 using System.Net;
 using System.Reflection;
 using Windows.Devices.Radios;
+using Windows.Devices.Bluetooth;
 using Windows.Devices.WiFi;
 using System.Windows.Threading;
 using Newtonsoft.Json.Linq;

@@ -50,7 +50,7 @@
             },
             "Microsoft.Windows.SDK.Contracts": {
               "target": "Package",
-              "version": "[10.0.22000.196, )"
+              "version": "[10.0.22621.2, )"
             },
             "ModernWpfUI": {
               "target": "Package",
@@ -80,12 +80,7 @@
               "target": "Package",
               "version": "[2.0.2, )"
             }
-          },
-          "imports": [
-            "uap10.0.22000"
-          ],
-          "assetTargetFallback": true,
-          "warn": true
+          }
         }
       },
       "runtimes": {

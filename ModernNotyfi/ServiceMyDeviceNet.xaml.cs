@@ -130,7 +130,7 @@ namespace ModernNotyfi
 
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            LOGConsole.Text = LOGConsole.Text + "\n" + "Данные отправлены: " + "ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume + "&UnesellID=" + Properties.Settings.Default.Unesell_id + "&SystemInfo=" + Properties.Settings.Default.System + "&SysMemoryTotal=" + Math.Round(SysInfo.SystemMemoryTotal, 2) + "&SysMemoryFree=" + Math.Round(SysInfo.SystemMemoryFree, 2);
+                            //LOGConsole.Text = LOGConsole.Text + "\n" + "Данные отправлены: " + "ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume + "&UnesellID=" + Properties.Settings.Default.Unesell_id + "&SystemInfo=" + Properties.Settings.Default.System + "&SysMemoryTotal=" + Math.Round(SysInfo.SystemMemoryTotal, 2) + "&SysMemoryFree=" + Math.Round(SysInfo.SystemMemoryFree, 2);
                         }));
                     }
                 });
@@ -138,7 +138,7 @@ namespace ModernNotyfi
             }
             catch (Exception ex)
             {
-                LOGConsole.Text = LOGConsole.Text + "\n" + "Ошибка отправки данных на сервер: " + ex;
+                LOGConsole.Text = LOGConsole.Text + "\n" + "Ошибка отправки данных на сервер.";
             }
         }
 

@@ -15,7 +15,7 @@
     <SourceRoot Include="C:\Program Files (x86)\Microsoft\Xamarin\NuGet\" />
   </ItemGroup>
   <ImportGroup Condition="'$(ExcludeRestorePackageImports)' != 'true'">
-    <Import Project="$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22000.196\build\Microsoft.Windows.SDK.Contracts.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22000.196\build\Microsoft.Windows.SDK.Contracts.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22621.2\build\Microsoft.Windows.SDK.Contracts.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.sdk.contracts\10.0.22621.2\build\Microsoft.Windows.SDK.Contracts.props')" />
   </ImportGroup>
   <PropertyGroup Condition="'$(ExcludeRestorePackageImports)' != 'true'">
     <PkgLiveCharts_Wpf Condition="'$(PkgLiveCharts_Wpf)' == ''">C:\Users\stas1\.nuget\packages\livecharts.wpf\0.9.7\</PkgLiveCharts_Wpf>
