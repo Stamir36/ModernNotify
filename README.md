@@ -10,17 +10,17 @@ Language: Russian<br><br>
 # 🚀 Getting started
 To start using the app, you need to install the Windows app. To expand the functionality, you can install the client on Android and manage devices using the MyDevice website.<br><br>
 Download Link:<br>
-<a href="https://github.com/Stamir36/ModernNotify/releases/"><img src="https://unesell.com/modernnotify/images/software/git-download.png"></a>
+<a href="https://github.com/Stamir36/ModernNotify/releases/"><img src="https://unesell.com/modernnotify/images/software/github-download.png"></a>
 <a href="https://unesell.com/modernnotify/download/"><img src="https://unesell.com/modernnotify/images/software/site-download.png"></a>
-<a href="https://play.google.com/store/apps/details?id=com.unesell.mnc"><img src="https://unesell.com/modernnotify/images/software/link-android.png"></a>
-<br><br>
+<br>
 Links to add-ons:
 <br>
 <a href="https://unesell.com/app/mydevice/"><img src="https://unesell.com/modernnotify/images/software/link-mydevice.png"></a>
+<a href="https://play.google.com/store/apps/details?id=com.unesell.mnc"><img src="https://unesell.com/modernnotify/images/software/link-android.png"></a>
 <br>
 
 # 🪟 Demonstration
-<br><img src="https://unesell.com/modernnotify/images/software/MN-DEMO-GIF.gif" alt="GIF-MN-DEMO" border="0">
+<br><img src="https://unesell.com/modernnotify/images/software/demo-gif-min.gif">
 
 # Description
 A quick action panel that combines a computer control panel and an Android application client with which you can monitor the battery charge, volume level, control music, the name of the shared clipboard and more.
