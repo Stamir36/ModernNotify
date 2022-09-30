@@ -9,7 +9,12 @@ Language: Russian<br><br>
 
 # 🚀 Getting started
 To start using the app, you need to install the Windows app. To expand the functionality, you can install the client on Android and manage devices using the MyDevice website.<br><br>
-Download Link:<br>
+
+Download from Store:<br>
+<a href="https://www.microsoft.com/store/apps/9PJH1QSV3KV6"><img src="https://unesell.com/modernnotify/images/software/ms-store.png"></a>
+<br>
+<br>
+Download Web Link:<br>
 <a href="https://github.com/Stamir36/ModernNotify/releases/"><img src="https://unesell.com/modernnotify/images/software/github-download.png"></a>
 <a href="https://unesell.com/modernnotify/download/"><img src="https://unesell.com/modernnotify/images/software/site-download.png"></a>
 <br>
