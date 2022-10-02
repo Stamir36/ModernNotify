@@ -101,7 +101,7 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>unesell.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>unesell.from.store.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="netstandard" />
@@ -257,6 +257,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="unesell.from.store.pfx" />
     <None Include="unesell.pfx" />
   </ItemGroup>
   <ItemGroup>

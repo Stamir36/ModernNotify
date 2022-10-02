@@ -36,7 +36,7 @@ namespace ModernNotyfi
     /// </summary>
     public partial class MyDevice : Window
     {
-        public string api = "http://api.unesell.com/";
+        public string api = "https://api.unesell.com/";
         //public string api = "http://localhost/api/";
 
         public DispatcherTimer timer = new DispatcherTimer();
@@ -536,8 +536,8 @@ namespace ModernNotyfi
 
         private void UploadProgressCallback(object sender, UploadProgressChangedEventArgs e)
         {
-            TextProgressUpload.Content = e.ProgressPercentage + "%";
-            ProgressUploadBar.Value = e.ProgressPercentage;
+            TextProgressUpload.Content = (e.ProgressPercentage * 2) + "%";
+            ProgressUploadBar.Value = e.ProgressPercentage * 2;
         }
 
         private void UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
