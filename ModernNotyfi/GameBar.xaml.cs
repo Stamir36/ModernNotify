@@ -22,6 +22,7 @@ namespace ModernNotyfi
     public partial class GameBar : Window
     {
         public DispatcherTimer timer = new DispatcherTimer();
+
         public GameBar()
         {
             InitializeComponent();

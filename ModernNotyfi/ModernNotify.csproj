@@ -131,6 +131,9 @@
     <Compile Include="ConnectQR.xaml.cs">
       <DependentUpon>ConnectQR.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Other Page\gamePanel.xaml.cs">
+      <DependentUpon>gamePanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServiceMyDeviceNet.xaml.cs">
       <DependentUpon>ServiceMyDeviceNet.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
     <Page Include="ConnectQR.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Other Page\gamePanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ServiceMyDeviceNet.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -278,6 +285,9 @@
   <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf">
       <Version>0.9.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent">
+      <Version>3.0.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>7.1.2</Version>

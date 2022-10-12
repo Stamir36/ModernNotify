@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[0.9.7, )"
             },
+            "Microsoft.Diagnostics.Tracing.TraceEvent": {
+              "target": "Package",
+              "version": "[3.0.5, )"
+            },
             "Microsoft.Toolkit.Uwp.Notifications": {
               "target": "Package",
               "version": "[7.1.2, )"

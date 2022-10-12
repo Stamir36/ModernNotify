@@ -1,0 +1,67 @@
+﻿<Window x:Name="Settings" x:Class="ModernNotyfi.gamePanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+        mc:Ignorable="d"
+        ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True"
+        
+        xmlns:local="clr-namespace:ModernNotyfi"
+        Title="Выключение или перезагрузка" Height="1073" Width="400"
+        xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        MinWidth="300" MinHeight="530" Icon="../icons/shutdown.png" WindowStyle="None"
+        Loaded="Settings_Loaded" Background="#CC2B2B2B" Closed="Settings_Closed">
+
+    <Grid Grid.IsSharedSizeScope="True">
+        <wpfui:Card Margin="20,261,20,0" Height="233" VerticalAlignment="Top">
+            <lvc:CartesianChart x:Name="Chart" Series="{Binding SeriesCollection}" Margin="-9,18,-6,0" Height="191" VerticalAlignment="Top" ScrollBarFill="{x:Null}" IsEnabled="False" >
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis x:Name="Axis">
+                        <lvc:Axis.Sections>
+                            <lvc:AxisSection Value="15" SectionWidth="4" Label="Bad">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="#FF8585" Opacity=".4"/>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                        </lvc:Axis.Sections>
+                    </lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </wpfui:Card>
+
+        <wpfui:Card Margin="20,179,20,0" Height="70" VerticalAlignment="Top"/>
+        <Label x:Name="Logo" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Unesell GameBar" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="261" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <Button FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="close" Content="Закрыть" Margin="0,30,20,0" HorizontalAlignment="Right" Width="106" VerticalAlignment="Top" Cursor="Hand" Click="Close" Background="#4CBFBFBF" Padding="10,6,10,6" Height="32" />
+        <wpfui:Card BorderThickness="1" Margin="20,0,20,19" Padding="0,0,0,0" Height="64" VerticalAlignment="Bottom">
+            <Grid>
+                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="User_Name" Content="Привет!" Margin="68,10,0,0" HorizontalAlignment="Left" Width="280" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
+                <wpfui:ProgressRing x:Name="progressRing" IsIndeterminate="True" Width="20" Height="20" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" />
+                <Ellipse Margin="15,0,0,0" Stroke="#7F000000" HorizontalAlignment="Left" Width="45" Height="44" VerticalAlignment="Center">
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="acctype" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="69,33,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </wpfui:Card>
+        <StackPanel
+            VerticalAlignment="Top"
+            Opacity="0.9"
+            Orientation="Horizontal" Margin="20,63,0,0" HorizontalAlignment="Left" Width="85">
+            <wpfui:Icon x:Name="batteryIcon"
+                Margin="0,0,6,0"
+                Glyph="Battery820" />
+
+            <TextBlock x:Name="TimeClock" Margin="0,-1,0,0" Text="4:56 PM" Foreground="White" />
+        </StackPanel>
+        <Label x:Name="FPS" FontFamily="/icons/Fonts/#Google Sans Medium" Content="кадров / сек" HorizontalAlignment="Left" Margin="108,211,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="text_fps" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Фрейм-рейт экрана" HorizontalAlignment="Left" Margin="108,191,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White"/>
+        <wpfui:Card Margin="20,99,20,0" Height="70" VerticalAlignment="Top"/>
+        <Image x:Name="IconApp" HorizontalAlignment="Left" Height="40" Margin="319,115,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label x:Name="text_name_open_app" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Имя запущеного приложения" HorizontalAlignment="Left" Margin="36,111,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White" FontSize="10"/>
+        <Label x:Name="Game" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Переключитесь на игру" HorizontalAlignment="Left" Margin="35,131,0,0" VerticalAlignment="Top" Width="263" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="FPS_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="--" HorizontalAlignment="Left" Margin="28,191,0,0" VerticalAlignment="Top" Width="75" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="48" FontSize="36" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="text_fps_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="График кадров в секунду" HorizontalAlignment="Left" Margin="35,273,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White"/>
+    </Grid>
+</Window>

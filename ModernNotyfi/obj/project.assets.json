@@ -23,6 +23,29 @@
           "lib/net45/LiveCharts.Wpf.dll": {}
         }
       },
+      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "compile": {
+          "lib/net462/Dia2Lib.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/OSExtensions.dll": {},
+          "lib/net462/TraceReloggerLib.dll": {}
+        },
+        "runtime": {
+          "lib/net462/Dia2Lib.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/OSExtensions.dll": {},
+          "lib/net462/TraceReloggerLib.dll": {}
+        },
+        "build": {
+          "buildTransitive/Microsoft.Diagnostics.Tracing.TraceEvent.props": {}
+        }
+      },
       "Microsoft.NETFramework.ReferenceAssemblies/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -714,6 +737,18 @@
           "lib/net461/System.Drawing.Common.dll": {}
         }
       },
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {}
+        }
+      },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
         "type": "package",
         "compile": {
@@ -872,6 +907,29 @@
         },
         "runtime": {
           "lib/net45/LiveCharts.Wpf.dll": {}
+        }
+      },
+      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "compile": {
+          "lib/net462/Dia2Lib.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/OSExtensions.dll": {},
+          "lib/net462/TraceReloggerLib.dll": {}
+        },
+        "runtime": {
+          "lib/net462/Dia2Lib.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/OSExtensions.dll": {},
+          "lib/net462/TraceReloggerLib.dll": {}
+        },
+        "build": {
+          "buildTransitive/Microsoft.Diagnostics.Tracing.TraceEvent.props": {}
         }
       },
       "Microsoft.NETFramework.ReferenceAssemblies/1.0.0": {
@@ -1555,6 +1613,18 @@
           "lib/net461/System.Drawing.Common.dll": {}
         }
       },
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {}
+        }
+      },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
         "type": "package",
         "compile": {
@@ -1701,6 +1771,29 @@
         },
         "runtime": {
           "lib/net45/LiveCharts.Wpf.dll": {}
+        }
+      },
+      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "compile": {
+          "lib/net462/Dia2Lib.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/OSExtensions.dll": {},
+          "lib/net462/TraceReloggerLib.dll": {}
+        },
+        "runtime": {
+          "lib/net462/Dia2Lib.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/OSExtensions.dll": {},
+          "lib/net462/TraceReloggerLib.dll": {}
+        },
+        "build": {
+          "buildTransitive/Microsoft.Diagnostics.Tracing.TraceEvent.props": {}
         }
       },
       "Microsoft.NETFramework.ReferenceAssemblies/1.0.0": {
@@ -2382,6 +2475,18 @@
         },
         "runtime": {
           "lib/net461/System.Drawing.Common.dll": {}
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {}
         }
       },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
@@ -2532,6 +2637,29 @@
           "lib/net45/LiveCharts.Wpf.dll": {}
         }
       },
+      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "compile": {
+          "lib/net462/Dia2Lib.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/OSExtensions.dll": {},
+          "lib/net462/TraceReloggerLib.dll": {}
+        },
+        "runtime": {
+          "lib/net462/Dia2Lib.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/OSExtensions.dll": {},
+          "lib/net462/TraceReloggerLib.dll": {}
+        },
+        "build": {
+          "buildTransitive/Microsoft.Diagnostics.Tracing.TraceEvent.props": {}
+        }
+      },
       "Microsoft.NETFramework.ReferenceAssemblies/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -3211,6 +3339,18 @@
         },
         "runtime": {
           "lib/net461/System.Drawing.Common.dll": {}
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {}
         }
       },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
@@ -3379,6 +3519,55 @@
         "livecharts.wpf.0.9.7.nupkg.sha512",
         "livecharts.wpf.nuspec",
         "tools/install.ps1"
+      ]
+    },
+    "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
+      "sha512": "lq3Ka7gg2JDIKpzaOlLNvyb+Tzsznyi6boeUqitw9apNYnhFdUFwYxjMCFMb8ydWNEzY/5EYdTsHijxgTgrVqw==",
+      "type": "package",
+      "path": "microsoft.diagnostics.tracing.traceevent/3.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Microsoft.Diagnostics.Tracing.TraceEvent.props",
+        "build/native/amd64/KernelTraceControl.dll",
+        "build/native/amd64/msdia140.dll",
+        "build/native/amd64/msvcp140.dll",
+        "build/native/amd64/vcruntime140.dll",
+        "build/native/amd64/vcruntime140_1.dll",
+        "build/native/arm64/KernelTraceControl.dll",
+        "build/native/arm64/msdia140.dll",
+        "build/native/arm64/msvcp140.dll",
+        "build/native/arm64/vcruntime140.dll",
+        "build/native/arm64/vcruntime140_1.dll",
+        "build/native/x86/KernelTraceControl.Win61.dll",
+        "build/native/x86/KernelTraceControl.dll",
+        "build/native/x86/msdia140.dll",
+        "build/native/x86/msvcp140.dll",
+        "build/native/x86/vcruntime140.dll",
+        "buildTransitive/Microsoft.Diagnostics.Tracing.TraceEvent.props",
+        "lib/net462/Dia2Lib.dll",
+        "lib/net462/Microsoft.Diagnostics.FastSerialization.dll",
+        "lib/net462/Microsoft.Diagnostics.FastSerialization.xml",
+        "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll",
+        "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.xml",
+        "lib/net462/OSExtensions.dll",
+        "lib/net462/TraceReloggerLib.dll",
+        "lib/netstandard1.6/Dia2Lib.dll",
+        "lib/netstandard1.6/Microsoft.Diagnostics.FastSerialization.dll",
+        "lib/netstandard1.6/Microsoft.Diagnostics.FastSerialization.xml",
+        "lib/netstandard1.6/Microsoft.Diagnostics.Tracing.TraceEvent.dll",
+        "lib/netstandard1.6/Microsoft.Diagnostics.Tracing.TraceEvent.xml",
+        "lib/netstandard1.6/OSExtensions.dll",
+        "lib/netstandard1.6/TraceReloggerLib.dll",
+        "lib/netstandard2.0/Dia2Lib.dll",
+        "lib/netstandard2.0/Microsoft.Diagnostics.FastSerialization.dll",
+        "lib/netstandard2.0/Microsoft.Diagnostics.FastSerialization.xml",
+        "lib/netstandard2.0/Microsoft.Diagnostics.Tracing.TraceEvent.dll",
+        "lib/netstandard2.0/Microsoft.Diagnostics.Tracing.TraceEvent.xml",
+        "lib/netstandard2.0/OSExtensions.dll",
+        "lib/netstandard2.0/TraceReloggerLib.dll",
+        "microsoft.diagnostics.tracing.traceevent.3.0.5.nupkg.sha512",
+        "microsoft.diagnostics.tracing.traceevent.nuspec"
       ]
     },
     "Microsoft.NETFramework.ReferenceAssemblies/1.0.0": {
@@ -4799,6 +4988,38 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+      "sha512": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
+      "type": "package",
+      "path": "system.runtime.compilerservices.unsafe/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net45/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net45/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/net461/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/net461/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
       "sha512": "J4GUi3xZQLUBasNwZnjrffN8i5wpHrBtZoLG+OhRyGo/+YunMRWWtwoMDlUAIdmX0uRfpHIBDSV6zyr3yf00TA==",
       "type": "package",
@@ -5216,6 +5437,7 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
       "LiveCharts.Wpf >= 0.9.7",
+      "Microsoft.Diagnostics.Tracing.TraceEvent >= 3.0.5",
       "Microsoft.Toolkit.Uwp.Notifications >= 7.1.2",
       "Microsoft.Windows.SDK.Contracts >= 10.0.22621.2",
       "ModernWpfUI >= 0.9.4",
@@ -5271,6 +5493,10 @@
           "LiveCharts.Wpf": {
             "target": "Package",
             "version": "[0.9.7, )"
+          },
+          "Microsoft.Diagnostics.Tracing.TraceEvent": {
+            "target": "Package",
+            "version": "[3.0.5, )"
           },
           "Microsoft.Toolkit.Uwp.Notifications": {
             "target": "Package",

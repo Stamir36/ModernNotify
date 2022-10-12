@@ -201,3 +201,26 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\UiLoginUnesell.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\UiLoginUnesell.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ServiceMyDeviceNet.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\ServiceMyDeviceNet.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\gamePanel.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Debug\Other Page\gamePanel.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\TraceReloggerLib.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Dia2Lib.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\OSExtensions.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\x86\KernelTraceControl.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\x86\KernelTraceControl.Win61.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\x86\msdia140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\x86\msvcp140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\x86\vcruntime140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\amd64\KernelTraceControl.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\amd64\msdia140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\amd64\msvcp140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\amd64\vcruntime140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\amd64\vcruntime140_1.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\arm64\KernelTraceControl.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\arm64\msdia140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\arm64\msvcp140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\arm64\vcruntime140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\arm64\vcruntime140_1.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Microsoft.Diagnostics.FastSerialization.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\Microsoft.Diagnostics.Tracing.TraceEvent.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll

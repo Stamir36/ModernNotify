@@ -94,7 +94,9 @@ namespace ModernNotyfi
             [In] int id);
 
         private HwndSource _source;
-        private const int HOTKEY_ID = 9000;
+        private const int HOTKEY_ID_Panel = 9000;
+        private const int HOTKEY_ID_Bar = 9001;
+
 
         protected override void OnSourceInitialized(EventArgs e)
         {
@@ -102,7 +104,16 @@ namespace ModernNotyfi
             var helper = new WindowInteropHelper(this);
             _source = HwndSource.FromHwnd(helper.Handle);
             _source.AddHook(HwndHook);
-            RegisterHotKey();
+
+            // Хоткей на открытие панели
+            const uint SPASE = 0x20;
+            const uint MOD_CTRL = 0x0002;
+            RegisterHotKey(helper.Handle, HOTKEY_ID_Panel, MOD_CTRL, SPASE);
+
+            // Хоткей на открытии игрового оверлея
+            const uint ALT = 0xA4;
+            const uint G = 0x47;
+            RegisterHotKey(helper.Handle, HOTKEY_ID_Bar, MOD_CTRL, G);
         }
 
         protected override void OnClosed(EventArgs e)
@@ -119,23 +130,25 @@ namespace ModernNotyfi
             }
             base.OnClosed(e);
         }
-
+        /*
         private void RegisterHotKey()
         {
             var helper = new WindowInteropHelper(this);
-            const uint SPASE = 0x20;
-            const uint MOD_CTRL = 0x0002;
+
             if (!RegisterHotKey(helper.Handle, HOTKEY_ID, MOD_CTRL, SPASE))
             {
                 // handle error
             }
         }
-
+        */
         private void UnregisterHotKey()
         {
             var helper = new WindowInteropHelper(this);
-            UnregisterHotKey(helper.Handle, HOTKEY_ID);
+            UnregisterHotKey(helper.Handle, HOTKEY_ID_Panel);
+            UnregisterHotKey(helper.Handle, HOTKEY_ID_Bar);
         }
+
+        public bool gameBar_show = false;
 
         private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
@@ -145,8 +158,18 @@ namespace ModernNotyfi
                 case WM_HOTKEY:
                     switch (wParam.ToInt32())
                     {
-                        case HOTKEY_ID:
+                        case HOTKEY_ID_Panel:
                             OnHotKeyPressed();
+                            handled = true;
+                            break;
+
+                        case HOTKEY_ID_Bar:
+
+                            if (!gameBar_show && ModernNotyfi.WindowState == WindowState.Minimized)
+                            {
+                                gamePanel gamePanel = new gamePanel();
+                                gamePanel.Show();
+                            }
                             handled = true;
                             break;
                     }
