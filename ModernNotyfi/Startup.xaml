@@ -12,7 +12,7 @@
         Height="50" Width="220" ResizeMode="NoResize" Icon="/icons/maim_settings.png" Background="{x:Null}" WindowStyle="None" Loaded="StartProgram">
     <Grid>
         <wpfui:ProgressRing x:Name="progressRing" IsIndeterminate="True" Margin="15,10,180,10" Width="25" Height="25" />
-        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="info" Content="Запускаем сервисы..." Margin="50,15,10,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
+        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="info" Content="Инициализация приложения" Margin="50,15,10,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="11" FontStyle="Italic"/>
 
     </Grid>
 </Window>

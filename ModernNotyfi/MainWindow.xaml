@@ -388,6 +388,20 @@
                         <Grid x:Name="Clock_Tab" Height="460">
 
                             <wpfui:ProgressRing x:Name="TimeSecBar" Margin="38,61,34,199" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" Height="200" Width="200" Padding="0,0,0,0" EngAngle="359" OverridesDefaultStyle="True" >
+                                <wpfui:ProgressRing.Foreground>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <LinearGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                <RotateTransform Angle="159.146" CenterY="0.5" CenterX="0.5"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </LinearGradientBrush.RelativeTransform>
+                                        <GradientStop Color="#FFED6D00"/>
+                                        <GradientStop Color="#FF00FF9C" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </wpfui:ProgressRing.Foreground>
                                 <wpfui:ProgressRing.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="1" ScaleY="1"/>

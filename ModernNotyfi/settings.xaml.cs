@@ -435,6 +435,9 @@ namespace ModernNotyfi
         public string update_version;
         private void Check_Update_Click(object sender, RoutedEventArgs e)
         {
+            ChangeLog.Visibility = Visibility.Hidden;
+            LastChekUpdate.Visibility = Visibility.Visible;
+
             //Проверка модуля обновления.
             if (Properties.Settings.Default.Language == "Russian")
             {
@@ -557,13 +560,19 @@ namespace ModernNotyfi
                         if (Properties.Settings.Default.Language == "Russian")
                         {
                             InfoUpdate.Content = "Доступна новая версия " + GetContent("https://unesell.com/api/version/modernnotify/version_dev.txt");
-                            LastChekUpdate.Content = "Готовы к обновлению.";
+                            ChangeLog.Visibility = Visibility.Visible;
+                            LastChekUpdate.Visibility = Visibility.Hidden;
+                            ChangeLog.Content = "Что нового?";
+                            ///LastChekUpdate.Content = "Готовы к обновлению.";
                             Check_Update.Content = "Начать обновление";
                         }
                         else if (Properties.Settings.Default.Language == "English")
                         {
                             InfoUpdate.Content = "New version available: " + GetContent("https://unesell.com/api/version/modernnotify/version_dev.txt");
-                            LastChekUpdate.Content = "Ready to upgrade.";
+                            ChangeLog.Visibility = Visibility.Visible;
+                            LastChekUpdate.Visibility = Visibility.Hidden;
+                            ChangeLog.Content = "What's new?";
+                            //LastChekUpdate.Content = "Ready to upgrade.";
                             Check_Update.Content = "Start update";
                         }
                         BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/restart_fluent.png", UriKind.Relative); bi3.EndInit();
@@ -1333,6 +1342,11 @@ namespace ModernNotyfi
                 DisplayDialog("Невозможно запустить модуль", "Попробуйте проверить наличие обновлений, " +
                     "или запустите файл update.exe вручную.");
             }
+        }
+
+        private void ChangeLog_Open(object sender, RoutedEventArgs e)
+        {
+            DisplayDialog("Что нового в версии " + GetContent("https://unesell.com/api/version/modernnotify/version_dev.txt"), GetContent("https://unesell.com/api/version/modernnotify/changelog.txt"));
         }
     }
 }

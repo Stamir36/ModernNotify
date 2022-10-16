@@ -543,8 +543,12 @@
                                             <wpfui:Hyperlink x:Name="LinkOpenUpdate"
                                                 FontFamily="/icons/Fonts/#Google Sans Medium"
                                                 Content="Запустить модуль обновления"
-                                                Icon="Link48" Click="OpenUpdateModule" Margin="25,298,0,0" FontSize="11" Height="24" VerticalAlignment="Top" />
+                                                Icon="Link48" Click="OpenUpdateModule" Margin="25,299,0,0" FontSize="11" Height="24" VerticalAlignment="Top" Width="197" />
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version_Copy" Content="Програмное обеспечение ModernNotify и MyDevice&#xD;&#xA;распростроняются бесплатно.&#xD;&#xA;Unesell Studio 2022 год." HorizontalAlignment="Left" Margin="474,183,0,0" VerticalAlignment="Top" Width="327" Height="64"/>
+                                            <wpfui:Hyperlink x:Name="ChangeLog"
+                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                Content="Что нового?"
+                                                Icon="Info16" Click="ChangeLog_Open" Margin="102,48,0,0" FontSize="11" Height="24" VerticalAlignment="Top" Visibility="Hidden" />
                                         </Grid>
                                     </TabItem>
                                     <TabItem Header="Color" Width="80" Margin="498,-202,316,202">

@@ -63,5 +63,52 @@
         <Label x:Name="Game" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Переключитесь на игру" HorizontalAlignment="Left" Margin="35,131,0,0" VerticalAlignment="Top" Width="263" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <Label x:Name="FPS_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="--" HorizontalAlignment="Left" Margin="28,191,0,0" VerticalAlignment="Top" Width="75" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="48" FontSize="36" FontWeight="Bold" Foreground="White"/>
         <Label x:Name="text_fps_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="График кадров в секунду" HorizontalAlignment="Left" Margin="35,273,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White"/>
+        <wpfui:Card
+            Margin="0,508,0,0" Padding="5,5,5,5" Height="189" VerticalAlignment="Top" HorizontalAlignment="Center" Width="360"/>
+        <Grid Margin="84,592,0,0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="8,0,0,0">
+                <TextBlock FontFamily="/icons/Fonts/#Google Sans Medium" Text="-- " x:Name="CPU" FontSize="24" FontWeight="Bold" Width="35" FlowDirection="RightToLeft" Foreground="White"/>
+                <TextBlock FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="prochent" Text="%" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,0" Padding="0,0,0,0" Height="18" Foreground="White"/>
+            </StackPanel>
+        </Grid>
+        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2" Content="Показатели производительности" HorizontalAlignment="Left" Margin="30,520,0,0" VerticalAlignment="Top" Width="203" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
+        <wpfui:ProgressRing x:Name="CPUBar" Progress="0" Margin="60,550,0,0" Width="115" Height="115" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <wpfui:ProgressRing.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </wpfui:ProgressRing.RenderTransform>
+        </wpfui:ProgressRing>
+        <wpfui:ProgressRing x:Name="RAMBar" Progress="0" Margin="225,550,0,0" Width="115" Height="115" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <wpfui:ProgressRing.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </wpfui:ProgressRing.RenderTransform>
+        </wpfui:ProgressRing>
+        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy" Content="CPU" HorizontalAlignment="Left" Margin="85,672,0,0" VerticalAlignment="Top" Width="60" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
+        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy1" Content="RAM" HorizontalAlignment="Left" Margin="250,671,0,0" VerticalAlignment="Top" Width="60" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
+        <Grid Margin="249,592,0,0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="8,0,0,0">
+                <TextBlock FontFamily="/icons/Fonts/#Google Sans Medium" Text="-- " x:Name="RAM" FontSize="24" FontWeight="Bold" Width="35" FlowDirection="RightToLeft" Foreground="White"/>
+                <TextBlock FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="prochent1" Text="%" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,0" Padding="0,0,0,0" Height="18" Foreground="White"/>
+            </StackPanel>
+        </Grid>
+        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="177,605,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+        </Border>
     </Grid>
 </Window>

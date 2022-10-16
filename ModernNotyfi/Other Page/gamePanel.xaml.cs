@@ -19,6 +19,7 @@ using System.IO;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Defaults;
+using System.Threading.Tasks;
 
 namespace ModernNotyfi
 {
@@ -88,17 +89,23 @@ namespace ModernNotyfi
                     }
                 }
 
-                if (p.MainWindowTitle.Length > 0)
+                try
                 {
-                    NAME_ACTIVE_APP = p.MainWindowTitle;
-                    PATH_ACTIVE_APP = p.MainModule.FileName;
+                    if (p.MainWindowTitle.Length > 0)
+                    {
+                        NAME_ACTIVE_APP = p.MainWindowTitle;
+                        PATH_ACTIVE_APP = p.MainModule.FileName;
+                    }
+                    else
+                    {
+                        NAME_ACTIVE_APP = "Переключитесь на игру";
+                    }
                 }
-                else
+                catch
                 {
-                    NAME_ACTIVE_APP = "Переключитесь на игру";
+                    // Skip
                 }
 
-                //Console.Write("FPS: {0}; pid: {1}; window: {2}", FPS, pid, p.MainWindowTitle);
                 Thread.Sleep(1000);
             }
         }
@@ -108,6 +115,7 @@ namespace ModernNotyfi
         public SeriesCollection SeriesCollection { get; set; }
 
         public DispatcherTimer timer = new DispatcherTimer();
+
         public gamePanel()
         {
             InitializeComponent();
@@ -285,7 +293,37 @@ namespace ModernNotyfi
                 {
                     IconApp.Source = null;
                 }
+
+                // CPU and RAM
+
+                RAM.Text = Convert.ToString(Convert.ToInt16(100 - Math.Round(SysInfo.SystemMemoryFree, 2) * 100 / Math.Round(SysInfo.SystemMemoryTotal, 2)));
+                RAMBar.Progress = Convert.ToInt16(100 - Math.Round(SysInfo.SystemMemoryFree, 2) * 100 / Math.Round(SysInfo.SystemMemoryTotal, 2));
+
+                
             };
+
+            RunCPU();
+        }
+
+        public async void RunCPU()
+        {
+            bool done = false;
+            float t = 0;
+            await Task.Run(() =>
+            {
+                PerformanceCounter total_cpu = new PerformanceCounter("Processor Information", "% Processor Time", "_Total");
+                while (!done)
+                {
+                    t = total_cpu.NextValue();
+                    System.Threading.Thread.Sleep(1000);
+                    t = total_cpu.NextValue();
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        CPU.Text = Convert.ToString(Convert.ToInt32(t));
+                        CPUBar.Progress = Convert.ToInt32(t);
+                    })); 
+                }
+            });
         }
 
         public void Light_Theme()
@@ -457,6 +495,8 @@ namespace ModernNotyfi
         private void Settings_Closed(object sender, EventArgs e)
         {
             m_EtwSession.Dispose();
+            timer.Stop();
+            timer.IsEnabled = false;
 
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
