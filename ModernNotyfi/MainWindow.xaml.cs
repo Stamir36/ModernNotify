@@ -601,8 +601,9 @@ namespace ModernNotyfi
                         new ToastContentBuilder()
                         .AddArgument("action", "viewConversation")
                         .AddArgument("conversationId", 9813)
-                        .AddText("Open the panel with Ctrl + Space")
+                        .AddText("Open the panel with Ctrl + Space \n GameBar from with Ctrl + G")
                         .AddText("This notification can be turned off in the settings.")
+                        .AddHeroImage(new Uri("https://unesell.com/assets/img/software/Shortcuts.low.jpg"))
                         .Show();
                     }
                     else
@@ -610,8 +611,9 @@ namespace ModernNotyfi
                         new ToastContentBuilder()
                         .AddArgument("action", "viewConversation")
                         .AddArgument("conversationId", 9813)
-                        .AddText("Откройте панель с Ctrl + Пробел")
+                        .AddText("Откройте панель с Ctrl + Пробел \nИгровой оверлей с Ctrl + G")
                         .AddText("Это уведомление можно отключить в настройках.")
+                        .AddHeroImage(new Uri("https://unesell.com/assets/img/software/Shortcuts.low.jpg"))
                         .Show();
                     }
                 }

@@ -307,11 +307,11 @@ namespace ModernNotyfi
             Back.Visibility = Visibility.Visible;
             if (Language_combo1.SelectedIndex == 0)
             {
-                Titles.Content = "Настройки > Внутрипрограмные сервисы";
+                Titles.Content = "Настройки > Боковая игровая панель";
             }
             else if (Language_combo1.SelectedIndex == 1)
             {
-                Titles.Content = "Settings > Services and Apps";
+                Titles.Content = "Settings > Game performance bar";
             }
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/App_Color.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
         }
@@ -883,7 +883,7 @@ namespace ModernNotyfi
             text_7.Content = "Категории:";
             mainsett_text.Text = "Основные параметры";
             perssetttext.Text = "Персонализация";
-            widgettmaintext.Text = "Внутрипрограмные сервисы";
+            widgettmaintext.Text = "Игровая боковая панель";
             aboutstext.Text = "О программе";
             updatemainsett.Text = "Центр обновления";
             close.Content = "Закрыть окно";
@@ -898,7 +898,7 @@ namespace ModernNotyfi
             textstyleshutdown.Title = "Стиль панели выключения";
             subbone.Content = "Панель выключения.";
             texts65464.Title = "Кнопка: Выключение приложения";
-            text_2.Content = "Категории и разделы";
+            text_2.Content = "Настройки игрового оверлея";
             Back.Content = "< Назад";
             // Ревизия 1.
             text_3.Content = "Вид панелей:";
@@ -933,7 +933,7 @@ namespace ModernNotyfi
             // Revision 3
             Login_Unesell.Content = "Войти в Unesell Аккаунт";
             Tab1.Content = "Главная";
-            Tab2.Content = "Сервисы";
+            Tab2.Content = "GameBar";
             Tab3.Content = "Основное";
             Tab4.Content = "Дизайн";
             Tab5.Content = "Версия";
@@ -945,7 +945,7 @@ namespace ModernNotyfi
             InfoUpdate.Content = "Выполните проверку обновлений";
             SubText1.Text = "Редактируйте главные параметры приложения, такие как тема, положение и взаимодействие.";
             SubText2.Text = "Изменяйте внешний вид панели на свой вкус и предпочтения.";
-            SubText3.Text = "Приложения от Unesell Studio встроенные в систему.";
+            SubText3.Text = "Настройка игрового оверлея, и других параметров панели.";
             SubText4.Text = "Информация о разработчике и продукте. Дополнительные ссылки.";
             SubText5.Text = "Проверка обновлений ModernNotify и компонентов сервисов.";
             thametext.Subtitle = "Основной стиль оформления приложения.";
@@ -961,6 +961,8 @@ namespace ModernNotyfi
             text23r923ri12.Subtitle = "Увеличивает задний план слайдера громкости.";
             MicaBool.Content = "Разрешить";
             LinkOpenUpdate.Content = "Запустить модуль обновления";
+            InfoGamePanel.Title = "Запуск игрового оверлея";
+            InfoGamePanel.Subtitle = "Комбинация клавиш для вызова панели производительности";
         }
 
         public void EnglishInterfase_Settings()
@@ -978,7 +980,7 @@ namespace ModernNotyfi
             text_7.Content = "Categories:";
             mainsett_text.Text = "Main parameters";
             perssetttext.Text = "Personalization";
-            widgettmaintext.Text = "Services and Apps";
+            widgettmaintext.Text = "Game performance bar";
             aboutstext.Text = "About the program";
             updatemainsett.Text = "Software updates";
             close.Content = "Close";
@@ -993,7 +995,7 @@ namespace ModernNotyfi
             textstyleshutdown.Title = "Shutdown bar style";
             subbone.Content = "Shutdown panel.";
             texts65464.Title = "Button: Turn off the application";
-            text_2.Content = "Categories and sections";
+            text_2.Content = "Settings Game Bar";
             text23r923ri12.Title = "Wide volume slider";
             Back.Content = "< Back";
             // Revision 1
@@ -1027,7 +1029,7 @@ namespace ModernNotyfi
             // Revision 3
             Login_Unesell.Content = "Login to Unesell Account";
             Tab1.Content = "Home";
-            Tab2.Content = "Services";
+            Tab2.Content = "GameBar";
             Tab3.Content = "Main";
             Tab4.Content = "Design";
             Tab5.Content = "Update";
@@ -1039,7 +1041,7 @@ namespace ModernNotyfi
             InfoUpdate.Content = "Check for updates";
             SubText1.Text = "Edit the application's main parameters such as theme, position, and interaction.";
             SubText2.Text = "Change the appearance of the panel to your taste and preferences.";
-            SubText3.Text = "Applications from Unesell Studio built into the system.";
+            SubText3.Text = "Setting the game overlay, and other panel options.";
             SubText4.Text = "Information about the developer and product. Additional links.";
             SubText5.Text = "Check for updates to ModernNotify and service components.";
             thametext.Subtitle = "The main style of the application.";

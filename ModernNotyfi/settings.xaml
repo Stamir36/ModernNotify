@@ -6,7 +6,7 @@
         xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
         Style="{StaticResource UiWindow}"
         xmlns:local="clr-namespace:ModernNotyfi"
-        Title="Настройки" Height="461" Width="710"
+        Title="Настройки" Height="418" Width="710"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         MinWidth="960" MinHeight="530" Icon="icons/maim_settings.png"
         WindowStartupLocation="CenterScreen"
@@ -96,18 +96,18 @@
                                                         <wpfui:CardAction x:Name="Open_Keyboard"
                                                         Margin="0,0,0,8"
                                                         Click="Open_Keyboard_Click"
-                                                        Icon="Apps24">
+                                                        Icon="AlignRight24">
                                                             <StackPanel>
                                                                 <TextBlock x:Name="widgettmaintext"
                                                                 FontFamily="/icons/Fonts/#Google Sans Medium"
                                                                 Margin="0,0,0,4"
                                                                 FontWeight="Medium"
-                                                                Text="Внутрипрограмные сервисы" />
+                                                                Text="Боковая игровая панель" />
                                                                 <TextBlock x:Name="SubText3"
                                                                 FontFamily="/icons/Fonts/#Google Sans Medium"
                                                                 FontSize="10"
                                                                 Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                                                Text="Приложения от Unesell Studio встроенные в систему." />
+                                                                Text="Настройка игрового оверлея, и других параметров панели.." />
                                                             </StackPanel>
                                                         </wpfui:CardAction>
 
@@ -280,12 +280,8 @@
                                     </TabItem>
                                     <TabItem Header="Apps" Width="80" Margin="292,-66,522,66">
                                         <Grid>
-                                            <wpfui:Card Grid.Column="0" Margin="30,51,0,0" x:Name="Open_MyDivece" Cursor="Hand" MouseLeftButtonDown="Open_MyDivece_Click" HorizontalAlignment="Left" Width="158" Height="170" VerticalAlignment="Top">
+                                            <wpfui:Card Grid.Column="0" Margin="30,167,0,0" x:Name="Open_MyDivece" Cursor="Hand" MouseLeftButtonDown="Open_MyDivece_Click" HorizontalAlignment="Left" Width="170" Height="62" VerticalAlignment="Top">
                                                 <StackPanel>
-                                                    <Image
-                                                        Margin="14"
-                                                        RenderOptions.BitmapScalingMode="HighQuality"
-                                                        Source="/icons/Device.png" Height="77" Width="75" />
                                                     <TextBlock
                                                         Grid.Row="0"
                                                         FontSize="16"
@@ -301,13 +297,9 @@
                                                 </StackPanel>
                                             </wpfui:Card>
 
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_2" Content="Доступные приложения" Margin="24,13,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                            <wpfui:Card x:Name="Open_Start" Grid.Column="0" Margin="212,51,0,0" Cursor="Hand" MouseLeftButtonDown="OpenGameBar" HorizontalAlignment="Left" Width="158" Height="170" VerticalAlignment="Top">
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_2" Content="Настройки игрового оверлея" Margin="24,13,0,0" HorizontalAlignment="Left" Width="273" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                            <wpfui:Card x:Name="Open_Start" Grid.Column="0" Margin="212,167,0,0" Cursor="Hand" MouseLeftButtonDown="OpenGameBar" HorizontalAlignment="Left" Width="170" Height="62" VerticalAlignment="Top">
                                                 <StackPanel>
-                                                    <Image
-                                                        Margin="14"
-                                                        RenderOptions.BitmapScalingMode="HighQuality"
-                                                        Source="/icons/App_Color.png" Height="77" Width="75" />
                                                     <TextBlock
                                                         Grid.Row="0"
                                                         FontSize="16"
@@ -322,10 +314,21 @@
                                                         Text="Unesell Studio" />
                                                 </StackPanel>
                                             </wpfui:Card>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="otherptext_Copy" Content="Прочее:" Margin="23,132,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="26,156,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                                <Border.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleY="-1"/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Border.RenderTransform>
+                                            </Border>
                                             <Border
                                                 Padding="0"
                                                 Background="White"
-                                                CornerRadius="2" Margin="303,58,0,0" HorizontalAlignment="Left" Width="60" Height="10" VerticalAlignment="Top">
+                                                CornerRadius="2" Margin="297,20,0,0" HorizontalAlignment="Left" Width="63" Height="11" VerticalAlignment="Top">
                                                 <TextBlock x:Name="InDevelop"
                                                     FontFamily="/icons/Fonts/#Google Sans Medium"
                                                     Margin="0,-1,0,0"
@@ -336,6 +339,13 @@
                                                     FontWeight="Bold"
                                                     Text="В разработке" Foreground="Black" />
                                             </Border>
+                                            <wpfui:CardControl
+                                                x:Name="InfoGamePanel" Title="Запуск игрового оверлея"
+                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                Icon="AlignRight24"
+                                                Subtitle="Комбинация клавиш для вызова панели производительности" Margin="27,53,25,0" Height="68" VerticalAlignment="Top">
+                                                <Label Content="Ctrl + G" FontSize="18" Margin="0,3,15,0"/>
+                                            </wpfui:CardControl>
                                         </Grid>
                                     </TabItem>
                                     <TabItem Header="Personalization" Width="80" Margin="403,-102,411,102">
@@ -479,7 +489,7 @@
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Devetxt" Content="Разработчик:" HorizontalAlignment="Left" Margin="15,191,0,0" VerticalAlignment="Top" Foreground="#FFFFC700" FontWeight="Bold"/>
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="15,210,0,0" VerticalAlignment="Top"/>
                                             <Label x:Name="textaboutproduct" Content="О продукте:" HorizontalAlignment="Left" Margin="15,123,0,0" VerticalAlignment="Top" Foreground="#FFFFAF00" FontWeight="Bold"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11." HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" Height="48" Width="371" UseLayoutRounding="False"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11." HorizontalAlignment="Left" Margin="15,143,0,0" VerticalAlignment="Top" Height="48" Width="371" UseLayoutRounding="False"/>
 
                                             <wpfui:Hyperlink x:Name="text_5_dadsc" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Используемый исходный код"
                                             Icon="Link48" Click="Open_Sourse" Margin="0,48,22,0" FontSize="11" Height="24"
@@ -644,7 +654,7 @@
                         Tag="dashboard" Click="Backs" />
                     <wpfui:NavigationItem x:Name="Tab2"
                         Click="Open_Keyboard_Click"
-                        Content="Сервисы"
+                        Content="GameBar"
                         Icon="Apps24"
                         Tag="forms" />
                     <wpfui:NavigationItem x:Name="Tab3"

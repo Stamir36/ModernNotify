@@ -439,5 +439,8 @@
   <ItemGroup>
     <Resource Include="icons\terminal.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Shortcuts.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
