@@ -10,11 +10,11 @@ none
 false
 TRACE
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\App.xaml
-13-1227671772
+15811735849
 
-19-2084304256
-2322069413066
-ConnectQR.xaml;GameBar.xaml;ModernUI.xaml;MainWindow.xaml;Other Page\UiLoginUnesell.xaml;Other Page\DebugWindow.xaml;Other Page\modal_info.xaml;MyDevice.xaml;Other Page\shutdown.xaml;settings.xaml;Other Page\unesell_login_web.xaml;Startup.xaml;welcome.xaml;
-icons\banner_dev.jpg
-True
+21-1842271201
+2391788596201
+ConnectQR.xaml;Other Page\gamePanel.xaml;ServiceMyDeviceNet.xaml;GameBar.xaml;ModernUI.xaml;MainWindow.xaml;Other Page\UiLoginUnesell.xaml;Other Page\DebugWindow.xaml;Other Page\modal_info.xaml;MyDevice.xaml;Other Page\shutdown.xaml;settings.xaml;Other Page\unesell_login_web.xaml;Startup.xaml;welcome.xaml;
+icons\banner_stable.png
+False
 

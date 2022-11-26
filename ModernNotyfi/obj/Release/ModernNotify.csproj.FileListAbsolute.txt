@@ -201,3 +201,26 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\UiLoginUnesell.g.
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\UiLoginUnesell.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ServiceMyDeviceNet.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ServiceMyDeviceNet.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\gamePanel.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\TraceReloggerLib.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Dia2Lib.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\OSExtensions.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\x86\KernelTraceControl.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\x86\KernelTraceControl.Win61.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\x86\msdia140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\x86\msvcp140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\x86\vcruntime140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\amd64\KernelTraceControl.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\amd64\msdia140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\amd64\msvcp140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\amd64\vcruntime140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\amd64\vcruntime140_1.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\arm64\KernelTraceControl.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\arm64\msdia140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\arm64\msvcp140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\arm64\vcruntime140.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\arm64\vcruntime140_1.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Microsoft.Diagnostics.FastSerialization.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Microsoft.Diagnostics.Tracing.TraceEvent.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\gamePanel.baml

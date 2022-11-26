@@ -1554,7 +1554,6 @@ namespace ModernNotyfi
         // РАБОТА С МУЗЫКОЙ
         public static void MediaManager_OnNewSource(MediaManager.MediaSession session)
         {
-            ChencheMusic("Источник: " + session.ControlSession.SourceAppUserModelId);
             if (session.ControlSession.SourceAppUserModelId == "Spotify.exe")
             {
                 Application.Current.Dispatcher.Invoke(new Action(() =>

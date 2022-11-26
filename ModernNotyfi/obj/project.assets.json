@@ -23,7 +23,7 @@
           "lib/net45/LiveCharts.Wpf.dll": {}
         }
       },
-      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
+      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.6": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0"
@@ -909,7 +909,7 @@
           "lib/net45/LiveCharts.Wpf.dll": {}
         }
       },
-      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
+      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.6": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0"
@@ -1773,7 +1773,7 @@
           "lib/net45/LiveCharts.Wpf.dll": {}
         }
       },
-      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
+      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.6": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0"
@@ -2637,7 +2637,7 @@
           "lib/net45/LiveCharts.Wpf.dll": {}
         }
       },
-      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
+      "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.6": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0"
@@ -3521,10 +3521,10 @@
         "tools/install.ps1"
       ]
     },
-    "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.5": {
-      "sha512": "lq3Ka7gg2JDIKpzaOlLNvyb+Tzsznyi6boeUqitw9apNYnhFdUFwYxjMCFMb8ydWNEzY/5EYdTsHijxgTgrVqw==",
+    "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.6": {
+      "sha512": "CuSe3xRd5Rr0X6xXtxjtyKgLVapPr5dUX11so2a5QlG1j8LQ8YSB0qrume1tKvVRnly/WnxgpoeFqhn8QbefRA==",
       "type": "package",
-      "path": "microsoft.diagnostics.tracing.traceevent/3.0.5",
+      "path": "microsoft.diagnostics.tracing.traceevent/3.0.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3566,7 +3566,7 @@
         "lib/netstandard2.0/Microsoft.Diagnostics.Tracing.TraceEvent.xml",
         "lib/netstandard2.0/OSExtensions.dll",
         "lib/netstandard2.0/TraceReloggerLib.dll",
-        "microsoft.diagnostics.tracing.traceevent.3.0.5.nupkg.sha512",
+        "microsoft.diagnostics.tracing.traceevent.3.0.6.nupkg.sha512",
         "microsoft.diagnostics.tracing.traceevent.nuspec"
       ]
     },
@@ -5437,7 +5437,7 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
       "LiveCharts.Wpf >= 0.9.7",
-      "Microsoft.Diagnostics.Tracing.TraceEvent >= 3.0.5",
+      "Microsoft.Diagnostics.Tracing.TraceEvent >= 3.0.6",
       "Microsoft.Toolkit.Uwp.Notifications >= 7.1.2",
       "Microsoft.Windows.SDK.Contracts >= 10.0.22621.2",
       "ModernWpfUI >= 0.9.4",
@@ -5496,7 +5496,7 @@
           },
           "Microsoft.Diagnostics.Tracing.TraceEvent": {
             "target": "Package",
-            "version": "[3.0.5, )"
+            "version": "[3.0.6, )"
           },
           "Microsoft.Toolkit.Uwp.Notifications": {
             "target": "Package",

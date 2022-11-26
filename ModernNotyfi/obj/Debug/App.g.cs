@@ -80,7 +80,7 @@ namespace ModernNotyfi {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         public static void Main() {
-            SplashScreen splashScreen = new SplashScreen("icons/banner_dev.jpg");
+            SplashScreen splashScreen = new SplashScreen("icons/banner_stable.png");
             splashScreen.Show(true);
             ModernNotyfi.App app = new ModernNotyfi.App();
             app.InitializeComponent();

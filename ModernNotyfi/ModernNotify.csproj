@@ -287,7 +287,7 @@
       <Version>0.9.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent">
-      <Version>3.0.5</Version>
+      <Version>3.0.6</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>7.1.2</Version>
@@ -324,7 +324,7 @@
     <Resource Include="icons\sound.png" />
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="icons\banner_dev.jpg" />
+    <None Include="icons\banner_dev.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\info.png" />
@@ -441,6 +441,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Shortcuts.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="icons\banner_stable.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "afEDz1Y3fpvXBXuQRSjYcWnFt4UqHw2otjmOfI2n8rNeQBWAwJTeN5TaC4B58YasWRPsRTGednmNvywdRpipEg==",
+  "dgSpecHash": "UnRXBM6DFDpnK5mNtq76CYbPYsLUzsGinhStK2G++AHXTZT9oKJwZAO7q6i9nDR0V8xF6nlVYb+Zi+t4Pnr46Q==",
   "success": true,
   "projectFilePath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\ModernNotify.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\stas1\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",
-    "C:\\Users\\stas1\\.nuget\\packages\\microsoft.diagnostics.tracing.traceevent\\3.0.5\\microsoft.diagnostics.tracing.traceevent.3.0.5.nupkg.sha512",
+    "C:\\Users\\stas1\\.nuget\\packages\\microsoft.diagnostics.tracing.traceevent\\3.0.6\\microsoft.diagnostics.tracing.traceevent.3.0.6.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.0\\microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net472\\1.0.0\\microsoft.netframework.referenceassemblies.net472.1.0.0.nupkg.sha512",
     "C:\\Users\\stas1\\.nuget\\packages\\microsoft.toolkit.uwp.notifications\\7.1.2\\microsoft.toolkit.uwp.notifications.7.1.2.nupkg.sha512",
