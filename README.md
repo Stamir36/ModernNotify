@@ -36,6 +36,10 @@ __Main view of settings and interface:__
 <img src="https://unesell.com/modernnotify/images/app/classic02.png" alt="3" border="0">
 <img src="https://unesell.com/modernnotify/images/app/classic03.png" alt="2" border="0">
 <br><br>
+__GameBar (Open: Ctrl + G):__
+<br><br>
+<img src="https://i.ibb.co/RhKQR89/13.png" alt="4" border="0">
+<br><br>
 __Device management service:__
 <br><br>
 <img src="https://unesell.com/modernnotify/images/app/app-mydevice.jpg" alt="2" border="0">
