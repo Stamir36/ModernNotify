@@ -32,6 +32,8 @@ using Newtonsoft.Json.Linq;
 using WPFUI;
 using WPFUI.Controls;
 using Woof.SystemEx;
+using Windows.Management;
+using System.Device.Location;
 
 namespace ModernNotyfi
 {
@@ -71,6 +73,9 @@ namespace ModernNotyfi
         MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
         ProcessStartInfo commands = new ProcessStartInfo();
         IEnumerable<MMDevice> speakDevices;
+
+        private GlobalSystemMediaTransportControlsSessionManager sessionManager;
+        private GlobalSystemMediaTransportControlsSession currentSession;
 
         [DllImport("user32.dll")]
         public static extern void keybd_event(byte virtualKey, byte scanCode, uint flags, IntPtr extraInfo);
@@ -352,6 +357,7 @@ namespace ModernNotyfi
                 MainPanel.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
                 Border_Notify.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
                 MusicCard.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
+                MainCard.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
 
                 Border_Time.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
                 Border_Panel.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
@@ -454,6 +460,11 @@ namespace ModernNotyfi
                 Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
             }
 
+            sessionManager = GlobalSystemMediaTransportControlsSessionManager.RequestAsync().GetAwaiter().GetResult();
+            currentSession = sessionManager.GetCurrentSession();
+            currentSession.MediaPropertiesChanged += CurrentSession_MediaPropertiesChanged;
+
+            GetMediaProperties();
 
             //Синхронизация уведомлений с Unesell Account
             /*
@@ -495,6 +506,49 @@ namespace ModernNotyfi
 
             }
             */
+        }
+
+        private async void CurrentSession_MediaPropertiesChanged(GlobalSystemMediaTransportControlsSession sender, MediaPropertiesChangedEventArgs args)
+        {
+            await Dispatcher.InvokeAsync(GetMediaProperties);
+        }
+
+        private async void GetMediaProperties()
+        {
+            try
+            {
+                var properties = await currentSession.TryGetMediaPropertiesAsync();
+
+                if (properties != null && properties.Thumbnail != null)
+                {
+                    using (Stream stream = properties.Thumbnail.OpenReadAsync().GetAwaiter().GetResult().AsStreamForRead())
+                    {
+                        var albumCoverImage = new BitmapImage();
+                        albumCoverImage.BeginInit();
+                        albumCoverImage.CacheOption = BitmapCacheOption.OnLoad;
+                        albumCoverImage.StreamSource = stream;
+                        albumCoverImage.EndInit();
+                        albumCoverImage.Freeze();
+
+                        Dispatcher.Invoke(() =>
+                        {
+                            AlbumCoverImage.Source = albumCoverImage;
+                        });
+                    }
+                }
+                else
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        AlbumCoverImage.Source = null;
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Обработка ошибок при получении обложки
+                System.Windows.MessageBox.Show($"Ошибка при получении обложки: {ex.Message}");
+            }
         }
 
         private async Task<string[]> SortFilesPath(string[] files) => await Task.Run(() =>
@@ -578,11 +632,33 @@ namespace ModernNotyfi
         }
 
         public ChartValues<int> BatteryChar { get; set; }
+        private GeoCoordinateWatcher watcher;
 
         public async void ModernNotyfi_Loaded(object sender, RoutedEventArgs e) // ИНИЦИАЛИЗАЦИЯ ПАРАМЕТРОВ
         {
-            
             ModernNotyfi.WindowState = WindowState.Minimized;
+            if (Properties.Settings.Default.Unesell_Login == "Yes")
+            {
+                try
+                {
+                    var userBitmapSmall = new BitmapImage(new Uri("https://unesell.com/data/users/avatar/" + Properties.Settings.Default.Unesell_Avatar));
+                    AccauntImg.ImageSource = userBitmapSmall;
+                }
+                catch
+                {
+                    var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
+                    AccauntImg.ImageSource = userBitmapSmall;
+                }
+            }
+            else
+            {
+                var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
+                AccauntImg.ImageSource = userBitmapSmall;
+            }
+
+            watcher = new GeoCoordinateWatcher();
+            watcher.PositionChanged += Watcher_PositionChanged;
+            watcher.Start();
 
             MediaManager.OnNewSource += MediaManager_OnNewSource;
             MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
@@ -619,7 +695,6 @@ namespace ModernNotyfi
                 }
                 // ------------------------------------------------------------------------------
             });
-
 
             // ПОЛУ-СЕКУНДНЫЙ ТАЙМЕР
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
@@ -751,7 +826,8 @@ namespace ModernNotyfi
                 // Обновление данных плеера. (Более рабочий вариант с таймером)
                 try
                 {
-                    await Task.Run(async () => {
+                    await Task.Run(async () =>
+                    {
                         MediaManager.OnNewSource += MediaManager_OnNewSource;
                         MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
                         MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
@@ -769,15 +845,15 @@ namespace ModernNotyfi
                                 try
                                 {
                                     MediaSession.Content = gsmtcsm.GetCurrentSession().SourceAppUserModelId.Replace(".exe", "");
-                                    if(gsmtcsm.GetCurrentSession().SourceAppUserModelId.Replace(".exe", "").Contains("ZuneMusic"))
+                                    if (gsmtcsm.GetCurrentSession().SourceAppUserModelId.Replace(".exe", "").Contains("ZuneMusic"))
                                     {
                                         MediaSession.Content = "Zune Music";
                                     }
                                 }
-                                catch {
+                                catch
+                                {
                                     MediaSession.Content = "Нет источника";
                                 }
-                                
 
                                 if (mediaProperties.Artist == "" || mediaProperties.Artist == null)
                                 {
@@ -785,7 +861,10 @@ namespace ModernNotyfi
                                 }
 
                                 SoundTimeAll.Content = gsmtcsm.GetCurrentSession().GetTimelineProperties().EndTime.ToString(@"mm\:ss");
-                                media_all_sec = Convert.ToInt32(gsmtcsm.GetCurrentSession().GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(gsmtcsm.GetCurrentSession().GetTimelineProperties().EndTime.ToString(@"mm"));
+                                var position = gsmtcsm.GetCurrentSession().GetTimelineProperties().Position;
+                                SoundTimeNow.Content = position.ToString(@"mm\:ss");
+                                music_min = position.Minutes;
+                                music_sec = position.Seconds;
                             }));
                         }
                     });
@@ -801,7 +880,6 @@ namespace ModernNotyfi
 
                 //GetMobileInfo(); // MN Connect 
                 GetBatteryPercent(); //Батарея
-
                 GetConnectionsPCIsEnabledAsync(); // Радио
             };
 
@@ -878,6 +956,101 @@ namespace ModernNotyfi
 
 
             //GetServerInfo();
+        }
+
+        private void Watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            double latitude = e.Position.Location.Latitude;
+            double longitude = e.Position.Location.Longitude;
+            watcher.Stop();
+
+            // Получение данных о погоде
+            string weatherData = GetWeatherData(latitude, longitude);
+            // Вывод данных о погоде в текстовый блок
+            //GPS.Content = weatherData;
+        }
+        
+        private string GetWeatherData(double latitude, double longitude)
+        {
+            // Замените {YOUR_API_KEY} на ваш ключ API OpenWeatherMap
+            string apiKey = Properties.Settings.Default.WeatherAPI;
+
+            // Формирование URL для запроса погодных данных
+            string url = $"http://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={apiKey}&units=metric";
+
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    string json = client.DownloadString(url);
+                    JObject data = JObject.Parse(json);
+
+                    // Извлекаем нужные данные
+                    string city = data["name"].ToString();
+                    int temperature = (int)Math.Round(double.Parse(data["main"]["temp"].ToString()));
+
+                    // Обновляем Label с данными о местоположении и погоде
+                    Dispatcher.Invoke(() =>
+                    {
+                        GPS.Content = $"{city}";
+                        Weather.Content = $"{temperature}C°";
+                    });
+
+                    string iconPath = string.Empty;
+                    string weatherIconsFolderPath = "icons/Weather/";
+                    string weatherCondition = data["weather"][0]["main"].ToString();
+
+                    if (weatherCondition.Contains("Clear"))
+                    {
+                        iconPath = weatherIconsFolderPath + "sun.png";
+                    }
+                    else if (weatherCondition.Contains("Clouds"))
+                    {
+                        iconPath = weatherIconsFolderPath + "clouds.png";
+                    }
+                    else if (weatherCondition.Contains("Rain"))
+                    {
+                        iconPath = weatherIconsFolderPath + "rain.png";
+                    }
+                    else if (weatherCondition.Contains("Thunderstorm"))
+                    {
+                        iconPath = weatherIconsFolderPath + "thunderstorm.png";
+                    }
+                    else if (weatherCondition.Contains("Snow"))
+                    {
+                        iconPath = weatherIconsFolderPath + "snow.png";
+                    }
+                    else if (weatherCondition.Contains("Fog"))
+                    {
+                        iconPath = weatherIconsFolderPath + "fog.png";
+                    }
+                    else if (weatherCondition.Contains("Tornado"))
+                    {
+                        iconPath = weatherIconsFolderPath + "tornado.png";
+                    }
+                    else if (weatherCondition.Contains("Drizzle"))
+                    {
+                        iconPath = weatherIconsFolderPath + "drizzle.png";
+                    }
+                    else
+                    {
+                        iconPath = weatherIconsFolderPath + "default.png";
+                    }
+
+                    // Установка изображения иконки
+                    if (!string.IsNullOrEmpty(iconPath))
+                    {
+                        BitmapImage iconImage = new BitmapImage(new Uri(iconPath, UriKind.Relative));
+                        IconWeather.Source = iconImage;
+                    }
+
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error retrieving weather data";
+            }
         }
 
         public sealed class UserNotification
@@ -1276,6 +1449,7 @@ namespace ModernNotyfi
                 MMDevice mMDevice = speakDevices.ToList()[soundDevice];
                 mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar = Convert.ToInt32(SoundSlider.Value) / 100.0f;
                 ValueVolumeBar.Value = SoundSlider.Value;
+                SoundSliderMusicCard.Value = SoundSlider.Value;
                 if (Properties.Settings.Default.Language == "English")
                 {
                     SoundText.Content = "Volume: " + (Convert.ToInt32(SoundSlider.Value) / 100.0f * 100) + "%";
@@ -1582,17 +1756,9 @@ namespace ModernNotyfi
 
                 my.media_all_sec = Convert.ToInt32(session.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(session.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
 
-                var timers = new System.Windows.Threading.DispatcherTimer();
-                var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
-                timers.Interval = new TimeSpan(0, 0, 1);
-                timers.IsEnabled = true;
-                timers.Tick += (o, t) =>
-                {
-                    my.SoundTimeNow.Content = session.ControlSession.GetTimelineProperties().Position.ToString(@"mm\:ss");
-                    my.music_min = session.ControlSession.GetTimelineProperties().Position.Minutes;
-                    my.music_sec = session.ControlSession.GetTimelineProperties().Position.Seconds;
-                };
-                timers.Start();
+                my.SoundTimeNow.Content = session.ControlSession.GetTimelineProperties().Position.ToString(@"mm\:ss");
+                my.music_min = session.ControlSession.GetTimelineProperties().Position.Minutes;
+                my.music_sec = session.ControlSession.GetTimelineProperties().Position.Seconds;
             }));
         }
 
@@ -1633,7 +1799,9 @@ namespace ModernNotyfi
 
                     my.SoundTimeAll.Content = sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm\:ss");
                     my.media_all_sec = Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
-                    //my.GetServerInfo();
+                    my.SoundTimeNow.Content = sender.ControlSession.GetTimelineProperties().Position.ToString(@"mm\:ss");
+                    my.music_min = sender.ControlSession.GetTimelineProperties().Position.Minutes;
+                    my.music_sec = sender.ControlSession.GetTimelineProperties().Position.Seconds;
                 }));
             }
             catch
@@ -1663,13 +1831,19 @@ namespace ModernNotyfi
 
                 my.SoundTimeAll.Content = sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm\:ss");
                 my.media_all_sec = Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
-
+                my.SoundTimeNow.Content = sender.ControlSession.GetTimelineProperties().Position.ToString(@"mm\:ss");
+                my.music_min = sender.ControlSession.GetTimelineProperties().Position.Minutes;
+                my.music_sec = sender.ControlSession.GetTimelineProperties().Position.Seconds;
             }));
         }
 
         private static void ChencheMusic(string Songs)
         {
             _ = Songs;
+            MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            my.sessionManager = GlobalSystemMediaTransportControlsSessionManager.RequestAsync().GetAwaiter().GetResult();
+            my.currentSession = my.sessionManager.GetCurrentSession();
+            my.currentSession.MediaPropertiesChanged += my.CurrentSession_MediaPropertiesChanged;
         }
 
         public static async Task NowPlay()
@@ -1682,6 +1856,7 @@ namespace ModernNotyfi
                 {
                     MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                     my.NowPlayning.Content = mediaProperties.Title;
+
                 }));
             }
         }
@@ -1926,6 +2101,11 @@ namespace ModernNotyfi
             Stopwatch_hours = 0;
             playStopwatchIcon.Glyph = WPFUI.Common.Icon.Play12;
         }
+
+        private void SoundSliderMusicCardCheng(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            SoundSlider.Value = SoundSliderMusicCard.Value;
+        }
     }
 
 
@@ -1951,6 +2131,16 @@ namespace ModernNotyfi
                 sessionManager.SessionsChanged += SessionsChanged;
                 IsStarted = true;
             }
+
+            foreach (var mediaSession in CurrentMediaSessions.Values)
+            {
+                mediaSession.ControlSession.PlaybackInfoChanged += (session, args) =>
+                {
+                    var playbackInfo = session.GetPlaybackInfo();
+                    OnPlaybackStateChanged?.Invoke(mediaSession, playbackInfo);
+                };
+            }
+
         }
 
         private static void SessionsChanged(GlobalSystemMediaTransportControlsSessionManager sender, SessionsChangedEventArgs args = null)

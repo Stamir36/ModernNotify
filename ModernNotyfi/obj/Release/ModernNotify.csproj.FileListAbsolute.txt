@@ -224,3 +224,4 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Microsoft.Diagnostics.FastSe
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Microsoft.Diagnostics.Tracing.TraceEvent.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\gamePanel.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.csproj.ResolveComReference.cache

@@ -107,6 +107,7 @@
     <Reference Include="netstandard" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Device" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
@@ -140,8 +141,8 @@
     <Compile Include="GameBar.xaml.cs">
       <DependentUpon>GameBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModernUI.xaml.cs">
-      <DependentUpon>ModernUI.xaml</DependentUpon>
+    <Compile Include="oldUI.xaml.cs">
+      <DependentUpon>oldUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="Other Page\UiLoginUnesell.xaml.cs">
       <DependentUpon>UiLoginUnesell.xaml</DependentUpon>
@@ -187,7 +188,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ModernUI.xaml">
+    <Page Include="oldUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -444,6 +445,33 @@
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="icons\banner_stable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\Weather\clouds.png" />
+    <Resource Include="icons\Weather\rain.png" />
+    <Resource Include="icons\Weather\sun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\Weather\default.png" />
+    <Resource Include="icons\Weather\drizzle.png" />
+    <Resource Include="icons\Weather\fog.png" />
+    <Resource Include="icons\Weather\snow.png" />
+    <Resource Include="icons\Weather\thunderstorm.png" />
+    <Resource Include="icons\Weather\tornado.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

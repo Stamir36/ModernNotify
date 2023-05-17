@@ -5,10 +5,14 @@
       "LiveCharts/0.9.7": {
         "type": "package",
         "compile": {
-          "lib/net45/LiveCharts.dll": {}
+          "lib/net45/LiveCharts.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net45/LiveCharts.dll": {}
+          "lib/net45/LiveCharts.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "LiveCharts.Wpf/0.9.7": {
@@ -17,10 +21,14 @@
           "LiveCharts": "0.9.7"
         },
         "compile": {
-          "lib/net45/LiveCharts.Wpf.dll": {}
+          "lib/net45/LiveCharts.Wpf.dll": {
+            "related": ".pdb;.XML"
+          }
         },
         "runtime": {
-          "lib/net45/LiveCharts.Wpf.dll": {}
+          "lib/net45/LiveCharts.Wpf.dll": {
+            "related": ".pdb;.XML"
+          }
         }
       },
       "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.6": {
@@ -30,15 +38,23 @@
         },
         "compile": {
           "lib/net462/Dia2Lib.dll": {},
-          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
-          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {
+            "related": ".xml"
+          },
           "lib/net462/OSExtensions.dll": {},
           "lib/net462/TraceReloggerLib.dll": {}
         },
         "runtime": {
           "lib/net462/Dia2Lib.dll": {},
-          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
-          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {
+            "related": ".xml"
+          },
           "lib/net462/OSExtensions.dll": {},
           "lib/net462/TraceReloggerLib.dll": {}
         },
@@ -66,10 +82,14 @@
           "System.ValueTuple": "4.5.0"
         },
         "compile": {
-          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Win32.Registry/4.7.0": {
@@ -82,10 +102,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net472/Microsoft.Win32.Registry.dll": {}
+          "ref/net472/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Win32.Registry.dll": {}
+          "lib/net461/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
@@ -211,12 +235,20 @@
           "netstandard"
         ],
         "compile": {
-          "lib/net462/ModernWpf.Controls.dll": {},
-          "lib/net462/ModernWpf.dll": {}
+          "lib/net462/ModernWpf.Controls.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/ModernWpf.dll": {
+            "related": ".Controls.xml;.xml"
+          }
         },
         "runtime": {
-          "lib/net462/ModernWpf.Controls.dll": {},
-          "lib/net462/ModernWpf.dll": {}
+          "lib/net462/ModernWpf.Controls.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/ModernWpf.dll": {
+            "related": ".Controls.xml;.xml"
+          }
         },
         "resource": {
           "lib/net462/af-ZA/ModernWpf.Controls.resources.dll": {
@@ -628,10 +660,14 @@
           "NAudio.WinMM": "2.0.1"
         },
         "compile": {
-          "lib/netstandard2.0/NAudio.dll": {}
+          "lib/netstandard2.0/NAudio.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/NAudio.dll": {}
+          "lib/netstandard2.0/NAudio.dll": {
+            "related": ".xml"
+          }
         }
       },
       "NAudio.Asio/2.0.0": {
@@ -708,10 +744,14 @@
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "QRCoder/1.4.3": {
@@ -731,10 +771,14 @@
       "System.Drawing.Common/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net461/System.Drawing.Common.dll": {}
+          "lib/net461/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Drawing.Common.dll": {}
+          "lib/net461/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.CompilerServices.Unsafe/5.0.0": {
@@ -743,10 +787,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
@@ -794,10 +842,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.AccessControl.dll": {}
+          "ref/net461/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Security.AccessControl.dll": {}
+          "lib/net461/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/win/lib/net461/System.Security.AccessControl.dll": {
@@ -813,10 +865,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.Principal.Windows.dll": {}
+          "ref/net461/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Security.Principal.Windows.dll": {}
+          "lib/net461/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/win/lib/net461/System.Security.Principal.Windows.dll": {
@@ -834,16 +890,22 @@
           "ref/net47/System.ValueTuple.dll": {}
         },
         "runtime": {
-          "lib/net47/System.ValueTuple.dll": {}
+          "lib/net47/System.ValueTuple.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Woof.Core/2.2.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Woof.Core.dll": {}
+          "lib/netstandard2.0/Woof.Core.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Woof.Core.dll": {}
+          "lib/netstandard2.0/Woof.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Woof.System/2.8.2": {
@@ -852,10 +914,14 @@
           "Woof.Core": "2.2.0"
         },
         "compile": {
-          "lib/net461/Woof.System.dll": {}
+          "lib/net461/Woof.System.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/Woof.System.dll": {}
+          "lib/net461/Woof.System.dll": {
+            "related": ".xml"
+          }
         }
       },
       "WPF-UI/1.2.2": {
@@ -864,10 +930,14 @@
           "System.Drawing.Common": "6.0.0"
         },
         "compile": {
-          "lib/net47/WPFUI.dll": {}
+          "lib/net47/WPFUI.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net47/WPFUI.dll": {}
+          "lib/net47/WPFUI.dll": {
+            "related": ".xml"
+          }
         }
       },
       "XamlAnimatedGif/2.0.2": {
@@ -880,10 +950,14 @@
           "WindowsBase"
         ],
         "compile": {
-          "lib/net45/XamlAnimatedGif.dll": {}
+          "lib/net45/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
         },
         "runtime": {
-          "lib/net45/XamlAnimatedGif.dll": {}
+          "lib/net45/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
         }
       }
     },
@@ -891,10 +965,14 @@
       "LiveCharts/0.9.7": {
         "type": "package",
         "compile": {
-          "lib/net45/LiveCharts.dll": {}
+          "lib/net45/LiveCharts.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net45/LiveCharts.dll": {}
+          "lib/net45/LiveCharts.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "LiveCharts.Wpf/0.9.7": {
@@ -903,10 +981,14 @@
           "LiveCharts": "0.9.7"
         },
         "compile": {
-          "lib/net45/LiveCharts.Wpf.dll": {}
+          "lib/net45/LiveCharts.Wpf.dll": {
+            "related": ".pdb;.XML"
+          }
         },
         "runtime": {
-          "lib/net45/LiveCharts.Wpf.dll": {}
+          "lib/net45/LiveCharts.Wpf.dll": {
+            "related": ".pdb;.XML"
+          }
         }
       },
       "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.6": {
@@ -916,15 +998,23 @@
         },
         "compile": {
           "lib/net462/Dia2Lib.dll": {},
-          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
-          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {
+            "related": ".xml"
+          },
           "lib/net462/OSExtensions.dll": {},
           "lib/net462/TraceReloggerLib.dll": {}
         },
         "runtime": {
           "lib/net462/Dia2Lib.dll": {},
-          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
-          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {
+            "related": ".xml"
+          },
           "lib/net462/OSExtensions.dll": {},
           "lib/net462/TraceReloggerLib.dll": {}
         },
@@ -952,10 +1042,14 @@
           "System.ValueTuple": "4.5.0"
         },
         "compile": {
-          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Win32.Registry/4.7.0": {
@@ -968,10 +1062,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net472/Microsoft.Win32.Registry.dll": {}
+          "ref/net472/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll": {}
+          "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Windows.SDK.Contracts/10.0.22621.2": {
@@ -1087,12 +1185,20 @@
           "netstandard"
         ],
         "compile": {
-          "lib/net462/ModernWpf.Controls.dll": {},
-          "lib/net462/ModernWpf.dll": {}
+          "lib/net462/ModernWpf.Controls.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/ModernWpf.dll": {
+            "related": ".Controls.xml;.xml"
+          }
         },
         "runtime": {
-          "lib/net462/ModernWpf.Controls.dll": {},
-          "lib/net462/ModernWpf.dll": {}
+          "lib/net462/ModernWpf.Controls.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/ModernWpf.dll": {
+            "related": ".Controls.xml;.xml"
+          }
         },
         "resource": {
           "lib/net462/af-ZA/ModernWpf.Controls.resources.dll": {
@@ -1504,10 +1610,14 @@
           "NAudio.WinMM": "2.0.1"
         },
         "compile": {
-          "lib/netstandard2.0/NAudio.dll": {}
+          "lib/netstandard2.0/NAudio.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/NAudio.dll": {}
+          "lib/netstandard2.0/NAudio.dll": {
+            "related": ".xml"
+          }
         }
       },
       "NAudio.Asio/2.0.0": {
@@ -1584,10 +1694,14 @@
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "QRCoder/1.4.3": {
@@ -1607,10 +1721,14 @@
       "System.Drawing.Common/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net461/System.Drawing.Common.dll": {}
+          "lib/net461/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Drawing.Common.dll": {}
+          "lib/net461/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.CompilerServices.Unsafe/5.0.0": {
@@ -1619,10 +1737,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
@@ -1670,10 +1792,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.AccessControl.dll": {}
+          "ref/net461/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "runtimes/win/lib/net461/System.Security.AccessControl.dll": {}
+          "runtimes/win/lib/net461/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Security.Principal.Windows/4.7.0": {
@@ -1683,10 +1809,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.Principal.Windows.dll": {}
+          "ref/net461/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "runtimes/win/lib/net461/System.Security.Principal.Windows.dll": {}
+          "runtimes/win/lib/net461/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.ValueTuple/4.5.0": {
@@ -1698,16 +1828,22 @@
           "ref/net47/System.ValueTuple.dll": {}
         },
         "runtime": {
-          "lib/net47/System.ValueTuple.dll": {}
+          "lib/net47/System.ValueTuple.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Woof.Core/2.2.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Woof.Core.dll": {}
+          "lib/netstandard2.0/Woof.Core.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Woof.Core.dll": {}
+          "lib/netstandard2.0/Woof.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Woof.System/2.8.2": {
@@ -1716,10 +1852,14 @@
           "Woof.Core": "2.2.0"
         },
         "compile": {
-          "lib/net461/Woof.System.dll": {}
+          "lib/net461/Woof.System.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/Woof.System.dll": {}
+          "lib/net461/Woof.System.dll": {
+            "related": ".xml"
+          }
         }
       },
       "WPF-UI/1.2.2": {
@@ -1728,10 +1868,14 @@
           "System.Drawing.Common": "6.0.0"
         },
         "compile": {
-          "lib/net47/WPFUI.dll": {}
+          "lib/net47/WPFUI.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net47/WPFUI.dll": {}
+          "lib/net47/WPFUI.dll": {
+            "related": ".xml"
+          }
         }
       },
       "XamlAnimatedGif/2.0.2": {
@@ -1744,10 +1888,14 @@
           "WindowsBase"
         ],
         "compile": {
-          "lib/net45/XamlAnimatedGif.dll": {}
+          "lib/net45/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
         },
         "runtime": {
-          "lib/net45/XamlAnimatedGif.dll": {}
+          "lib/net45/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
         }
       }
     },
@@ -1755,10 +1903,14 @@
       "LiveCharts/0.9.7": {
         "type": "package",
         "compile": {
-          "lib/net45/LiveCharts.dll": {}
+          "lib/net45/LiveCharts.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net45/LiveCharts.dll": {}
+          "lib/net45/LiveCharts.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "LiveCharts.Wpf/0.9.7": {
@@ -1767,10 +1919,14 @@
           "LiveCharts": "0.9.7"
         },
         "compile": {
-          "lib/net45/LiveCharts.Wpf.dll": {}
+          "lib/net45/LiveCharts.Wpf.dll": {
+            "related": ".pdb;.XML"
+          }
         },
         "runtime": {
-          "lib/net45/LiveCharts.Wpf.dll": {}
+          "lib/net45/LiveCharts.Wpf.dll": {
+            "related": ".pdb;.XML"
+          }
         }
       },
       "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.6": {
@@ -1780,15 +1936,23 @@
         },
         "compile": {
           "lib/net462/Dia2Lib.dll": {},
-          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
-          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {
+            "related": ".xml"
+          },
           "lib/net462/OSExtensions.dll": {},
           "lib/net462/TraceReloggerLib.dll": {}
         },
         "runtime": {
           "lib/net462/Dia2Lib.dll": {},
-          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
-          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {
+            "related": ".xml"
+          },
           "lib/net462/OSExtensions.dll": {},
           "lib/net462/TraceReloggerLib.dll": {}
         },
@@ -1816,10 +1980,14 @@
           "System.ValueTuple": "4.5.0"
         },
         "compile": {
-          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Win32.Registry/4.7.0": {
@@ -1832,10 +2000,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net472/Microsoft.Win32.Registry.dll": {}
+          "ref/net472/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Win32.Registry.dll": {}
+          "lib/net461/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Windows.SDK.Contracts/10.0.22621.2": {
@@ -1951,12 +2123,20 @@
           "netstandard"
         ],
         "compile": {
-          "lib/net462/ModernWpf.Controls.dll": {},
-          "lib/net462/ModernWpf.dll": {}
+          "lib/net462/ModernWpf.Controls.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/ModernWpf.dll": {
+            "related": ".Controls.xml;.xml"
+          }
         },
         "runtime": {
-          "lib/net462/ModernWpf.Controls.dll": {},
-          "lib/net462/ModernWpf.dll": {}
+          "lib/net462/ModernWpf.Controls.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/ModernWpf.dll": {
+            "related": ".Controls.xml;.xml"
+          }
         },
         "resource": {
           "lib/net462/af-ZA/ModernWpf.Controls.resources.dll": {
@@ -2368,10 +2548,14 @@
           "NAudio.WinMM": "2.0.1"
         },
         "compile": {
-          "lib/netstandard2.0/NAudio.dll": {}
+          "lib/netstandard2.0/NAudio.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/NAudio.dll": {}
+          "lib/netstandard2.0/NAudio.dll": {
+            "related": ".xml"
+          }
         }
       },
       "NAudio.Asio/2.0.0": {
@@ -2448,10 +2632,14 @@
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "QRCoder/1.4.3": {
@@ -2471,10 +2659,14 @@
       "System.Drawing.Common/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net461/System.Drawing.Common.dll": {}
+          "lib/net461/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Drawing.Common.dll": {}
+          "lib/net461/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.CompilerServices.Unsafe/5.0.0": {
@@ -2483,10 +2675,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
@@ -2534,10 +2730,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.AccessControl.dll": {}
+          "ref/net461/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Security.AccessControl.dll": {}
+          "lib/net461/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Security.Principal.Windows/4.7.0": {
@@ -2547,10 +2747,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.Principal.Windows.dll": {}
+          "ref/net461/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Security.Principal.Windows.dll": {}
+          "lib/net461/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.ValueTuple/4.5.0": {
@@ -2562,16 +2766,22 @@
           "ref/net47/System.ValueTuple.dll": {}
         },
         "runtime": {
-          "lib/net47/System.ValueTuple.dll": {}
+          "lib/net47/System.ValueTuple.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Woof.Core/2.2.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Woof.Core.dll": {}
+          "lib/netstandard2.0/Woof.Core.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Woof.Core.dll": {}
+          "lib/netstandard2.0/Woof.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Woof.System/2.8.2": {
@@ -2580,10 +2790,14 @@
           "Woof.Core": "2.2.0"
         },
         "compile": {
-          "lib/net461/Woof.System.dll": {}
+          "lib/net461/Woof.System.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/Woof.System.dll": {}
+          "lib/net461/Woof.System.dll": {
+            "related": ".xml"
+          }
         }
       },
       "WPF-UI/1.2.2": {
@@ -2592,10 +2806,14 @@
           "System.Drawing.Common": "6.0.0"
         },
         "compile": {
-          "lib/net47/WPFUI.dll": {}
+          "lib/net47/WPFUI.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net47/WPFUI.dll": {}
+          "lib/net47/WPFUI.dll": {
+            "related": ".xml"
+          }
         }
       },
       "XamlAnimatedGif/2.0.2": {
@@ -2608,10 +2826,14 @@
           "WindowsBase"
         ],
         "compile": {
-          "lib/net45/XamlAnimatedGif.dll": {}
+          "lib/net45/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
         },
         "runtime": {
-          "lib/net45/XamlAnimatedGif.dll": {}
+          "lib/net45/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
         }
       }
     },
@@ -2619,10 +2841,14 @@
       "LiveCharts/0.9.7": {
         "type": "package",
         "compile": {
-          "lib/net45/LiveCharts.dll": {}
+          "lib/net45/LiveCharts.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net45/LiveCharts.dll": {}
+          "lib/net45/LiveCharts.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "LiveCharts.Wpf/0.9.7": {
@@ -2631,10 +2857,14 @@
           "LiveCharts": "0.9.7"
         },
         "compile": {
-          "lib/net45/LiveCharts.Wpf.dll": {}
+          "lib/net45/LiveCharts.Wpf.dll": {
+            "related": ".pdb;.XML"
+          }
         },
         "runtime": {
-          "lib/net45/LiveCharts.Wpf.dll": {}
+          "lib/net45/LiveCharts.Wpf.dll": {
+            "related": ".pdb;.XML"
+          }
         }
       },
       "Microsoft.Diagnostics.Tracing.TraceEvent/3.0.6": {
@@ -2644,15 +2874,23 @@
         },
         "compile": {
           "lib/net462/Dia2Lib.dll": {},
-          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
-          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {
+            "related": ".xml"
+          },
           "lib/net462/OSExtensions.dll": {},
           "lib/net462/TraceReloggerLib.dll": {}
         },
         "runtime": {
           "lib/net462/Dia2Lib.dll": {},
-          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {},
-          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {},
+          "lib/net462/Microsoft.Diagnostics.FastSerialization.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {
+            "related": ".xml"
+          },
           "lib/net462/OSExtensions.dll": {},
           "lib/net462/TraceReloggerLib.dll": {}
         },
@@ -2680,10 +2918,14 @@
           "System.ValueTuple": "4.5.0"
         },
         "compile": {
-          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+          "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Microsoft.Win32.Registry/4.7.0": {
@@ -2696,10 +2938,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net472/Microsoft.Win32.Registry.dll": {}
+          "ref/net472/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/Microsoft.Win32.Registry.dll": {}
+          "lib/net461/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Windows.SDK.Contracts/10.0.22621.2": {
@@ -2815,12 +3061,20 @@
           "netstandard"
         ],
         "compile": {
-          "lib/net462/ModernWpf.Controls.dll": {},
-          "lib/net462/ModernWpf.dll": {}
+          "lib/net462/ModernWpf.Controls.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/ModernWpf.dll": {
+            "related": ".Controls.xml;.xml"
+          }
         },
         "runtime": {
-          "lib/net462/ModernWpf.Controls.dll": {},
-          "lib/net462/ModernWpf.dll": {}
+          "lib/net462/ModernWpf.Controls.dll": {
+            "related": ".xml"
+          },
+          "lib/net462/ModernWpf.dll": {
+            "related": ".Controls.xml;.xml"
+          }
         },
         "resource": {
           "lib/net462/af-ZA/ModernWpf.Controls.resources.dll": {
@@ -3232,10 +3486,14 @@
           "NAudio.WinMM": "2.0.1"
         },
         "compile": {
-          "lib/netstandard2.0/NAudio.dll": {}
+          "lib/netstandard2.0/NAudio.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/NAudio.dll": {}
+          "lib/netstandard2.0/NAudio.dll": {
+            "related": ".xml"
+          }
         }
       },
       "NAudio.Asio/2.0.0": {
@@ -3312,10 +3570,14 @@
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "QRCoder/1.4.3": {
@@ -3335,10 +3597,14 @@
       "System.Drawing.Common/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net461/System.Drawing.Common.dll": {}
+          "lib/net461/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Drawing.Common.dll": {}
+          "lib/net461/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.CompilerServices.Unsafe/5.0.0": {
@@ -3347,10 +3613,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/net45/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
@@ -3398,10 +3668,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.AccessControl.dll": {}
+          "ref/net461/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Security.AccessControl.dll": {}
+          "lib/net461/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Security.Principal.Windows/4.7.0": {
@@ -3411,10 +3685,14 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net461/System.Security.Principal.Windows.dll": {}
+          "ref/net461/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/System.Security.Principal.Windows.dll": {}
+          "lib/net461/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.ValueTuple/4.5.0": {
@@ -3426,16 +3704,22 @@
           "ref/net47/System.ValueTuple.dll": {}
         },
         "runtime": {
-          "lib/net47/System.ValueTuple.dll": {}
+          "lib/net47/System.ValueTuple.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Woof.Core/2.2.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Woof.Core.dll": {}
+          "lib/netstandard2.0/Woof.Core.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Woof.Core.dll": {}
+          "lib/netstandard2.0/Woof.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Woof.System/2.8.2": {
@@ -3444,10 +3728,14 @@
           "Woof.Core": "2.2.0"
         },
         "compile": {
-          "lib/net461/Woof.System.dll": {}
+          "lib/net461/Woof.System.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net461/Woof.System.dll": {}
+          "lib/net461/Woof.System.dll": {
+            "related": ".xml"
+          }
         }
       },
       "WPF-UI/1.2.2": {
@@ -3456,10 +3744,14 @@
           "System.Drawing.Common": "6.0.0"
         },
         "compile": {
-          "lib/net47/WPFUI.dll": {}
+          "lib/net47/WPFUI.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net47/WPFUI.dll": {}
+          "lib/net47/WPFUI.dll": {
+            "related": ".xml"
+          }
         }
       },
       "XamlAnimatedGif/2.0.2": {
@@ -3472,10 +3764,14 @@
           "WindowsBase"
         ],
         "compile": {
-          "lib/net45/XamlAnimatedGif.dll": {}
+          "lib/net45/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
         },
         "runtime": {
-          "lib/net45/XamlAnimatedGif.dll": {}
+          "lib/net45/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
         }
       }
     }
@@ -5450,9 +5746,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\stas1\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\stas1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -5464,15 +5758,9 @@
       "outputPath": "C:\\Develop\\C#\\ModernNotyfi\\ModernNotyfi\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
         "C:\\Users\\stas1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net472"

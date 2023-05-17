@@ -10,7 +10,7 @@
         Title="Консоль MyDevice"
         Style="{StaticResource UiWindow}"
         WindowStartupLocation="CenterScreen"
-        Height="389" Width="678" ResizeMode="NoResize" Icon="/icons/terminal.png" Background="{x:Null}" Loaded="Window_Loaded" WindowStyle="None" Visibility="Collapsed" ShowInTaskbar="False">
+        Height="389" Width="678" ResizeMode="NoResize" Icon="/icons/terminal.png" Background="{x:Null}" Loaded="Window_Loaded" ShowInTaskbar="False" WindowStyle="None">
 
     <Grid>
 
@@ -34,8 +34,11 @@
                     <Label Content="Воспроизведение:" HorizontalAlignment="Left" Margin="17,21,0,0" VerticalAlignment="Top" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="8"/>
                     <Label Content="Батарея:" HorizontalAlignment="Left" Margin="17,90,0,0" VerticalAlignment="Top" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="8"/>
                     <Label x:Name="Battery" Content="100" HorizontalAlignment="Left" Margin="17,101,0,0" VerticalAlignment="Top" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="18" Foreground="White"/>
-                    <Label Content="Громкость:" HorizontalAlignment="Left" Margin="77,90,0,0" VerticalAlignment="Top" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="8"/>
-                    <Label x:Name="Volume" Content="100" HorizontalAlignment="Left" Margin="77,101,0,0" VerticalAlignment="Top" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="18" Foreground="White"/>
+                    <Label Content="Громкость:" HorizontalAlignment="Left" Margin="73,0,0,0" VerticalAlignment="Center" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="8"/>
+                    <Label x:Name="Volume" Content="100" HorizontalAlignment="Left" Margin="73,101,0,0" VerticalAlignment="Top" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="18" Foreground="White"/>
+                    <Label Content="Местоположение " HorizontalAlignment="Left" Margin="135,0,0,0" VerticalAlignment="Center" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="8" Width="82"/>
+                    <Label x:Name="GPS_latitude" Content="00,0000000000000" HorizontalAlignment="Left" Margin="135,101,0,0" VerticalAlignment="Top" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="8" Foreground="White" Width="185" Height="13" Padding="0,0,0,0"/>
+                    <Label x:Name="GPS_longitude" Content="00,0000000000000" HorizontalAlignment="Left" Margin="135,111,0,0" VerticalAlignment="Top" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="8" Foreground="White" Width="185" Height="13" Padding="0,0,0,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Логирование">

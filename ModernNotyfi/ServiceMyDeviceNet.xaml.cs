@@ -22,6 +22,9 @@ using System.Windows.Threading;
 using Woof.SystemEx;
 using ModernNotyfi;
 using System.Collections.ObjectModel;
+using System.Device.Location;
+using WPFUI.Appearance;
+using System.Reflection;
 
 namespace ModernNotyfi
 {
@@ -36,6 +39,9 @@ namespace ModernNotyfi
         public int soundDevice = 1; //Активное устройство воспроизведения
         public DispatcherTimer timer = new DispatcherTimer();
         ManagementClass wmi = new ManagementClass("Win32_Battery");
+
+        double latitude = 0;
+        double longitude = 0;
 
         [DllImport("user32.dll")]
         public static extern void keybd_event(byte virtualKey, byte scanCode, uint flags, IntPtr extraInfo);
@@ -121,7 +127,7 @@ namespace ModernNotyfi
 
                 await Task.Run(() => {
 
-                    string url = api + "connect/pc_add_info.php?ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume + "&UnesellID=" + Properties.Settings.Default.Unesell_id + "&SystemInfo=" + Properties.Settings.Default.System + "&SysMemoryTotal=" + Math.Round(SysInfo.SystemMemoryTotal, 2) + "&SysMemoryFree=" + Math.Round(SysInfo.SystemMemoryFree, 2);
+                    string url = api + "connect/pc_add_info.php?ID_PC=" + GetMotherBoardID() + "&BATTETY=" + bb + "&M1=" + m1 + "&M2=" + m2 + "&VOLUME=" + volume + "&UnesellID=" + Properties.Settings.Default.Unesell_id + "&SystemInfo=" + Properties.Settings.Default.System + "&SysMemoryTotal=" + Math.Round(SysInfo.SystemMemoryTotal, 2) + "&SysMemoryFree=" + Math.Round(SysInfo.SystemMemoryFree, 2) + "&latitude=" + latitude + "&longitude=" + longitude + "&mn_version=" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
                     using (var webClient = new WebClient())
                     {
@@ -266,12 +272,21 @@ namespace ModernNotyfi
             return mbInfo;
         }
 
+        private GeoCoordinateWatcher watcher;
+
+        private void Watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            latitude = e.Position.Location.Latitude;
+            longitude = e.Position.Location.Longitude;
+            GPS_latitude.Content = latitude;
+            GPS_longitude.Content = longitude;
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
             this.Visibility = Visibility.Collapsed;
             this.ShowInTaskbar = false;
-
 
             MediaManager.Start();
             AppListItit();
@@ -318,6 +333,10 @@ namespace ModernNotyfi
                 GetServerInfo();
                 GetMobileInfo();
             };
+
+            watcher = new GeoCoordinateWatcher();
+            watcher.PositionChanged += Watcher_PositionChanged;
+            watcher.Start();
         }
 
         public async void AppListItit()
