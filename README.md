@@ -32,17 +32,26 @@ A quick action panel that combines a computer control panel and an Android appli
 
 # Screenshots
 __Main view of settings and interface:__
-<br>
+<br><br>
 <img src="https://unesell.com/modernnotify/images/app/classic02.png" alt="3" border="0">
 <img src="https://unesell.com/modernnotify/images/app/classic03.png" alt="2" border="0">
-<br>
+<br><br>
+__GameBar (Open: Ctrl + G):__
+<br><br>
+<img src="https://i.ibb.co/RhKQR89/13.png" alt="4" border="0">
+<br><br>
 __Device management service:__
-<br>
+<br><br>
 <img src="https://unesell.com/modernnotify/images/app/app-mydevice.jpg" alt="2" border="0">
-<br>
+<br><br>
 __Shutdown window::__
-<br>
+<br><br>
 <img src="https://unesell.com/modernnotify/images/app/app-shutdown.png" alt="Image-3" border="0">
+
+# MyDevice integration
+Link: <a href="https://unesell.com/app/mydevice/">Unesell MyDevice</a>
+<br><br>
+<img src="https://i.ibb.co/qR3CnzG/image.png" alt="1" border="0">
 
 # License and Author
 The source code of the program is open, distribution and modification is allowed only with the consent of the author.<br>
