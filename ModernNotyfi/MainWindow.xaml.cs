@@ -1332,6 +1332,7 @@ namespace ModernNotyfi
             foreach (var battery in allBatteries)
             {
                 BatteryState.Content = Convert.ToDouble(battery["EstimatedChargeRemaining"]) + "%";
+                GradientBattery.Offset = Convert.ToDouble(battery["EstimatedChargeRemaining"]) / 100;
                 Voltage_battery.Content = Math.Round(Convert.ToDouble(battery["DesignVoltage"]) / 1000, 1) + " kW";
                 Battery_ProgressBar.Value = Convert.ToDouble(battery["EstimatedChargeRemaining"]);
                 if (Convert.ToUInt16(battery["BatteryStatus"]) == 1)

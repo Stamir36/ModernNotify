@@ -128,6 +128,28 @@
                         </StackPanel>
                     </StackPanel>
                 </wpfui:Card>
+                <wpfui:Button Appearance="Secondary" x:Name="OpenBatteryApp" Margin="4,95,0,0" Height="56" Cursor="Hand" Padding="10,0,10,0" VerticalAlignment="Top" Click="Battery_Open_Panel" HorizontalAlignment="Left" Width="89">
+                    <wpfui:Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="180" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF25DA6A"/>
+                            <GradientStop Color="#0FFFFFFF" Offset="1"/>
+                            <GradientStop x:Name="GradientBattery" Color="#6625DA6A" Offset="0.5"/>
+                        </LinearGradientBrush>
+                    </wpfui:Button.Background>
+                    <Grid Height="42" Width="64">
+                        <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" x:Name="Battery_Copy" Glyph="Battery024" FontSize="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="24"/>
+                        <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Батарея" HorizontalAlignment="Left" Width="54" FontWeight="Bold" FontSize="12" Height="18" VerticalAlignment="Top" />
+                    </Grid>
+
+                </wpfui:Button>
             </Grid>
         </wpfui:Card>
         <Border x:Name="Border_Time" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="51" Margin="10,439,0,0" VerticalAlignment="Top" Width="340" CornerRadius="5">
