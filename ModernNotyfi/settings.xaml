@@ -6,18 +6,11 @@
         xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
         Style="{StaticResource UiWindow}"
         xmlns:local="clr-namespace:ModernNotyfi"
-        Title="Настройки" Height="418" Width="710"
+        Title="Настройки" Height="193" Width="848"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         MinWidth="960" MinHeight="530" Icon="icons/maim_settings.png"
         WindowStartupLocation="CenterScreen"
-        Loaded="Settings_Loaded" mc:Ignorable="d" Background="#F21B1B1B">
-
-    <!--
-    mc:Ignorable="d"
-    <Window.Background>
-        <SolidColorBrush x:Name="Window_Back" Color="#F2424242" Opacity="0.5"/>
-    </Window.Background>
-    -->
+        Loaded="Settings_Loaded" mc:Ignorable="d" Background="#F21B1B1B" Closing="Settings_Closing">
 
     <Grid Grid.IsSharedSizeScope="True">
         <Grid.ColumnDefinitions>
@@ -28,6 +21,17 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <Image x:Name="Abstractlines" Source="/Image/abstract-lines.png" Margin="0,0,288,-247" RenderTransformOrigin="0.5,0.5" Stretch="UniformToFill" Grid.Column="1" Grid.RowSpan="2" Height="791" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="226" Visibility="Collapsed">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -44,7 +48,7 @@
                     <Grid x:Name="RootGrid">
                         <Border>
                             <Grid>
-                                <Button x:Name="close" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Закрыть окно" Margin="0,0,203,26" HorizontalAlignment="Right" Width="118" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Close" Padding="10,6,10,6" FontSize="14" />
+                                <Button x:Name="close" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Закрыть окно" Margin="0,0,203,26" HorizontalAlignment="Right" Width="118" Style="{StaticResource AccentButtonStyle}" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Close" Padding="10,6,10,6" FontSize="14" />
                                 <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Save_Settings" Content="Сохранить изменения" Style="{StaticResource AccentButtonStyle}" Margin="0,0,19,26" HorizontalAlignment="Right" Width="179" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Save_Settings_Click" />
                                 <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Titles" Content="Настройки" Margin="55,16,25,0" VerticalAlignment="Top" Height="50" FontSize="28" Padding="0,0,0,10" VerticalContentAlignment="Center"/>
                                 <Image x:Name="Sett_img" HorizontalAlignment="Left" Height="28" Margin="23,21,0,0" VerticalAlignment="Top" Width="27" Source="icons/settings.png"/>
@@ -157,9 +161,14 @@
                                                         <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
                                                     </Ellipse.Fill>
                                                 </Ellipse>
-                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NameProfile" Content="Привет!" Margin="115,23,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold"/>
-
-                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="localacc" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="116,48,0,0" VerticalAlignment="Top"/>
+                                                <StackPanel Margin="115,16,0,432" HorizontalAlignment="Left" Width="540" VerticalAlignment="Center">
+                                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NameProfile" Content="Привет!" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold"/>
+                                                    <Label Visibility="Collapsed" FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="localacc" Content="Локальный аккаунт" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                                    <StackPanel x:Name="sync_loading" Orientation="Horizontal">
+                                                        <wpfui:ProgressRing IsIndeterminate="True" Height="15" Width="15" />
+                                                        <Label Content="Синхрозизация параметров с сервером..." VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0,0,0,0" Margin="10,0,0,0"/>
+                                                    </StackPanel>
+                                                </StackPanel>
                                                 <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Login_Unesell" Content="Войти в Unesell Аккаунт" Style="{StaticResource AccentButtonStyle}" Margin="0,26,20,0" Cursor="Hand" Click="LoginWebUnesell" VerticalAlignment="Top" HorizontalAlignment="Right" Width="210"/>
 
                                             </Grid>
@@ -168,119 +177,161 @@
                                     <TabItem Header="Main Setting" Width="80" Margin="188,-27,626,27">
                                         <ScrollViewer>
                                             <StackPanel>
-                                                <Grid Height="710">
-                                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_1" Content="Основные параметры" Margin="24,15,0,0" HorizontalAlignment="Left" Width="244" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                                    <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="30,39,0,0" VerticalAlignment="Top" Width="354" RenderTransformOrigin="0.5,0.5">
-                                                        <Border.RenderTransform>
-                                                            <TransformGroup>
-                                                                <ScaleTransform ScaleY="-1"/>
-                                                                <SkewTransform/>
-                                                                <RotateTransform/>
-                                                                <TranslateTransform/>
-                                                            </TransformGroup>
-                                                        </Border.RenderTransform>
-                                                    </Border>
+                                                <Grid Margin="0,10,0,0">
+                                                    <StackPanel Margin="0,0,477,0">
+                                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Внешний вид панели управления" Margin="27,15,0,0" HorizontalAlignment="Left" Width="355" Padding="0,0,0,0" FontSize="20" VerticalContentAlignment="Stretch" Height="25" FontWeight="Bold" />
+                                                        <Label Content="Выберите внешний вид панели&#xD;&#xA;Слева - новый | Справа - старый." Margin="27,0,0,0" HorizontalAlignment="Left" Width="295" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="48" />
+                                                        <wpfui:CardControl
+                                                             Title="Обратите внимание!"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Icon="Info24"
+                                                            Subtitle="Старый дизайн больше не обновляется,&#xD;&#xA;но более стабилен." Margin="27,55,25,0"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="472">
+                                                        <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" BorderBrush="{x:Null}" Cursor="Hand" Style="{DynamicResource DefaultButtonStyle}" Grid.RowSpan="1" Width="220" Click="TriggerStyleNew" Margin="0,0,10,0" Height="217">
+                                                            <ToggleButton x:Name="NewDisign" Padding="0,0,0,0" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="217" Width="217">
+                                                                <Grid>
+                                                                    <Rectangle HorizontalAlignment="Left" Height="29" Margin="0,169,0,0" VerticalAlignment="Top" Width="205" Fill="#4C545454" RadiusX="0" RadiusY="0"/>
+                                                                    <wpfui:Card Margin="46,10,0,0" Height="154" VerticalAlignment="Top" HorizontalAlignment="Left" Width="159" Background="#7F686767"/>
+                                                                    <Label Content="00:00&#xD;&#xA;01.01.2023" HorizontalAlignment="Left" Margin="159,173,0,0" VerticalAlignment="Top" FontSize="8" FlowDirection="RightToLeft"/>
+                                                                    <Label Content="ModernNotify" HorizontalAlignment="Left" Margin="54,18,0,0" VerticalAlignment="Top" FontSize="8" FlowDirection="RightToLeft"/>
+                                                                    <Label Content="00:00" HorizontalAlignment="Left" Margin="56,142,0,0" VerticalAlignment="Top" FontSize="12" FlowDirection="RightToLeft" FontWeight="Bold"/>
+                                                                    <Label Content=":00" HorizontalAlignment="Left" Margin="87,147,0,0" VerticalAlignment="Top" FontSize="7" FontWeight="Bold"/>
+                                                                    <wpfui:Card Background="#7F686767" Width="30" Height="16" Margin="169,16,16,166"/>
+                                                                </Grid>
+                                                            </ToggleButton>
+                                                        </wpfui:Button>
 
-                                                    <wpfui:CardControl x:Name="thametext"
+                                                        <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" BorderBrush="{x:Null}" Cursor="Hand" Style="{DynamicResource DefaultButtonStyle}" Grid.RowSpan="1" Width="220" Click="TriggerStyleOld" Margin="0,0,10,0" Height="217">
+                                                            <ToggleButton x:Name="OldDesign" Padding="0,0,0,0" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="217" Width="217">
+                                                                <Grid>
+                                                                    <Rectangle HorizontalAlignment="Left" Height="29" Margin="0,169,0,0" VerticalAlignment="Top" Width="205" Fill="#4C545454" RadiusX="0" RadiusY="0"/>
+                                                                    <wpfui:Card Background="#7F686767" Margin="46,136,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="159"/>
+                                                                    <wpfui:Card Background="#7F686767" Margin="46,103,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="159"/>
+                                                                    <wpfui:Card Background="#7F686767" Margin="46,70,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="159"/>
+                                                                    <wpfui:Card Background="#7F686767" Margin="46,10,0,0" Height="56" VerticalAlignment="Top" HorizontalAlignment="Left" Width="159"/>
+                                                                    <Label Content="00:00&#xA;01.01.2023" HorizontalAlignment="Left" Margin="159,173,0,0" VerticalAlignment="Top" FontSize="8" FlowDirection="RightToLeft"/>
+                                                                    <Label Content="00:00" HorizontalAlignment="Left" Margin="56,142,0,0" VerticalAlignment="Top" FontSize="12" FlowDirection="RightToLeft" FontWeight="Bold"/>
+                                                                    <Label Content=":00" HorizontalAlignment="Left" Margin="87,147,0,0" VerticalAlignment="Top" FontSize="7" FontWeight="Bold"/>
+                                                                </Grid>
+                                                            </ToggleButton>
+                                                        </wpfui:Button>
+                                                    </StackPanel>
+                                                </Grid>
+
+                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_1" Content="Основные параметры" Margin="27,20,0,0" HorizontalAlignment="Left" Width="244" Padding="0,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="19" />
+                                                <Label Content="Настройки, которые влияют на опыт использования приложения." Margin="27,0,0,0" HorizontalAlignment="Left" Width="510" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="21" />
+                                                <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="30,5,0,0" VerticalAlignment="Top" Width="354" RenderTransformOrigin="0.5,0.5">
+                                                    <Border.RenderTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform ScaleY="-1"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
+                                                        </TransformGroup>
+                                                    </Border.RenderTransform>
+                                                </Border>
+
+                                                <wpfui:CardControl x:Name="thametext"
                                                         FontFamily="/icons/Fonts/#Google Sans Medium"
                                                         Title="Тема приложения"
                                                         Grid.Row="0"
                                                         Icon="DarkTheme24"
-                                                        Subtitle="Основной стиль оформления приложения." Margin="27,53,25,0" Height="68" VerticalAlignment="Top">
-                                                        <ComboBox x:Name="theme_combo" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" SelectionChanged="theme_combo_SelectionChanged" HorizontalContentAlignment="Left">
-                                                            <TextBlock><Run Text="Светлая"/></TextBlock>
-                                                            <TextBlock><Run Text="Тёмная"/></TextBlock>
-                                                            <TextBlock><Run Text="Как в системе"/></TextBlock>
-                                                        </ComboBox>
-                                                    </wpfui:CardControl>
-                                                    <wpfui:CardControl x:Name="text0213023"
+                                                        Subtitle="Основной стиль оформления приложения." Margin="27,15,25,0" Height="68" VerticalAlignment="Top">
+                                                    <ComboBox x:Name="theme_combo" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" SelectionChanged="theme_combo_SelectionChanged" HorizontalContentAlignment="Left">
+                                                        <TextBlock><Run Text="Светлая"/></TextBlock>
+                                                        <TextBlock><Run Text="Тёмная"/></TextBlock>
+                                                        <TextBlock><Run Text="Как в системе"/></TextBlock>
+                                                    </ComboBox>
+                                                </wpfui:CardControl>
+                                                <wpfui:CardControl x:Name="text0213023"
                                                         FontFamily="/icons/Fonts/#Google Sans Medium"
                                                         Title="Местоположение панели"
                                                         Grid.Row="0"
                                                         Icon="AlignEndHorizontal20"
-                                                        Subtitle="Выберите, на какой стороне рабочего стола будет находиться панель." Margin="27,130,25,0" Height="68" VerticalAlignment="Top">
-                                                        <ComboBox x:Name="pos_combo" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" HorizontalContentAlignment="Left">
-                                                            <TextBlock><Run Text="Справо"/></TextBlock>
-                                                            <TextBlock><Run Text="Слево"/></TextBlock>
-                                                        </ComboBox>
-                                                    </wpfui:CardControl>
-                                                    <wpfui:CardControl x:Name="SubText8"
+                                                        Subtitle="Выберите, на какой стороне рабочего стола будет находиться панель." Margin="27,10,25,0" Height="68" VerticalAlignment="Top">
+                                                    <ComboBox x:Name="pos_combo" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" HorizontalContentAlignment="Left">
+                                                        <TextBlock><Run Text="Справо"/></TextBlock>
+                                                        <TextBlock><Run Text="Слево"/></TextBlock>
+                                                    </ComboBox>
+                                                </wpfui:CardControl>
+                                                <wpfui:CardControl x:Name="SubText8"
                                                         FontFamily="/icons/Fonts/#Google Sans Medium"
                                                         Title="Язык / Language"
                                                         Grid.Row="0"
                                                         Icon="CodeText20"
-                                                        Subtitle="Выберите перевод приложения" Margin="27,208,25,0" Height="68" VerticalAlignment="Top">
-                                                        <ComboBox x:Name="Language_combo1" HorizontalAlignment="Right" Width="200" DataContextChanged="Select_Language" HorizontalContentAlignment="Left" SelectionChanged="Language_combo1_SelectionChanged">
-                                                            <TextBlock><Run Text="Русский"/></TextBlock>
-                                                            <TextBlock><Run Text="English"/></TextBlock>
-                                                        </ComboBox>
-                                                    </wpfui:CardControl>
-                                                    <wpfui:CardControl x:Name="text3243"
+                                                        Subtitle="Выберите перевод приложения" Margin="27,10,25,0" Height="68" VerticalAlignment="Top">
+                                                    <ComboBox x:Name="Language_combo1" HorizontalAlignment="Right" Width="200" DataContextChanged="Select_Language" HorizontalContentAlignment="Left" SelectionChanged="Language_combo1_SelectionChanged">
+                                                        <TextBlock><Run Text="Русский"/></TextBlock>
+                                                        <TextBlock><Run Text="English"/></TextBlock>
+                                                    </ComboBox>
+                                                </wpfui:CardControl>
+                                                <wpfui:CardControl x:Name="text3243"
                                                         FontFamily="/icons/Fonts/#Google Sans Medium"
                                                         Title="Показывать стартовое уведомление"
                                                         Grid.Row="0"
                                                         Icon="Comment24"
-                                                        Subtitle="При запуске приложения будет выводится подсказка об &quot;Ctrl + Пробел&quot;" Margin="27,286,25,0" Height="68" VerticalAlignment="Top">
-                                                        <wpfui:ToggleSwitch x:Name="Chek_Start_Notify" Cursor="Hand"/>
-                                                    </wpfui:CardControl>
-                                                    <wpfui:CardControl
-                                                        x:Name="textstyleshutdown" Title="Стиль панели выключения"
-                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
-                                                        Grid.Row="0"
-                                                        Icon="ColorLine24"
-                                                        Subtitle="Панель выключения может быть компактной или на весь экран." Margin="27,420,25,0" Height="68" VerticalAlignment="Top">
-                                                        <ComboBox x:Name="Style_Shutdown" HorizontalAlignment="Right" Width="200" SelectionChanged="theme_combo_SelectionChanged" HorizontalContentAlignment="Left">
-                                                            <TextBlock><Run Text="Обычный"/></TextBlock>
-                                                            <TextBlock><Run Text="Современный"/></TextBlock>
-                                                        </ComboBox>
-                                                    </wpfui:CardControl>
-                                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="funnanduse" Content="Функции и взаимодействие" Margin="23,369,0,0" HorizontalAlignment="Left" Width="293" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                                    <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="27,392,0,0" VerticalAlignment="Top" Width="353" RenderTransformOrigin="0.5,0.5">
-                                                        <Border.RenderTransform>
-                                                            <TransformGroup>
-                                                                <ScaleTransform ScaleY="-1"/>
-                                                                <SkewTransform/>
-                                                                <RotateTransform/>
-                                                                <TranslateTransform/>
-                                                            </TransformGroup>
-                                                        </Border.RenderTransform>
-                                                    </Border>
-                                                    <Label x:Name="subbone" Content="Панель выключения." Margin="28,394,0,0" HorizontalAlignment="Left" Width="151" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
-                                                    <wpfui:CardControl
+                                                        Subtitle="При запуске приложения будет выводится подсказка об &quot;Ctrl + Пробел&quot;" Margin="27,10,25,0" Height="68" VerticalAlignment="Top">
+                                                    <wpfui:ToggleSwitch x:Name="Chek_Start_Notify" Cursor="Hand"/>
+                                                </wpfui:CardControl>
+
+                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="funnanduse" Content="Функции и взаимодействие" Margin="27,25,25,0" HorizontalAlignment="Left" Width="293" Padding="0,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="20" />
+                                                <Label x:Name="subbone" Content="Панель выключения." Margin="27,0,0,0" HorizontalAlignment="Left" Width="151" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="21" />
+                                                <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="27,5,25,0" VerticalAlignment="Top" Width="353" RenderTransformOrigin="0.5,0.5">
+                                                    <Border.RenderTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform ScaleY="-1"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
+                                                        </TransformGroup>
+                                                    </Border.RenderTransform>
+                                                </Border>
+                                                <wpfui:CardControl
                                                         x:Name="texts65464" Title="Кнопка: Выключение приложения"
                                                         FontFamily="/icons/Fonts/#Google Sans Medium"
                                                         Grid.Row="0"
                                                         Icon="ConferenceRoom24"
-                                                        Subtitle="Отображать кнопку &quot;Закрыть панель&quot; на панели выключения." Margin="27,495,25,0" Height="68" VerticalAlignment="Top">
-                                                        <wpfui:ToggleSwitch x:Name="Exit_Setting" Cursor="Hand"/>
-                                                    </wpfui:CardControl>
-                                                    <wpfui:CardControl
+                                                        Subtitle="Отображать кнопку &quot;Закрыть панель&quot; на панели выключения." Margin="27,15,25,0" Height="68" VerticalAlignment="Top">
+                                                    <wpfui:ToggleSwitch x:Name="Exit_Setting" Cursor="Hand"/>
+                                                </wpfui:CardControl>
+                                                <wpfui:CardControl
+                                                        x:Name="textstyleshutdown" Title="Стиль панели выключения"
+                                                        FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                        Grid.Row="0"
+                                                        Icon="ColorLine24"
+                                                        Subtitle="Панель выключения может быть компактной или на весь экран." Margin="27,10,25,0" Height="68" VerticalAlignment="Top">
+                                                    <ComboBox x:Name="Style_Shutdown" HorizontalAlignment="Right" Width="200" SelectionChanged="theme_combo_SelectionChanged" HorizontalContentAlignment="Left">
+                                                        <TextBlock><Run Text="Обычный"/></TextBlock>
+                                                        <TextBlock><Run Text="Современный"/></TextBlock>
+                                                    </ComboBox>
+                                                </wpfui:CardControl>
+                                                <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="funnanduse_Copy" Content="Параметры запуска" Margin="27,25,25,0" HorizontalAlignment="Left" Width="293" Padding="0,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="21" />
+                                                <Label x:Name="subbone_Copy" Content="Настройте, как будет запускаться приложение или его сервисы." Margin="27,0,25,0" HorizontalAlignment="Left" Width="525" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
+                                                <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="27,5,25,0" VerticalAlignment="Top" Width="353" RenderTransformOrigin="0.5,0.5">
+                                                    <Border.RenderTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform ScaleY="-1"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
+                                                        </TransformGroup>
+                                                    </Border.RenderTransform>
+                                                </Border>
+                                                <wpfui:CardControl
                                                         x:Name="textstyleshutdown_Copy" Title="Запускаемый объект"
                                                         FontFamily="/icons/Fonts/#Google Sans Medium"
                                                         Grid.Row="0"
                                                         Icon="ContentSettings24"
-                                                        Subtitle="Выберите, что включать при запуске, панель или окно MyDevice." Margin="27,632,25,0" Height="68" VerticalAlignment="Top">
-                                                        <wpfui:Button Appearance="Secondary" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="Startup_Settings" Content="Выбрать запускаемый элемент" HorizontalAlignment="Stretch" VerticalAlignment="Top" Cursor="Hand" Height="32" FontSize="12" Click="StartupChencheOpen"/>
-                                                    </wpfui:CardControl>
-                                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="funnanduse_Copy" Content="Параметры запуска" Margin="23,576,0,0" HorizontalAlignment="Left" Width="293" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                                    <Label x:Name="subbone_Copy" Content="Настройте, как будет запускаться приложение или его сервисы." Margin="28,603,0,0" HorizontalAlignment="Left" Width="525" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="23" VerticalAlignment="Top" />
-                                                    <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="28,600,0,0" VerticalAlignment="Top" Width="353" RenderTransformOrigin="0.5,0.5">
-                                                        <Border.RenderTransform>
-                                                            <TransformGroup>
-                                                                <ScaleTransform ScaleY="-1"/>
-                                                                <SkewTransform/>
-                                                                <RotateTransform/>
-                                                                <TranslateTransform/>
-                                                            </TransformGroup>
-                                                        </Border.RenderTransform>
-                                                    </Border>
-                                                </Grid>
+                                                        Subtitle="Выберите, что включать при запуске, панель или окно MyDevice." Margin="27,15,25,30" Height="68" VerticalAlignment="Top">
+                                                    <wpfui:Button Appearance="Secondary" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="Startup_Settings" Content="Выбрать запускаемый элемент" HorizontalAlignment="Stretch" VerticalAlignment="Top" Cursor="Hand" Height="32" FontSize="12" Click="StartupChencheOpen"/>
+                                                </wpfui:CardControl>
                                             </StackPanel>
                                         </ScrollViewer>
                                     </TabItem>
-                                    <TabItem Header="Apps" Width="80" Margin="292,-66,522,66">
+                                    <TabItem Header="Apps" Width="80" Margin="0,-66,539,66" HorizontalAlignment="Right">
                                         <Grid>
-                                            <wpfui:Card Grid.Column="0" Margin="30,167,0,0" x:Name="Open_MyDivece" Cursor="Hand" MouseLeftButtonDown="Open_MyDivece_Click" HorizontalAlignment="Left" Width="170" Height="62" VerticalAlignment="Top">
+                                            <wpfui:Card Grid.Column="0" Margin="30,247,0,0" x:Name="Open_MyDivece" Cursor="Hand" MouseLeftButtonDown="Open_MyDivece_Click" HorizontalAlignment="Left" Width="170" Height="62" VerticalAlignment="Top">
                                                 <StackPanel>
                                                     <TextBlock
                                                         Grid.Row="0"
@@ -298,7 +349,7 @@
                                             </wpfui:Card>
 
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_2" Content="Настройки игрового оверлея" Margin="24,13,0,0" HorizontalAlignment="Left" Width="273" Padding="5,0,0,0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                            <wpfui:Card x:Name="Open_Start" Grid.Column="0" Margin="212,167,0,0" Cursor="Hand" MouseLeftButtonDown="OpenGameBar" HorizontalAlignment="Left" Width="170" Height="62" VerticalAlignment="Top">
+                                            <wpfui:Card x:Name="Open_Start" Grid.Column="0" Margin="212,247,0,0" Cursor="Hand" MouseLeftButtonDown="OpenGameBar" HorizontalAlignment="Left" Width="170" Height="62" VerticalAlignment="Top">
                                                 <StackPanel>
                                                     <TextBlock
                                                         Grid.Row="0"
@@ -314,8 +365,8 @@
                                                         Text="Unesell Studio" />
                                                 </StackPanel>
                                             </wpfui:Card>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="otherptext_Copy" Content="Прочее:" Margin="23,132,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
-                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="26,156,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="otherptext_Copy" Content="Прочее:" Margin="23,212,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="16" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" />
+                                            <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="26,236,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5">
                                                 <Border.RenderTransform>
                                                     <TransformGroup>
                                                         <ScaleTransform ScaleY="-1"/>
@@ -345,6 +396,34 @@
                                                 Icon="AlignRight24"
                                                 Subtitle="Комбинация клавиш для вызова панели производительности" Margin="27,53,25,0" Height="68" VerticalAlignment="Top">
                                                 <Label Content="Ctrl + G" FontSize="18" Margin="0,3,15,0"/>
+                                            </wpfui:CardControl>
+                                            <wpfui:CardControl
+                                                x:Name="StyleGamePanel" Title="Стиль игрового оверлея"
+                                                FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                Icon="AlignRight24"
+                                                Subtitle="Как игровой оверлей будет отображаться на экране" Margin="27,133,25,0" Height="68" VerticalAlignment="Top">
+
+                                                <StackPanel Orientation="Horizontal">
+                                                    <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Height="36" BorderBrush="{x:Null}" Cursor="Hand" Style="{DynamicResource DefaultButtonStyle}" Grid.RowSpan="1" Width="165" Click="TriggerGB_One" Margin="0,0,10,0">
+                                                        <ToggleButton x:Name="ActiveGameBar" Padding="0,0,0,0" Height="35" VerticalAlignment="Top" Width="165">
+                                                            <wpfui:Card Padding="0,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="165" Height="35" Grid.IsSharedSizeScope="True">
+                                                                <Grid Margin="0,0,0,0" Width="165">
+                                                                    <Label FontFamily="./icons/Fonts/#Google Sans Medium" Content="Компактная панель" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0"/>
+                                                                </Grid>
+                                                            </wpfui:Card>
+                                                        </ToggleButton>
+                                                    </wpfui:Button>
+                                                    <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" Height="36" BorderBrush="{x:Null}" Cursor="Hand" Style="{DynamicResource DefaultButtonStyle}" Grid.RowSpan="1" Width="165" Click="TriggerGP_One">
+                                                        <ToggleButton x:Name="ActiveGamePanel" Padding="0,0,0,0" Height="35" VerticalAlignment="Top" Width="165">
+                                                            <wpfui:Card Padding="0,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="165" Height="35">
+                                                                <Grid Margin="0,0,0,0" Height="35" Width="165">
+                                                                    <Label  FontFamily="./icons/Fonts/#Google Sans Medium" Content="Полная панель" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0" Margin="0,0,0,3"/>
+                                                                </Grid>
+                                                            </wpfui:Card>
+                                                        </ToggleButton>
+                                                    </wpfui:Button>
+                                                </StackPanel>
+
                                             </wpfui:CardControl>
                                         </Grid>
                                     </TabItem>
@@ -468,7 +547,11 @@
                                                         <wpfui:Hyperlink x:Name="Link2"
                                                             FontFamily="/icons/Fonts/#Google Sans Medium"
                                                             Content="Цвет акцента элементов"
-                                                            Icon="Link48" NavigateUri="ms-settings:colors" Margin="169,506,0,0" FontSize="11" Height="24" VerticalAlignment="Top" Width="190" />
+                                                            Icon="Link48" NavigateUri="ms-settings:colors" Margin="169,506,0,0" FontSize="11" Height="24" VerticalAlignment="Top" Width="165" />
+                                                        <wpfui:Hyperlink x:Name="Link3"
+                                                            FontFamily="/icons/Fonts/#Google Sans Medium"
+                                                            Content="Элементы быстрого доступа"
+                                                            Icon="Link48" Margin="345,506,0,0" FontSize="11" Height="24" VerticalAlignment="Top" Width="190" Click="Link3_Click" />
 
 
                                                     </Grid>
@@ -486,11 +569,12 @@
                                             <Button FontFamily="/icons/Fonts/#Google Sans Medium"  x:Name="Open_Tab_Update" Content="Проверить обновления" Style="{StaticResource AccentButtonStyle}" Margin="15,76,0,0" VerticalAlignment="Top" Width="180" Click="Open_Tab_Update_Click" Cursor="Hand"/>
                                             <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Open_Site" Content="Сайт проекта" Margin="200,76,0,0" Style="{StaticResource AccentButtonStyle}" VerticalAlignment="Top" Cursor="Hand" Click="Open_Site_Progect" Height="30" Padding="10,6,10,6" Width="130" Background="#BF0078D7"/>
                                             <Label x:Name="version" Content="version" HorizontalAlignment="Left" Margin="67,40,0,0" VerticalAlignment="Top" Width="154"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Devetxt" Content="Разработчик:" HorizontalAlignment="Left" Margin="15,191,0,0" VerticalAlignment="Top" Foreground="#FFFFC700" FontWeight="Bold"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="15,210,0,0" VerticalAlignment="Top"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Devetxt" Content="Разработчик:" HorizontalAlignment="Left" Margin="15,201,0,0" VerticalAlignment="Top" Foreground="#FFFFC700" FontWeight="Bold"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="140,227,0,0" VerticalAlignment="Top" Height="16"/>
                                             <Label x:Name="textaboutproduct" Content="О продукте:" HorizontalAlignment="Left" Margin="15,123,0,0" VerticalAlignment="Top" Foreground="#FFFFAF00" FontWeight="Bold"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11." HorizontalAlignment="Left" Margin="15,143,0,0" VerticalAlignment="Top" Height="48" Width="371" UseLayoutRounding="False"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11.&#xD;&#xA;Нам 2 года! Спасибо что с нами)" HorizontalAlignment="Left" Margin="15,143,0,0" VerticalAlignment="Top" Height="58" Width="371" UseLayoutRounding="False"/>
 
+                                            <Image Source="/icons/icon.png" Margin="16,225,0,0" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18"/>
                                             <wpfui:Hyperlink x:Name="text_5_dadsc" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Используемый исходный код"
                                             Icon="Link48" Click="Open_Sourse" Margin="0,48,22,0" FontSize="11" Height="24"
                                             VerticalAlignment="Top" HorizontalAlignment="Right" />
@@ -499,6 +583,32 @@
                                             <wpfui:Hyperlink x:Name="text_5_dvdsacv" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Репозиторий"
                                                 Icon="Link48" Click="Open_Sourse_Code" Margin="0,72,22,0" FontSize="11" Height="24"
                                                 VerticalAlignment="Top" HorizontalAlignment="Right" Width="103" />
+                                            <wpfui:Card Margin="0,0,20,10" Height="79" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="152" Padding="0,0,0,0" Background="#FF003E61">
+                                                <StackPanel Orientation="Horizontal" Margin="5,25,10,5" FlowDirection="RightToLeft" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                                    <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" BorderThickness="0" Padding="0" Height="36" Cursor="Hand" Grid.RowSpan="1" Width="34" Margin="0,0,15,0" Click="OpenMyDevice">
+                                                        <Image Source="/icons/mydevice.png" Width="25" Height="25" />
+                                                    </wpfui:Button>
+
+                                                    <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" BorderThickness="0" Padding="0" Height="36" Cursor="Hand" Grid.RowSpan="1" Width="34" Margin="0,0,15,0" Click="OpenCursus">
+                                                        <Image Source="/icons/cursus.png" Width="20" Height="20"/>
+                                                    </wpfui:Button>
+
+                                                    <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" BorderThickness="0" Padding="0" Height="36" Cursor="Hand" Grid.RowSpan="1" Width="34" Margin="0,0,0,0" Click="Openlipari">
+                                                        <Image Source="/icons/lipari.png" Width="25" Height="25"/>
+                                                    </wpfui:Button>
+                                                </StackPanel>
+                                            </wpfui:Card>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_6_Copy" Content="Другие приложения" Margin="0,0,32,62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="128" FlowDirection="RightToLeft" HorizontalContentAlignment="Center"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_6_Copy1" Content="Unesell Studio  |" Margin="43,227,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" RenderTransformOrigin="0.5,0.5">
+                                                <Label.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="-0.198"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Label.RenderTransform>
+                                            </Label>
                                         </Grid>
                                     </TabItem>
                                     <TabItem Header="Update" Margin="706,-166,0,166" HorizontalAlignment="Left" Width="128">
@@ -506,7 +616,7 @@
                                             <wpfui:Card BorderThickness="1" Height="73" Margin="23,10,10,0" VerticalAlignment="Top" Padding="0,0,0,0">
                                                 <Grid>
                                                     <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="InfoUpdate" Content="Выполните проверку обновлений" Margin="78,12,0,0" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
-                                                    <Image x:Name="Update_img" HorizontalAlignment="Left" Height="51" Margin="15,10,0,0" VerticalAlignment="Top" Width="51" Source="icons/update.png" RenderTransformOrigin="0.5,0.5"></Image>
+                                                    <Image x:Name="Update_img" HorizontalAlignment="Left" Height="51" Margin="15,10,0,0" VerticalAlignment="Top" Width="51" Source="icons/update.png" RenderTransformOrigin="0.5,0.5"/>
                                                     <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Check_Update" Content="Проверить наличие обновлений" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="0,18,20,0" VerticalAlignment="Top" Width="254" Cursor="Hand" Click="Check_Update_Click"/>
                                                     <Label x:Name="LastChekUpdate" Content="Последняя проверка" HorizontalAlignment="Left" Margin="78,39,0,0" VerticalAlignment="Top" Width="454"/>
                                                 </Grid>
@@ -554,7 +664,7 @@
                                                 FontFamily="/icons/Fonts/#Google Sans Medium"
                                                 Content="Запустить модуль обновления"
                                                 Icon="Link48" Click="OpenUpdateModule" Margin="25,299,0,0" FontSize="11" Height="24" VerticalAlignment="Top" Width="197" />
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version_Copy" Content="Програмное обеспечение ModernNotify и MyDevice&#xD;&#xA;распростроняются бесплатно.&#xD;&#xA;Unesell Studio 2022 год." HorizontalAlignment="Left" Margin="474,183,0,0" VerticalAlignment="Top" Width="327" Height="64"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version_Copy" Content="Програмное обеспечение ModernNotify и MyDevice&#xA;распростроняются бесплатно.&#xA;Unesell Studio 2023 год." HorizontalAlignment="Left" Margin="474,183,0,0" VerticalAlignment="Top" Width="344" Height="64"/>
                                             <wpfui:Hyperlink x:Name="ChangeLog"
                                                 FontFamily="/icons/Fonts/#Google Sans Medium"
                                                 Content="Что нового?"
@@ -586,7 +696,7 @@
                                                     <Border BorderThickness="1" Height="31" Margin="81,292,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="146">
                                                         <Grid Margin="-2,-4,2,4">
                                                             <Border BorderThickness="1" Margin="8,10,0,0" Background="#7FFF0000" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
-                                                            <Label x:Name="REDtext" Margin="25,11,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12"></Label>
+                                                            <Label x:Name="REDtext" Margin="25,11,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12"/>
                                                             <Border BorderThickness="1" Margin="52,10,0,0" Background="#7F00FF00" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
                                                             <Label x:Name="GREENtext" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Margin="69,11,0,0"/>
                                                             <Border BorderThickness="1" Margin="96,10,0,0" Background="#7F0000FF" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
@@ -617,6 +727,7 @@
                                             </StackPanel>
                                         </ScrollViewer>
                                     </TabItem>
+
                                 </TabControl>
                                 <Button x:Name="Back" Content="Назад" FontFamily="/icons/Fonts/#Google Sans Medium" Margin="23,0,0,26" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Backs" Padding="3,5,8,6" Width="91" Visibility="Hidden" FontSize="14" />
                                 <wpfui:Snackbar
@@ -630,6 +741,17 @@
                                     Show="False"
                                     ShowCloseButton="True"
                                     Timeout="5000" Margin="23,0,0,20" HorizontalAlignment="Left" Width="355" />
+
+                                <wpfui:Snackbar
+                                    FontFamily="/icons/Fonts/#Google Sans Medium"
+                                    x:Name="SyncBar"
+                                    Title="Синхронизация параметров..."
+                                    MaxWidth="600"
+                                    Icon="CloudSync24"
+                                    Message="Настройки закроются автоматически, как только мы закончим процесс."
+                                    Show="False"
+                                    ShowCloseButton="False"
+                                    Margin="23,0,0,20" HorizontalAlignment="Left" Width="355"/>
                             </Grid>
                         </Border>
                     </Grid>

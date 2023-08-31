@@ -302,26 +302,32 @@ namespace ModernNotyfi
             timer.IsEnabled = true;
             timer.Tick += async (o, t) =>
             {
-
                 // Обновление данных плеера. (Более рабочий вариант с таймером)
                 try
                 {
                     await Task.Run(async () => {
-                        var gsmtcsm = await ModernNotyfi.MainWindow.GetSystemMediaTransportControlsSessionManager();
-                        var mediaProperties = await ModernNotyfi.MainWindow.GetMediaProperties(gsmtcsm.GetCurrentSession());
-                        if (mediaProperties.Title.Length > 0)
+                        try
                         {
-                            Application.Current.Dispatcher.Invoke(new Action(() =>
+                            var gsmtcsm = await ModernNotyfi.MainWindow.GetSystemMediaTransportControlsSessionManager();
+                            var mediaProperties = await ModernNotyfi.MainWindow.GetMediaProperties(gsmtcsm.GetCurrentSession());
+                            if (mediaProperties != null)
                             {
-                                NowPlayning.Content = mediaProperties.Title;
-                                NowPlayning_Autor.Content = mediaProperties.Artist;
-
-                                if (mediaProperties.Artist == "" || mediaProperties.Artist == null)
+                                if (mediaProperties.Title.Length > 0)
                                 {
-                                    NowPlayning_Autor.Content = "Нет автора";
+                                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                                    {
+                                        NowPlayning.Content = mediaProperties.Title;
+                                        NowPlayning_Autor.Content = mediaProperties.Artist;
+
+                                        if (mediaProperties.Artist == "" || mediaProperties.Artist == null)
+                                        {
+                                            NowPlayning_Autor.Content = "Нет автора";
+                                        }
+                                    }));
                                 }
-                            }));
+                            }
                         }
+                        catch { }
                     });
                 }
                 catch

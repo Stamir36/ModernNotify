@@ -132,6 +132,12 @@
     <Compile Include="ConnectQR.xaml.cs">
       <DependentUpon>ConnectQR.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Other Page\LauncherEdit.xaml.cs">
+      <DependentUpon>LauncherEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Other Page\game_bar.xaml.cs">
+      <DependentUpon>game_bar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Other Page\gamePanel.xaml.cs">
       <DependentUpon>gamePanel.xaml</DependentUpon>
     </Compile>
@@ -160,6 +166,7 @@
       <DependentUpon>shutdown.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scripts\PInvoke.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
@@ -175,6 +182,14 @@
     <Page Include="ConnectQR.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Other Page\LauncherEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Other Page\game_bar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Other Page\gamePanel.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -450,6 +465,15 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -472,6 +496,21 @@
     <Resource Include="icons\Weather\snow.png" />
     <Resource Include="icons\Weather\thunderstorm.png" />
     <Resource Include="icons\Weather\tornado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\abstract-lines.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\mydevice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\cursus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\lipari.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

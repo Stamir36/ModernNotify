@@ -31,7 +31,7 @@
         </wpfui:Card>
 
         <wpfui:Card Margin="20,179,20,0" Height="70" VerticalAlignment="Top"/>
-        <Label x:Name="Logo" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Unesell GameBar" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="261" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="Logo" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Unesell GameBar" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="167" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <Button FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="close" Content="Закрыть" Margin="0,30,20,0" HorizontalAlignment="Right" Width="106" VerticalAlignment="Top" Cursor="Hand" Click="Close" Background="#4CBFBFBF" Padding="10,6,10,6" Height="32" />
         <wpfui:Card BorderThickness="1" Margin="20,0,20,19" Padding="0,0,0,0" Height="64" VerticalAlignment="Bottom">
             <Grid>
@@ -110,5 +110,8 @@
                 </TransformGroup>
             </Border.RenderTransform>
         </Border>
+        <Button FontFamily="../icons/Fonts/#Google Sans Medium" Margin="232,30,0,0" HorizontalAlignment="Left" Width="37" VerticalAlignment="Top" Cursor="Hand" Click="Minimization" Background="#4CBFBFBF" Padding="10,6,10,6" Height="32">
+            <wpfui:Icon Glyph="ArrowMinimize24" />
+        </Button>
     </Grid>
 </Window>

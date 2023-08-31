@@ -122,13 +122,13 @@
                 <TabItem Header="Step 4">
                     <Grid>
 
-                        <Label FontFamily="/icons/Fonts/#Google Sans Medium"  x:Name="text_1" Content="Основные параметры" Margin="16,105,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"  />
+                        <Label FontFamily="/icons/Fonts/#Google Sans Medium"  x:Name="text_1" Content="Основные параметры" Margin="16,63,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"  />
 
                         <wpfui:Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Save_Settings" Content="Принять и завершить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Width="178" VerticalAlignment="Bottom" Cursor="Hand" Height="32" Click="Save_Settings_Click" Margin="0,0,10,20"/>
-                        <Label FontFamily="/icons/Fonts/#Google Sans Medium"    x:Name="text_1_Copy" Content="Прочее" Margin="16,309,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="20" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" />
-                        <wpfui:ToggleSwitch  Content="Запуск при старте системы" FontFamily="/icons/Fonts/#Google Sans Medium"  x:Name="StartInWindows" Cursor="Hand" Margin="20,326,110,65"/>
+                        <Label FontFamily="/icons/Fonts/#Google Sans Medium"    x:Name="text_1_Copy" Content="Прочее" Margin="16,267,0,0" HorizontalAlignment="Left" Width="230" Padding="5,0,0,0" FontSize="14" VerticalContentAlignment="Stretch" Height="20" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" />
+                        <wpfui:ToggleSwitch  Content="Запуск при старте системы" FontFamily="/icons/Fonts/#Google Sans Medium"  x:Name="StartInWindows" Cursor="Hand" Margin="20,290,10,101"/>
                         <wpfui:CardControl
-                            Margin="20,130,10,210"
+                            Margin="20,88,10,252"
                             Icon="BrightnessHigh24" Height="80" Background="#0FFFFFFF">
                             <StackPanel Width="270">
                                 <TextBlock x:Name="Step4_text1"
@@ -143,7 +143,7 @@
                             </StackPanel>
                         </wpfui:CardControl>
                         <wpfui:CardControl
-                            Margin="20,216,10,124"
+                            Margin="20,174,10,166"
                             Icon="CenterHorizontal20" Height="80" Background="#0FFFFFFF" Click="CardControl_Click">
                             <StackPanel Width="270">
                                 <TextBlock x:Name="Step4_text2"

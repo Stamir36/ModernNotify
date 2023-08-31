@@ -20,6 +20,10 @@ using System.Management;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using Newtonsoft.Json;
+using static ModernNotyfi.settings;
+using System.Net.Http;
+using System.Net.NetworkInformation;
 
 namespace ModernNotyfi
 {
@@ -37,7 +41,38 @@ namespace ModernNotyfi
             WPFUI.Appearance.Theme.Set(WPFUI.Appearance.ThemeType.Dark);
         }
 
-        private void StartProgram(object sender, RoutedEventArgs e)
+        public async Task<bool> CheckInternetConnectionAsync()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    using (var response = await client.GetAsync("https://www.unesell.com"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private async void StartProgram(object sender, RoutedEventArgs e)
+        {
+            bool hasInternetConnection = await CheckInternetConnectionAsync();
+            if (Properties.Settings.Default.Unesell_Login == "Yes" && hasInternetConnection)
+            {
+                await SettingSyncAsync(); // Интернет есть
+            }
+            else
+            {
+                await StartingAsync(); // Интернета нет
+            } 
+        }
+
+        public async Task StartingAsync()
         {
             string proc = Process.GetCurrentProcess().ProcessName;
             Process[] processess = Process.GetProcessesByName(proc);
@@ -60,19 +95,23 @@ namespace ModernNotyfi
 
                 if (Properties.Settings.Default.Unesell_id != "")
                 {
-                    string responseString = string.Empty;
-                    using (var webClient = new WebClient())
+                    try
                     {
-                        webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-                        responseString = webClient.DownloadString(UserData);
-                    }
+                        string responseString = string.Empty;
+                        using (var webClient = new WebClient())
+                        {
+                            webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+                            responseString = await webClient.DownloadStringTaskAsync(new Uri(UserData));
+                        }
 
-                    if (responseString != "null")
-                    {
-                        string name = Convert.ToString(JObject.Parse(responseString).SelectToken("name"));
-                        Properties.Settings.Default.User_Name = name;
-                        Properties.Settings.Default.Save();
+                        if (responseString != "null")
+                        {
+                            string name = Convert.ToString(JObject.Parse(responseString).SelectToken("name"));
+                            Properties.Settings.Default.User_Name = name;
+                            Properties.Settings.Default.Save();
+                        }
                     }
+                    catch { }
                 }
 
                 if (Properties.Settings.Default.Startup == "Panel")
@@ -103,11 +142,54 @@ namespace ModernNotyfi
                     MessageBox.Show("Error", "Конфигурация установлена не правильно. Очистите настройки или поставте параметр 'Startup' на значение ''Panel''.");
                 }
 
-                // Запуск сервесов.
-                ServiceMyDeviceNet serviceMyDeviceNet = new ServiceMyDeviceNet();
-                serviceMyDeviceNet.Show();
+                try
+                {
+                    // Запуск сервисов.
+                    ServiceMyDeviceNet serviceMyDeviceNet = new ServiceMyDeviceNet();
+                    serviceMyDeviceNet.Show();
+                }
+                catch { }
 
                 this.Close();
+            }
+        }
+
+        public async Task SettingSyncAsync()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://unesell.com/api/connect/");
+                HttpResponseMessage response = await client.GetAsync("get_settings.php?user_id=" + Properties.Settings.Default.Unesell_id);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string receivedJsonSettings = await response.Content.ReadAsStringAsync();
+                    UserSettings receivedSettings = JsonConvert.DeserializeObject<UserSettings>(receivedJsonSettings);
+
+                    // Сохранение полученных настроек в файл настроек
+                    Properties.Settings.Default.opacity_panel = Convert.ToDouble(receivedSettings.opacity_panel);
+                    Properties.Settings.Default.color_panel = receivedSettings.color_panel;
+                    Properties.Settings.Default.theme = receivedSettings.theme;
+                    Properties.Settings.Default.Show_Exit = receivedSettings.Show_Exit;
+                    Properties.Settings.Default.Disign_Shutdown = receivedSettings.Disign_Shutdown;
+                    Properties.Settings.Default.show_start_notify = Convert.ToBoolean(receivedSettings.show_start_notify);
+                    Properties.Settings.Default.posicion = receivedSettings.posicion;
+                    Properties.Settings.Default.CornerRadius = Convert.ToInt32(receivedSettings.CornerRadius);
+                    Properties.Settings.Default.WinStyle = receivedSettings.WinStyle;
+                    Properties.Settings.Default.Language = receivedSettings.Language;
+                    Properties.Settings.Default.progressbarstyle = receivedSettings.progressbarstyle;
+                    Properties.Settings.Default.ConnectMobile = receivedSettings.ConnectMobile;
+                    Properties.Settings.Default.MicaBool = Convert.ToBoolean(receivedSettings.MicaBool);
+                    Properties.Settings.Default.Startup = receivedSettings.Startup;
+                    Properties.Settings.Default.PanelStyle = Convert.ToInt32(receivedSettings.PanelStyle);
+                    Properties.Settings.Default.Save();
+
+                    await StartingAsync();
+                }
+                else
+                {
+                    await StartingAsync();
+                }
             }
         }
     }

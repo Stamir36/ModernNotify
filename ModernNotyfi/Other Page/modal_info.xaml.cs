@@ -24,17 +24,11 @@ namespace ModernNotyfi
         {
             InitializeComponent();
             Loaded += OnLoaded;
-            //ThemeManager.SetRequestedTheme(this, ElementTheme.Dark);
 
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             
             this.Left = desktopWorkingArea.Right - this.Width - 10;
             this.Top = desktopWorkingArea.Bottom - 50;
-
-            /* Правый верхний угол
-            this.Left = (desktopWorkingArea.Right / 2) - (this.Width / 2);
-            this.Top = desktopWorkingArea.Bottom - 50;
-            */
 
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
@@ -42,7 +36,7 @@ namespace ModernNotyfi
                 MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 if (command == "volume")
                 {
-                    timer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+                    timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
                     timer.IsEnabled = true;
                     timer.Tick += (o, t) =>
                     {

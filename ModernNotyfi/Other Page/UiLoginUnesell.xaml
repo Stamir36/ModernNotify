@@ -19,7 +19,7 @@
         <wpfui:TitleBar
             FontFamily="/icons/Fonts/#Google Sans Medium"
             Title="Вход в аккаунт Unesell Studio"
-            Icon="pack://application:,,,/icons/App_Color.png"
+            Icon="pack://application:,,,/icons/icon.png"
             Grid.Row="0" Foreground="White"/>
         <wpfui:Card Visibility="Hidden" x:Name="LoginCard" Background="#26FFFFFF" Height="167" VerticalAlignment="Top" HorizontalAlignment="Left" Width="358" Margin="46,175,0,0">
             <StackPanel Margin="6,3,0,3">

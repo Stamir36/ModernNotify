@@ -234,20 +234,20 @@
         <Border x:Name="Border_Shutdown" Visibility="Hidden" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="125" Margin="142,323,0,0" VerticalAlignment="Top" Width="167" CornerRadius="5" Background="White">
             <Grid>
                 <Grid Height="Auto" Margin="0">
-                    <wpfui:Button BorderBrush="#1900D6FF" Click="Command_shutdown" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="181" Margin="0,4,0,0" VerticalAlignment="Top" Background="{x:Null}">
+                    <wpfui:Button BorderBrush="{x:Null}" Click="Command_shutdown" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="181" Margin="0,4,0,0" VerticalAlignment="Top" Background="{x:Null}">
                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="137">
                             <Image Source="icons/shutdown_fluent.png" HorizontalAlignment="Left" Margin="0,2" Width="17"/>
                             <Label x:Name="TextShutdown" Content="Выключение ПК" Margin="17,0,-33,0" Padding="5,0,0,2"/>
                         </Grid>
                     </wpfui:Button>
 
-                    <wpfui:Button  BorderBrush="#1900D6FF" Click="Command_Restart" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="175" Background="{x:Null}">
+                    <wpfui:Button  BorderBrush="{x:Null}" Click="Command_Restart" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="175" Background="{x:Null}">
                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="137">
                             <Image Source="icons/restart_fluent.png" HorizontalAlignment="Left" Margin="0,2" Width="17"/>
                             <Label x:Name="TextRestartPC" Content="Перезагрузка ПК" Margin="17,0,-35,0" Padding="5,0,0,2"/>
                         </Grid>
                     </wpfui:Button>
-                    <wpfui:Button BorderBrush="#1900D6FF" Click="Command_Exit" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="181" Margin="0,81,0,0" VerticalAlignment="Top" Background="{x:Null}" >
+                    <wpfui:Button BorderBrush="{x:Null}" Click="Command_Exit" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="181" Margin="0,81,0,0" VerticalAlignment="Top" Background="{x:Null}" >
                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="137">
                             <Image Source="icons/exit.png" HorizontalAlignment="Left" Margin="0,2" Width="17"/>
                             <Label x:Name="EXITtextPROGRAM" Content="Выкл. панель" Margin="17,0,10,0" Padding="5,0,0,2"/>

@@ -102,16 +102,16 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="499.002"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="53.998"/>
         </Grid.RowDefinitions>
         <wpfui:Card x:Name="MainCard"
-            Height="423"
+            Height="377"
             Margin="10,0,0,9"
             VerticalAlignment="Bottom" Background="#FF313131" Padding="5,5,5,5" HorizontalAlignment="Left" Width="340">
             <Grid>
-                <Image Source="/icon.ico" Margin="6,10,295,374"/>
-                <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="ModernNotify" HorizontalAlignment="Left" Margin="37,16,0,377" Width="119" FontWeight="Bold" />
-                <wpfui:Button Appearance="Secondary" x:Name="AccountOpenMain" Margin="0,5,5,0" Height="35" Cursor="Hand" Padding="10,0,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50">
+                <Image Source="/icon.ico" Margin="6,10,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="27"/>
+                <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="ModernNotify" Margin="37,16,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="119" Height="18" VerticalAlignment="Top" />
+                <wpfui:Button Appearance="Secondary" x:Name="AccountOpenMain" Margin="0,5,5,0" Height="35" Cursor="Hand" Padding="10,0,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Click="NotifycationOpen">
                     <Ellipse Stroke="#7F000000" Height="25" VerticalAlignment="Top" Width="25">
                         <Ellipse.Fill>
                             <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
@@ -119,7 +119,7 @@
                     </Ellipse>
                 </wpfui:Button>
                 <wpfui:Card
-            HorizontalAlignment="Left" Width="100" Height="35" Margin="168,5,0,371" Padding="5,0,5,0">
+            HorizontalAlignment="Left" Width="100" Height="35" Margin="168,5,0,0" Padding="5,0,5,0" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
                         <Image x:Name="IconWeather" Height="30" Width="25" Margin="0,0,10,0"/>
                         <StackPanel Width="50">
@@ -128,30 +128,45 @@
                         </StackPanel>
                     </StackPanel>
                 </wpfui:Card>
-                <wpfui:Button Appearance="Secondary" x:Name="OpenBatteryApp" Margin="4,95,0,0" Height="56" Cursor="Hand" Padding="10,0,10,0" VerticalAlignment="Top" Click="Battery_Open_Panel" HorizontalAlignment="Left" Width="89">
-                    <wpfui:Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <LinearGradientBrush.RelativeTransform>
-                                <TransformGroup>
-                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                    <RotateTransform Angle="180" CenterY="0.5" CenterX="0.5"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </LinearGradientBrush.RelativeTransform>
-                            <GradientStop Color="#FF25DA6A"/>
-                            <GradientStop Color="#0FFFFFFF" Offset="1"/>
-                            <GradientStop x:Name="GradientBattery" Color="#6625DA6A" Offset="0.5"/>
-                        </LinearGradientBrush>
-                    </wpfui:Button.Background>
-                    <Grid Height="42" Width="64">
-                        <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" x:Name="Battery_Copy" Glyph="Battery024" FontSize="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="24"/>
-                        <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Батарея" HorizontalAlignment="Left" Width="54" FontWeight="Bold" FontSize="12" Height="18" VerticalAlignment="Top" />
-                    </Grid>
+                <wpfui:Card Margin="5,258,5,0" Height="54" VerticalAlignment="Top" Padding="0,0,0,0">
+                    <Grid>
+                        <ItemsControl ItemsSource="{Binding QuickLaunchItems}" Margin="0,0,53,0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="10,5,0,5"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" BorderThickness="0" Padding="0" Height="36" Cursor="Hand"  Grid.RowSpan="1" Width="34" Margin="0,0,15,0" Click="QuickLaunchButton_Click">
+                                        <Image Source="{Binding IconPath}" Width="25" Height="25"/>
+                                    </wpfui:Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" CanContentScroll="True">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                        </ItemsControl>
 
-                </wpfui:Button>
+
+                        <wpfui:Button Appearance="Secondary" HorizontalAlignment="Left" Width="40" Height="40" Cursor="Hand" Padding="3" Click="LauncherEdit" Margin="268,0,0,0">
+                            <wpfui:Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </wpfui:Button.Resources>
+                            <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" Glyph="Edit24" FontSize="20" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        </wpfui:Button>
+                    </Grid>
+                </wpfui:Card>
+                <Label x:Name="NoApp" Foreground="{DynamicResource Button.Static.Background}" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Приложения отсутсвуют" Margin="20,277,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="176" Height="18" VerticalAlignment="Top" />
             </Grid>
         </wpfui:Card>
+
         <Border x:Name="Border_Time" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="51" Margin="10,439,0,0" VerticalAlignment="Top" Width="340" CornerRadius="5">
             <Border.Background>
                 <SolidColorBrush Color="#fff" Opacity="0.5"/>
@@ -208,24 +223,9 @@
                 </wpfui:Button>
             </Grid>
         </Border>
-        <Border x:Name="Border_Panel" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="72" Margin="-404,360,0,0" VerticalAlignment="Top" Width="340" CornerRadius="5">
-            <Border.Background>
-                <SolidColorBrush Color="#fff" Opacity="0.7"/>
-            </Border.Background>
-        </Border>
-        <Border x:Name="SoundBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="-404,0,0,144" VerticalAlignment="Bottom" Width="340" CornerRadius="5">
-            <Border.Background>
-                <SolidColorBrush Color="#fff" Opacity="0.7"/>
-            </Border.Background>
-        </Border>
-        <Border x:Name="Border_Music" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="50" Margin="-404,440,0,0" VerticalAlignment="Top" Width="340" CornerRadius="5">
-            <Border.Background>
-                <SolidColorBrush Color="#fff" Opacity="0.7"/>
-            </Border.Background>
-        </Border>
         <Border x:Name="MainPanel" BorderBrush="Black" BorderThickness="1" Margin="366,6,10,10" Background="#B2FFFFFF" CornerRadius="5">
             <Grid>
-                <TabControl x:Name="Full_Panel_Tab" Margin="10,-76,10,-30" TabStripPlacement="Bottom" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                <TabControl x:Name="Full_Panel_Tab" Margin="10,-150,10,-30" TabStripPlacement="Bottom" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <TabItem Header="Battery_Tab" Margin="4,-216,-4,216" Background="#00000000" BorderBrush="{x:Null}" Foreground="{x:Null}">
                         <Grid x:Name="Battery_Tab">
                             <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="text_bbss" Content="Заряд батареи" HorizontalAlignment="Left" Margin="12,18,0,440" Width="115" Padding="0,0,0,0"/>
@@ -371,6 +371,42 @@
                             </wpfui:Card>
                         </Grid>
                     </TabItem>
+                    <TabItem Margin="10,-182,-10,182">
+                        <Grid>
+                            <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Устройство воспроизведения" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Width="184" Height="19"/>
+                            <Label x:Name="AudioDevice_now" Foreground="{DynamicResource Button.Static.Background}" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Динамики" Margin="10,35,10,0" VerticalAlignment="Top" Height="29" FontSize="18" FontWeight="Bold"/>
+                            <ListBox x:Name="AudioDevice" Margin="10,90,10,43" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" SelectionChanged="AudioDevice_SelectionChanged" Background="{x:Null}"/>
+                            <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Все устройства:" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="184" Height="16" FontSize="10"/>
+
+                        </Grid>
+                    </TabItem>
+                    <TabItem Margin="-2,-192,2,192">
+                        <Grid>
+                            <Label Foreground="{DynamicResource Button.Static.Background}" x:Name="BackText1" FontFamily="./icons/Fonts/#Samsung Sharp Sans" Content="Уведомления" HorizontalAlignment="Left" Margin="10,25,0,439" FontSize="12" Padding="0,0,5,0" FontWeight="Bold" Width="97"/>
+                            <Grid Margin="0,60,0,46">
+                                <ListBox Foreground="{DynamicResource Button.Static.Background}" ItemsSource="{Binding Notify}" x:Name="List_Notify" Margin="0,0,0,4" Background="{x:Null}" BorderBrush="{x:Null}">
+
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding Image}" MaxWidth="20" MaxHeight="20" Margin="0,0,10,0" Width="23" Stretch="Fill" StretchDirection="Both" Height="43"/>
+                                                <StackPanel Orientation="Vertical" Height="39" Width="260" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="5,0,0,0">
+                                                    <TextBlock Text="{Binding MainTextN}" FontWeight="Bold"/>
+                                                    <TextBlock Text="{Binding SubTextN}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+
+                                </ListBox>
+
+                                <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="Not_Text" Content="Нет уведомлений" FontWeight="Bold" HorizontalAlignment="Center" Width="138" Height="22" VerticalAlignment="Top" Background="{x:Null}" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,146,0,0"/>
+                                <wpfui:Button Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="MyDevice" Content="Мои устройства" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="3,0,3,3" Cursor="Hand" OpacityMask="#FFDE8686" Click="OpenMyDevice" Width="102" Height="22" Margin="0,167,0,0"/>
+
+                            </Grid>
+                            <wpfui:Button Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="Clear_All_N" Content="Очистить всё" VerticalAlignment="Top" Click="Clear_All_Notify" Padding="1,0,7,1" Background="{x:Null}" BorderBrush="Transparent" HorizontalContentAlignment="Right" Margin="0,20,0,0" FontSize="11" VerticalContentAlignment="Top" HorizontalAlignment="Right" Width="88" Height="26"/>
+                        </Grid>
+                    </TabItem>
                 </TabControl>
                 <Border x:Name="NMWrite" BorderBrush="Black" Height="40" VerticalAlignment="Top" Background="#33FFFFFF" CornerRadius="5">
                     <Grid>
@@ -391,49 +427,13 @@
                 </Border>
             </Grid>
         </Border>
-        <Border x:Name="Border_Notify" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="-404,0,0,231" Width="340" CornerRadius="5" Height="51" VerticalAlignment="Bottom">
-            <Border.Background>
-                <SolidColorBrush Color="White" Opacity="0.7"/>
-            </Border.Background>
-            <Grid>
-                <Border x:Name="NWrite" BorderBrush="Black" Height="50" VerticalAlignment="Top" Background="#33FFFFFF" CornerRadius="5" Margin="0,0,-1,0">
-                    <Grid>
-                        <wpfui:Button x:Name="Nitify_Open" HorizontalAlignment="Left" Margin="296,11,0,0" VerticalAlignment="Top" Width="30" Height="29" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Nitify_Open_Panel">
-                            <wpfui:Button.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="7"/>
-                                </Style>
-                            </wpfui:Button.Resources>
-                            <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" x:Name="Open_N_Image" Glyph="CaretUp24" FontSize="21" RenderTransformOrigin="0.5,0.5"/>
-                        </wpfui:Button>
-                        <Label Foreground="{DynamicResource Button.Static.Background}" x:Name="BackText1" FontFamily="./icons/Fonts/#Samsung Sharp Sans" Content="Уведомления" HorizontalAlignment="Left" Margin="15,18,0,17" FontSize="12" Padding="0,0,5,0" FontWeight="Bold" Width="97"/>
-                    </Grid>
-                </Border>
-                <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="Not_Text" Content="Нет уведомлений" Margin="102,105,0,0" FontWeight="Bold" HorizontalAlignment="Left" Width="138" Height="22" VerticalAlignment="Top" Background="{x:Null}" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <ListBox Foreground="{DynamicResource Button.Static.Background}" ItemsSource="{Binding Notify}" x:Name="List_Notify" Margin="10,55,10,27" Background="{x:Null}" BorderBrush="{x:Null}">
 
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding Image}" MaxWidth="20" MaxHeight="20" Margin="0,0,10,0" Width="23" Stretch="Fill" StretchDirection="Both" Height="43"/>
-                                <StackPanel Orientation="Vertical" Height="39" Width="260" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="5,0,0,0">
-                                    <TextBlock Text="{Binding MainTextN}" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding SubTextN}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
 
-                </ListBox>
-                <wpfui:Button Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="Clear_All_N" Content="Очистить всё" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Clear_All_Notify" Padding="1,0,7,1" Background="{x:Null}" BorderBrush="Transparent" HorizontalContentAlignment="Right" Margin="233,191,10,4" FontSize="11" VerticalContentAlignment="Top"/>
-                <wpfui:Button Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="MyDevice" Content="Мои устройства" HorizontalAlignment="Left" Margin="120,127,0,0" VerticalAlignment="Top" FontSize="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="3,0,3,3" Cursor="Hand" OpacityMask="#FFDE8686" Click="OpenMyDevice" Width="103" Height="22"/>
-            </Grid>
-        </Border>
         <wpfui:Card x:Name="MusicCard"
             Height="169"
             Margin="366,0,10,10"
             VerticalAlignment="Bottom" Background="#FF313131" Padding="5,5,5,5">
-            <Grid>
+            <Grid Opacity="1">
                 <wpfui:Button x:Name="MusicCard_Close" Margin="3,3,0,0" VerticalAlignment="Top" Width="30" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" Click="MusicCard_Close_Click" Height="30" HorizontalAlignment="Left">
                     <wpfui:Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -454,7 +454,7 @@
                 <Label Foreground="{DynamicResource Button.Static.Background}" x:Name="NowPlayning_Autor_MusicCard" Content="Очередь пуста." Margin="97,57,35,0" FontSize="12" VerticalContentAlignment="Center" Padding="0,0,0,0" Height="16" VerticalAlignment="Top"/>
                 <Label Foreground="{DynamicResource Button.Static.Background}"  FontFamily="./icons/Fonts/#Samsung Sharp Sans" Content="Медиаплеер" Margin="35,8,0,0" FontSize="10" VerticalContentAlignment="Center" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="74" Padding="0,0,0,0"/>
                 <wpfui:Card Margin="10,119,5,3"/>
-                <wpfui:Button x:Name="Play_Pause_Copy" Margin="44,122,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Click="Play_Pause_Click" Height="30" HorizontalAlignment="Left" Width="30">
+                <wpfui:Button x:Name="Play_Pause_Copy" Margin="49,122,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Click="Play_Pause_Click" Height="30" HorizontalAlignment="Left" Width="30">
                     <wpfui:Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
@@ -467,7 +467,7 @@
                     <Label x:Name="MediaSession" Foreground="{DynamicResource Button.Static.Background}"  FontFamily="./icons/Fonts/#Samsung Sharp Sans" Content="Нет источника" FontSize="8" VerticalContentAlignment="Center" FontWeight="Bold" Padding="0,0,0,0" HorizontalContentAlignment="Center" Margin="0,-2,0,-2"/>
                 </wpfui:Card>
                 <Slider x:Name="SoundSliderMusicCard" Height="20" Margin="0,126,10,0" VerticalAlignment="Top" ValueChanged="SoundSliderMusicCardCheng" Maximum="100" BorderThickness="10,0,10,0" Background="{x:Null}" Foreground="{x:Null}" Width="100" HorizontalAlignment="Right"/>
-                <wpfui:Button x:Name="Music_Right_Card" Margin="79,122,0,6" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Opacity="0.95" Click="Music_Right_Click" HorizontalAlignment="Left">
+                <wpfui:Button x:Name="Music_Right_Card" Margin="84,122,0,6" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Opacity="0.95" Click="Music_Right_Click" HorizontalAlignment="Left">
                     <wpfui:Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
@@ -475,7 +475,7 @@
                     </wpfui:Button.Resources>
                     <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" Glyph="Next16" />
                 </wpfui:Button>
-                <wpfui:Button x:Name="Music_Left_Card" Margin="9,122,0,6" VerticalAlignment="Stretch" Width="30" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" Click="Music_Left_Click" HorizontalAlignment="Left">
+                <wpfui:Button x:Name="Music_Left_Card" Margin="14,122,0,6" VerticalAlignment="Stretch" Width="30" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" Click="Music_Left_Click" HorizontalAlignment="Left">
                     <wpfui:Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
@@ -486,7 +486,9 @@
                 <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" FontSize="14" Glyph="Speaker248" HorizontalAlignment="Right" Margin="0,130,119,0" VerticalAlignment="Top" Width="14"/>
             </Grid>
         </wpfui:Card>
-        <Grid Margin="12,222,320,204">
+
+
+        <Grid Margin="12,166,320,260">
 
             <wpfui:Button x:Name="MN_Connect_Open" Cursor="Hand" Click="MNConnect_Open" Margin="284,0,0,0" Padding="0,0,0,0" Height="55" Width="45" Background="{x:Null}" VerticalContentAlignment="Center" HorizontalAlignment="Left">
                 <wpfui:Card Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="45" Height="57" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -538,69 +540,73 @@
                 </Border>
             </Button>
         </Grid>
-        <Grid Margin="12,299,320,132">
+        <Grid Margin="12,243,320,188">
             <Label Foreground="{DynamicResource Button.Static.Background}" x:Name="SoundText" Content="Настройки звука" HorizontalAlignment="Left" Margin="19,10,0,0" FontSize="12" Height="16" VerticalAlignment="Top" Padding="0,0,5,0"/>
             <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" FontSize="24" Glyph="Speaker248" HorizontalAlignment="Left" Margin="16,32,0,0" VerticalAlignment="Top"/>
             <Button Foreground="{DynamicResource Button.Static.Background}" FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="SoundDevice" Content="Колонки" HorizontalAlignment="Left" Margin="134,8,0,0" VerticalAlignment="Top" Width="181" FontSize="12" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Height="22" Padding="3,0,5,3" Cursor="Hand" Click="SoundDevice_Click" Grid.RowSpan="1" Grid.ColumnSpan="1"/>
-            <ListBox x:Name="AudioDevice" Height="75" Margin="19,68,19,0" VerticalAlignment="Top" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" Width="300" SelectionChanged="AudioDevice_SelectionChanged" Background="{x:Null}"/>
             <ProgressBar x:Name="ValueVolumeBar" HorizontalAlignment="Left" Margin="50,40,0,0" VerticalAlignment="Top" Width="268" Value="100" Height="10" MinHeight="6" Foreground="#FFFFA400"/>
             <Slider x:Name="SoundSlider" Height="26" Margin="47,34,21,0" VerticalAlignment="Top" ValueChanged="SoundSlider_ValueChanged" Maximum="100" Width="270" BorderThickness="10,0,10,0" Background="{x:Null}" Foreground="{x:Null}"/>
 
         </Grid>
         <wpfui:Card
-            HorizontalAlignment="Left" Width="316" Margin="22,378,0,70"/>
-        <Grid Margin="221,379,331,72">
-            <wpfui:Button x:Name="Play_Pause" Margin="45,9,0,10" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Click="Play_Pause_Click" HorizontalAlignment="Left">
-                <wpfui:Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="7"/>
-                    </Style>
-                </wpfui:Button.Resources>
-                <wpfui:Icon Glyph="Play12" FontSize="24" x:Name="PlayIcon" Foreground="{DynamicResource Button.Static.Background}"/>
-            </wpfui:Button>
-            <wpfui:Button x:Name="Music_Right" Margin="80,9,0,10" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Opacity="0.95" Click="Music_Right_Click" HorizontalAlignment="Left">
-                <wpfui:Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="7"/>
-                    </Style>
-                </wpfui:Button.Resources>
-                <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" Glyph="Next16" />
-            </wpfui:Button>
-            <wpfui:Button x:Name="Music_Left" Margin="10,9,0,10" VerticalAlignment="Stretch" Width="30" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" Click="Music_Left_Click" HorizontalAlignment="Left">
-                <wpfui:Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="7"/>
-                    </Style>
-                </wpfui:Button.Resources>
-                <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" Glyph="Previous16" />
-            </wpfui:Button>
-        </Grid>
-        <wpfui:Button x:Name="Music_About" Height="49" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Music_About_Click" Style="{DynamicResource DefaultButtonStyle}" Margin="22,379,444,71">
-            <Grid Height="39" HorizontalAlignment="Left" VerticalAlignment="Center" Width="223">
-                <Grid x:Name="SoundGridContent" Margin="0,1,10,-1">
-                    <Label Foreground="{DynamicResource Button.Static.Background}"  FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="NowPlayning" Content="Музыка" Margin="35,0,0,0" FontSize="15" VerticalContentAlignment="Center" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="191" Padding="0,0,0,0"/>
-                    <Image x:Name="MusicPlayer" HorizontalAlignment="Left" Height="26" Margin="4,0,0,0" VerticalAlignment="Center" Width="24" Source="/icons/Media/notes.png"/>
-                    <Label Foreground="{DynamicResource Button.Static.Background}" x:Name="NowPlayning_Autor" Content="Очередь пуста." HorizontalAlignment="Left" Margin="35,0,0,3" FontSize="12" Width="183" VerticalContentAlignment="Center" Height="16" VerticalAlignment="Bottom" Padding="0,0,0,0"/>
+            HorizontalAlignment="Left" Width="316" Margin="22,318,0,130" Padding="0,0,0,0">
+            <Grid>
+                <Grid Margin="198,0,0,0">
+                    <wpfui:Button x:Name="Play_Pause" Margin="45,9,0,10" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Click="Play_Pause_Click" HorizontalAlignment="Left">
+                        <wpfui:Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="7"/>
+                            </Style>
+                        </wpfui:Button.Resources>
+                        <wpfui:Icon Glyph="Play12" FontSize="24" x:Name="PlayIcon" Foreground="{DynamicResource Button.Static.Background}"/>
+                    </wpfui:Button>
+                    <wpfui:Button x:Name="Music_Right" Margin="80,9,0,10" VerticalAlignment="Stretch" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Width="30" Opacity="0.95" Click="Music_Right_Click" HorizontalAlignment="Left">
+                        <wpfui:Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="7"/>
+                            </Style>
+                        </wpfui:Button.Resources>
+                        <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" Glyph="Next16" />
+                    </wpfui:Button>
+                    <wpfui:Button x:Name="Music_Left" Margin="10,9,0,10" VerticalAlignment="Stretch" Width="30" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" Click="Music_Left_Click" HorizontalAlignment="Left">
+                        <wpfui:Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="7"/>
+                            </Style>
+                        </wpfui:Button.Resources>
+                        <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" Glyph="Previous16" />
+                    </wpfui:Button>
                 </Grid>
+                <wpfui:Button x:Name="Music_About" Height="49" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="3" Click="Music_About_Click" Style="{DynamicResource DefaultButtonStyle}" Margin="0,0,116,0">
+                    <Grid Height="39" HorizontalAlignment="Left" VerticalAlignment="Center" Width="223">
+                        <Grid x:Name="SoundGridContent" Margin="0,1,10,-1">
+                            <Label Foreground="{DynamicResource Button.Static.Background}"  FontFamily="./icons/Fonts/#Samsung Sharp Sans" x:Name="NowPlayning" Content="Музыка" Margin="40,0,0,0" FontSize="15" VerticalContentAlignment="Center" FontWeight="Bold" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="186" Padding="0,0,0,0"/>
+                            <Image x:Name="MusicPlayer" HorizontalAlignment="Left" Height="30" VerticalAlignment="Center" Width="30" Source="/icons/Media/notes.png" Margin="3,0,0,0"/>
+                            <Label Foreground="{DynamicResource Button.Static.Background}" x:Name="NowPlayning_Autor" Content="Очередь пуста." HorizontalAlignment="Left" Margin="40,0,0,3" FontSize="12" Width="178" VerticalContentAlignment="Center" Height="16" VerticalAlignment="Bottom" Padding="0,0,0,0"/>
+                        </Grid>
+                    </Grid>
+                </wpfui:Button>
+
             </Grid>
-        </wpfui:Button>
-        <Border x:Name="Border_Shutdown" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="125" Margin="142,323,0,0" VerticalAlignment="Top" Width="167" CornerRadius="5" Background="White" Visibility="Hidden">
+        </wpfui:Card>
+
+        <Border Visibility="Hidden" x:Name="Border_Shutdown" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="125" Margin="142,323,0,0" VerticalAlignment="Top" Width="167" CornerRadius="5" Background="#FF343434" >
             <Grid>
                 <Grid Height="Auto" Margin="0">
-                    <wpfui:Button BorderBrush="#1900D6FF" Click="Command_shutdown" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="181" Margin="0,4,0,0" VerticalAlignment="Top" Background="{x:Null}">
+                    <wpfui:Button BorderBrush="{x:Null}" Click="Command_shutdown" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="181" Margin="0,4,0,0" VerticalAlignment="Top" Background="{x:Null}">
                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="137">
                             <Image Source="icons/shutdown_fluent.png" HorizontalAlignment="Left" Margin="0,2" Width="17"/>
                             <Label x:Name="TextShutdown" Content="Выключение ПК" Margin="17,0,-33,0" Padding="5,0,0,2"/>
                         </Grid>
                     </wpfui:Button>
 
-                    <wpfui:Button  BorderBrush="#1900D6FF" Click="Command_Restart" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="175" Background="{x:Null}">
+                    <wpfui:Button  BorderBrush="{x:Null}" Click="Command_Restart" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="175" Background="{x:Null}">
                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="137">
                             <Image Source="icons/restart_fluent.png" HorizontalAlignment="Left" Margin="0,2" Width="17"/>
                             <Label x:Name="TextRestartPC" Content="Перезагрузка ПК" Margin="17,0,-35,0" Padding="5,0,0,2"/>
                         </Grid>
                     </wpfui:Button>
-                    <wpfui:Button BorderBrush="#1900D6FF" Click="Command_Exit" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="181" Margin="0,81,0,0" VerticalAlignment="Top" Background="{x:Null}" >
+                    <wpfui:Button BorderBrush="{x:Null}" Click="Command_Exit" Height="38" HorizontalAlignment="Center" Padding="0,0,0,0" Width="181" Margin="0,81,0,0" VerticalAlignment="Top" Background="{x:Null}" >
                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="137">
                             <Image Source="icons/exit.png" HorizontalAlignment="Left" Margin="0,2" Width="17"/>
                             <Label x:Name="EXITtextPROGRAM" Content="Выкл. панель" Margin="17,0,10,0" Padding="5,0,0,2"/>
@@ -609,5 +615,27 @@
                 </Grid>
             </Grid>
         </Border>
+        <wpfui:Button Appearance="Secondary" x:Name="OpenBatteryApp" Margin="-518,444,0,0" Height="56" Cursor="Hand" Padding="10,0,10,0" VerticalAlignment="Top" Click="Battery_Open_Panel" HorizontalAlignment="Left" Width="88" Grid.RowSpan="2">
+            <wpfui:Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="180" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF25DA6A"/>
+                    <GradientStop Color="#0FFFFFFF" Offset="1"/>
+                    <GradientStop x:Name="GradientBattery" Color="#6625DA6A" Offset="0.5"/>
+                </LinearGradientBrush>
+            </wpfui:Button.Background>
+            <Grid Height="42" Width="64">
+                <wpfui:Icon Foreground="{DynamicResource Button.Static.Background}" x:Name="Battery_Copy" Glyph="Battery024" FontSize="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="24"/>
+                <Label Foreground="{DynamicResource Button.Static.Background}" FontFamily="/icons/Fonts/#Google Sans Medium"  Content="Батарея" HorizontalAlignment="Left" Width="54" FontWeight="Bold" FontSize="12" Height="18" VerticalAlignment="Top" />
+            </Grid>
+
+        </wpfui:Button>
     </Grid>
 </Window>

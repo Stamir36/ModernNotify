@@ -34,6 +34,12 @@ using WPFUI.Controls;
 using Woof.SystemEx;
 using Windows.Management;
 using System.Device.Location;
+using System.Text;
+using Windows.UI.Xaml.Controls.Primitives;
+using Woof.Core;
+using ModernNotyfi.Other_Page;
+using System.ComponentModel;
+using IWshRuntimeLibrary;
 
 namespace ModernNotyfi
 {
@@ -48,8 +54,15 @@ namespace ModernNotyfi
      * 
      */
 
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public string api = "http://api.unesell.com/";
         //public string api = "http://localhost/api/";
 
@@ -85,6 +98,33 @@ namespace ModernNotyfi
         public const int VK_MEDIA_PLAY_PAUSE = 0xB3;
         public const int VK_MEDIA_PREV_TRACK = 0xB1;
 
+        // УСТРОЙСТВА ВОСПРОИЗВЕДЕНИЯ ----------------------------------------------------------------------
+        private const int SND_APPLICATION = 0x80;
+        private const int SND_ALIAS_ID = 0x110000;
+        private const int SND_FILENAME = 0x20000;
+        private const int SND_PURGE = 0x40;
+        private const int SND_SYNC = 0x0;
+
+        private const int SND_DEVICE_DISABLE = 0x0002;
+        private const int SND_DEVICE_ENABLE = 0x0001;
+        private const int SND_DEVICE_QUERY = 0x0008;
+        private const int SND_DEVICE_REMOVE = 0x0004;
+
+        [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool PlaySound(string pszSound, IntPtr hmod, int fdwSound);
+
+        [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool PlaySound(byte[] pszSound, IntPtr hmod, int fdwSound);
+
+        [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool PlaySound(string pszSound, IntPtr hmod, int fdwSound, int dwFlags);
+
+        [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool PlaySound(byte[] pszSound, IntPtr hmod, int fdwSound, int dwFlags);
+
+        [DllImport("winmm.dll")]
+        private static extern int mciSendString(string command, StringBuilder returnValue, int returnLength, IntPtr hwndCallback);
+        
         // РЕГИСТРАЦИЯ ХОТКЕЯ ----------------------------------------------------------------------
         [DllImport("User32.dll")]
         private static extern bool RegisterHotKey(
@@ -116,7 +156,7 @@ namespace ModernNotyfi
             RegisterHotKey(helper.Handle, HOTKEY_ID_Panel, MOD_CTRL, SPASE);
 
             // Хоткей на открытии игрового оверлея
-            const uint ALT = 0xA4;
+            //const uint ALT = 0xA4;
             const uint G = 0x47;
             RegisterHotKey(helper.Handle, HOTKEY_ID_Bar, MOD_CTRL, G);
         }
@@ -129,7 +169,7 @@ namespace ModernNotyfi
                 _source = null;
                 UnregisterHotKey();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -172,8 +212,16 @@ namespace ModernNotyfi
 
                             if (!gameBar_show && ModernNotyfi.WindowState == WindowState.Minimized)
                             {
-                                gamePanel gamePanel = new gamePanel();
-                                gamePanel.Show();
+                                if (Properties.Settings.Default.GameWindowStyle == "gamePanel")
+                                {
+                                    gamePanel gamePanel = new gamePanel();
+                                    gamePanel.Show();
+                                }
+                                else
+                                {
+                                    gameBar gameBar = new gameBar();
+                                    gameBar.Show();
+                                }
                             }
                             handled = true;
                             break;
@@ -225,6 +273,29 @@ namespace ModernNotyfi
 
         public ObservableCollection<NotifyModel> Notify { get; set; } = new ObservableCollection<NotifyModel>();
 
+        private string GetShortcutTarget(string shortcutFilePath)
+        {
+            WshShell shell = new WshShell();
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutFilePath);
+            string targetPath = shortcut.TargetPath;
+            Marshal.ReleaseComObject(shortcut);
+            Marshal.ReleaseComObject(shell);
+            return targetPath;
+        }
+
+        private BitmapSource GetFileIcon(string filePath)
+        {
+            if (System.IO.File.Exists(filePath))
+            {
+                System.Drawing.Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(filePath);
+                if (icon != null)
+                {
+                    return Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                }
+            }
+            return null;
+        }
+
         private async void Search_App_TextChanged(object sender, TextChangedEventArgs e)
         {
             Items.Clear();
@@ -244,22 +315,26 @@ namespace ModernNotyfi
 
                 if (icon != null)
                 {
-                    using (var bmp = icon.ToBitmap())
+                    string targetPath = GetShortcutTarget(fileInfo.FullName);
+                    BitmapSource iconSource = GetFileIcon(targetPath);
+
+                    if (iconSource != null)
                     {
-                        var stream = new MemoryStream();
-                        bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                        imageSource = BitmapFrame.Create(stream);
+                        imageSource = iconSource;
                     }
                 }
 
 
                 if (Search_App.Text.Length == 0)
                 {
-                    Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
+                    if (fileInfo.Name.Replace(".lnk", "") != "File Explorer")
+                    {
+                        Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
+                    }
                 }
                 else
                 {
-                    if (fileInfo.Name.Contains(Search_App.Text))
+                    if (fileInfo.Name.Contains(Search_App.Text) && fileInfo.Name.Replace(".lnk", "") != "File Explorer")
                     {
                         Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
                     }
@@ -349,34 +424,24 @@ namespace ModernNotyfi
 
                 // Применение настроек.
                 var bc = new BrushConverter();
-                Border_Time.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
-                Border_Panel.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
-                SoundBorder.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
-                Border_Shutdown.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
-                Border_Music.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
-                MainPanel.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
-                Border_Notify.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
-                MusicCard.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
-                MainCard.Background = (System.Windows.Media.Brush)bc.ConvertFrom(Properties.Settings.Default.color_panel);
+
+                System.Windows.Media.Color color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(Properties.Settings.Default.color_panel);
+                System.Windows.Media.Color transparentColor = System.Windows.Media.Color.FromArgb((byte)(Properties.Settings.Default.opacity_panel * 255), color.R, color.G, color.B);
+                SolidColorBrush transparentBrush = new SolidColorBrush(transparentColor);
+
+                MusicCard.Background = transparentBrush;
+                MainCard.Background = transparentBrush;
+
+                Border_Time.Background = transparentBrush;
+                Border_Shutdown.Background = transparentBrush;
+                MainPanel.Background = transparentBrush;
 
                 Border_Time.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
-                Border_Panel.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
-                SoundBorder.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
                 Border_Shutdown.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
-                Border_Music.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
                 MainPanel.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
-                Border_Notify.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
-                NWrite.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
                 NMWrite.CornerRadius = new CornerRadius(Properties.Settings.Default.CornerRadius);
-
-                Border_Time.Background.Opacity = Properties.Settings.Default.opacity_panel;
-                Border_Panel.Background.Opacity = Properties.Settings.Default.opacity_panel;
-                SoundBorder.Background.Opacity = Properties.Settings.Default.opacity_panel;
-                Border_Music.Background.Opacity = Properties.Settings.Default.opacity_panel;
-                MainPanel.Background.Opacity = Properties.Settings.Default.opacity_panel;
-                Border_Notify.Opacity = Properties.Settings.Default.opacity_panel;
-                MusicCard.Opacity = Properties.Settings.Default.opacity_panel;
                 NowPlayning.Foreground = SoundText.Foreground;
+
 
                 if (Properties.Settings.Default.Show_Exit == "False")
                 {
@@ -417,6 +482,7 @@ namespace ModernNotyfi
                     SoundSlider.Value = Convert.ToInt16(mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
                     ValueVolumeBar.Value = SoundSlider.Value;
                     SoundDevice.Content = speakDevices.ToList()[soundDevice];
+                    AudioDevice_now.Content = speakDevices.ToList()[soundDevice];
                 }
 
                 InitStart();
@@ -429,8 +495,50 @@ namespace ModernNotyfi
             }
         }
 
+        public ObservableCollection<QuickLaunchItemViewModel> QuickLaunchItems { get; set; }
+
+        private void QuickLaunchButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.Button clickedButton = (System.Windows.Controls.Button)sender;
+            QuickLaunchItemViewModel item = clickedButton.DataContext as QuickLaunchItemViewModel;
+
+            if (item != null && System.IO.File.Exists(item.AppPath))
+            {
+                Process.Start(item.AppPath);
+            }
+        }
+
+        public void LauncherUpdate()
+        {
+            string shortcutsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "shortcuts");
+            if (!Directory.Exists(shortcutsFolderPath))
+            {
+                Directory.CreateDirectory(shortcutsFolderPath);
+            }
+
+            string[] shortcutFiles = Directory.GetFiles(shortcutsFolderPath);
+            foreach (string shortcutFilePath in shortcutFiles)
+            {
+                QuickLaunchItems.Add(new QuickLaunchItemViewModel(shortcutFilePath));
+            }
+
+            if (QuickLaunchItems.Count == 0)
+            {
+                NoApp.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NoApp.Visibility = Visibility.Collapsed;
+            }
+        }
+
         public async void InitStart()
         {
+            QuickLaunchItems = new ObservableCollection<QuickLaunchItemViewModel>();
+
+            LauncherUpdate();
+            DataContext = this;
+
             string name_user = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             var appUser = Directory.GetFiles("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
             var appWindows = Directory.GetFiles(name_user + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs", "*.lnk");
@@ -449,68 +557,37 @@ namespace ModernNotyfi
 
                 if (icon != null)
                 {
-                    using (var bmp = icon.ToBitmap())
+                    string targetPath = GetShortcutTarget(fileInfo.FullName);
+                    BitmapSource iconSource = GetFileIcon(targetPath);
+
+                    if (iconSource != null)
                     {
-                        var stream = new MemoryStream();
-                        bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                        imageSource = BitmapFrame.Create(stream);
+                        imageSource = iconSource;
                     }
                 }
-
-                Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
+                if (fileInfo.Name.Replace(".lnk", "") != "File Explorer")
+                {
+                    Items.Add(new ItemModel(fileInfo.Name.Replace(".lnk", ""), imageSource, fileInfo.FullName));
+                }
             }
 
-            sessionManager = GlobalSystemMediaTransportControlsSessionManager.RequestAsync().GetAwaiter().GetResult();
-            currentSession = sessionManager.GetCurrentSession();
-            currentSession.MediaPropertiesChanged += CurrentSession_MediaPropertiesChanged;
+            try {
+                sessionManager = GlobalSystemMediaTransportControlsSessionManager.RequestAsync().GetAwaiter().GetResult();
+                currentSession = sessionManager.GetCurrentSession();
+                currentSession.MediaPropertiesChanged += CurrentSession_MediaPropertiesChanged;
 
-            GetMediaProperties();
-
-            //Синхронизация уведомлений с Unesell Account
-            /*
-            string id = Properties.Settings.Default.Unesell_id;
-            if (!string.IsNullOrEmpty(id))
-            {
-                // api + "applogin.php?email=" + "&password="
-                string responseString = string.Empty;
-                using (var webClient = new WebClient())
-                {
-                    webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-                    responseString = webClient.DownloadString("http://localhost/api/" + "appNotify.php?id=" + id);
-                }
-
-                if (responseString == "null")
-                {
-                    return;
-                }
-                else
-                {
-                    string text = Convert.ToString(JObject.Parse(responseString).SelectToken("text"));
-                    System.Windows.MessageBox.Show(text);
-                    try
-                    {
-                        Task.Run(() =>
-                        {
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                
-                            });
-                        });
-
-                    }
-                    catch
-                    {
-
-                    }
-                }
-
-            }
-            */
+                GetMediaProperties();
+            } catch { }
         }
 
         private async void CurrentSession_MediaPropertiesChanged(GlobalSystemMediaTransportControlsSession sender, MediaPropertiesChangedEventArgs args)
         {
-            await Dispatcher.InvokeAsync(GetMediaProperties);
+            try{
+                await Dispatcher.InvokeAsync(GetMediaProperties);
+            }
+            catch { 
+                // none
+            } 
         }
 
         private async void GetMediaProperties()
@@ -533,6 +610,7 @@ namespace ModernNotyfi
                         Dispatcher.Invoke(() =>
                         {
                             AlbumCoverImage.Source = albumCoverImage;
+                            MusicPlayer.Source = albumCoverImage;
                         });
                     }
                 }
@@ -541,12 +619,13 @@ namespace ModernNotyfi
                     Dispatcher.Invoke(() =>
                     {
                         AlbumCoverImage.Source = null;
+                        BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/Media/notes.png", UriKind.Relative); bi3.EndInit();
+                        MusicPlayer.Source = bi3;
                     });
                 }
             }
             catch (Exception ex)
             {
-                // Обработка ошибок при получении обложки
                 System.Windows.MessageBox.Show($"Ошибка при получении обложки: {ex.Message}");
             }
         }
@@ -826,48 +905,7 @@ namespace ModernNotyfi
                 // Обновление данных плеера. (Более рабочий вариант с таймером)
                 try
                 {
-                    await Task.Run(async () =>
-                    {
-                        MediaManager.OnNewSource += MediaManager_OnNewSource;
-                        MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
-                        MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
-                        MediaManager.OnSongChanged += MediaManager_OnSongChanged;
-                        MediaManager.Start();
-
-                        var gsmtcsm = await GetSystemMediaTransportControlsSessionManager();
-                        var mediaProperties = await GetMediaProperties(gsmtcsm.GetCurrentSession());
-                        if (mediaProperties.Title.Length > 0)
-                        {
-                            Application.Current.Dispatcher.Invoke(new Action(() =>
-                            {
-                                NowPlayning.Content = mediaProperties.Title;
-                                NowPlayning_Autor.Content = mediaProperties.Artist;
-                                try
-                                {
-                                    MediaSession.Content = gsmtcsm.GetCurrentSession().SourceAppUserModelId.Replace(".exe", "");
-                                    if (gsmtcsm.GetCurrentSession().SourceAppUserModelId.Replace(".exe", "").Contains("ZuneMusic"))
-                                    {
-                                        MediaSession.Content = "Zune Music";
-                                    }
-                                }
-                                catch
-                                {
-                                    MediaSession.Content = "Нет источника";
-                                }
-
-                                if (mediaProperties.Artist == "" || mediaProperties.Artist == null)
-                                {
-                                    NowPlayning_Autor.Content = "Нет автора";
-                                }
-
-                                SoundTimeAll.Content = gsmtcsm.GetCurrentSession().GetTimelineProperties().EndTime.ToString(@"mm\:ss");
-                                var position = gsmtcsm.GetCurrentSession().GetTimelineProperties().Position;
-                                SoundTimeNow.Content = position.ToString(@"mm\:ss");
-                                music_min = position.Minutes;
-                                music_sec = position.Seconds;
-                            }));
-                        }
-                    });
+                    UpdatePlayer();
                 }
                 catch
                 {
@@ -953,9 +991,43 @@ namespace ModernNotyfi
 
                 return Task.CompletedTask;
             });
+        }
 
+        private async void UpdatePlayer()
+        {
+            var gsmtcsm = await GetSystemMediaTransportControlsSessionManager();
+            var mediaProperties = await GetMediaProperties(gsmtcsm.GetCurrentSession());
+            if (mediaProperties != null)
+            {
+                if (mediaProperties.Title.Length > 0)
+                {
+                    NowPlayning.Content = mediaProperties.Title;
+                    NowPlayning_Autor.Content = mediaProperties.Artist;
+                    try
+                    {
+                        MediaSession.Content = gsmtcsm.GetCurrentSession().SourceAppUserModelId.Replace(".exe", "");
+                        if (gsmtcsm.GetCurrentSession().SourceAppUserModelId.Replace(".exe", "").Contains("ZuneMusic"))
+                        {
+                            MediaSession.Content = "Zune Music";
+                        }
+                        SoundTimeAll.Content = gsmtcsm.GetCurrentSession().GetTimelineProperties().EndTime.ToString(@"mm\:ss");
+                    }
+                    catch
+                    {
+                        MediaSession.Content = "Нет источника";
+                    }
 
-            //GetServerInfo();
+                    if (mediaProperties.Artist == "" || mediaProperties.Artist == null)
+                    {
+                        NowPlayning_Autor.Content = "Нет автора";
+                    }
+
+                    var position = gsmtcsm.GetCurrentSession().GetTimelineProperties().Position;
+                    SoundTimeNow.Content = position.ToString(@"mm\:ss");
+                    music_min = position.Minutes;
+                    music_sec = position.Seconds;
+                }
+            }
         }
 
         private void Watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
@@ -1067,8 +1139,6 @@ namespace ModernNotyfi
             {
                 UserNotificationListener listener = UserNotificationListener.Current;
                 UserNotificationListenerAccessStatus accessStatus = await listener.RequestAccessAsync();
-
-                //IReadOnlyList<UserNotification> notifs = await listener.GetNotificationsAsync(NotificationKinds.Toast);
             }
             else
             {
@@ -1471,67 +1541,8 @@ namespace ModernNotyfi
 
         private void SoundDevice_Click(object sender, RoutedEventArgs e)
         {
-            if (SoundDeviceOpen == 0)
-            {
-                SoundDeviceOpen = 1; not_up = 0;
-                DoubleAnimation SoundDeviceAnimation = new DoubleAnimation();
-                SoundDeviceAnimation.From = SoundBorder.ActualHeight;
-                SoundDeviceAnimation.To = 150;
-                SoundDeviceAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                SoundBorder.BeginAnimation(Border.HeightProperty, SoundDeviceAnimation);
-
-                DoubleAnimation NotifyAnimation = new DoubleAnimation();
-                NotifyAnimation.From = Border_Notify.ActualHeight;
-                NotifyAnimation.To = 52;
-                NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                Border_Notify.BeginAnimation(Border.HeightProperty, NotifyAnimation);
-
-                Open_N_Image.Glyph = WPFUI.Common.Icon.CaretUp24;
-
-                ThicknessAnimation Border_NotifyAnimation = new ThicknessAnimation();
-                Border_NotifyAnimation.From = new Thickness(10, 0, 0, 274);
-                Border_NotifyAnimation.To = new Thickness(10, 0, 0, 358);
-                Border_NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                Border_Notify.BeginAnimation(Border.MarginProperty, Border_NotifyAnimation);
-
-                ThicknessAnimation Border_MusicAnimation = new ThicknessAnimation();
-                Border_MusicAnimation.From = new Thickness(10, 230, 0, 0);
-                Border_MusicAnimation.To = new Thickness(10, 150, 0, 0);
-                Border_MusicAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                Border_Music.BeginAnimation(Border.MarginProperty, Border_MusicAnimation);
-                //Margin="10,150,0,0"
-            }
-            else
-            {
-                SoundDeviceOpen = 0; not_up = 0;
-                DoubleAnimation SoundDeviceAnimation = new DoubleAnimation();
-                SoundDeviceAnimation.From = SoundBorder.ActualHeight;
-                SoundDeviceAnimation.To = 70;
-                SoundDeviceAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                SoundBorder.BeginAnimation(Border.HeightProperty, SoundDeviceAnimation);
-
-                DoubleAnimation NotifyAnimation = new DoubleAnimation();
-                NotifyAnimation.From = Border_Notify.ActualHeight;
-                NotifyAnimation.To = 52;
-                NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                Border_Notify.BeginAnimation(Border.HeightProperty, NotifyAnimation);
-
-                Open_N_Image.Glyph = WPFUI.Common.Icon.CaretUp24;
-
-                ThicknessAnimation Border_NotifyAnimation = new ThicknessAnimation();
-                Border_NotifyAnimation.From = new Thickness(10, 0, 0, 358);
-                Border_NotifyAnimation.To = new Thickness(10, 0, 0, 274);
-                Border_NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                Border_Notify.BeginAnimation(Border.MarginProperty, Border_NotifyAnimation);
-
-                ThicknessAnimation Border_MusicAnimation = new ThicknessAnimation();
-                Border_MusicAnimation.From = new Thickness(10, 150, 0, 0);
-                Border_MusicAnimation.To = new Thickness(10, 230, 0, 0);
-                Border_MusicAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                Border_Music.BeginAnimation(Border.MarginProperty, Border_MusicAnimation);
-                //10,230,0,0
-            }
-
+            Open_Full_Panel();
+            Full_Panel_Tab.SelectedIndex = 3;
         }
 
         private void AudioDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1545,7 +1556,14 @@ namespace ModernNotyfi
                 MMDevice mMDevice = speakDevices.ToList()[soundDevice];
                 SoundSlider.Value = Convert.ToInt16(mMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
                 ValueVolumeBar.Value = SoundSlider.Value;
-                SoundDevice.Content = speakDevices.ToList()[soundDevice];
+
+                string selectedDeviceName = Convert.ToString(speakDevices.ToList()[soundDevice]);
+                SoundDevice.Content = selectedDeviceName;
+                AudioDevice_now.Content = selectedDeviceName;
+
+                int startIndex = selectedDeviceName.IndexOf("(") + 1;
+                int endIndex = selectedDeviceName.IndexOf(")");
+                string deviceName = selectedDeviceName.Substring(startIndex, endIndex - startIndex);
             }
         }
 
@@ -1563,50 +1581,6 @@ namespace ModernNotyfi
             MainPanelGrid.BeginAnimation(Border.MarginProperty, Border_MainPanelGrid);
         }
         int not_up = 0;
-        private void Nitify_Open_Panel(object sender, RoutedEventArgs e)
-        {
-            DoubleAnimation NotifyAnimation = new DoubleAnimation();
-            NotifyAnimation.From = Border_Notify.ActualHeight;
-            if (not_up == 0)
-            {
-                
-                Open_N_Image.Glyph = WPFUI.Common.Icon.CaretDown24;
-                NotifyAnimation.To = 215;
-                not_up = 1;
-            }
-            else
-            {
-                Open_N_Image.Glyph = WPFUI.Common.Icon.CaretUp24;
-                NotifyAnimation.To = 52;
-                not_up = 0;
-            }
-            NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
-            Border_Notify.BeginAnimation(Border.HeightProperty, NotifyAnimation);
-
-            DoubleAnimation SoundDeviceAnimation = new DoubleAnimation();
-            SoundDeviceAnimation.From = SoundBorder.ActualHeight;
-            SoundDeviceAnimation.To = 70;
-            SoundDeviceAnimation.Duration = TimeSpan.FromSeconds(0.5);
-            SoundBorder.BeginAnimation(Border.HeightProperty, SoundDeviceAnimation);
-
-            if (Border_Notify.Margin == new Thickness(10, 0, 0, 358))
-            {
-                ThicknessAnimation Border_NotifyAnimation = new ThicknessAnimation();
-                Border_NotifyAnimation.From = new Thickness(10, 0, 0, 358);
-                Border_NotifyAnimation.To = new Thickness(10, 0, 0, 274);
-                Border_NotifyAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                Border_Notify.BeginAnimation(Border.MarginProperty, Border_NotifyAnimation);
-            }
-
-            if (Border_Music.Margin == new Thickness(10, 150, 0, 0))
-            {
-                ThicknessAnimation Border_MusicAnimation = new ThicknessAnimation();
-                Border_MusicAnimation.From = new Thickness(10, 150, 0, 0);
-                Border_MusicAnimation.To = new Thickness(10, 230, 0, 0);
-                Border_MusicAnimation.Duration = TimeSpan.FromSeconds(0.5);
-                Border_Music.BeginAnimation(Border.MarginProperty, Border_MusicAnimation);
-            }
-        }
 
         private void Full_Close_Panel(object sender, RoutedEventArgs e)
         {
@@ -1620,26 +1594,6 @@ namespace ModernNotyfi
         //int onen_about_sound = 0;
         private void Music_About_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            if(onen_about_sound == 0)
-            {
-                ThicknessAnimation Border_MainPanelGrid = new ThicknessAnimation();
-                Border_MainPanelGrid.From = new Thickness(0, 0, 0, 0);
-                Border_MainPanelGrid.To = new Thickness(-250, 0, 0, 0);
-                Border_MainPanelGrid.Duration = TimeSpan.FromSeconds(0.1);
-                SoundGridContent.BeginAnimation(Grid.MarginProperty, Border_MainPanelGrid);
-                onen_about_sound = 1;
-            }
-            else
-            {
-                ThicknessAnimation Border_MainPanelGrid = new ThicknessAnimation();
-                Border_MainPanelGrid.From = new Thickness(-250, 0, 0, 0);
-                Border_MainPanelGrid.To = new Thickness(0, 0, 0, 0);
-                Border_MainPanelGrid.Duration = TimeSpan.FromSeconds(0.1);
-                SoundGridContent.BeginAnimation(Grid.MarginProperty, Border_MainPanelGrid);
-                onen_about_sound = 0;
-            }
-            */
             Open_Full_Panel();
             MainPanel.Visibility = Visibility.Hidden;
             MusicCard.Visibility = Visibility.Visible;
@@ -1803,6 +1757,7 @@ namespace ModernNotyfi
                     my.SoundTimeNow.Content = sender.ControlSession.GetTimelineProperties().Position.ToString(@"mm\:ss");
                     my.music_min = sender.ControlSession.GetTimelineProperties().Position.Minutes;
                     my.music_sec = sender.ControlSession.GetTimelineProperties().Position.Seconds;
+                    my.GetMediaProperties();
                 }));
             }
             catch
@@ -1819,22 +1774,25 @@ namespace ModernNotyfi
             {
                 MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 
-                if (args.PlaybackStatus.ToString() == "Paused") //Paused   || Playing
+                if (args.PlaybackStatus.ToString() == "Paused" || args.PlaybackStatus.ToString() == "Playing")
                 {
-                    my.PlayIcon.Glyph = WPFUI.Common.Icon.Play12;
-                    my.PlayIcon_MusicCard.Glyph = WPFUI.Common.Icon.Play12;
-                }
-                else
-                {
-                    my.PlayIcon.Glyph = WPFUI.Common.Icon.Pause12;
-                    my.PlayIcon_MusicCard.Glyph = WPFUI.Common.Icon.Pause12;
-                }
+                    my.PlayIcon.Glyph = args.PlaybackStatus.ToString() == "Paused" ? WPFUI.Common.Icon.Play12 : WPFUI.Common.Icon.Pause12;
+                    my.PlayIcon_MusicCard.Glyph = my.PlayIcon.Glyph;
 
-                my.SoundTimeAll.Content = sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm\:ss");
-                my.media_all_sec = Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
-                my.SoundTimeNow.Content = sender.ControlSession.GetTimelineProperties().Position.ToString(@"mm\:ss");
-                my.music_min = sender.ControlSession.GetTimelineProperties().Position.Minutes;
-                my.music_sec = sender.ControlSession.GetTimelineProperties().Position.Seconds;
+                    my.SoundTimeAll.Content = sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm\:ss");
+                    my.media_all_sec = Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"ss")) + 60 * Convert.ToInt32(sender.ControlSession.GetTimelineProperties().EndTime.ToString(@"mm"));
+
+                    // Добавляем таймер для обновления времени каждую секунду
+                    var timer = new System.Windows.Threading.DispatcherTimer();
+                    timer.Interval = TimeSpan.FromSeconds(1);
+                    timer.IsEnabled = true;
+                    timer.Tick += (o, t) =>
+                    {
+                        my.SoundTimeNow.Content = sender.ControlSession.GetTimelineProperties().Position.ToString(@"mm\:ss");
+                        my.music_min = sender.ControlSession.GetTimelineProperties().Position.Minutes;
+                        my.music_sec = sender.ControlSession.GetTimelineProperties().Position.Seconds;
+                    };
+                }
             }));
         }
 
@@ -1861,41 +1819,42 @@ namespace ModernNotyfi
                 }));
             }
         }
-
+        
         public static async Task<GlobalSystemMediaTransportControlsSessionManager> GetSystemMediaTransportControlsSessionManager() =>
             await GlobalSystemMediaTransportControlsSessionManager.RequestAsync();
 
-        public static async Task<GlobalSystemMediaTransportControlsSessionMediaProperties> GetMediaProperties(GlobalSystemMediaTransportControlsSession session) =>
-            await session.TryGetMediaPropertiesAsync();
+        public static async Task<GlobalSystemMediaTransportControlsSessionMediaProperties> GetMediaProperties(GlobalSystemMediaTransportControlsSession session)
+        {
+            try
+            {
+                if(session != null)
+                {
+                    return await session.TryGetMediaPropertiesAsync();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         private void Play_Pause_Click(object sender, RoutedEventArgs e)
         {
             keybd_event(VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
-            MediaManager.OnNewSource += MediaManager_OnNewSource;
-            MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
-            MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
-            MediaManager.OnSongChanged += MediaManager_OnSongChanged;
-            MediaManager.Start();
         }
 
         private void Music_Right_Click(object sender, RoutedEventArgs e)
         {
             keybd_event(VK_MEDIA_NEXT_TRACK, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
-            MediaManager.OnNewSource += MediaManager_OnNewSource;
-            MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
-            MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
-            MediaManager.OnSongChanged += MediaManager_OnSongChanged;
-            MediaManager.Start();
         }
 
         private void Music_Left_Click(object sender, RoutedEventArgs e)
         {
             keybd_event(VK_MEDIA_PREV_TRACK, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
-            MediaManager.OnNewSource += MediaManager_OnNewSource;
-            MediaManager.OnRemovedSource += MediaManager_OnRemovedSource;
-            MediaManager.OnPlaybackStateChanged += MediaManager_OnPlaybackStateChanged;
-            MediaManager.OnSongChanged += MediaManager_OnSongChanged;
-            MediaManager.Start();
         }
 
         private void Battery_Settings_Click(object sender, RoutedEventArgs e)
@@ -2107,10 +2066,74 @@ namespace ModernNotyfi
         {
             SoundSlider.Value = SoundSliderMusicCard.Value;
         }
+
+        private void NotifycationOpen(object sender, RoutedEventArgs e)
+        {
+            Open_Full_Panel();
+            Full_Panel_Tab.SelectedIndex = 4;
+        }
+
+        private void LauncherEdit(object sender, RoutedEventArgs e)
+        {
+            LauncherEdit launcher = new LauncherEdit();
+            launcher.Show();
+        }
     }
 
+    public class QuickLaunchItemViewModel
+    {
+        public ImageSource IconPath { get; }
+        public string AppPath { get; }
 
+        public QuickLaunchItemViewModel(string shortcutFilePath)
+        {
+            AppPath = shortcutFilePath;
+            IconPath = ExtractIcon(shortcutFilePath);
+        }
 
+        private ImageSource ExtractIcon(string filePath)
+        {
+            ImageSource imageSource = null;
+
+            FileInfo fileInfo = new FileInfo(filePath);
+
+            if (fileInfo.Extension.ToLower() == ".lnk")
+            {
+                string targetPath = GetShortcutTarget(filePath);
+                BitmapSource iconSource = GetFileIcon(targetPath);
+
+                if (iconSource != null)
+                {
+                    imageSource = iconSource;
+                }
+            }
+
+            return imageSource;
+        }
+
+        private string GetShortcutTarget(string shortcutFilePath)
+        {
+            WshShell shell = new WshShell();
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutFilePath);
+            string targetPath = shortcut.TargetPath;
+            Marshal.ReleaseComObject(shortcut);
+            Marshal.ReleaseComObject(shell);
+            return targetPath;
+        }
+
+        private BitmapSource GetFileIcon(string filePath)
+        {
+            if (System.IO.File.Exists(filePath))
+            {
+                System.Drawing.Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(filePath);
+                if (icon != null)
+                {
+                    return Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                }
+            }
+            return null;
+        }
+    }
 
     public static class MediaManager
     {

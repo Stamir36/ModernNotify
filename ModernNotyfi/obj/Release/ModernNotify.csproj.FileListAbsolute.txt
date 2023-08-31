@@ -165,7 +165,6 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.csproj.Suggeste
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\modal_info.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ConnectQR.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\GameBar.g.cs
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernUI.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\MainWindow.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\DebugWindow.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\modal_info.g.cs
@@ -181,7 +180,6 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify_MarkupCompile.l
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\App.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ConnectQR.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\GameBar.baml
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernUI.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\MainWindow.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\DebugWindow.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\MyDevice.baml
@@ -225,3 +223,10 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\Microsoft.Diagnostics.Tracin
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\gamePanel.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\ModernNotify.csproj.ResolveComReference.cache
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Interop.IWshRuntimeLibrary.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\LauncherEdit.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\game_bar.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\oldUI.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\LauncherEdit.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\Other Page\game_bar.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\Release\oldUI.baml

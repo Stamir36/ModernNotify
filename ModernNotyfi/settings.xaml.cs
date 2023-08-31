@@ -29,6 +29,9 @@ using WPFUI;
 using WPFUI.Controls;
 using static ModernNotyfi.PInvoke.ParameterTypes;
 using static ModernNotyfi.PInvoke.Methods;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.NetworkInformation;
 
 namespace ModernNotyfi
 {
@@ -36,6 +39,28 @@ namespace ModernNotyfi
     {
         public DispatcherTimer timer_sec = new DispatcherTimer();
 
+
+        //Настройки пользователя.
+        public class UserSettings
+        {
+            public string user_id { get; set; }
+            public string opacity_panel { get; set; }
+            public string color_panel { get; set; }
+            public string theme { get; set; }
+            public string Show_Exit { get; set; }
+            public string Disign_Shutdown { get; set; }
+            public string show_start_notify { get; set; }
+            public string posicion { get; set; }
+            public string CornerRadius { get; set; }
+            public string WinStyle { get; set; }
+            public string Language { get; set; }
+            public string progressbarstyle { get; set; }
+            public string ConnectMobile { get; set; }
+            public string MicaBool { get; set; }
+            public string Startup { get; set; }
+            public string PanelStyle { get; set; }
+            public string LAST_UPDATE { get; set; }
+        }
 
 
         public settings()
@@ -87,10 +112,17 @@ namespace ModernNotyfi
 
 
             // Закрытие сервисов
-            ServiceMyDeviceNet service = Application.Current.Windows.OfType<ServiceMyDeviceNet>().FirstOrDefault();
-            if (service.IsActive == true)
+            try
             {
-                service.Close();
+                ServiceMyDeviceNet service = Application.Current.Windows.OfType<ServiceMyDeviceNet>().FirstOrDefault();
+                if (service.IsActive == true)
+                {
+                    service.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                // NoServiceRunning
             }
         }
 
@@ -131,7 +163,25 @@ namespace ModernNotyfi
             }
         }
 
-        private void Settings_Loaded(object sender, RoutedEventArgs e)
+        public async Task<bool> CheckInternetConnectionAsync()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    using (var response = await client.GetAsync("https://www.unesell.com"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private async void Settings_Loaded(object sender, RoutedEventArgs e)
         {
             MicaBool.IsChecked = Properties.Settings.Default.MicaBool;
             if (MicaBool.IsChecked == false) { snakshow = true; }
@@ -153,6 +203,69 @@ namespace ModernNotyfi
 
             LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
 
+            // Синхронизация параметров
+            bool hasInternetConnection = await CheckInternetConnectionAsync();
+            if (Properties.Settings.Default.Unesell_Login == "Yes" && hasInternetConnection)
+            {
+                SettingActive();
+                localacc.Visibility = Visibility.Collapsed;
+                sync_loading.Visibility = Visibility.Visible;
+                await SettingSyncAsync();
+            }
+            else
+            {
+                localacc.Visibility = Visibility.Visible;
+                sync_loading.Visibility = Visibility.Collapsed;
+                SettingActive();
+            }
+        }
+
+        public async Task SettingSyncAsync(){
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://unesell.com/api/connect/");
+                HttpResponseMessage response = await client.GetAsync("get_settings.php?user_id=" + Properties.Settings.Default.Unesell_id);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string receivedJsonSettings = await response.Content.ReadAsStringAsync();
+                    UserSettings receivedSettings = JsonConvert.DeserializeObject<UserSettings>(receivedJsonSettings);
+
+                    // Сохранение полученных настроек в файл настроек
+                    Properties.Settings.Default.opacity_panel = Convert.ToDouble(receivedSettings.opacity_panel);
+                    Properties.Settings.Default.color_panel = receivedSettings.color_panel;
+                    Properties.Settings.Default.theme = receivedSettings.theme;
+                    Properties.Settings.Default.Show_Exit = receivedSettings.Show_Exit;
+                    Properties.Settings.Default.Disign_Shutdown = receivedSettings.Disign_Shutdown;
+                    Properties.Settings.Default.show_start_notify = Convert.ToBoolean(receivedSettings.show_start_notify);
+                    Properties.Settings.Default.posicion = receivedSettings.posicion;
+                    Properties.Settings.Default.CornerRadius = Convert.ToInt32(receivedSettings.CornerRadius);
+                    Properties.Settings.Default.WinStyle = receivedSettings.WinStyle;
+                    Properties.Settings.Default.Language = receivedSettings.Language;
+                    Properties.Settings.Default.progressbarstyle = receivedSettings.progressbarstyle;
+                    Properties.Settings.Default.ConnectMobile = receivedSettings.ConnectMobile;
+                    Properties.Settings.Default.MicaBool = Convert.ToBoolean(receivedSettings.MicaBool);
+                    Properties.Settings.Default.Startup = receivedSettings.Startup;
+                    Properties.Settings.Default.PanelStyle = Convert.ToInt32(receivedSettings.PanelStyle);
+                    Properties.Settings.Default.Save();
+
+                    SettingActive();
+
+                    await Task.Delay(2000);
+                    localacc.Visibility = Visibility.Visible;
+                    sync_loading.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    localacc.Visibility = Visibility.Visible;
+                    sync_loading.Visibility = Visibility.Collapsed;
+                    SettingActive();
+                }
+            }
+        }
+
+        public void SettingActive()
+        {
             //Настройки
             Opacity_Panel_Settings.Value = Properties.Settings.Default.opacity_panel * 100;
             Color_Border.Text = Properties.Settings.Default.color_panel;
@@ -163,7 +276,8 @@ namespace ModernNotyfi
             {
                 theme_combo.SelectedIndex = 0;
                 Light_Theme();
-            } else if(Properties.Settings.Default.theme == "dark")
+            }
+            else if (Properties.Settings.Default.theme == "dark")
             {
                 theme_combo.SelectedIndex = 1;
                 Dark_Theme();
@@ -196,7 +310,7 @@ namespace ModernNotyfi
                 Language_combo1.SelectedIndex = 0;
                 RussianInterfase_Settings();
             }
-            else if(Properties.Settings.Default.Language == "English")
+            else if (Properties.Settings.Default.Language == "English")
             {
                 Language_combo1.SelectedIndex = 1;
                 EnglishInterfase_Settings();
@@ -262,6 +376,28 @@ namespace ModernNotyfi
             {
                 StartMyDevice.IsChecked = true;
             }
+
+            if (Properties.Settings.Default.GameWindowStyle == "gamePanel")
+            {
+                ActiveGameBar.IsChecked = false;
+                ActiveGamePanel.IsChecked = true;
+            }
+            else
+            {
+                ActiveGameBar.IsChecked = true;
+                ActiveGamePanel.IsChecked = false;
+            }
+
+            if (Properties.Settings.Default.PanelStyle == 1)
+            {
+                NewDisign.IsChecked = true;
+                OldDesign.IsChecked = false;
+            }
+            else if (Properties.Settings.Default.PanelStyle == 2)
+            {
+                NewDisign.IsChecked = false;
+                OldDesign.IsChecked = true;
+            }
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -284,6 +420,7 @@ namespace ModernNotyfi
                 Titles.Content = "Settings";
             }
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/settings.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
+            Abstractlines.Visibility = Visibility.Collapsed;
         }
 
         private void Open_Main_Click(object sender, RoutedEventArgs e)
@@ -299,6 +436,7 @@ namespace ModernNotyfi
                 Titles.Content = "Settings > Basic settings";
             }
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/maim_settings.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
+            Abstractlines.Visibility = Visibility.Collapsed;
         }
 
         private void Open_Keyboard_Click(object sender, RoutedEventArgs e)
@@ -314,6 +452,7 @@ namespace ModernNotyfi
                 Titles.Content = "Settings > Game performance bar";
             }
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/App_Color.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
+            Abstractlines.Visibility = Visibility.Collapsed;
         }
 
         private void Open_Personalization_Click(object sender, RoutedEventArgs e)
@@ -329,6 +468,7 @@ namespace ModernNotyfi
                 Titles.Content = "Settings > Personalization";
             }
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/Personalization.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
+            Abstractlines.Visibility = Visibility.Collapsed;
         }
 
         private void Open_Info_Click(object sender, RoutedEventArgs e)
@@ -344,6 +484,7 @@ namespace ModernNotyfi
                 Titles.Content = "Settings > About";
             }
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/info.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
+            Abstractlines.Visibility = Visibility.Visible;
         }
 
         private void Open_Update_Click(object sender, RoutedEventArgs e)
@@ -361,6 +502,7 @@ namespace ModernNotyfi
             }
 
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/update.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
+            Abstractlines.Visibility = Visibility.Collapsed;
         }
 
         private void Open_Help_Click(object sender, RoutedEventArgs e)
@@ -376,6 +518,7 @@ namespace ModernNotyfi
                 Titles.Content = "Settings > About";
             }
             BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/info.png", UriKind.Relative); bi3.EndInit(); Sett_img.Source = bi3;
+            Abstractlines.Visibility = Visibility.Visible;
         }
 
         private void Open_Color_Click(object sender, RoutedEventArgs e)
@@ -404,12 +547,14 @@ namespace ModernNotyfi
             Red.Value = int.Parse(hexString.Substring(0, 2), NumberStyles.AllowHexSpecifier);
             Green.Value = int.Parse(hexString.Substring(2, 2), NumberStyles.AllowHexSpecifier);
             Blue.Value = int.Parse(hexString.Substring(4, 2), NumberStyles.AllowHexSpecifier);
+            Abstractlines.Visibility = Visibility.Collapsed;
         }
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
             NavView_Navigate(item as NavigationViewItem);
+            Abstractlines.Visibility = Visibility.Collapsed;
         }
 
         private void NavView_Navigate(NavigationViewItem item)
@@ -417,15 +562,19 @@ namespace ModernNotyfi
             switch (item.Tag)
             {
                 case "Home":
+                    Abstractlines.Visibility = Visibility.Collapsed;
                     Open_Main.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
                     break;
                 case "Keyboard":
+                    Abstractlines.Visibility = Visibility.Collapsed;
                     Open_Keyboard.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
                     break;
                 case "Library":
+                    Abstractlines.Visibility = Visibility.Collapsed;
                     Open_Personalization.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
                     break;
                 case "Help":
+                    Abstractlines.Visibility = Visibility.Visible;
                     Open_Info.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
                     break;
             }
@@ -654,7 +803,7 @@ namespace ModernNotyfi
             }
         }
 
-        private void Save_Settings_Click(object sender, RoutedEventArgs e)
+        private async void Save_Settings_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -732,18 +881,100 @@ namespace ModernNotyfi
                     Properties.Settings.Default.Language = "English";
                 }
 
+                if (ActiveGamePanel.IsChecked == true)
+                {
+                    Properties.Settings.Default.GameWindowStyle = "gamePanel";
+                }
+                if (ActiveGameBar.IsChecked == true)
+                {
+                    Properties.Settings.Default.GameWindowStyle = "gameBar";
+                }
+
+                if (NewDisign.IsChecked == true)
+                {
+                    Properties.Settings.Default.PanelStyle = 1;
+                }
+                
+                if (OldDesign.IsChecked == true)
+                {
+                    Properties.Settings.Default.PanelStyle = 2;
+                }
+
                 Properties.Settings.Default.Save();
 
-
                 //Применение.
-                Startup mainWindow = new Startup();
-                mainWindow.Show();
-                Close();
+                if (Properties.Settings.Default.Unesell_Login == "Yes") {
+                    await syncServerAsync();
+                }else{
+                    Startup mainWindow = new Startup();
+                    mainWindow.Show();
+                    Close();
+                }
             }
             catch
             {
                 System.Windows.MessageBox.Show("Мы не смогли сохранить данные. Проверьте все изменённые настройки.", "Ошибка применения", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private async Task<bool> syncServerAsync()
+        {
+            SyncBar.Show = true;
+            UserSettings settings = new UserSettings
+            {
+                user_id = Convert.ToString(Properties.Settings.Default.Unesell_id),
+                opacity_panel = Convert.ToString(Properties.Settings.Default.opacity_panel),
+                color_panel = Convert.ToString(Properties.Settings.Default.color_panel),
+                theme = Convert.ToString(Properties.Settings.Default.theme),
+                Show_Exit = Convert.ToString(Properties.Settings.Default.Show_Exit),
+                Disign_Shutdown = Convert.ToString(Properties.Settings.Default.Disign_Shutdown),
+                show_start_notify = Convert.ToString(Properties.Settings.Default.show_start_notify),
+                posicion = Convert.ToString(Properties.Settings.Default.posicion),
+                CornerRadius = Convert.ToString(Properties.Settings.Default.CornerRadius),
+                WinStyle = Convert.ToString(Properties.Settings.Default.WinStyle),
+                Language = Convert.ToString(Properties.Settings.Default.Language),
+                progressbarstyle = Convert.ToString(Properties.Settings.Default.progressbarstyle),
+                ConnectMobile = Convert.ToString(Properties.Settings.Default.ConnectMobile),
+                MicaBool = Convert.ToString(Properties.Settings.Default.MicaBool),
+                Startup = Convert.ToString(Properties.Settings.Default.Startup),
+                PanelStyle = Convert.ToString(Properties.Settings.Default.PanelStyle),
+                LAST_UPDATE = Convert.ToString(DateTime.Now),
+            };
+
+            string jsonSettings = JsonConvert.SerializeObject(settings);
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("https://unesell.com/api/connect/");
+                    var content = new StringContent(jsonSettings, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync("update_settings.php", content);
+
+                    await Task.Delay(1000);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Startup mainWindow = new Startup();
+                        mainWindow.Show();
+                        Close();
+                    }
+                    else
+                    {
+                        SyncBar.Show = false;
+                        Startup mainWindow = new Startup();
+                        mainWindow.Show();
+                        Close();
+                    }
+                }
+            }
+            catch
+            {
+                Startup mainWindow = new Startup();
+                mainWindow.Show();
+                Close();
+            }
+
+            return true;
         }
 
         private void ValueUpdate(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -1349,6 +1580,84 @@ namespace ModernNotyfi
         private void ChangeLog_Open(object sender, RoutedEventArgs e)
         {
             DisplayDialog("Что нового в версии " + GetContent("https://unesell.com/api/version/modernnotify/version_dev.txt"), GetContent("https://unesell.com/api/version/modernnotify/changelog.txt"));
+        }
+
+        private void TriggerGB_One(object sender, RoutedEventArgs e)
+        {
+            ActiveGameBar.IsChecked = true;
+            ActiveGamePanel.IsChecked = false;
+        }
+
+        private void TriggerGP_One(object sender, RoutedEventArgs e)
+        {
+            ActiveGamePanel.IsChecked = true;
+            ActiveGameBar.IsChecked = false;
+        }
+
+        private void OpenMyDevice(object sender, RoutedEventArgs e)
+        {
+            string url = "https://unesell.com/app/mydevice/";
+
+            try
+            {
+                Process.Start(url);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"Произошла ошибка при открытии URL: {ex.Message}");
+            }
+        }
+
+        private void OpenCursus(object sender, RoutedEventArgs e)
+        {
+            string url = "https://unesell.com/app/cursus/";
+
+            try
+            {
+                Process.Start(url);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"Произошла ошибка при открытии URL: {ex.Message}");
+            }
+        }
+
+        private void Openlipari(object sender, RoutedEventArgs e)
+        {
+            string url = "https://unesell.com/app/lipari/";
+
+            try
+            {
+                Process.Start(url);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"Произошла ошибка при открытии URL: {ex.Message}");
+            }
+        }
+
+        private void TriggerStyleNew(object sender, RoutedEventArgs e)
+        {
+            NewDisign.IsChecked = true;
+            OldDesign.IsChecked = false;
+        }
+
+        private void TriggerStyleOld(object sender, RoutedEventArgs e)
+        {
+            NewDisign.IsChecked = false;
+            OldDesign.IsChecked = true;
+        }
+
+        private void Link3_Click(object sender, RoutedEventArgs e)
+        {
+            Other_Page.LauncherEdit launcherEdit = new Other_Page.LauncherEdit();
+            launcherEdit.Show();
+        }
+
+        private void Settings_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Startup mainWindow = new Startup();
+            mainWindow.Show();
         }
     }
 }

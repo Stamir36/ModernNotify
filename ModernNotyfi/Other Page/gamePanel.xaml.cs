@@ -504,6 +504,13 @@ namespace ModernNotyfi
                 my.gameBar_show = false;
             }));
         }
+
+        private void Minimization(object sender, RoutedEventArgs e)
+        {
+            gameBar gameBar = new gameBar();
+            gameBar.Show();
+            Close();
+        }
     }
 
     //вспомогательный класс для хранения моментов времени отрисовки кадров

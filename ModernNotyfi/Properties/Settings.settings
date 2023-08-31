@@ -89,5 +89,8 @@
     <Setting Name="WeatherAPI" Type="System.String" Scope="User">
       <Value Profile="(Default)">b8ce7bba8c275b3b442213b29b0eef32</Value>
     </Setting>
+    <Setting Name="GameWindowStyle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">gamePanel</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
