@@ -7,7 +7,7 @@
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
     <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\stas1\.nuget\packages\</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.6.0</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.7.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="C:\Users\stas1\.nuget\packages\" />
@@ -17,6 +17,7 @@
     <Import Project="$(NuGetPackageRoot)microsoft.diagnostics.tracing.traceevent\3.0.6\buildTransitive\Microsoft.Diagnostics.Tracing.TraceEvent.props" Condition="Exists('$(NuGetPackageRoot)microsoft.diagnostics.tracing.traceevent\3.0.6\buildTransitive\Microsoft.Diagnostics.Tracing.TraceEvent.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_Web_WebView2 Condition=" '$(PkgMicrosoft_Web_WebView2)' == '' ">C:\Users\stas1\.nuget\packages\microsoft.web.webview2\1.0.2045.28</PkgMicrosoft_Web_WebView2>
     <PkgLiveCharts_Wpf Condition=" '$(PkgLiveCharts_Wpf)' == '' ">C:\Users\stas1\.nuget\packages\livecharts.wpf\0.9.7</PkgLiveCharts_Wpf>
   </PropertyGroup>
 </Project>

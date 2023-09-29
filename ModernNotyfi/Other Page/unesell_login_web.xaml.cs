@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,14 +23,15 @@ namespace ModernNotyfi
         public unesell_login_web()
         {
             InitializeComponent();
-            WebLogin.Source = new Uri("https://unesell.com/login/?auth=yes&app=ModernNotify&service=app&data=2&icon=/assets/img/icons/mnlogo.png&out=http://app.modernnotify/");
+            webView.NavigationStarting += EnsureHttps;
         }
 
-        private void WebLogin_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        void EnsureHttps(object sender, CoreWebView2NavigationStartingEventArgs args)
         {
-            if (Convert.ToString(WebLogin.Source).Contains("http://app.modernnotify/?id="))
+            String uri = args.Uri;
+            if (uri.StartsWith("http://app.modernnotify/?id="))
             {
-                string results = WebLogin.Source.ToString();
+                string results = uri;
                 results.Replace("http://app.modernnotify/?", ""); //Получаем: ключ=значение
                 
                 string[] response = results.Split('&');

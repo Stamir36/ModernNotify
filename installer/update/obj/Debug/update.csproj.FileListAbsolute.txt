@@ -40,7 +40,6 @@ C:\Develop\C#\ModernNotyfi\installer\update\bin\Debug\Setup.exe.config
 C:\Develop\C#\ModernNotyfi\installer\update\bin\Debug\Setup.exe
 C:\Develop\C#\ModernNotyfi\installer\update\bin\Debug\Setup.pdb
 C:\Develop\C#\ModernNotyfi\installer\update\obj\Debug\update.csproj.AssemblyReference.cache
-C:\Develop\C#\ModernNotyfi\installer\update\obj\Debug\update.csproj.SuggestedBindingRedirects.cache
 C:\Develop\C#\ModernNotyfi\installer\update\obj\Debug\Interop.IWshRuntimeLibrary.dll
 C:\Develop\C#\ModernNotyfi\installer\update\obj\Debug\update.csproj.ResolveComReference.cache
 C:\Develop\C#\ModernNotyfi\installer\update\obj\Debug\MainWindow.baml

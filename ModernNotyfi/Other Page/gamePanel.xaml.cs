@@ -20,6 +20,8 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Defaults;
 using System.Threading.Tasks;
+using Microsoft.Web.WebView2.Core;
+using ModernNotyfi.Other_Page;
 
 namespace ModernNotyfi
 {
@@ -27,7 +29,7 @@ namespace ModernNotyfi
     {
 
         // ------------------------------ FPS CODE ----------------------------------
-
+        private WebViewManager webViewManager;
         //коды событий (https://github.com/GameTechDev/PresentMon/blob/40ee99f437bc1061a27a2fc16a8993ee8ce4ebb5/PresentData/PresentMonTraceConsumer.cpp)
         public const int EventID_D3D9PresentStart = 1;
         public const int EventID_DxgiPresentStart = 42;
@@ -130,7 +132,6 @@ namespace ModernNotyfi
                 }
             };
 
-
             DataContext = this;
 
             TimeClock.Text = DateTime.Now.ToString("HH:mm");
@@ -165,6 +166,14 @@ namespace ModernNotyfi
                     var userBitmapSmall = new BitmapImage(new Uri(SysInfo.GetUserPicturePath()));
                     AccauntImg.ImageSource = userBitmapSmall;
                 }
+                WebContent.Visibility = Visibility.Visible;
+                NoAccount.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                WebLoader.Visibility = Visibility.Collapsed;
+                WebContent.Visibility = Visibility.Collapsed;
+                NoAccount.Visibility = Visibility.Visible;
             }
 
             WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
@@ -259,6 +268,8 @@ namespace ModernNotyfi
                     if (IconID == 7) batteryIcon.Glyph = WPFUI.Common.Icon.Battery720;
                     if (IconID == 8) batteryIcon.Glyph = WPFUI.Common.Icon.Battery820;
                     if (IconID == 9) batteryIcon.Glyph = WPFUI.Common.Icon.Battery920;
+
+                    BatteryProcent.Text = doubleBattery + "%";
                 }
 
                 //FPS.Content = FPS_APP_ACTIVE + " кадров / сек";
@@ -455,10 +466,35 @@ namespace ModernNotyfi
                     ApplyBackgroundEffect(2);
                 }
             }
+
+            webViewManager = new WebViewManager(webView);
+            webView.NavigationStarting += EnsureHttps;
+            webView.NavigationCompleted += NavigationCompleted;
         }
 
-        // ModernWpf.ThemeManager.GetActualTheme(this).ToString(); <- Тема установленная в системе
-        
+        void EnsureHttps(object sender, CoreWebView2NavigationStartingEventArgs args)
+        {
+            webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('headers').style = 'background-blend-mode: unset;background: transparent;';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('textimput').style = 'padding: 10px; background: transparent; position: fixed; align-items: normal; border-top: 0px;';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.querySelector('.chat-box').style = 'padding-bottom: 50px !important; padding-bottom: 50px; padding: 15px; zoom: 90%;';");
+
+            String uri = args.Uri;
+            if (uri == "https://unesell.com/app/cursus/")
+            {
+                webView.CoreWebView2.ExecuteScriptAsync("location.href = 'https://unesell.com/app/cursus/users.php?login_id=" + Properties.Settings.Default.Unesell_id + "';");
+            }
+        }
+
+        private void NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            WebLoader.Visibility = Visibility.Collapsed;
+            webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('headers').style = 'background-blend-mode: unset;background: transparent;';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('textimput').style = 'padding: 10px; background: transparent; position: fixed; align-items: normal; border-top: 0px;';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.querySelector('.chat-box').style = 'padding-bottom: 50px !important; padding-bottom: 50px; padding: 15px; zoom: 90%;';");
+
+            if (Properties.Settings.Default.theme != "light"){ webView.CoreWebView2.ExecuteScriptAsync("document.body.classList.toggle('dark-mode');"); }
+        }
+
         private void Close(object sender, RoutedEventArgs e)
         {
             Close();
@@ -494,6 +530,10 @@ namespace ModernNotyfi
 
         private void Settings_Closed(object sender, EventArgs e)
         {
+            webView.NavigationStarting -= EnsureHttps;
+            webView.NavigationCompleted -= NavigationCompleted;
+            webViewManager.Dispose();
+
             m_EtwSession.Dispose();
             timer.Stop();
             timer.IsEnabled = false;
@@ -503,12 +543,36 @@ namespace ModernNotyfi
                 MainWindow my = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 my.gameBar_show = false;
             }));
+
+            // Вызываем сборщик мусора
+            GC.Collect();
         }
 
         private void Minimization(object sender, RoutedEventArgs e)
         {
             gameBar gameBar = new gameBar();
             gameBar.Show();
+            Close();
+        }
+
+        private void webView_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        {
+            if (Properties.Settings.Default.Unesell_Login == "Yes")
+            {
+                webView.CoreWebView2.Navigate("https://unesell.com/app/cursus/users.php?login_id=" + Properties.Settings.Default.Unesell_id);
+            }
+            else
+            {
+                webView.NavigationStarting -= EnsureHttps;
+                webView.NavigationCompleted -= NavigationCompleted;
+                webViewManager.Dispose();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UiLoginUnesell uiLoginUnesell = new UiLoginUnesell();
+            uiLoginUnesell.Show();
             Close();
         }
     }

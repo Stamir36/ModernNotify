@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True"
         
@@ -14,104 +15,143 @@
         Loaded="Settings_Loaded" Background="#CC2B2B2B" Closed="Settings_Closed">
 
     <Grid Grid.IsSharedSizeScope="True">
-        <wpfui:Card Margin="20,261,20,0" Height="233" VerticalAlignment="Top">
-            <lvc:CartesianChart x:Name="Chart" Series="{Binding SeriesCollection}" Margin="-9,18,-6,0" Height="191" VerticalAlignment="Top" ScrollBarFill="{x:Null}" IsEnabled="False" >
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis x:Name="Axis">
-                        <lvc:Axis.Sections>
-                            <lvc:AxisSection Value="15" SectionWidth="4" Label="Bad">
-                                <lvc:AxisSection.Fill>
-                                    <SolidColorBrush Color="#FF8585" Opacity=".4"/>
-                                </lvc:AxisSection.Fill>
-                            </lvc:AxisSection>
-                        </lvc:Axis.Sections>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
-        </wpfui:Card>
-
-        <wpfui:Card Margin="20,179,20,0" Height="70" VerticalAlignment="Top"/>
         <Label x:Name="Logo" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Unesell GameBar" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="167" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <Button FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="close" Content="Закрыть" Margin="0,30,20,0" HorizontalAlignment="Right" Width="106" VerticalAlignment="Top" Cursor="Hand" Click="Close" Background="#4CBFBFBF" Padding="10,6,10,6" Height="32" />
-        <wpfui:Card BorderThickness="1" Margin="20,0,20,19" Padding="0,0,0,0" Height="64" VerticalAlignment="Bottom">
-            <Grid>
-                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="User_Name" Content="Привет!" Margin="68,10,0,0" HorizontalAlignment="Left" Width="280" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
-                <wpfui:ProgressRing x:Name="progressRing" IsIndeterminate="True" Width="20" Height="20" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" />
-                <Ellipse Margin="15,0,0,0" Stroke="#7F000000" HorizontalAlignment="Left" Width="45" Height="44" VerticalAlignment="Center">
-                    <Ellipse.Fill>
-                        <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
-                    </Ellipse.Fill>
-                </Ellipse>
-                <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="acctype" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="69,33,0,0" VerticalAlignment="Top"/>
-            </Grid>
-        </wpfui:Card>
         <StackPanel
             VerticalAlignment="Top"
             Opacity="0.9"
-            Orientation="Horizontal" Margin="20,63,0,0" HorizontalAlignment="Left" Width="85">
+            Orientation="Horizontal" Margin="20,63,0,0" HorizontalAlignment="Left" Width="150">
+            <wpfui:Icon x:Name="TimeIcon" Glyph="Clock20" Margin="0,0,3,0" />
+            <TextBlock x:Name="TimeClock" Text="4:56 PM" Foreground="White" />
+            
             <wpfui:Icon x:Name="batteryIcon"
-                Margin="0,0,6,0"
+                Margin="6,0,3,0"
                 Glyph="Battery820" />
 
-            <TextBlock x:Name="TimeClock" Margin="0,-1,0,0" Text="4:56 PM" Foreground="White" />
+            <TextBlock x:Name="BatteryProcent" Margin="0,-1,0,0" Text="100%" Foreground="White" />
         </StackPanel>
-        <Label x:Name="FPS" FontFamily="/icons/Fonts/#Google Sans Medium" Content="кадров / сек" HorizontalAlignment="Left" Margin="108,211,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
-        <Label x:Name="text_fps" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Фрейм-рейт экрана" HorizontalAlignment="Left" Margin="108,191,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White"/>
-        <wpfui:Card Margin="20,99,20,0" Height="70" VerticalAlignment="Top"/>
-        <Image x:Name="IconApp" HorizontalAlignment="Left" Height="40" Margin="319,115,0,0" VerticalAlignment="Top" Width="40"/>
-        <Label x:Name="text_name_open_app" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Имя запущеного приложения" HorizontalAlignment="Left" Margin="36,111,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White" FontSize="10"/>
-        <Label x:Name="Game" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Переключитесь на игру" HorizontalAlignment="Left" Margin="35,131,0,0" VerticalAlignment="Top" Width="263" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
-        <Label x:Name="FPS_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="--" HorizontalAlignment="Left" Margin="28,191,0,0" VerticalAlignment="Top" Width="75" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="48" FontSize="36" FontWeight="Bold" Foreground="White"/>
-        <Label x:Name="text_fps_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="График кадров в секунду" HorizontalAlignment="Left" Margin="35,273,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White"/>
-        <wpfui:Card
-            Margin="0,508,0,0" Padding="5,5,5,5" Height="189" VerticalAlignment="Top" HorizontalAlignment="Center" Width="360"/>
-        <Grid Margin="84,592,0,0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="8,0,0,0">
-                <TextBlock FontFamily="/icons/Fonts/#Google Sans Medium" Text="-- " x:Name="CPU" FontSize="24" FontWeight="Bold" Width="35" FlowDirection="RightToLeft" Foreground="White"/>
-                <TextBlock FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="prochent" Text="%" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,0" Padding="0,0,0,0" Height="18" Foreground="White"/>
-            </StackPanel>
-        </Grid>
-        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2" Content="Показатели производительности" HorizontalAlignment="Left" Margin="30,520,0,0" VerticalAlignment="Top" Width="203" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
-        <wpfui:ProgressRing x:Name="CPUBar" Progress="0" Margin="60,550,0,0" Width="115" Height="115" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" VerticalAlignment="Top" HorizontalAlignment="Left" >
-            <wpfui:ProgressRing.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-90"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </wpfui:ProgressRing.RenderTransform>
-        </wpfui:ProgressRing>
-        <wpfui:ProgressRing x:Name="RAMBar" Progress="0" Margin="225,550,0,0" Width="115" Height="115" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" VerticalAlignment="Top" HorizontalAlignment="Left" >
-            <wpfui:ProgressRing.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-90"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </wpfui:ProgressRing.RenderTransform>
-        </wpfui:ProgressRing>
-        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy" Content="CPU" HorizontalAlignment="Left" Margin="85,672,0,0" VerticalAlignment="Top" Width="60" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
-        <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy1" Content="RAM" HorizontalAlignment="Left" Margin="250,671,0,0" VerticalAlignment="Top" Width="60" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
-        <Grid Margin="249,592,0,0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="8,0,0,0">
-                <TextBlock FontFamily="/icons/Fonts/#Google Sans Medium" Text="-- " x:Name="RAM" FontSize="24" FontWeight="Bold" Width="35" FlowDirection="RightToLeft" Foreground="White"/>
-                <TextBlock FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="prochent1" Text="%" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,0" Padding="0,0,0,0" Height="18" Foreground="White"/>
-            </StackPanel>
-        </Grid>
-        <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="177,605,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.5,0.5">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="90"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-        </Border>
+
         <Button FontFamily="../icons/Fonts/#Google Sans Medium" Margin="232,30,0,0" HorizontalAlignment="Left" Width="37" VerticalAlignment="Top" Cursor="Hand" Click="Minimization" Background="#4CBFBFBF" Padding="10,6,10,6" Height="32">
             <wpfui:Icon Glyph="ArrowMinimize24" />
         </Button>
+        <TabControl x:Name="Tabs" Margin="0,100,0,0" TabStripPlacement="Bottom" Background="{x:Null}" BorderBrush="{x:Null}" SelectedIndex="0">
+            <TabItem Header="Игровой оверлей" Margin="22,0,-20,0">
+                <Grid>
+                    <wpfui:Card BorderThickness="1" Margin="20,0,20,19" Padding="0,0,0,0" Height="64" VerticalAlignment="Bottom">
+                        <Grid>
+                            <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="User_Name" Content="Привет!" Margin="68,10,0,0" HorizontalAlignment="Left" Width="280" Padding="0" FontSize="18" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" />
+                            <wpfui:ProgressRing x:Name="progressRing" IsIndeterminate="True" Width="20" Height="20" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" />
+                            <Ellipse Margin="15,0,0,0" Stroke="#7F000000" HorizontalAlignment="Left" Width="45" Height="44" VerticalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Label FontFamily="../icons/Fonts/#Google Sans Medium" x:Name="acctype" Content="Локальный аккаунт" HorizontalAlignment="Left" Margin="69,33,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </wpfui:Card>
+
+                    <wpfui:Card Margin="20,171,20,0" Height="233" VerticalAlignment="Top">
+                        <lvc:CartesianChart x:Name="Chart" Series="{Binding SeriesCollection}" Margin="-9,18,-6,0" Height="191" VerticalAlignment="Top" ScrollBarFill="{x:Null}" IsEnabled="False" >
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis x:Name="Axis">
+                                    <lvc:Axis.Sections>
+                                        <lvc:AxisSection Value="15" SectionWidth="4" Label="Bad">
+                                            <lvc:AxisSection.Fill>
+                                                <SolidColorBrush Color="#FF8585" Opacity=".4"/>
+                                            </lvc:AxisSection.Fill>
+                                        </lvc:AxisSection>
+                                    </lvc:Axis.Sections>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </wpfui:Card>
+
+                    <wpfui:Card Margin="20,89,20,0" Height="70" VerticalAlignment="Top"/>
+                    <Label x:Name="FPS" FontFamily="/icons/Fonts/#Google Sans Medium" Content="кадров / сек" HorizontalAlignment="Left" Margin="108,121,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
+                    <Label x:Name="text_fps" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Фрейм-рейт экрана" HorizontalAlignment="Left" Margin="108,101,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White"/>
+                    <wpfui:Card Margin="20,9,20,0" Height="70" VerticalAlignment="Top"/>
+                    <Image x:Name="IconApp" HorizontalAlignment="Left" Height="40" Margin="319,25,0,0" VerticalAlignment="Top" Width="40"/>
+                    <Label x:Name="text_name_open_app" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Имя запущеного приложения" HorizontalAlignment="Left" Margin="36,21,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White" FontSize="10"/>
+                    <Label x:Name="Game" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Переключитесь на игру" HorizontalAlignment="Left" Margin="35,41,0,0" VerticalAlignment="Top" Width="263" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="28" FontSize="20" FontWeight="Bold" Foreground="White"/>
+                    <Label x:Name="FPS_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="--" HorizontalAlignment="Left" Margin="28,101,0,0" VerticalAlignment="Top" Width="75" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="48" FontSize="36" FontWeight="Bold" Foreground="White"/>
+                    <Label x:Name="text_fps_Copy" FontFamily="/icons/Fonts/#Google Sans Medium" Content="График кадров в секунду" HorizontalAlignment="Left" Margin="35,183,0,0" VerticalAlignment="Top" Width="262" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" FontWeight="Bold" Foreground="White"/>
+                    <wpfui:Card
+    Margin="0,418,0,0" Padding="5,5,5,5" Height="189" VerticalAlignment="Top" HorizontalAlignment="Center" Width="360"/>
+                    <Grid Margin="84,502,0,0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="8,0,0,0">
+                            <TextBlock FontFamily="/icons/Fonts/#Google Sans Medium" Text="-- " x:Name="CPU" FontSize="24" FontWeight="Bold" Width="35" FlowDirection="RightToLeft" Foreground="White"/>
+                            <TextBlock FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="prochent" Text="%" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,0" Padding="0,0,0,0" Height="18" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2" Content="Показатели производительности" HorizontalAlignment="Left" Margin="30,430,0,0" VerticalAlignment="Top" Width="203" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
+                    <wpfui:ProgressRing x:Name="CPUBar" Progress="0" Margin="60,460,0,0" Width="115" Height="115" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                        <wpfui:ProgressRing.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </wpfui:ProgressRing.RenderTransform>
+                    </wpfui:ProgressRing>
+                    <wpfui:ProgressRing x:Name="RAMBar" Progress="0" Margin="225,460,0,0" Width="115" Height="115" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                        <wpfui:ProgressRing.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </wpfui:ProgressRing.RenderTransform>
+                    </wpfui:ProgressRing>
+                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy" Content="CPU" HorizontalAlignment="Left" Margin="85,582,0,0" VerticalAlignment="Top" Width="60" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
+                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="btext2_Copy1" Content="RAM" HorizontalAlignment="Left" Margin="250,581,0,0" VerticalAlignment="Top" Width="60" FontSize="12" Foreground="#CCFFFFFF" HorizontalContentAlignment="Center" />
+                    <Grid Margin="249,502,0,0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Margin="8,0,0,0">
+                            <TextBlock FontFamily="/icons/Fonts/#Google Sans Medium" Text="-- " x:Name="RAM" FontSize="24" FontWeight="Bold" Width="35" FlowDirection="RightToLeft" Foreground="White"/>
+                            <TextBlock FontFamily="./icons/Fonts/#Google Sans Medium" x:Name="prochent1" Text="%" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,0,0,0" Padding="0,0,0,0" Height="18" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                    <Border BorderBrush="#4C000000" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="177,515,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Групповой чат" Margin="20,0,-19,0">
+                <Grid>
+                    <Grid x:Name="WebContent">
+                        <wpfui:ProgressRing x:Name="WebLoader" IsIndeterminate="True" Height="50" Width="50" />
+                        <DockPanel>
+                            <wv2:WebView2 Name="webView" Source="https://unesell.com/app/cursus/" DefaultBackgroundColor="transparent" CoreWebView2InitializationCompleted="webView_CoreWebView2InitializationCompleted"/>
+                        </DockPanel>
+                    </Grid>
+                    <Grid x:Name="NoAccount" Visibility="Collapsed">
+                        <Button Content="Авторизация в аккаунте" FontFamily="../icons/Fonts/#Google Sans Medium" HorizontalAlignment="Center" Margin="0,502,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+                        <Label Content="Для использования чата Cursus войдите в свой аккаунт" HorizontalAlignment="Center" FontFamily="../icons/Fonts/#Google Sans Medium" Margin="0,466,0,0" VerticalAlignment="Top"/>
+                        <Image HorizontalAlignment="Center" Height="178" VerticalAlignment="Top" Width="178" Margin="0,272,0,0" Source="/icons/cybersecurity.png"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Border
+            Padding="0"
+            Background="White"
+            CornerRadius="2" Margin="325,113,0,0" HorizontalAlignment="Left" Width="38" Height="11" VerticalAlignment="Top">
+            <TextBlock x:Name="InDevelop"
+                FontFamily="/icons/Fonts/#Google Sans Medium"
+                Margin="0,-1,0,0"
+                Padding="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="8"
+                FontWeight="Bold" Foreground="Black" Text="Beta" />
+        </Border>
     </Grid>
 </Window>

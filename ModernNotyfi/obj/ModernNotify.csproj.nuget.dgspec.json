@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[7.1.2, )"
             },
+            "Microsoft.Web.WebView2": {
+              "target": "Package",
+              "version": "[1.0.2045.28, )"
+            },
             "Microsoft.Windows.SDK.Contracts": {
               "target": "Package",
               "version": "[10.0.22621.2, )"

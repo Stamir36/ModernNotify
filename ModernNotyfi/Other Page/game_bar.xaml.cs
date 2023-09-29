@@ -20,12 +20,15 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Defaults;
 using System.Threading.Tasks;
+using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.Wpf;
+using ModernNotyfi.Other_Page;
 
 namespace ModernNotyfi
 {
     public partial class gameBar : Window
     {
-
+        private WebViewManager webViewManager;
         // ------------------------------ FPS CODE ----------------------------------
 
         //коды событий (https://github.com/GameTechDev/PresentMon/blob/40ee99f437bc1061a27a2fc16a8993ee8ce4ebb5/PresentData/PresentMonTraceConsumer.cpp)
@@ -268,7 +271,35 @@ namespace ModernNotyfi
 
         private void Settings_Loaded(object sender, RoutedEventArgs e)
         {
-           
+            webViewManager = new WebViewManager(webView);
+            if (Properties.Settings.Default.Unesell_Login == "Yes")
+            {
+                webView.NavigationStarting += EnsureHttps;
+                webView.NavigationCompleted += NavigationCompleted;
+            }
+        }
+
+        void EnsureHttps(object sender, CoreWebView2NavigationStartingEventArgs args)
+        {
+            webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('headers').style.display = 'none';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('textimput').style = 'padding: 10px; background: transparent; position: fixed; align-items: normal; border-top: 0px;';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.querySelector('.chat-box').style = 'padding-bottom: 50px !important; padding-bottom: 50px; padding: 15px; zoom: 90%;';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.body.classList.toggle('dark-mode');");
+
+            String uri = args.Uri;
+            if (uri == "https://unesell.com/app/cursus/")
+            {
+                webView.CoreWebView2.ExecuteScriptAsync("location.href = 'https://unesell.com/app/cursus/users.php?login_id=" + Properties.Settings.Default.Unesell_id + "';");
+            }
+        }
+
+        private void NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            WebLoader.Visibility = Visibility.Collapsed;
+            webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('headers').style.display = 'none';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('textimput').style = 'padding: 10px; background: transparent; position: fixed; align-items: normal; border-top: 0px;';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.querySelector('.chat-box').style = 'padding-bottom: 50px !important; padding-bottom: 50px; padding: 15px; zoom: 90%;';");
+            webView.CoreWebView2.ExecuteScriptAsync("document.body.classList.toggle('dark-mode');");
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -297,9 +328,87 @@ namespace ModernNotyfi
 
         private void Fullscrean(object sender, RoutedEventArgs e)
         {
-            gamePanel gamePanel = new gamePanel();
-            gamePanel.Show();
+            try
+            {
+                gamePanel gamePanel = new gamePanel();
+                gamePanel.Show();
+                Close();
+            }
+            catch
+            {
+
+            }
+            
+        }
+
+        private void openChatBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Perfomance.Visibility == Visibility.Visible)
+            {
+                Perfomance.Visibility = Visibility.Collapsed;
+
+                if (Properties.Settings.Default.Unesell_Login == "Yes")
+                {
+                    Web.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    NoAccount.Visibility = Visibility.Visible;
+                    WebLoader.Visibility = Visibility.Collapsed;
+                }
+
+                openChatBtn.Content = "Назад";
+
+                var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+                this.Left = desktopWorkingArea.Left + 5;
+                this.Top = desktopWorkingArea.Bottom - this.Height;
+            }
+            else
+            {
+                Perfomance.Visibility = Visibility.Visible;
+                Web.Visibility = Visibility.Collapsed;
+                NoAccount.Visibility = Visibility.Collapsed;
+                openChatBtn.Content = "Открыть чат";
+
+                var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+                this.Left = desktopWorkingArea.Left;
+                this.Top = desktopWorkingArea.Top;
+            }
+        }
+
+        private void GameBar_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            webView.NavigationStarting -= EnsureHttps;
+            webView.NavigationCompleted -= NavigationCompleted;
+            webViewManager.Dispose();
+            GC.Collect();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UiLoginUnesell uiLoginUnesell = new UiLoginUnesell();
+            uiLoginUnesell.Show();
             Close();
+        }
+    }
+
+    public class WebViewManager : IDisposable
+    {
+        private WebView2 webView;
+
+        public WebViewManager(WebView2 webView)
+        {
+            this.webView = webView;
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                if (Properties.Settings.Default.Unesell_Login == "Yes"){ webView.CoreWebView2.Stop(); }
+                webView.Dispose();
+            }
+            catch{}
         }
     }
 }

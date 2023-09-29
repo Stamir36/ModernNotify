@@ -6,7 +6,7 @@
         xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
         Style="{StaticResource UiWindow}"
         xmlns:local="clr-namespace:ModernNotyfi"
-        Title="Настройки" Height="193" Width="848"
+        Title="Настройки" Height="286" Width="549"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         MinWidth="960" MinHeight="530" Icon="icons/maim_settings.png"
         WindowStartupLocation="CenterScreen"
@@ -161,7 +161,7 @@
                                                         <ImageBrush x:Name="AccauntImg" Stretch="UniformToFill" ImageSource="/icons/user-48.png"/>
                                                     </Ellipse.Fill>
                                                 </Ellipse>
-                                                <StackPanel Margin="115,16,0,432" HorizontalAlignment="Left" Width="540" VerticalAlignment="Center">
+                                                <StackPanel Margin="115,23,0,0" HorizontalAlignment="Left" Width="540" VerticalAlignment="Top">
                                                     <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NameProfile" Content="Привет!" HorizontalAlignment="Left" Width="468" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold"/>
                                                     <Label Visibility="Collapsed" FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="localacc" Content="Локальный аккаунт" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                                     <StackPanel x:Name="sync_loading" Orientation="Horizontal">

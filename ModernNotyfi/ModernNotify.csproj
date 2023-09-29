@@ -308,6 +308,9 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>7.1.2</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Web.WebView2">
+      <Version>1.0.2045.28</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
       <Version>10.0.22621.2</Version>
     </PackageReference>
@@ -511,6 +514,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\lipari.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\cybersecurity.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

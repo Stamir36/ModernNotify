@@ -81,7 +81,13 @@ namespace update
                 {
                     foreach (ZipArchiveEntry entry in archive.Entries)
                     {
-                        entry.ExtractToFile(Path.Combine(mainPath, entry.FullName), true);
+                        string entryPath = Path.Combine(mainPath, entry.FullName);
+                        string entryDirectory = Path.GetDirectoryName(entryPath);
+                        Directory.CreateDirectory(entryDirectory);
+                        if (!entry.FullName.EndsWith("/"))
+                        {
+                            entry.ExtractToFile(entryPath, true);
+                        }
                     }
                 }
             }

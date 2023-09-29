@@ -9,7 +9,7 @@
         Height="299" 
         Width="588" MaxWidth="1000" MaxHeight="1000" Icon="/setup.ico" ShowInTaskbar="True" WindowStyle="None">
     <Grid>
-        <Image HorizontalAlignment="Center" Height="240" VerticalAlignment="Top" Width="588" Source="/imege/backround.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" IsEnabled="False" Margin="0,-1,0,0">
+        <Image HorizontalAlignment="Center" Height="303" VerticalAlignment="Center" Width="742" Source="/imege/backround.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" IsEnabled="False">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -19,12 +19,15 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image HorizontalAlignment="Left" Height="21" Margin="19,22,0,0" VerticalAlignment="Top" Width="20" Source="imege/logo-dark.png" Stretch="UniformToFill"/>
+        <Image HorizontalAlignment="Left" Height="288" VerticalAlignment="Top" Width="582" Source="/imege/panel.png" Margin="64,11,0,0" Opacity="0.2"/>
+
+
+        <Image HorizontalAlignment="Left" Height="21" Margin="19,23,0,0" VerticalAlignment="Top" Width="20" Source="imege/logo-dark.png" Stretch="UniformToFill"/>
         <Label FontFamily="./#Google Sans Medium" x:Name="InfoUpdate" Content="Добро пожаловать в программу установки!" HorizontalAlignment="Left" Margin="19,153,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
         <Label FontFamily="./#Google Sans Medium" x:Name="SubText" Content="Скачивание ModernNotify" HorizontalAlignment="Left" Margin="19,182,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Button FontFamily="./#Google Sans Medium" x:Name="Close" Content="Отмена установки" Margin="412,245,0,0" VerticalAlignment="Top" Width="156" Height="30" Background="{x:Null}" BorderBrush="#FFF3B3B3" Padding="0" Click="Close_Click"/>
+        <Button Cursor="Hand" FontFamily="./#Google Sans Medium" x:Name="Close" Content="Отмена установки" Margin="412,245,0,0" VerticalAlignment="Top" Width="156" Height="30" Background="{x:Null}" BorderBrush="#FFF3B3B3" Padding="0" Click="Close_Click"/>
         <ProgressBar x:Name="ProgressDownload" Visibility="Hidden" HorizontalAlignment="Left" Height="12" Margin="20,216,0,0" VerticalAlignment="Top" Width="449" MinHeight="10" />
-        <Label x:Name="InfoUpdate_Copy" Content="ModernNotify" HorizontalAlignment="Left" Margin="41,23,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <Label x:Name="InfoUpdate_Copy" FontFamily="./#Google Sans Medium" Content="ModernNotify" HorizontalAlignment="Left" Margin="44,25,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
         <Button FontFamily="./#Google Sans Medium" x:Name="Install" Content="Продолжить" Margin="17,245,0,0" VerticalAlignment="Top" Height="30" Width="197" Click="Install_Click" Foreground="White" Background="#FF3F78EA" Cursor="Hand" BorderBrush="#7F352323"/>
         <Label FontFamily="./#Google Sans Medium" Content="Your life is your style." HorizontalAlignment="Left" Margin="76,41,0,0" VerticalAlignment="Top" Width="143" FontSize="8"/>
         <Grid x:Name="path_grid" Margin="20,210,179,59" Visibility="Hidden">

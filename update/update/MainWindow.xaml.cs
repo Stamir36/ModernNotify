@@ -112,7 +112,13 @@ namespace update
                     {
                         if (entry.FullName != "ModernWpf.dll" && entry.FullName != "ModernWpf.Controls.dll" && entry.FullName != "update.exe")
                         {
-                            entry.ExtractToFile(Path.Combine(mainPath, entry.FullName), true); // Расспаковка с заменой
+                            string entryPath = Path.Combine(mainPath, entry.FullName);
+                            string entryDirectory = Path.GetDirectoryName(entryPath);
+                            Directory.CreateDirectory(entryDirectory);
+                            if (!entry.FullName.EndsWith("/"))
+                            {
+                                entry.ExtractToFile(entryPath, true);
+                            }
                         }
                     }
                 }
@@ -123,7 +129,6 @@ namespace update
                 Log.Content = "";
                 SubText.Content = "Пропробуйте ещё раз.";
                 Close.Content = "Выход";
-                throw;
             }
             finally
             {

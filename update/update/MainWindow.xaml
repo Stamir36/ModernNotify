@@ -8,10 +8,10 @@
         Background="Transparent"
         Height="246" Width="496" Icon="imege/update.png" ShowInTaskbar="True" WindowStyle="SingleBorderWindow" Loaded="update_window_Loaded">
     <Grid>
-        <TabControl x:Name="Page" TabStripPlacement="Bottom" Margin="10,0,10,-40" Background="{x:Null}" BorderBrush="{x:Null}">
+        <TabControl x:Name="Page" TabStripPlacement="Bottom" Margin="10,0,10,-51" Background="{x:Null}" BorderBrush="{x:Null}">
             <TabItem Header="Update">
                 <Grid Margin="0,0,-7,0">
-                    <Button x:Name="Settings" Margin="423,16,17,0" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" VerticalAlignment="Top" Height="32" Click="Open_Settings">
+                    <Button x:Name="Settings" Margin="426,17,0,0" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.75" VerticalAlignment="Top" Height="32" Click="Open_Settings">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="7"/>
@@ -22,7 +22,7 @@
                     <Image HorizontalAlignment="Left" Height="21" Margin="19,19,0,0" VerticalAlignment="Top" Width="20" Source="/imege/logo-dark.png" Stretch="UniformToFill"/>
                     <Label FontFamily="./#Google Sans Medium" x:Name="InfoUpdate" Content="Проверка обновлений..." HorizontalAlignment="Left" Margin="19,54,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Width="417"/>
                     <Label FontFamily="./#Google Sans Medium" x:Name="SubText" Content="Подключение..." HorizontalAlignment="Left" Margin="19,168,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="Close" Content="Отмена" Margin="374,163,18,0" VerticalAlignment="Top" Background="#33C3C1C1" BorderBrush="{x:Null}" Click="Close_Click" Height="29"/>
+                    <Button x:Name="Close" Content="Отмена" Margin="368,158,0,0" VerticalAlignment="Top" Background="#33C3C1C1" Click="Close_Click" Width="84"/>
                     <ProgressBar Visibility="Hidden" x:Name="ProgressDownload" HorizontalAlignment="Center" Height="15" Margin="0,145,0,0" Width="433" MinHeight="6" VerticalAlignment="Top"/>
                     <Label FontFamily="./#Google Sans Medium" x:Name="InfoUpdate_Copy" Content="ModernNotify" HorizontalAlignment="Left" Margin="48,22,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
                     <Label x:Name="Log" FontFamily="./#Google Sans Medium" Content="" HorizontalAlignment="Left" Margin="19,88,0,0" VerticalAlignment="Top" Width="373" Height="52" FontSize="11"/>
@@ -43,8 +43,9 @@
                             </ComboBox>
                         </Grid>
                     </Border>
-                    <Label FontFamily="./#Google Sans Medium" Content="Продукт &quot;Обновление ModernNotify&quot; распространяется&#xD;&#xA;&quot;как есть&quot; и разработчик не несёт никакую ответственность&#xD;&#xA;за возможные неполадки." HorizontalAlignment="Left" Margin="19,88,0,0" VerticalAlignment="Top" Height="56" Width="345" FontSize="10"/>
-                    <Button x:Name="Back_U" Content="Назад" Click="Update_Open" Margin="374,163,0,0" VerticalAlignment="Top" Background="#33C3C1C1" BorderBrush="{x:Null}" Height="29"/>
+                    <Label FontFamily="./#Google Sans Medium" Content="Продукт &quot;Обновление ModernNotify&quot; распространяется&#xA;&quot;как есть&quot; и разработчик не несёт никакую ответственность&#xA;за возможные неполадки." HorizontalAlignment="Left" Margin="19,88,0,0" VerticalAlignment="Top" Height="56" Width="345" FontSize="10"/>
+                    <Button x:Name="Back_U" Content="Назад" Margin="368,158,0,0"  VerticalAlignment="Top" Background="#33C3C1C1" Click="Update_Open" Width="84"/>
+
                     <Label FontFamily="./#Google Sans Medium" x:Name="InfoUpdate_Copy1" Content="Unesell Studio" HorizontalAlignment="Left" Margin="396,17,0,0" VerticalAlignment="Top" FontSize="8" FontWeight="Bold"/>
 
                 </Grid>

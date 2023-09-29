@@ -92,6 +92,48 @@
           }
         }
       },
+      "Microsoft.Web.WebView2/1.0.2045.28": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/Microsoft.Web.WebView2.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/WebView2Loader.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-x64/native/WebView2Loader.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/WebView2Loader.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
       "Microsoft.Win32.Registry/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -1052,6 +1094,34 @@
           }
         }
       },
+      "Microsoft.Web.WebView2/1.0.2045.28": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/Microsoft.Web.WebView2.targets": {}
+        }
+      },
       "Microsoft.Win32.Registry/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -1988,6 +2058,37 @@
           "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
             "related": ".pdb;.xml"
           }
+        }
+      },
+      "Microsoft.Web.WebView2/1.0.2045.28": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "native": {
+          "runtimes/win-arm64/native/WebView2Loader.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Web.WebView2.targets": {}
         }
       },
       "Microsoft.Win32.Registry/4.7.0": {
@@ -2928,6 +3029,37 @@
           }
         }
       },
+      "Microsoft.Web.WebView2/1.0.2045.28": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "native": {
+          "runtimes/win-x64/native/WebView2Loader.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Web.WebView2.targets": {}
+        }
+      },
       "Microsoft.Win32.Registry/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -3864,6 +3996,37 @@
           "lib/net461/Microsoft.Toolkit.Uwp.Notifications.dll": {
             "related": ".pdb;.xml"
           }
+        }
+      },
+      "Microsoft.Web.WebView2/1.0.2045.28": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Web.WebView2.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.WinForms.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Microsoft.Web.WebView2.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "native": {
+          "runtimes/win-x86/native/WebView2Loader.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Web.WebView2.targets": {}
         }
       },
       "Microsoft.Win32.Registry/4.7.0": {
@@ -5234,6 +5397,98 @@
         "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.Notifications.xml",
         "microsoft.toolkit.uwp.notifications.7.1.2.nupkg.sha512",
         "microsoft.toolkit.uwp.notifications.nuspec"
+      ]
+    },
+    "Microsoft.Web.WebView2/1.0.2045.28": {
+      "sha512": "QDsR/HCNjzqYZrIuNLxyfmOIqVfMq1iGyoBR3OVVlFl4NZ12T8jRC0MNpOReKfgwtO5zh8g+eBYR6RAXFltcVA==",
+      "type": "package",
+      "path": "microsoft.web.webview2/1.0.2045.28",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "NOTICE.txt",
+        "WebView2.idl",
+        "WebView2.tlb",
+        "build/Common.targets",
+        "build/Microsoft.Web.WebView2.targets",
+        "build/WebView2Rules.Project.xml",
+        "build/native/Microsoft.Web.WebView2.targets",
+        "build/native/arm64/WebView2Loader.dll",
+        "build/native/arm64/WebView2Loader.dll.lib",
+        "build/native/arm64/WebView2LoaderStatic.lib",
+        "build/native/include-winrt/WebView2Interop.h",
+        "build/native/include-winrt/WebView2Interop.idl",
+        "build/native/include-winrt/WebView2Interop.tlb",
+        "build/native/include/WebView2.h",
+        "build/native/include/WebView2EnvironmentOptions.h",
+        "build/native/x64/WebView2Loader.dll",
+        "build/native/x64/WebView2Loader.dll.lib",
+        "build/native/x64/WebView2LoaderStatic.lib",
+        "build/native/x86/WebView2Loader.dll",
+        "build/native/x86/WebView2Loader.dll.lib",
+        "build/native/x86/WebView2LoaderStatic.lib",
+        "build/wv2winrt.targets",
+        "lib/Microsoft.Web.WebView2.Core.winmd",
+        "lib/net45/Microsoft.Web.WebView2.Core.dll",
+        "lib/net45/Microsoft.Web.WebView2.Core.xml",
+        "lib/net45/Microsoft.Web.WebView2.WinForms.dll",
+        "lib/net45/Microsoft.Web.WebView2.WinForms.xml",
+        "lib/net45/Microsoft.Web.WebView2.Wpf.dll",
+        "lib/net45/Microsoft.Web.WebView2.Wpf.xml",
+        "lib/netcoreapp3.0/Microsoft.Web.WebView2.Core.dll",
+        "lib/netcoreapp3.0/Microsoft.Web.WebView2.Core.xml",
+        "lib/netcoreapp3.0/Microsoft.Web.WebView2.WinForms.dll",
+        "lib/netcoreapp3.0/Microsoft.Web.WebView2.WinForms.xml",
+        "lib/netcoreapp3.0/Microsoft.Web.WebView2.Wpf.dll",
+        "lib/netcoreapp3.0/Microsoft.Web.WebView2.Wpf.xml",
+        "microsoft.web.webview2.1.0.2045.28.nupkg.sha512",
+        "microsoft.web.webview2.nuspec",
+        "runtimes/win-arm64/native/WebView2Loader.dll",
+        "runtimes/win-arm64/native_uap/Microsoft.Web.WebView2.Core.dll",
+        "runtimes/win-x64/native/WebView2Loader.dll",
+        "runtimes/win-x64/native_uap/Microsoft.Web.WebView2.Core.dll",
+        "runtimes/win-x86/native/WebView2Loader.dll",
+        "runtimes/win-x86/native_uap/Microsoft.Web.WebView2.Core.dll",
+        "tools/VisualStudioToolsManifest.xml",
+        "tools/wv2winrt/Antlr3.Runtime.dll",
+        "tools/wv2winrt/Antlr4.StringTemplate.dll",
+        "tools/wv2winrt/System.Buffers.dll",
+        "tools/wv2winrt/System.CommandLine.DragonFruit.dll",
+        "tools/wv2winrt/System.CommandLine.Rendering.dll",
+        "tools/wv2winrt/System.CommandLine.dll",
+        "tools/wv2winrt/System.Memory.dll",
+        "tools/wv2winrt/System.Numerics.Vectors.dll",
+        "tools/wv2winrt/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/wv2winrt/codegen_util.dll",
+        "tools/wv2winrt/concrt140_app.dll",
+        "tools/wv2winrt/cs/System.CommandLine.resources.dll",
+        "tools/wv2winrt/de/System.CommandLine.resources.dll",
+        "tools/wv2winrt/es/System.CommandLine.resources.dll",
+        "tools/wv2winrt/fr/System.CommandLine.resources.dll",
+        "tools/wv2winrt/it/System.CommandLine.resources.dll",
+        "tools/wv2winrt/ja/System.CommandLine.resources.dll",
+        "tools/wv2winrt/ko/System.CommandLine.resources.dll",
+        "tools/wv2winrt/msvcp140_1_app.dll",
+        "tools/wv2winrt/msvcp140_2_app.dll",
+        "tools/wv2winrt/msvcp140_app.dll",
+        "tools/wv2winrt/pl/System.CommandLine.resources.dll",
+        "tools/wv2winrt/pt-BR/System.CommandLine.resources.dll",
+        "tools/wv2winrt/ru/System.CommandLine.resources.dll",
+        "tools/wv2winrt/tr/System.CommandLine.resources.dll",
+        "tools/wv2winrt/type_hierarchy.dll",
+        "tools/wv2winrt/vcamp140_app.dll",
+        "tools/wv2winrt/vccorlib140_app.dll",
+        "tools/wv2winrt/vcomp140_app.dll",
+        "tools/wv2winrt/vcruntime140_app.dll",
+        "tools/wv2winrt/winrt_winmd.dll",
+        "tools/wv2winrt/winrt_winmd.winmd",
+        "tools/wv2winrt/wv2winrt.exe",
+        "tools/wv2winrt/wv2winrt.exe.config",
+        "tools/wv2winrt/wv2winrt.xml",
+        "tools/wv2winrt/zh-Hans/System.CommandLine.resources.dll",
+        "tools/wv2winrt/zh-Hant/System.CommandLine.resources.dll"
       ]
     },
     "Microsoft.Win32.Registry/4.7.0": {
@@ -6673,6 +6928,7 @@
       "LiveCharts.Wpf >= 0.9.7",
       "Microsoft.Diagnostics.Tracing.TraceEvent >= 3.0.6",
       "Microsoft.Toolkit.Uwp.Notifications >= 7.1.2",
+      "Microsoft.Web.WebView2 >= 1.0.2045.28",
       "Microsoft.Windows.SDK.Contracts >= 10.0.22621.2",
       "ModernWpfUI >= 0.9.4",
       "NAudio >= 2.0.1",
@@ -6727,6 +6983,10 @@
           "Microsoft.Toolkit.Uwp.Notifications": {
             "target": "Package",
             "version": "[7.1.2, )"
+          },
+          "Microsoft.Web.WebView2": {
+            "target": "Package",
+            "version": "[1.0.2045.28, )"
           },
           "Microsoft.Windows.SDK.Contracts": {
             "target": "Package",

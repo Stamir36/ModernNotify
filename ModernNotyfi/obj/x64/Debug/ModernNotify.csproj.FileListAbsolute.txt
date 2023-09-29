@@ -1,6 +1,7 @@
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\TraceReloggerLib.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Dia2Lib.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\OSExtensions.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\runtimes\win-x64\native\WebView2Loader.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\x86\KernelTraceControl.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\x86\KernelTraceControl.Win61.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\x86\msdia140.dll
@@ -27,6 +28,10 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Diagnostics.Fast
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Diagnostics.Tracing.TraceEvent.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\WebView2Loader.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Web.WebView2.Core.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Web.WebView2.WinForms.dll
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Web.WebView2.Wpf.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\Microsoft.Win32.Registry.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\ModernWpf.Controls.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\ModernWpf.dll
@@ -183,9 +188,13 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\XamlAnimatedGif.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\bin\x64\Debug\XamlAnimatedGif.pdb
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.csproj.AssemblyReference.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.csproj.SuggestedBindingRedirects.cache
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.exe.config
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Interop.IWshRuntimeLibrary.dll
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.csproj.ResolveComReference.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\modal_info.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ConnectQR.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\LauncherEdit.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\game_bar.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\gamePanel.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ServiceMyDeviceNet.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\GameBar.g.cs
@@ -201,10 +210,13 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\unesell_login_w
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Startup.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\welcome.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\App.g.cs
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify_Content.g.cs
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify_MarkupCompile.cache
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify_MarkupCompile.lref
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\App.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ConnectQR.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\LauncherEdit.baml
+C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\game_bar.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\gamePanel.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ServiceMyDeviceNet.baml
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\GameBar.baml
@@ -225,8 +237,3 @@ C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.csproj.CoreCo
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.csproj.CopyComplete
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.exe
 C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\ModernNotify.pdb
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\game_bar.g.cs
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\game_bar.baml
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\LauncherEdit.g.cs
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Other Page\LauncherEdit.baml
-C:\Develop\C#\ModernNotyfi\ModernNotyfi\obj\x64\Debug\Interop.IWshRuntimeLibrary.dll

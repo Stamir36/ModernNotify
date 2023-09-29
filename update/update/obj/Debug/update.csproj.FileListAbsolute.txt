@@ -32,3 +32,4 @@ C:\Develop\C#\ModernNotyfi\update\update\obj\Debug\update.pdb
 C:\Develop\C#\ModernNotyfi\update\update\bin\Debug\update.exe.config
 C:\Develop\C#\ModernNotyfi\update\update\obj\Debug\update.csproj.Fody.CopyLocal.cache
 C:\Develop\C#\ModernNotyfi\update\update\obj\Debug\update.csproj.AssemblyReference.cache
+C:\Develop\C#\ModernNotyfi\update\update\obj\Debug\update.exe.config
