@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using ModernNotyfi.Other_Page;
 using ModernWpf;
 using QRCoder;
 using System;
@@ -351,8 +352,8 @@ namespace ModernNotyfi
 
         private void LoginWebUnesell(object sender, RoutedEventArgs e)
         {
-            unesell_login_web unesell_Login_Web = new unesell_login_web();
-            unesell_Login_Web.Show();
+            UiLoginUnesell uiLogin = new UiLoginUnesell();
+            uiLogin.Show();
         }
 
         bool no_login = true;

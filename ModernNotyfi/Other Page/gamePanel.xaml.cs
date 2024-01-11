@@ -306,14 +306,11 @@ namespace ModernNotyfi
                 }
 
                 // CPU and RAM
-
                 RAM.Text = Convert.ToString(Convert.ToInt16(100 - Math.Round(SysInfo.SystemMemoryFree, 2) * 100 / Math.Round(SysInfo.SystemMemoryTotal, 2)));
                 RAMBar.Progress = Convert.ToInt16(100 - Math.Round(SysInfo.SystemMemoryFree, 2) * 100 / Math.Round(SysInfo.SystemMemoryTotal, 2));
-
-                
             };
 
-            RunCPU();
+            //RunCPU();
         }
 
         public async void RunCPU()

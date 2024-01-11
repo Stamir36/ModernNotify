@@ -6,11 +6,11 @@
         xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
         Style="{StaticResource UiWindow}"
         xmlns:local="clr-namespace:ModernNotyfi"
-        Title="Настройки" Height="286" Width="549"
+        Title="Настройки" Height="394" Width="780"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         MinWidth="960" MinHeight="530" Icon="icons/maim_settings.png"
         WindowStartupLocation="CenterScreen"
-        Loaded="Settings_Loaded" mc:Ignorable="d" Background="#F21B1B1B" Closing="Settings_Closing">
+        Loaded="Settings_Loaded" mc:Ignorable="d" Background="#FF1B1B1B" Closing="Settings_Closing">
 
     <Grid Grid.IsSharedSizeScope="True">
         <Grid.ColumnDefinitions>
@@ -180,12 +180,12 @@
                                                 <Grid Margin="0,10,0,0">
                                                     <StackPanel Margin="0,0,477,0">
                                                         <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Внешний вид панели управления" Margin="27,15,0,0" HorizontalAlignment="Left" Width="355" Padding="0,0,0,0" FontSize="20" VerticalContentAlignment="Stretch" Height="25" FontWeight="Bold" />
-                                                        <Label Content="Выберите внешний вид панели&#xD;&#xA;Слева - новый | Справа - старый." Margin="27,0,0,0" HorizontalAlignment="Left" Width="295" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="48" />
+                                                        <Label Content="Выберите внешний вид панели&#xA;Слева - новый | Справа - старый." Margin="27,0,0,0" HorizontalAlignment="Left" Width="295" Padding="0" FontSize="14" VerticalContentAlignment="Stretch" Height="48" />
                                                         <wpfui:CardControl
                                                              Title="Обратите внимание!"
                                                             FontFamily="/icons/Fonts/#Google Sans Medium"
                                                             Icon="Info24"
-                                                            Subtitle="Старый дизайн больше не обновляется,&#xD;&#xA;но более стабилен." Margin="27,55,25,0"/>
+                                                            Subtitle="Старый дизайн больше не обновляется,&#xA;но более стабилен." Margin="27,55,25,0"/>
                                                     </StackPanel>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="472">
                                                         <wpfui:Button Appearance="Secondary" FontFamily="Century Gothic" Foreground="{x:Null}" Background="{x:Null}" BorderThickness="0" Padding="0" BorderBrush="{x:Null}" Cursor="Hand" Style="{DynamicResource DefaultButtonStyle}" Grid.RowSpan="1" Width="220" Click="TriggerStyleNew" Margin="0,0,10,0" Height="217">
@@ -193,7 +193,7 @@
                                                                 <Grid>
                                                                     <Rectangle HorizontalAlignment="Left" Height="29" Margin="0,169,0,0" VerticalAlignment="Top" Width="205" Fill="#4C545454" RadiusX="0" RadiusY="0"/>
                                                                     <wpfui:Card Margin="46,10,0,0" Height="154" VerticalAlignment="Top" HorizontalAlignment="Left" Width="159" Background="#7F686767"/>
-                                                                    <Label Content="00:00&#xD;&#xA;01.01.2023" HorizontalAlignment="Left" Margin="159,173,0,0" VerticalAlignment="Top" FontSize="8" FlowDirection="RightToLeft"/>
+                                                                    <Label Content="00:00&#xA;01.01.2023" HorizontalAlignment="Left" Margin="159,173,0,0" VerticalAlignment="Top" FontSize="8" FlowDirection="RightToLeft"/>
                                                                     <Label Content="ModernNotify" HorizontalAlignment="Left" Margin="54,18,0,0" VerticalAlignment="Top" FontSize="8" FlowDirection="RightToLeft"/>
                                                                     <Label Content="00:00" HorizontalAlignment="Left" Margin="56,142,0,0" VerticalAlignment="Top" FontSize="12" FlowDirection="RightToLeft" FontWeight="Bold"/>
                                                                     <Label Content=":00" HorizontalAlignment="Left" Margin="87,147,0,0" VerticalAlignment="Top" FontSize="7" FontWeight="Bold"/>
@@ -572,7 +572,7 @@
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Devetxt" Content="Разработчик:" HorizontalAlignment="Left" Margin="15,201,0,0" VerticalAlignment="Top" Foreground="#FFFFC700" FontWeight="Bold"/>
                                             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_6" Content="Станислав Мирошниченко" HorizontalAlignment="Left" Margin="140,227,0,0" VerticalAlignment="Top" Height="16"/>
                                             <Label x:Name="textaboutproduct" Content="О продукте:" HorizontalAlignment="Left" Margin="15,123,0,0" VerticalAlignment="Top" Foreground="#FFFFAF00" FontWeight="Bold"/>
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11.&#xD;&#xA;Нам 2 года! Спасибо что с нами)" HorizontalAlignment="Left" Margin="15,143,0,0" VerticalAlignment="Top" Height="58" Width="371" UseLayoutRounding="False"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="text_5" Content="Удобная и красивая панель быстрых действий на вашем&#xA;компьютере под управлением Windows 10 и 11.&#xA;Нам 2 года! Спасибо что с нами)" HorizontalAlignment="Left" Margin="15,143,0,0" VerticalAlignment="Top" Height="58" Width="371" UseLayoutRounding="False"/>
 
                                             <Image Source="/icons/icon.png" Margin="16,225,0,0" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18"/>
                                             <wpfui:Hyperlink x:Name="text_5_dadsc" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Используемый исходный код"
@@ -664,7 +664,7 @@
                                                 FontFamily="/icons/Fonts/#Google Sans Medium"
                                                 Content="Запустить модуль обновления"
                                                 Icon="Link48" Click="OpenUpdateModule" Margin="25,299,0,0" FontSize="11" Height="24" VerticalAlignment="Top" Width="197" />
-                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version_Copy" Content="Програмное обеспечение ModernNotify и MyDevice&#xA;распростроняются бесплатно.&#xA;Unesell Studio 2023 год." HorizontalAlignment="Left" Margin="474,183,0,0" VerticalAlignment="Top" Width="344" Height="64"/>
+                                            <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Version_Copy" Content="Разработка: Станислав Мирошниченко&#xD;&#xA;Дата: 11.04.2024 год&#xD;&#xA;Unesell Studio 2024 год." HorizontalAlignment="Left" Margin="474,183,0,0" VerticalAlignment="Top" Width="344" Height="64"/>
                                             <wpfui:Hyperlink x:Name="ChangeLog"
                                                 FontFamily="/icons/Fonts/#Google Sans Medium"
                                                 Content="Что нового?"
@@ -672,57 +672,48 @@
                                         </Grid>
                                     </TabItem>
                                     <TabItem Header="Color" Width="80" Margin="498,-202,316,202">
-                                        <ScrollViewer HorizontalAlignment="Left" VerticalAlignment="Top" Height="385" Margin="-64,0,0,0" Width="962">
+                                        <ScrollViewer VerticalAlignment="Top" Height="385" Margin="-64,0,-8,0">
                                             <StackPanel Height="385">
-                                                <Grid Height="397" Width="941">
-                                                    <Border BorderThickness="1" Height="57" Margin="79,6,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="469">
-                                                        <Grid HorizontalAlignment="Left" Width="473">
-                                                            <TextBox x:Name="color_piker" HorizontalAlignment="Left" Height="35" Margin="16,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="225"/>
-                                                            <Button x:Name="Color_Save" Content="Сохранить" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="100" Click="Color_Save_Click" Cursor="Hand" Padding="5,5,5,6"/>
-                                                            <Button x:Name="Site_color" Content="Сайт кодов" HorizontalAlignment="Left" Margin="361,10,-70,0" VerticalAlignment="Top" Click="Site_color_Click" Cursor="Hand" Width="91"/>
+                                                <Grid Margin="10,0,0,0" Height="386">
+                                                    <wpfui:Card Margin="81,10,0,0" Padding="0,0,0,0" HorizontalAlignment="Left" Width="467" Height="60" VerticalAlignment="Top">
+                                                        <Grid HorizontalAlignment="Left">
+                                                            <TextBox FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="color_piker" HorizontalAlignment="Left" Height="34" Margin="16,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="327" Text="#000000" Padding="6,6,6,4"/>
+                                                            <Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Color_Save" Content="Сохранить" Margin="352,0,0,0" Width="100" Click="Color_Save_Click" Cursor="Hand" Padding="5,5,5,6" Height="35"/>
                                                         </Grid>
-                                                    </Border>
-                                                    <Border BorderThickness="1" Height="196" Margin="79,86,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="469">
-                                                        <Grid HorizontalAlignment="Left" Width="473">
+                                                    </wpfui:Card>
+                                                    <wpfui:Card Margin="81,86,0,0" Padding="0,0,0,0" HorizontalAlignment="Left" Width="467" Height="196" VerticalAlignment="Top">
+                                                        <Grid Margin="0,5,0,0">
                                                             <Slider x:Name="Red" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" Width="412" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
-                                                            <Slider x:Name="Green" HorizontalAlignment="Left" Margin="20,89,0,0" VerticalAlignment="Top" Width="412" Height="36" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
+                                                            <Slider x:Name="Green" HorizontalAlignment="Left" Margin="20,89,0,0" VerticalAlignment="Top" Width="412" Height="25" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
                                                             <Slider x:Name="Blue" HorizontalAlignment="Left" Margin="20,149,0,0" VerticalAlignment="Top" Width="412" Maximum="255" AutoToolTipPlacement="TopLeft" ValueChanged="RGBtoHESH" TickFrequency="25"/>
                                                             <Label x:Name="redtext" Content="Красный" HorizontalAlignment="Left" Margin="16,10,0,151" Width="72"/>
                                                             <Label x:Name="greentext" Content="Зелёный" HorizontalAlignment="Left" Margin="16,70,0,0" VerticalAlignment="Top" Width="72"/>
                                                             <Label x:Name="bluetext" Content="Синий" HorizontalAlignment="Left" Margin="16,130,0,0" VerticalAlignment="Top" Width="51"/>
                                                         </Grid>
-                                                    </Border>
+                                                    </wpfui:Card>
+                                                    <Border Margin="592,7,0,0" BorderBrush="#339B9B9B" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" Height="320" VerticalAlignment="Top" HorizontalAlignment="Left" Width="320"/>
 
-                                                    <Border BorderThickness="1" Height="31" Margin="81,292,0,0" VerticalAlignment="Top" CornerRadius="5,5,5,5" Background="#7FFFEDED" BorderBrush="#33000000" HorizontalAlignment="Left" Width="146">
-                                                        <Grid Margin="-2,-4,2,4">
-                                                            <Border BorderThickness="1" Margin="8,10,0,0" Background="#7FFF0000" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
-                                                            <Label x:Name="REDtext" Margin="25,11,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12"/>
-                                                            <Border BorderThickness="1" Margin="52,10,0,0" Background="#7F00FF00" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
-                                                            <Label x:Name="GREENtext" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Margin="69,11,0,0"/>
-                                                            <Border BorderThickness="1" Margin="96,10,0,0" Background="#7F0000FF" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
-                                                            <Label x:Name="BLUEtext" Margin="113,11,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12"/>
+                                                    <wpfui:Card Padding="0,0,0,0" BorderThickness="1" Height="31" Margin="81,292,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="146">
+                                                        <Grid Margin="0,-5,0,0">
+                                                            <Border BorderThickness="1" Margin="8,12,0,0" Background="#7FFF0000" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
+                                                            <Label x:Name="REDtext" Margin="26,11,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12"/>
+                                                            <Border BorderThickness="1" Margin="52,12,0,0" Background="#7F00FF00" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
+                                                            <Label x:Name="GREENtext" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Margin="70,11,0,0"/>
+                                                            <Border BorderThickness="1" Margin="96,12,0,0" Background="#7F0000FF" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Width="16" Height="16" VerticalAlignment="Top"/>
+                                                            <Label x:Name="BLUEtext" Margin="114,11,0,0" Content="000" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12"/>
                                                         </Grid>
-                                                    </Border>
+                                                    </wpfui:Card>
 
-                                                    <Border x:Name="Material_Border" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="642,8,0,81" Width="242" CornerRadius="20" RenderTransformOrigin="0.5,0.5" Background="#FFE6ADAD">
-                                                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Width="242" CornerRadius="20" RenderTransformOrigin="0.5,0.5" Height="308" VerticalAlignment="Center">
-                                                            <Border.Background>
-                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                                    <LinearGradientBrush.RelativeTransform>
-                                                                        <TransformGroup>
-                                                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                                                            <RotateTransform Angle="143" CenterY="0.5" CenterX="0.5"/>
-                                                                            <TranslateTransform/>
-                                                                        </TransformGroup>
-                                                                    </LinearGradientBrush.RelativeTransform>
-                                                                    <GradientStop Color="#00F1A6A6" Offset="0.8"/>
-                                                                    <GradientStop Offset="1" Color="#7FFDFDFD"/>
-                                                                </LinearGradientBrush>
-                                                            </Border.Background>
-                                                        </Border>
-                                                    </Border>
-                                                    <Label Content="Материал" HorizontalAlignment="Left" Margin="640,318,0,0" VerticalAlignment="Top"/>
+                                                    <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="Предварительный просмотр" HorizontalAlignment="Left" Margin="608,20,0,0" VerticalAlignment="Top" Width="184"/>
+                                                    <Grid Margin="600,35,0,0" HorizontalAlignment="Left" Width="302" Height="302" VerticalAlignment="Top">
+                                                        <Rectangle Height="29" Margin="1,250,1,0" VerticalAlignment="Top" Fill="#4C545454" RadiusX="0" RadiusY="0"/>
+                                                        <wpfui:Card x:Name="Material_Border" Margin="0,10,8,65" Background="#7F686767" HorizontalAlignment="Right" Width="221"/>
+                                                        <Label Content="00:00&#xA;01.01.2023" Margin="0,0,10,24" VerticalAlignment="Bottom" FontSize="8" FlowDirection="RightToLeft" HorizontalAlignment="Right" Width="38"/>
+                                                        <Label FontFamily="/icons/Fonts/#Google Sans Medium" Content="ModernNotify" Margin="0,20,164,0" VerticalAlignment="Top" FontSize="8" FlowDirection="RightToLeft" HorizontalAlignment="Right" Width="53"/>
+                                                        <Label Content="00:00" Margin="0,0,186,70" FontSize="12" FlowDirection="RightToLeft" FontWeight="Bold" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="31"/>
+                                                        <Label Content=":00" Margin="0,0,176,72" FontSize="7" FontWeight="Bold" Height="13" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="10"/>
+                                                        <wpfui:Card Background="#7F686767" Height="16" Margin="0,19,18,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="30"/>
+                                                    </Grid>
                                                 </Grid>
                                             </StackPanel>
                                         </ScrollViewer>
@@ -804,12 +795,6 @@
             </wpfui:NavigationStore>
         </Grid>
 
-        <wpfui:TitleBar x:Name="TitleBarApp"
-          FontFamily="/icons/Fonts/#Google Sans Medium"
-          Title="Параметры ModernNotify"
-          Icon="pack://application:,,,/icons/maim_settings.png"
-          FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2"/>
-
         <wpfui:Dialog
             x:Name="StartupDialog"
             Grid.Row="0"
@@ -852,6 +837,37 @@
                 </StackPanel>
             </Grid>
         </wpfui:Dialog>
+        <wpfui:TitleBar x:Name="TitleBarApp"
+          ShowMaximize="False" ShowMinimize="False"
+          FontFamily="/icons/Fonts/#Google Sans Medium"
+          Title="Параметры ModernNotify"
+          Icon="pack://application:,,,/icons/maim_settings.png"
+          FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,0,-200,0" VerticalAlignment="Center"/>
+
+        <wpfui:Button x:Name="CloseWindow" Margin="0,0,16,0" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.95" Height="30" Grid.Column="1" Click="CloseSettings" HorizontalAlignment="Right" Width="30">
+            <wpfui:Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </wpfui:Button.Resources>
+            <wpfui:Icon Glyph="Dismiss24" />
+        </wpfui:Button>
+        <wpfui:Button x:Name="FullWindow" Margin="0,0,51,0" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.95" Height="30" Grid.Column="1" Click="FullSettings" HorizontalAlignment="Right" Width="30">
+            <wpfui:Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </wpfui:Button.Resources>
+            <wpfui:Icon Glyph="FullScreenMaximize24" />
+        </wpfui:Button>
+        <wpfui:Button x:Name="TrayWindow" Margin="0,0,86,0" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.95" Height="30" Grid.Column="1" Click="TraySettings" HorizontalAlignment="Right" Width="30">
+            <wpfui:Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </wpfui:Button.Resources>
+            <wpfui:Icon Glyph="TrayItemAdd24" />
+        </wpfui:Button>
 
     </Grid>
 

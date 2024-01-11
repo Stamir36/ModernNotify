@@ -23,6 +23,7 @@ namespace update
         public string program_relise = "ModernNotyfi Dev";
         public string url = "";
         public string new_version;
+        string path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\";
 
 
         public MainWindow()
@@ -57,9 +58,32 @@ namespace update
                 }
 
                 WebClient webClient = new WebClient();
-                webClient.DownloadProgressChanged += (o, args) => { ProgressDownload.Value = args.ProgressPercentage; SubText.Content = "Прогресс: " + args.ProgressPercentage + "% | Версия: " + new_version; };
-                webClient.DownloadFileCompleted += (o, args) => update();
-                webClient.DownloadFileAsync(new Uri(link), "update.zip");
+                DateTime startTime = DateTime.Now;
+                long fileSize = 0;
+                DownloadSpeed.Visibility = Visibility.Visible;
+                webClient.DownloadProgressChanged += (o, args) =>
+                {
+                    ProgressDownload.Value = args.ProgressPercentage;
+                    SubText.Content = "Прогресс: " + args.ProgressPercentage + "% | Версия: " + new_version;
+                    fileSize = args.TotalBytesToReceive;
+                    double speed = args.BytesReceived / (DateTime.Now - startTime).TotalSeconds;
+                    string speedUnit = "кб/с";
+                    if (speed > 1024)
+                    {
+                        speed /= 1024;
+                        speed /= 1024;
+                        speedUnit = "мб/с";
+                    }
+                    speed = Math.Round(speed, 2);
+                    DownloadSpeed.Content = speed + " " + speedUnit;
+                };
+
+                webClient.DownloadFileCompleted += (o, args) =>
+                {
+                    update();
+                    DownloadSpeed.Visibility = Visibility.Hidden;
+                };
+                webClient.DownloadFileAsync(new Uri(link), path + "update.zip");
             }
             catch
             {
@@ -100,7 +124,7 @@ namespace update
             ProgressDownload.Value = 100;
             InfoUpdate.Content = "Установка обновления.";
             
-            string zipPath = "update.zip";
+            string zipPath = path + "update.zip";
             string mainPath = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
 
             //Расспаковка
@@ -185,7 +209,7 @@ namespace update
         {
             try
             {
-                File.Delete("update.zip");
+                File.Delete(path + "update.zip");
             }
             catch
             {
@@ -306,8 +330,9 @@ namespace update
             {
                 InfoUpdate.Content = "Нет соединения с интернетом.";
                 Log.Content = "Проверьте настройки WiFi или кабеля интернет.\nЕсли всё в порядке, вы можете скачать новое\nобновление напрямую с сайта приложения.";
-                SubText.Content = "Проверте подключение или попробуйте позже.";
+                SubText.Content = "Попробуйте запустить:";
                 Close.Content = "Выход";
+                NetworkFix.Visibility = Visibility.Visible;
             }
 
             if (Properties.Settings.Default.Server == "Site")
@@ -346,6 +371,11 @@ namespace update
                 new WindowInteropHelper(this).Handle,
                 DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
                 flag);
+        }
+
+        private void NetworkFixStart(object sender, RoutedEventArgs e)
+        {
+            Process.Start("msdt.exe", "-skip TRUE -path C:\\Windows\\diagnostics\\system\\Networking");
         }
     }
 }

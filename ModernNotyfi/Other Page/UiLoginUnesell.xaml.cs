@@ -50,7 +50,7 @@ namespace ModernNotyfi.Other_Page
         private void LoginCheckGO(object sender, RoutedEventArgs e)
         {
             string email = Login_Data_Mail.Text;
-            string password = Login_Data_Password.Text;
+            string password = Login_Data_Password.Password;
 
             try
             {
@@ -175,6 +175,28 @@ namespace ModernNotyfi.Other_Page
             LoginCheck.Visibility = Visibility.Visible;
             Register.Visibility = Visibility.Visible; 
             LoginInfo.Visibility = Visibility.Hidden;
+        }
+
+        private void PrivPolLink_Go(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://unesell.com/service/rule/");
+        }
+
+        private void GoogleDialogClose(object sender, RoutedEventArgs e)
+        {
+            GoogleDialog.Show = false;
+            GoogleDialog.Visibility = Visibility.Hidden;
+        }
+
+        private void GoogleDialogShow(object sender, RoutedEventArgs e)
+        {
+            GoogleDialog.Show = true;
+            GoogleDialog.Visibility = Visibility.Visible;
+        }
+
+        private void ExitLogin(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

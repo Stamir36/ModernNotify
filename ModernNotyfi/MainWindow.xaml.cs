@@ -490,8 +490,8 @@ namespace ModernNotyfi
             catch (Exception e)
             {
                 System.Windows.MessageBox.Show("Во время загрузки произошла ошибка. Мы не смогли запустить приложение, в следующем окне будет показана детальная информация.", "Ошибка загрузки", MessageBoxButton.OK, MessageBoxImage.Error);
-                System.Windows.MessageBox.Show("Информация об ошибке:\n" + e + "\n\nПриложение будет закрыто, для избежания перегрузки памяти.", "Ошибка загрузки", MessageBoxButton.OK, MessageBoxImage.Error);
-                Application.Current.Shutdown();
+                System.Windows.MessageBox.Show("Информация об ошибке:\n" + e + "\n\nПриложение попытается продолжить работу...", "Ошибка загрузки", MessageBoxButton.OK, MessageBoxImage.Error);
+                //Application.Current.Shutdown();
             }
         }
 

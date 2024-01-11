@@ -26,6 +26,8 @@
                     <ProgressBar Visibility="Hidden" x:Name="ProgressDownload" HorizontalAlignment="Center" Height="15" Margin="0,145,0,0" Width="433" MinHeight="6" VerticalAlignment="Top"/>
                     <Label FontFamily="./#Google Sans Medium" x:Name="InfoUpdate_Copy" Content="ModernNotify" HorizontalAlignment="Left" Margin="48,22,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
                     <Label x:Name="Log" FontFamily="./#Google Sans Medium" Content="" HorizontalAlignment="Left" Margin="19,88,0,0" VerticalAlignment="Top" Width="373" Height="52" FontSize="11"/>
+                    <Button x:Name="NetworkFix" Visibility="Hidden" Content="Диагностика сети" Margin="206,158,0,0" VerticalAlignment="Top" Background="#7F0079FF" Click="NetworkFixStart" Width="158" Foreground="White"/>
+                    <Label x:Name="DownloadSpeed" Visibility="Hidden" FontFamily="./#Google Sans Medium" Content="0.0мб/с" Margin="327,121,0,0" HorizontalAlignment="Left" Width="125" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Height="17" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Settings">
@@ -39,7 +41,7 @@
                             <Label Content="Сервер:" Margin="10,7,173,7" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                             <ComboBox x:Name="theme_combo" Width="150" Margin="90,0,0,0" Height="24" VerticalAlignment="Center" FontSize="12" Padding="12,3,0,3" SelectionChanged="theme_combo_SelectionChanged">
                                 <TextBlock><Run Text="Сервер Unesell"/></TextBlock>
-                                <TextBlock><Run Text="GitHub (Тестирование)"/></TextBlock>
+                                <TextBlock><Run Text="Репозиторий GitHub"/></TextBlock>
                             </ComboBox>
                         </Grid>
                     </Border>

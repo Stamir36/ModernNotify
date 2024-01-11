@@ -1,11 +1,11 @@
-![ModernNotify Banner](https://unesell.com/modernnotify/images/software/banner-light.png#gh-light-mode-only)
+![ModernNotify Banner](https://unesell.com/modernnotify/images/software/banner.png#light)
 
 # ModernNotify | Control Panel
 [![GitHub release](https://img.shields.io/github/release/Stamir36/ModernNotify/all.svg)](https://github.com/Stamir36/ModernNotify/releases)
 
 Modern Control Panel for Microsoft Windows 10 and 11<br>
 Client for Windows and Android communication<br>
-Language: Russian<br><br>
+Language: Russian and English<br><br>
 
 # 🚀 Getting started
 To start using the app, you need to install the Windows app. To expand the functionality, you can install the client on Android and manage devices using the MyDevice website.<br><br>
@@ -21,11 +21,10 @@ Download Web Link:<br>
 Links to add-ons:
 <br>
 <a href="https://unesell.com/app/mydevice/"><img src="https://unesell.com/modernnotify/images/software/link-mydevice.png"></a>
-<a href="https://play.google.com/store/apps/details?id=com.unesell.mnc"><img src="https://unesell.com/modernnotify/images/software/link-android.png"></a>
 <br>
 
-# 🪟 Demonstration
-<br><img src="https://unesell.com/modernnotify/images/software/demo-gif-min.gif">
+# 🪟 Demonstration (Old Design)
+![Demonstration](https://unesell.com/modernnotify/images/software/demo-gif-min.gif)
 
 # Description
 A quick action panel that combines a computer control panel and an Android application client with which you can monitor the battery charge, volume level, control music, the name of the shared clipboard and more.
@@ -33,25 +32,31 @@ A quick action panel that combines a computer control panel and an Android appli
 # Screenshots
 __Main view of settings and interface:__
 <br><br>
-<img src="https://unesell.com/modernnotify/images/app/classic02.png" alt="3" border="0">
-<img src="https://unesell.com/modernnotify/images/app/classic03.png" alt="2" border="0">
+![Screenshots](https://unesell.com/modernnotify/images/app/classic02.png)
+![Screenshots](https://unesell.com/modernnotify/images/software/Screen%201.png)
+![Screenshots](https://unesell.com/modernnotify/images/software/Screen%202.png)
 <br><br>
 __GameBar (Open: Ctrl + G):__
 <br><br>
-<img src="https://i.ibb.co/RhKQR89/13.png" alt="4" border="0">
+![Screenshots](https://i.ibb.co/RhKQR89/13.png)
 <br><br>
 __Device management service:__
 <br><br>
-<img src="https://unesell.com/modernnotify/images/app/app-mydevice.jpg" alt="2" border="0">
+![Screenshots](https://unesell.com/modernnotify/images/app/app-mydevice.jpg)
 <br><br>
 __Shutdown window::__
 <br><br>
-<img src="https://unesell.com/modernnotify/images/app/app-shutdown.png" alt="Image-3" border="0">
+![Screenshots](https://unesell.com/modernnotify/images/app/app-shutdown.png)
 
 # MyDevice integration
 Link: <a href="https://unesell.com/app/mydevice/">Unesell MyDevice</a>
 <br><br>
-<img src="https://i.ibb.co/qR3CnzG/image.png" alt="1" border="0">
+![My Design WebSite](https://i.ibb.co/qR3CnzG/image.png)
+
+# Cursus integration
+Link: <a href="https://unesell.com/app/cursus/">Cursus Messenger</a>
+<br><br>
+![Cursus Panel](https://unesell.com/modernnotify/images/software/Screen%203.png)
 
 # License and Author
 The source code of the program is open, distribution and modification is allowed only with the consent of the author.<br>

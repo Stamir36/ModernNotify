@@ -122,6 +122,8 @@ namespace ModernNotyfi
         public gameBar()
         {
             InitializeComponent();
+
+
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
@@ -250,6 +252,7 @@ namespace ModernNotyfi
                 
             };
 
+            webView.NavigationStarting += EnsureHttps;
             Loaded += GameBar_Loaded;
         }
 
@@ -267,17 +270,35 @@ namespace ModernNotyfi
 
             int extendedStyle = WS_EX_TRANSPARENT;
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle);
+
+            webViewManager = new WebViewManager(webView);
+            webView.NavigationStarting += EnsureHttps;
+            webView.NavigationCompleted += NavigationCompleted;
         }
 
         private void Settings_Loaded(object sender, RoutedEventArgs e)
         {
-            webViewManager = new WebViewManager(webView);
-            if (Properties.Settings.Default.Unesell_Login == "Yes")
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            timer.IsEnabled = true;
+            timer.Tick += (o, t) =>
             {
-                webView.NavigationStarting += EnsureHttps;
-                webView.NavigationCompleted += NavigationCompleted;
+
+            };
+        }
+
+        void CheckWebViewSource()
+        {
+            // Проверка, инициализирован ли CoreWebView2
+            if (webView.CoreWebView2 != null)
+            {
+                // Получение URL текущей страницы
+                string currentUrl = webView.CoreWebView2.Source.ToString();
+
+                // Вывод URL в консоль
+                Console.WriteLine(currentUrl);
             }
         }
+
 
         void EnsureHttps(object sender, CoreWebView2NavigationStartingEventArgs args)
         {

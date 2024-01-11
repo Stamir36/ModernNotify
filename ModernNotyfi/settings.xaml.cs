@@ -38,7 +38,7 @@ namespace ModernNotyfi
     public partial class settings : Window
     {
         public DispatcherTimer timer_sec = new DispatcherTimer();
-
+        string path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\";
 
         //Настройки пользователя.
         public class UserSettings
@@ -599,8 +599,7 @@ namespace ModernNotyfi
             
             try
             {
-                FileVersionInfo.GetVersionInfo("update.exe");
-                FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo("update.exe");
+                FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(path + "update.exe");
                 update_version = myFileVersionInfo.FileVersion;
             }
             catch
@@ -635,7 +634,7 @@ namespace ModernNotyfi
                         WebClient webClient = new WebClient();
                         webClient.DownloadProgressChanged += (o, args) => LastChekUpdate.Content = "Скачивание: " + args.ProgressPercentage + "%";
                         webClient.DownloadFileCompleted += (o, args) => CheckUpdateApp();
-                        webClient.DownloadFileAsync(new Uri(link), "update.exe");
+                        webClient.DownloadFileAsync(new Uri(link), path + "update.exe");
                     }
                     catch
                     {
@@ -749,7 +748,7 @@ namespace ModernNotyfi
                 {
                     Process p = new Process();
                     p.StartInfo.Verb = "runas";
-                    p.StartInfo.FileName = "update.exe";
+                    p.StartInfo.FileName = path + "update.exe";
                     p.Start();
                     Application.Current.Shutdown();
                 }
@@ -797,7 +796,7 @@ namespace ModernNotyfi
                 Properties.Settings.Default.last_check_update = DateTime.Now.ToString();
                 Properties.Settings.Default.Save();
                 LastChekUpdate.Content = "Последняя проверка: " + Properties.Settings.Default.last_check_update;
-                BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/shutdown.png", UriKind.Relative); bi3.EndInit();
+                BitmapImage bi3 = new BitmapImage(); bi3.BeginInit(); bi3.UriSource = new Uri("icons/no_signal.png", UriKind.Relative); bi3.EndInit();
                 Update_img.Source = bi3;
                 return "Error";
             }
@@ -1025,11 +1024,6 @@ namespace ModernNotyfi
             }
         }
 
-        private void Site_color_Click(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://htmlcolorcodes.com/");
-        }
-
         private void Open_Tab_Update_Click(object sender, RoutedEventArgs e)
         {
             Open_Update.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
@@ -1155,7 +1149,6 @@ namespace ModernNotyfi
             inforelithe.Content = "Информация о выпуске";
             SysInfoHeader.Content = "Информация о системе";
             Color_Save.Content = "Сохранить";
-            Site_color.Content = "Сайт кодов";
             redtext.Content = "Крассный";
             greentext.Content = "Зелёный";
             bluetext.Content = "Синий";
@@ -1253,7 +1246,6 @@ namespace ModernNotyfi
             inforelithe.Content = "Release Notes";
             SysInfoHeader.Content = "System information";
             Color_Save.Content = "Save";
-            Site_color.Content = "Codes site";
             redtext.Content = "Red";
             greentext.Content = "Green";
             bluetext.Content = "Blue";
@@ -1567,7 +1559,7 @@ namespace ModernNotyfi
             {
                 Process p = new Process();
                 p.StartInfo.Verb = "runas";
-                p.StartInfo.FileName = "update.exe";
+                p.StartInfo.FileName = path + "update.exe";
                 p.Start();
             }
             catch
@@ -1658,6 +1650,28 @@ namespace ModernNotyfi
         {
             Startup mainWindow = new Startup();
             mainWindow.Show();
+        }
+
+        private void CloseSettings(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void FullSettings(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
+
+        private void TraySettings(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

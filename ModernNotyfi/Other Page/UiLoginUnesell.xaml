@@ -11,39 +11,46 @@
         Style="{StaticResource UiWindow}"
         WindowStartupLocation="CenterScreen"
         Height="513" Width="898" ResizeMode="NoResize" Icon="/icons/App_Color.png" Loaded="Window_Loaded">
-    <Window.Background>
+    <!--Window.Background>
         <ImageBrush ImageSource="/Image/background.jpg"/>
-    </Window.Background>
-    <Grid Background="#33000000">
-
+    </Window.Background -->
+    <Grid Background="#FF212121">
+        <wpfui:Hyperlink x:Name="LinkOpenUpdate"
+            FontFamily="/icons/Fonts/#Google Sans Medium"
+            Content="Как войти с помощью аккаунта Google?"
+            Icon="Link48" Margin="23,0,0,25" FontSize="11" Width="256" Click="GoogleDialogShow" Height="24" VerticalAlignment="Bottom" />
+        <wpfui:Hyperlink x:Name="PrivPolLink"
+            FontFamily="/icons/Fonts/#Google Sans Medium"
+            Content="Политика конфиденциальности"
+            Icon="Link48" Margin="23,0,0,50" FontSize="11" Width="234" Click="PrivPolLink_Go" Height="24" VerticalAlignment="Bottom" />
         <wpfui:TitleBar
             FontFamily="/icons/Fonts/#Google Sans Medium"
             Title="Вход в аккаунт Unesell Studio"
             Icon="pack://application:,,,/icons/icon.png"
-            Grid.Row="0" Foreground="White"/>
-        <wpfui:Card Visibility="Hidden" x:Name="LoginCard" Background="#26FFFFFF" Height="167" VerticalAlignment="Top" HorizontalAlignment="Left" Width="358" Margin="46,175,0,0">
+            Grid.Row="0" Foreground="White" Margin="0,0,-139,0"/>
+        <wpfui:Card x:Name="LoginCard" Height="167" VerticalAlignment="Center" HorizontalAlignment="Left" Width="317" Margin="498,0,0,0">
             <StackPanel Margin="6,3,0,3">
                 <TextBlock x:Name="Step2_text2"
                     FontFamily="/icons/Fonts/#Google Sans Medium"
                     Margin="0,0,0,4"
                     FontWeight="Medium"
                     Text="Почта" Foreground="White" FontSize="14" />
-                <TextBox x:Name="Login_Data_Mail" FontFamily="/icons/Fonts/#Google Sans Medium" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Width="277" Background="#33FFFFFF" FontSize="14"/>
+                <TextBox x:Name="Login_Data_Mail" FontFamily="/icons/Fonts/#Google Sans Medium" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Width="277" FontSize="14"/>
                 <TextBlock x:Name="Step2_text3"
                     FontFamily="/icons/Fonts/#Google Sans Medium"
                     Margin="0,0,0,4"
                     FontWeight="Medium"
                     Text="Пароль" Padding="0,10,0,0" Foreground="White" FontSize="14" />
-                <TextBox x:Name="Login_Data_Password" FontFamily="/icons/Fonts/#Google Sans Medium" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" Width="279" Background="#33FFFFFF" FontSize="14"/>
+                <PasswordBox x:Name="Login_Data_Password" FontFamily="/icons/Fonts/#Google Sans Medium" HorizontalAlignment="Left" Height="37" Width="279" FontSize="14"/>
             </StackPanel>
         </wpfui:Card>
-        <Button x:Name="LoginCheck" Visibility="Hidden" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Войти в аккаунт" Height="34" HorizontalAlignment="Left" Width="174" FontSize="14" Margin="46,359,0,0" VerticalAlignment="Top" Click="LoginCheckGO"/>
-        <Label Content="Unesell Account" FontFamily="/icons/Fonts/#Google Sans Medium" HorizontalAlignment="Left" Margin="46,94,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Button x:Name="LoginCheck" FontFamily="/icons/Fonts/#Google Sans Medium" Content="Войти в аккаунт" Height="34" HorizontalAlignment="Left" Width="174" FontSize="14" Margin="498,354,0,0" VerticalAlignment="Top" Click="LoginCheckGO"/>
+        <Label Content="Unesell Account" FontFamily="/icons/Fonts/#Google Sans Medium" HorizontalAlignment="Left" Margin="61,109,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
         <TextBlock x:Name="Step2_text2_Copy"
             FontFamily="/icons/Fonts/#Google Sans Medium"
             FontWeight="Medium"
-            Text="Вход и синхронизация данных с облаком" Foreground="White" Margin="46,143,526,337" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <wpfui:Button Visibility="Hidden" FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Register" Content="Регистрация" Margin="235,361,0,0" VerticalAlignment="Top" Click="OpenRegisterPage" Padding="1,1,0,1" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalContentAlignment="Right" FontSize="12" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="128" Height="31"/>
+            Text="Вход и синхронизация данных с облаком" Foreground="White" Margin="61,158,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <wpfui:Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Register" Content="Регистрация" Margin="687,356,0,0" VerticalAlignment="Top" Click="OpenRegisterPage" Padding="1,1,0,1" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalContentAlignment="Right" FontSize="12" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="128" Height="31"/>
         <wpfui:Button FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="Register_Copy" Content="Войти в аккаунт через веб-интерфейс" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="252" Click="OpenWebLogin" Padding="1,1,0,1" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalContentAlignment="Right" Height="23" FontSize="12" VerticalContentAlignment="Center"/>
 
         <wpfui:Snackbar
@@ -54,7 +61,8 @@
             Show="False" ShowCloseButton="True"
             Timeout="5000" Margin="23,0,0,20"
             HorizontalAlignment="Left" Width="355" Foreground="#FFF9F9F9" Height="65" />
-        <Grid x:Name="LoginInfo" Margin="26,205,494,192">
+
+        <Grid x:Name="LoginInfo" Visibility="Hidden" Margin="510,208,10,189">
             <wpfui:ProgressRing x:Name="progressRing" IsIndeterminate="True" Width="20" Height="20" HorizontalAlignment="Left" Margin="38,33,0,0" VerticalAlignment="Top" />
             <Label FontFamily="/icons/Fonts/#Google Sans Medium" x:Name="NameProfile" Content="Привет!" Margin="87,21,0,0" HorizontalAlignment="Left" Width="268" Padding="0" FontSize="20" VerticalContentAlignment="Stretch" Height="27" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
             <Ellipse Margin="19,14,0,0" Stroke="#7F000000" HorizontalAlignment="Left" Width="57" Height="57" VerticalAlignment="Top">
@@ -68,5 +76,83 @@
                 FontWeight="Medium"
                 Text="Сейчас мы вернёмся в приложение." Foreground="#87FFFFFF" Margin="19,83,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
         </Grid>
+        <TextBlock x:Name="Welcome_Text"
+            FontFamily="/icons/Fonts/#Google Sans Medium"
+            Foreground="White" Margin="496,135,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" ><Run Language="ru-ru" Text="Добро пожаловать!"/></TextBlock>
+        <Grid Margin="0,200,613,0" Height="49" VerticalAlignment="Top" HorizontalAlignment="Right" Width="224">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <wpfui:Icon FontSize="19" Glyph="CloudArchive24" />
+            <StackPanel
+                Grid.Column="1"
+                Margin="12,0,0,0"
+                VerticalAlignment="Center">
+                <TextBlock x:Name="Text1"
+                    Margin="0,0,0,4"
+                           Foreground="White"
+                    FontSize="11"
+                    FontWeight="Medium"
+                    Text="Синхронизация настроек" />
+                <TextBlock x:Name="Text2"
+                    FontSize="10"
+                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                    Text="Сохраните свой стиль ModernNotify" />
+            </StackPanel>
+        </Grid>
+        <Grid Margin="0,258,610,0" Height="49" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <wpfui:Icon FontSize="19" Glyph="ServerPlay20" />
+            <StackPanel
+                Grid.Column="1"
+                Margin="12,0,0,0"
+                VerticalAlignment="Center">
+                <TextBlock x:Name="Text3"
+                    Margin="0,0,0,4"
+                           Foreground="White"
+                    FontSize="11"
+                    FontWeight="Medium"
+                    Text="Интеграция с сервесами" />
+                <TextBlock x:Name="Text4"
+                    FontSize="10"
+                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                    Text="Доступ к Cursus и MyDevice в приложении" />
+            </StackPanel>
+        </Grid>
+        <TextBlock x:Name="Text4_Копировать"
+                    FontSize="10"
+                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                    Margin="61,326,641,157" ><Run Language="ru-ru" Text="И другие преимущества..."/></TextBlock>
+
+        <wpfui:Dialog
+            x:Name="GoogleDialog"
+            ButtonLeftClick="OpenWebLogin"
+            ButtonRightClick="GoogleDialogClose"
+            ButtonLeftName="Вход через сайт"
+            ButtonRightName="Закрыть окно"
+            FontFamily="/icons/Fonts/#Google Sans Medium"
+            Show="False" Visibility="Hidden">
+            <Grid>
+                <StackPanel Margin="0,0,0,-18" Height="90">
+                    <TextBlock FontWeight="Medium" Text="Вход через Google" FontFamily="/icons/Fonts/#Google Sans Medium" FontSize="14" Foreground="White" />
+                    <TextBlock TextWrapping="Wrap"
+                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                         Margin="0,5,0,0" HorizontalAlignment="Left" Height="65" ><Run Text="Чтобы войти в аккаунт, привязаный к Google:"/><LineBreak/><Run Text="1. Сбросьте пароль на странице восстановления"/><LineBreak/><Run Language="ru-ru" Text="2) Войдите через веб-интерфейс в правом нижнем углу."/></TextBlock>
+                </StackPanel>
+            </Grid>
+        </wpfui:Dialog>
+        <wpfui:Button x:Name="CloseWindow" Margin="0,10,15,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Padding="0" Opacity="0.95" Click="ExitLogin" HorizontalAlignment="Right" Width="30" Height="31">
+            <wpfui:Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </wpfui:Button.Resources>
+            <wpfui:Icon Foreground="White" Glyph="Dismiss24" />
+        </wpfui:Button>
+
     </Grid>
 </Window>

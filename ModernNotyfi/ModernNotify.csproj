@@ -518,5 +518,8 @@
   <ItemGroup>
     <Resource Include="icons\cybersecurity.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\no_signal.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
