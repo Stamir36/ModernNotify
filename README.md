@@ -7,6 +7,13 @@ Modern Control Panel for Microsoft Windows 10 and 11<br>
 Client for Windows and Android communication<br>
 Language: Russian and English<br><br>
 
+> #### Attention!
+>
+> - Hosting for the site unesell.com ends on March 17th.
+> - Due to the fact that there is no way to pay for it, all online services will be unavailable (MyDevice, Authorization).
+> 
+>  *Thank you* for being interested in **my development!**
+
 # 🚀 Getting started
 To start using the app, you need to install the Windows app. To expand the functionality, you can install the client on Android and manage devices using the MyDevice website.<br><br>
 
